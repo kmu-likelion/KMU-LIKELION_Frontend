@@ -70,7 +70,7 @@ export default function Header() {
                         onClose={handleClose}
                         >
                             <MenuItem onClick={handleClose}>
-                                <DropItem to={'/notice/'}>Notice</DropItem>
+                                <DropItem to={'/notice'}>Notice</DropItem>
                             </MenuItem>
                             <MenuItem onClick={handleClose}>Study</MenuItem>
                             <MenuItem onClick={handleClose}>QnA</MenuItem>
