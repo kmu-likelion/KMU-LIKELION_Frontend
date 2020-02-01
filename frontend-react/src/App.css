@@ -25,7 +25,28 @@
 }
   
 .right-footer{
-  font-size: 14px;
+  font-size: 0.9em;
   color: #f38104;
   line-height:0.6rem;
+  
+}
+
+/* a:link { color: red; text-decoration: none;}
+a:visited { color: black; text-decoration: none;}
+a:hover { color: blue; text-decoration: underline;} */
+/* a {color: #fff; text-decoration: none; outline: none}
+a:hover, a:active {text-decoration: none; color:#fff; background-color:#f59000;} */
+
+.nav-link {
+  color: #fff; text-decoration: none; outline: none
+}
+.nav-link:hover, .nav-link:active{
+  text-decoration: none; color:#fff;
+}
+
+.drop-link {
+  color: black; text-decoration: none; outline: none
+}
+.drop-link:hover, .drop-link:active{
+  text-decoration: none; color:black;
 }
