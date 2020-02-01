@@ -31,8 +31,9 @@ class NoticeList extends React.Component {
             <Container maxWidth="lg" className="main-container">                
                 <h1>Notice List</h1>
                 <h4><Link to={"/notice/new"}>New Notice</Link></h4>
+                <br/>
                 {this.state.noticeList.map((post) =>
-                    (<PostView key={post.id} id={post.id} title={post.title} body={post.body} />)
+                    (<PostView key={post.id} id={post.id} title={post.title} body={post.body} runDate={post.run_date} />)
                 )} 
             </Container>
         </div>
