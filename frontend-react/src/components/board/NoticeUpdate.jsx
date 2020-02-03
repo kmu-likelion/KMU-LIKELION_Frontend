@@ -8,7 +8,7 @@ import Paper from '@material-ui/core/Paper';
 import moment from 'moment';
 
 
-class NoticeNew extends Component {
+class NoticeUpdate extends Component {
 
     state = {
         title : '',
@@ -17,24 +17,39 @@ class NoticeNew extends Component {
     }
 
     componentDidMount() {
-		console.log("New ComponentDidMount");
-        // this._getPost(this.props.match.params.id);
+        console.log("New ComponentDidMount");
+        this.getNotice();
+    }
+
+    async getNotice() {
+        await api.getPost('notice', this.props.match.params.id)
+            .then(res => {
+                const data = res.data;
+                this.setState({ 
+                    title: data.title,
+                    body: data.body,
+                    id: data.id,
+                    run_date : data.run_date
+                });
+            }).catch(err => console.log(err));
+    }
+
+    async updateNotice(id, data) {
+        await api.updatePost('notice', id ,data)
+            .then(result =>
+                console.log('정상적으로 update됨.',result)
+            ).catch(err => console.log(err));
     }
 
     handlingChange = (event) => {
-        this.setState({[event.target.name]: event.target.value})
-        // console.log('run date : ', this.state.run_date)
-        // console.log(rDate);
-        console.log(event.target.value);
-        // console.log(moment(event.target.value).isValid());
+        this.setState({[event.target.name]: event.target.value});
     }
 
     handlingSubmit = async (event) => {
         event.preventDefault() //event의 디폴트 기능(새로고침 되는 것 등..) -> 막는다.
         var rDate = moment(this.state.run_date).format();
         rDate = moment(rDate).add(1,'d');
-        let result = await api.createPost('notice',{title:this.state.title, body:this.state.body, run_date:rDate})
-        console.log("정상적으로 생성됨.", result)
+        this.updateNotice(this.props.match.params.id, {title:this.state.title, body:this.state.body, run_date:rDate});
         this.setState({title:'', content:'', run_date:''})
         // this.getPosts()
         document.location.href = "/notice";
@@ -44,7 +59,7 @@ class NoticeNew extends Component {
         return(
                 <Container maxWidth="lg" className="PostingSection">
                     <Paper className="PostingPaper">
-                        <h2>New Notice</h2>
+                        <h2>Update Notice</h2>
                         <form onSubmit={this.handlingSubmit} className="PostingForm">
                             <input id='title' name='title' value={this.state.title} onChange={this.handlingChange} required="required" placeholder="Title"/>
                             <input id='body' name='body' value={this.state.body} onChange={this.handlingChange} required="required" placeholder="Content"/>
@@ -61,4 +76,4 @@ class NoticeNew extends Component {
 }
 
 
-export default NoticeNew;
+export default NoticeUpdate;

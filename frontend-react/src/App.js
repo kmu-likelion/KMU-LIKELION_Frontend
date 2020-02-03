@@ -9,14 +9,16 @@ import Main from "./components/main/Main";
 import NoticeList from "./components/board/NoticeList";
 import NoticeDetail from "./components/board/NoticeDetail";
 import NoticeNew from "./components/board/NoticeNew";
+import NoticeUpdate from "./components/board/NoticeUpdate";
 
 export default () => (
   <Router>
       <Header />
       <Route exact path="/" component={Main} />
       <Route exact path="/notice" component={NoticeList} />
-        <Route exact path="/notice/new" component={NoticeNew} />
+      <Route exact path="/notice/new" component={NoticeNew} />
       <Route path="/notice/detail/:id" component={NoticeDetail} id="number"/>
+      <Route path="/notice/update/:id" component={NoticeUpdate} id="number"/>
       <Footer />
   </Router>
 )

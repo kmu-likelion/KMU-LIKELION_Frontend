@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import api from '../../api/api_board'
 import axios from "axios";
 import { Link } from "react-router-dom";
+import moment from 'moment';
 
 // @material-ui
 import Button from '@material-ui/core/Button';
@@ -27,40 +28,27 @@ class NoticeDetail extends Component {
 
     componentDidMount() {
 		console.log("Detail ComponentDidMount");
-		this._getNotice(this.props.match.params.id);
+        // this._getNotice(this.props.match.params.id);
+        this.getNotice();
     }
-    
-    _getNotice = (id = "") => {
-		console.log("get notice Method 실행");
-		let URL;
-		if (id) {
-			URL = `notice/${id}`;
-		} else {
-            // URL = `api/notice/`;
-            console.log(`${id}번째 포스트 가져오기 실패!`);
-		}
-		let data = [];
-		axios
-			.get(URL)
-			.then(res => {
-				console.log("End Point: ", URL);		
-                const postData = res.data;
-				this.setState({ 
-                    title: postData.title,
-                    body: postData.body,
-                    id: postData.id,
-                    pub_date : postData.pub_date,
-                    run_date : postData.run_date
-                });
-                console.log('get post 성공.')
-			})
-			.catch(err => console.log(err));
 
-		return data;
-    };
-    
+    async getNotice() {
+        await api.getPost('notice', this.props.match.params.id)
+            .then(res => {
+                const data = res.data;
+
+                this.setState({ 
+                    title: data.title,
+                    body: data.body,
+                    id: data.id,
+                    pub_date : moment(data.pub_date).format('YYYY-MM-DD hh:mm'),
+                    run_date : moment(data.run_date).format('YYYY-MM-DD')
+                });
+            }).catch(err => console.log(err));
+    }
+
     handlingDelete = async (id) => {
-        await api.deleteNotice(id)
+        await api.deletePost('notice',id);
         console.log('delete post 성공.');
         document.location.href = "/notice";
     }
@@ -80,6 +68,7 @@ class NoticeDetail extends Component {
 
                 <CardActions>
                     <Button color="secondary" size="small" onClick={(event)=> this.handlingDelete(this.state.id)}>Delete</Button>
+                    <Link to={`/notice/update/${this.state.id}`}>Update</Link>
                     <Link to={'/notice'}>Back</Link>
                 </CardActions>  
                     

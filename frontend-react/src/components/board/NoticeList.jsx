@@ -18,7 +18,7 @@ class NoticeList extends React.Component {
     }
   
     async getNotices() {
-        const _noticeList = await api.getAllNotices();
+        const _noticeList = await api.getAllPosts('notice');
         console.log('getnotice 메서드 실행.');
         console.log(_noticeList);
         this.setState({noticeList : _noticeList.data});
