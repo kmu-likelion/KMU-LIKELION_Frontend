@@ -4,8 +4,7 @@ import { Link } from "react-router-dom";
 import Container from '@material-ui/core/Container';
 import Paper from '@material-ui/core/Paper';
 
-// var moment = require('moment');
-import moment from 'moment';
+// import moment from 'moment';
 
 
 class NoticeUpdate extends Component {
@@ -47,9 +46,7 @@ class NoticeUpdate extends Component {
 
     handlingSubmit = async (event) => {
         event.preventDefault() //event의 디폴트 기능(새로고침 되는 것 등..) -> 막는다.
-        var rDate = moment(this.state.run_date).format();
-        rDate = moment(rDate).add(1,'d');
-        this.updateNotice(this.props.match.params.id, {title:this.state.title, body:this.state.body, run_date:rDate});
+        this.updateNotice(this.props.match.params.id, {title:this.state.title, body:this.state.body, run_date:this.state.run_date});
         this.setState({title:'', content:'', run_date:''})
         // this.getPosts()
         document.location.href = "/notice";

@@ -37,16 +37,21 @@ a:hover { color: blue; text-decoration: underline;} */
 /* a {color: #fff; text-decoration: none; outline: none}
 a:hover, a:active {text-decoration: none; color:#fff; background-color:#f59000;} */
 
-.nav-link {
-  color: #fff; text-decoration: none; outline: none
+.link {
+  text-decoration: none; outline: none
 }
-.nav-link:hover, .nav-link:active{
-  text-decoration: none; color:#fff;
+.link:hover, .link:active{
+  text-decoration: none;
 }
 
-.drop-link {
-  color: black; text-decoration: none; outline: none
+.nav-link, .nav-link:hover, .nav-link:active{
+  color:#fff;
 }
-.drop-link:hover, .drop-link:active{
-  text-decoration: none; color:black;
+
+.drop-link, .drop-link:hover, .drop-link:active{
+  color:black;
+}
+
+.auth-link, .auth-link:hover, .auth-link:active{
+  color:#fff;
 }

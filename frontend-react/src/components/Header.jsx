@@ -41,12 +41,12 @@ export default function Header() {
     };
 
     const NavItem = ({children, to}) => (
-        <Link to={to} className="nav-link">
+        <Link to={to} className="link nav-link">
             {children}
         </Link>        
     );
     const DropItem = ({children, to}) => (
-        <Link to={to} className="drop-link">
+        <Link to={to} className="link drop-link">
             {children}
         </Link>        
     );
@@ -79,7 +79,9 @@ export default function Header() {
                 
                     </Typography>
 
-                    <Button color="inherit">Login</Button>
+                    <Button color="inherit">
+                        <Link to={'/login'} className="auth-link link">Login</Link>
+                    </Button>
                 </Toolbar>
             </AppBar>
         </div>

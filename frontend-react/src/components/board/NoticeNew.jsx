@@ -5,7 +5,7 @@ import Container from '@material-ui/core/Container';
 import Paper from '@material-ui/core/Paper';
 
 // var moment = require('moment');
-import moment from 'moment';
+// import moment from 'moment';
 
 
 class NoticeNew extends Component {
@@ -31,9 +31,9 @@ class NoticeNew extends Component {
 
     handlingSubmit = async (event) => {
         event.preventDefault() //event의 디폴트 기능(새로고침 되는 것 등..) -> 막는다.
-        var rDate = moment(this.state.run_date).format();
-        rDate = moment(rDate).add(1,'d');
-        let result = await api.createPost('notice',{title:this.state.title, body:this.state.body, run_date:rDate})
+        // var rDate = moment(this.state.run_date).format();
+        // rDate = moment(rDate).add(1,'d');
+        let result = await api.createPost('notice',{title:this.state.title, body:this.state.body, run_date:this.state.run_date}).catch(err => console.log(err))
         console.log("정상적으로 생성됨.", result)
         this.setState({title:'', content:'', run_date:''})
         // this.getPosts()

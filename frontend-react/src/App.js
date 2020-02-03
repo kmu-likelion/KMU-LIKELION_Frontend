@@ -11,6 +11,8 @@ import NoticeDetail from "./components/board/NoticeDetail";
 import NoticeNew from "./components/board/NoticeNew";
 import NoticeUpdate from "./components/board/NoticeUpdate";
 
+import Login from "./components/accounts/login";
+
 export default () => (
   <Router>
       <Header />
@@ -19,6 +21,7 @@ export default () => (
       <Route exact path="/notice/new" component={NoticeNew} />
       <Route path="/notice/detail/:id" component={NoticeDetail} id="number"/>
       <Route path="/notice/update/:id" component={NoticeUpdate} id="number"/>
+      <Route path="/login" component={Login} />
       <Footer />
   </Router>
 )
