@@ -6,9 +6,9 @@ export default {
 
 /* Auth api */
     
-    authlogin(data) {
+    authLogin(data) {
         console.log('login api 실행.');
-        return axios.POST('api-auth/login/', data);
+        return axios.post('account/auth/login/', data);
     },
     // authlogout()
 

@@ -26,9 +26,9 @@ class Login extends Component {
 
     handlingSubmit = async (event) => {
         event.preventDefault() //event의 디폴트 기능(새로고침 되는 것 등..) -> 막는다.
-
+        
         let result = await api.authLogin({username:this.state.username, password:this.state.password}).catch(err => console.log(err))
-        console.log("정상적으로 생성됨.", result)
+        console.log("로그인 성공!", result)
         this.setState({username:'', password:''})
 
         // document.location.href = "/notice";
