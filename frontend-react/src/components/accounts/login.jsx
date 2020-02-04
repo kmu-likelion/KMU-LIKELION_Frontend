@@ -3,7 +3,6 @@ import api from '../../api/api_auth';
 import { Link } from "react-router-dom";
 import Container from '@material-ui/core/Container';
 import Paper from '@material-ui/core/Paper';
-
 // var moment = require('moment');
 // import moment from 'moment';
 
@@ -11,8 +10,10 @@ import Paper from '@material-ui/core/Paper';
 class Login extends Component {
 
     state = {
+        id : '',
         username: '',
-        password: ''
+        password: '',
+        token : '',    
     }
 
     componentDidMount() {
@@ -27,11 +28,26 @@ class Login extends Component {
     handlingSubmit = async (event) => {
         event.preventDefault() //event의 디폴트 기능(새로고침 되는 것 등..) -> 막는다.
         
-        let result = await api.authLogin({username:this.state.username, password:this.state.password}).catch(err => console.log(err))
-        console.log("로그인 성공!", result)
-        this.setState({username:'', password:''})
+        await api.authLogin({username:this.state.username, password:this.state.password})
+            .then(result => {
+                console.log("로그인 성공!", result);
+                this.props.onLogin();
+                this.doSignup(result.data.user.id, result.data.user.username, result.data.token)
+                // this.props.history.push('/');
+                document.location.href = "/";
+                // this.props.history.push('/');
+            })
+            .catch(err => console.log(err))
 
-        // document.location.href = "/notice";
+        this.setState({username:'', password:''})        
+    }
+
+    doSignup = (id, name, token) => {
+        // console.log('id : ', id);
+        // console.log('token :', token);
+        window.sessionStorage.setItem('id', id);
+        window.sessionStorage.setItem('name', name);
+        window.sessionStorage.setItem('token', token);
     }
     
     render() {
