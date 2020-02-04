@@ -13,6 +13,11 @@ import NoticeUpdate from "./components/board/NoticeUpdate";
 import Login from "./components/accounts/LoginContainer";
 import Mypage from "./components/accounts/Mypage";
 import Store from "./Store/store";
+import QnANew from "./components/board/QnANew";
+import QnAList from "./components/board/QnAList";
+import QnADetail from "./components/board/QnADetail";
+import QnAUpdate from "./components/board/QnAUpdate";
+
 
 class App extends React.Component {
   constructor(props) {
@@ -69,8 +74,16 @@ class App extends React.Component {
             component={NoticeUpdate}
             id="number"
           />
+          <Route exact path="/QnA" component={QnAList} />
+          <Route exact path="/QnA/new" component={QnANew} />
+          <Route path="/QnA/detail/:id" component={QnADetail} id="number" />
+          <Route
+            path="/QnA/update/:id"
+            component={QnAUpdate}
+            id="number"
+          />
           <Route path="/login" component={Login} />
-          <Route path="/mypage/:username" component={Mypage} />>
+          <Route path="/mypage/:username" component={Mypage} />
           <Footer />
         </Router>
       </Store.Provider>
