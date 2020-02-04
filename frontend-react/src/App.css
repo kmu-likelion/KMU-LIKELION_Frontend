@@ -1,34 +1,29 @@
-
 .main-container {
   padding-top: 2rem;
   padding-bottom: 2rem;
 }
 
-
 .footer {
-  border-top:solid;
-  border-width:3rem;
-  border-color:#FDD7AB;
+  border-top: solid;
+  border-width: 3rem;
+  border-color: #fdd7ab;
   padding-top: 2rem;
-  
 }
 
-.left-footer{
+.left-footer {
   text-align: center;
-  border-right:solid;
-  border-color:#f38014;
-  border-width:0.01rem;
+  border-right: solid;
+  border-color: #f38014;
+  border-width: 0.01rem;
   /* height: 93px; */
   font-size: 15px;
   color: #f38104;
-
 }
-  
-.right-footer{
+
+.right-footer {
   font-size: 0.9em;
   color: #f38104;
-  line-height:0.6rem;
-  
+  line-height: 0.6rem;
 }
 
 /* a:link { color: red; text-decoration: none;}
@@ -38,20 +33,33 @@ a:hover { color: blue; text-decoration: underline;} */
 a:hover, a:active {text-decoration: none; color:#fff; background-color:#f59000;} */
 
 .link {
-  text-decoration: none; outline: none
+  text-decoration: none;
+  outline: none;
 }
-.link:hover, .link:active{
+.link:hover,
+.link:active {
   text-decoration: none;
 }
 
-.nav-link, .nav-link:hover, .nav-link:active{
-  color:#fff;
+.nav-link,
+.nav-link:hover,
+.nav-link:active {
+  color: #fff;
 }
 
-.drop-link, .drop-link:hover, .drop-link:active{
-  color:black;
+.drop-link,
+.drop-link:hover,
+.drop-link:active {
+  color: black;
 }
 
-.auth-link, .auth-link:hover, .auth-link:active{
-  color:#fff;
+.auth-link,
+.auth-link:hover,
+.auth-link:active {
+  color: #fff;
+}
+.commentForm {
+  display: flex;
+  flex-direction: column;
+  width: 25rem;
 }
