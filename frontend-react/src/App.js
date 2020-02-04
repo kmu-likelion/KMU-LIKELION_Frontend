@@ -46,7 +46,9 @@ class App extends React.Component {
   };
 
   componentDidMount() {
+    // const name = window.sessionStorage.getItem("name");
     const id = window.sessionStorage.getItem("id");
+
     if (id) {
       this.onLogin();
     } else {
@@ -83,7 +85,7 @@ class App extends React.Component {
             id="number"
           />
           <Route path="/login" component={Login} />
-          <Route path="/mypage/:username" component={Mypage} />
+          <Route path="/mypage/:id" component={Mypage} id="number" />
           <Footer />
         </Router>
       </Store.Provider>
