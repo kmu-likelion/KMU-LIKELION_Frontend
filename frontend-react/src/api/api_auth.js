@@ -11,7 +11,7 @@ export default {
   },
   getUser(userId) {
     console.log("getUser api 실행.");
-    return axios.get("account/auth/user/", userId);
+    return axios.get("account/user/" + String(userId));
   }
   // authlogout()
 };

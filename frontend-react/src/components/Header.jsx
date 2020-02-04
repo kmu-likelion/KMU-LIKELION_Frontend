@@ -26,7 +26,7 @@ export default function Header(props) {
   const classes = useStyles();
   const { logged, onLogout } = props;
   const [anchorEl, setAnchorEl] = React.useState(null);
-  const username = window.sessionStorage.getItem("username");
+  const id = window.sessionStorage.getItem("id");
 
   // React.useEffect();
 
@@ -90,7 +90,7 @@ export default function Header(props) {
                 </Link>
               </Button>
               <Button color="inherit">
-                <Link to={`/Mypage/${username}`} className="auth-link link">
+                <Link to={`/Mypage/${id}`} className="auth-link link">
                   Mypage
                 </Link>
               </Button>
