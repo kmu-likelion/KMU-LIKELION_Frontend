@@ -21,7 +21,7 @@ class NoticeList extends React.Component {
     const _noticeList = await api.getAllPosts("notice");
     console.log("getnotice 메서드 실행.");
     console.log(_noticeList);
-    this.setState({ noticeList: _noticeList.data });
+    this.setState({ noticeList: _noticeList.data.results });
     // console.log('postList의 타입은 : ' , typeof(this.state.postList))
   }
 

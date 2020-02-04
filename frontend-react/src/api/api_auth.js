@@ -8,6 +8,10 @@ export default {
   authLogin(data) {
     console.log("login api 실행.");
     return axios.post("account/auth/login/", data);
+  },
+  getUser(userId) {
+    console.log("getUser api 실행.");
+    return axios.get("account/auth/user/", userId);
   }
   // authlogout()
 };

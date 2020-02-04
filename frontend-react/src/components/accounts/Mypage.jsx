@@ -17,16 +17,33 @@ class Mypage extends Component {
     const _id = window.sessionStorage.getItem("id");
     const _user = window.sessionStorage.getItem("username");
 
-    if (_id) {
-      this.setState({ id: _id, username: _user });
-    }
+    this.setState({
+      id: _id,
+      username: _user
+    });
+    // this.getUser(_id);
   }
+
+  // async getUser(userId) {
+  //   await api
+  //     .getUser(userId)
+  //     .then(res => {
+  //       const userData = res.data;
+  //       console.log(userData);
+  //       this.setState({
+  //         id: userData.id,
+  //         username: userData.username
+  //       });
+  //     })
+  //     .catch(err => console.log(err));
+  // }
 
   render() {
     return (
       <Container maxWidth="lg" className="PostingSection">
         <Paper className="PostingPaper">
           <h2>My page</h2>
+          id {this.state.id} <br />
           Username {this.state.username}
           <br />
         </Paper>
