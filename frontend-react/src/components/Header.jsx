@@ -6,8 +6,8 @@ import { makeStyles } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
-import IconButton from "@material-ui/core/IconButton";
-import MenuIcon from "@material-ui/icons/Menu";
+// import IconButton from "@material-ui/core/IconButton";
+// import MenuIcon from "@material-ui/icons/Menu";
 import Button from "@material-ui/core/Button";
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
@@ -24,17 +24,11 @@ const useStyles = makeStyles(theme => ({
 
 export default function Header(props) {
   const classes = useStyles();
-
+  const { logged, onLogout } = props;
   const [anchorEl, setAnchorEl] = React.useState(null);
-  const [username, setUsername] = React.useState();
-  //   const _id = window.sessionStorage.getItem("id");
-  const _user = window.sessionStorage.getItem("name");
+  const username = window.sessionStorage.getItem("username");
 
-  console.log("user", _user);
-  if (_user) {
-    setUsername(_user);
-  }
-  //캐러셀 관련 코드?
+  // React.useEffect();
 
   //새로고침 안되게 하는코든데 작동이 안되누..
   // const preventDefault = event => event.preventDefault();
@@ -42,7 +36,6 @@ export default function Header(props) {
   const handleClick = event => {
     setAnchorEl(event.currentTarget);
   };
-
   const handleClose = () => {
     setAnchorEl(null);
   };
@@ -58,7 +51,6 @@ export default function Header(props) {
     </Link>
   );
 
-  const { logged, onLogout } = props;
   return (
     <div className="header">
       <AppBar position="static" style={{ background: "#f38014" }}>
@@ -98,10 +90,7 @@ export default function Header(props) {
                 </Link>
               </Button>
               <Button color="inherit">
-                <Link
-                  to={"/Mypage/:" + { username }}
-                  className="auth-link link"
-                >
+                <Link to={`/Mypage/${username}`} className="auth-link link">
                   Mypage
                 </Link>
               </Button>

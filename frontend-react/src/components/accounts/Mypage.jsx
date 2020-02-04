@@ -13,13 +13,12 @@ class Mypage extends Component {
   };
 
   componentDidMount() {
-    // console.log("New ComponentDidMount");
+    console.log("New ComponentDidMount");
     const _id = window.sessionStorage.getItem("id");
     const _user = window.sessionStorage.getItem("username");
-    console.log("user:", _user);
+
     if (_id) {
       this.setState({ id: _id, username: _user });
-      console.log(this.state.username);
     }
   }
 
