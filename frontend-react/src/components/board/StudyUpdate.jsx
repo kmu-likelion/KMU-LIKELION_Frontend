@@ -19,22 +19,22 @@ axios.defaults.xsrfHeaderName = "X-CSRFToken";
 
 
 
-class QnAUpdate extends Component {
+class StudyUpdate extends Component {
     state = {
         title : '',
         body : '',
-        subject: '',
+        how_many_people: ''
     }
 
     componentDidMount() {
 		console.log("Detail ComponentDidMount");
         //this._getQnA(this.props.match.params.id);
-        this.getQnA();
+        this.getStudy();
     }
     
-    async getQnA() {
+    async getStudy() {
         await api 
-            .getPost("QnA", this.props.match.params.id)
+            .getPost("study", this.props.match.params.id)
             .then(res => {
                 const data = res.data;
 
@@ -42,15 +42,15 @@ class QnAUpdate extends Component {
                     title : data.title,
                     body : data.body,
                     id : data.id,
-                    subject : data.subject
+                    how_many_people : data.how_many_people
                 });
 
             })
             .catch(err => console.log(err));
     }
-    async updateQnA(id, data) {
+    async updateStudy(id, data) {
         await api
-          .updatePost("QnA", id, data)
+          .updatePost("study", id, data)
           .then(result => console.log("정상적으로 update됨.", result))
           .catch(err => console.log(err));
       }
@@ -61,14 +61,14 @@ class QnAUpdate extends Component {
     
       handlingSubmit = async event => {
         event.preventDefault(); //event의 디폴트 기능(새로고침 되는 것 등..) -> 막는다.
-        this.updateQnA(this.props.match.params.id, {
+        this.updateStudy(this.props.match.params.id, {
           title: this.state.title,
           body: this.state.body,
-          subject: this.state.subject
+          how_many_people: this.state.how_many_people
         });
-        this.setState({ title: "", content: "", subject: "" });
+        this.setState({ title: "", content: "", how_many_people: "" });
         // this.getPosts()
-        document.location.href = "/QnA";
+        document.location.href = "/study";
       };
 
 
@@ -80,20 +80,20 @@ class QnAUpdate extends Component {
         return (
             <Container maxWidth="lg" className="PostingSection">
                 <Paper className="PostingPaper">
-                    <h2>Update QnA</h2>
+                    <h2>Update Study</h2>
                     <form onSubmit={this.handlingSubmit} className="PostingForm">
                         <input id='title' name='title' value={this.state.title} onChange={this.handlingChange} required="required" placeholder="Title" />
                         <input id='body' name='body' value={this.state.body} onChange={this.handlingChange} required="required" placeholder="Content" />
-                        <input name='subject' value={this.state.subject} onChange={this.handlingChange} required="required" placeholder="Subject" />
+                        <input name='how_many_people' value={this.state.how_many_people} onChange={this.handlingChange} required="required" placeholder="how_many_people" />
 
                         <button type="submit">제출</button>
                     </form>
 
-                    <Link to='/QnA'>Cancle</Link>
+                    <Link to='/study'>Cancle</Link>
                 </Paper>
             </Container>
         );
     }
 }
 
-export default QnAUpdate;
+export default StudyUpdate;

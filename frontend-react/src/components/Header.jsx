@@ -85,12 +85,17 @@ export default function Header(props) {
               <MenuItem onClick={handleClose}>
                 <DropItem to={"/notice"}>Notice</DropItem>
               </MenuItem>
-              <MenuItem onClick={handleClose}>Study</MenuItem>
+              <MenuItem onClick={handleClose}>
+                <DropItem to={"/study"}>Study</DropItem>
+              </MenuItem>
               <MenuItem onClick={handleClose}>
                 <DropItem to={"/QnA"}>QnA</DropItem>
               </MenuItem>
-              <MenuItem onClick={handleClose}>Recuit</MenuItem>
+              <MenuItem onClick={handleClose}>
+                <DropItem to={"/recruit"}>Recuit</DropItem>
+              </MenuItem>
             </Menu>
+            
           </Typography>
           {logged ? (
             <div>

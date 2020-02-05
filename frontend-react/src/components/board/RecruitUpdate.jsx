@@ -19,22 +19,21 @@ axios.defaults.xsrfHeaderName = "X-CSRFToken";
 
 
 
-class QnAUpdate extends Component {
+class RecruitUpdate extends Component {
     state = {
         title : '',
         body : '',
-        subject: '',
+        purpose: '',
     }
 
     componentDidMount() {
-		console.log("Detail ComponentDidMount");
-        //this._getQnA(this.props.match.params.id);
-        this.getQnA();
+		console.log("Detail ComponentDidMount")
+        this.getRecruit();
     }
     
-    async getQnA() {
+    async getRecruit() {
         await api 
-            .getPost("QnA", this.props.match.params.id)
+            .getPost("recruit", this.props.match.params.id)
             .then(res => {
                 const data = res.data;
 
@@ -42,15 +41,15 @@ class QnAUpdate extends Component {
                     title : data.title,
                     body : data.body,
                     id : data.id,
-                    subject : data.subject
+                    purpose : data.purpose
                 });
 
             })
             .catch(err => console.log(err));
     }
-    async updateQnA(id, data) {
+    async updateRecruit(id, data) {
         await api
-          .updatePost("QnA", id, data)
+          .updatePost("recruit", id, data)
           .then(result => console.log("정상적으로 update됨.", result))
           .catch(err => console.log(err));
       }
@@ -61,14 +60,14 @@ class QnAUpdate extends Component {
     
       handlingSubmit = async event => {
         event.preventDefault(); //event의 디폴트 기능(새로고침 되는 것 등..) -> 막는다.
-        this.updateQnA(this.props.match.params.id, {
+        this.updateRecruit(this.props.match.params.id, {
           title: this.state.title,
           body: this.state.body,
-          subject: this.state.subject
+          purpose: this.state.purpose
         });
-        this.setState({ title: "", content: "", subject: "" });
+        this.setState({ title: "", content: "", purpose: "" });
         // this.getPosts()
-        document.location.href = "/QnA";
+        document.location.href = "/recruit";
       };
 
 
@@ -80,20 +79,20 @@ class QnAUpdate extends Component {
         return (
             <Container maxWidth="lg" className="PostingSection">
                 <Paper className="PostingPaper">
-                    <h2>Update QnA</h2>
+                    <h2>Update Recruit</h2>
                     <form onSubmit={this.handlingSubmit} className="PostingForm">
                         <input id='title' name='title' value={this.state.title} onChange={this.handlingChange} required="required" placeholder="Title" />
                         <input id='body' name='body' value={this.state.body} onChange={this.handlingChange} required="required" placeholder="Content" />
-                        <input name='subject' value={this.state.subject} onChange={this.handlingChange} required="required" placeholder="Subject" />
+                        <input name='purpose' value={this.state.purpose} onChange={this.handlingChange} required="required" placeholder="purpose" />
 
                         <button type="submit">제출</button>
                     </form>
 
-                    <Link to='/QnA'>Cancle</Link>
+                    <Link to='/recruit'>Cancle</Link>
                 </Paper>
             </Container>
         );
     }
 }
 
-export default QnAUpdate;
+export default RecruitUpdate;
