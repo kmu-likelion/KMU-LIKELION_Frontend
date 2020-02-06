@@ -1,3 +1,14 @@
+@font-face {
+  font-family: "Eoe_Zno_L";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_eight@1.0/Eoe_Zno_L.woff")
+    format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+#root {
+  font-family: "Eoe_Zno_L";
+}
+
 .main-container {
   padding-top: 2rem;
   padding-bottom: 2rem;
@@ -62,4 +73,17 @@ a:hover, a:active {text-decoration: none; color:#fff; background-color:#f59000;}
   display: flex;
   flex-direction: column;
   width: 25rem;
+}
+
+.RecentForm {
+  padding: 0.5rem;
+  padding-left: 1rem;
+  /* margin: 3rem; */
+}
+
+.main-recentTitle {
+  text-align: center;
+}
+.main-postTitle {
+  font-size: x-large;
 }

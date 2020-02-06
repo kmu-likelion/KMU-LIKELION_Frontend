@@ -9,6 +9,7 @@ export default {
     console.log("getAllPosts 실행.");
     return axios.get(`Board/${url}/`);
   },
+  //단일 글 불러오기 및 단일댓글 불러오기?
   getPost(url, id) {
     console.log("getPost 실행");
     return axios.get(`Board/${url}/` + String(id));

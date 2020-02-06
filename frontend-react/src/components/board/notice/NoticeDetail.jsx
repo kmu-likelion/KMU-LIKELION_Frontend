@@ -31,11 +31,25 @@ class NoticeDetail extends Component {
     console.log("Detail ComponentDidMount");
     // this._getNotice(this.props.match.params.id);
     this.getNotice();
+    this.getComments();
   }
 
-  // async getComments() {
-  //   await api.getAllPosts()
-  // }
+  componentDidUpdate() {
+    // this.getComments();
+    console.log("post id : ", this.state.id);
+  }
+
+  async getComments() {
+    await api
+      .getPost("notice_comment", this.state.id)
+      .then(res => {
+        const _data = res.data;
+        this.setState({
+          comments: _data.results
+        });
+      })
+      .catch(err => console.log(err));
+  }
 
   async getNotice() {
     await api
@@ -55,10 +69,14 @@ class NoticeDetail extends Component {
       .catch(err => console.log(err));
   }
 
-  handlingDelete = async id => {
-    await api.deletePost("notice", id);
-    console.log("delete post 성공.");
-    document.location.href = "/notice";
+  handlingDelete = async (target, id) => {
+    await api.deletePost(target, id);
+    console.log(`delete ${target} 성공.`);
+    if (target === "notice") {
+      document.location.href = "/notice";
+    } else {
+      this.getComments();
+    }
   };
 
   handlingChange = event => {
@@ -79,7 +97,7 @@ class NoticeDetail extends Component {
       .catch(err => console.log(err));
     console.log("정상적으로 생성됨.", result);
     this.setState({ input_cmt: "" });
-    // this.getComments();
+    this.getComments();
   };
 
   render() {
@@ -100,7 +118,7 @@ class NoticeDetail extends Component {
             <Button
               color="secondary"
               size="small"
-              onClick={event => this.handlingDelete(this.state.id)}
+              onClick={event => this.handlingDelete("notice", this.state.id)}
             >
               Delete
             </Button>
@@ -112,6 +130,25 @@ class NoticeDetail extends Component {
         <Card className={"card"}>
           <CardContent>
             <h5>Comment</h5>
+            <div>
+              {this.state.comments.map(comment => (
+                <>
+                  <span> 작성자 : {comment.writer}</span>
+                  <br />
+                  <span>{comment.body}</span>
+                  <Button
+                    color="secondary"
+                    size="small"
+                    onClick={event =>
+                      this.handlingDelete("notice_comment", comment.id)
+                    }
+                  >
+                    Delete
+                  </Button>
+                  <hr />
+                </>
+              ))}
+            </div>
             <form onSubmit={this.commentSubmit} className="commentForm">
               <TextField
                 id="outlined-name"

@@ -1,15 +1,47 @@
 import React from "react";
+import api from "../../api/api_board";
+import RecentPost from "./RecentPost";
 
 import logo from "./logo.png";
 import Container from "@material-ui/core/Container";
 import Grid from "@material-ui/core/Grid";
+import Paper from "@material-ui/core/Paper";
 
 import Carousel from "react-bootstrap/Carousel";
 
 class Main extends React.Component {
-  // componentDidMount() {
-  //
-  // }
+  constructor(props) {
+    super(props);
+    this.state = {
+      recentNotices: [],
+      recentQnA: []
+    };
+  }
+  componentDidMount() {
+    this.getRecentPosts("notice");
+    this.getRecentPosts("QnA");
+  }
+
+  async getRecentPosts(target) {
+    await api
+      .getAllPosts(target)
+      .then(recentPosts => {
+        console.log(recentPosts);
+        var posts = recentPosts.data.results;
+        var slicePosts = posts.slice(0, 4);
+        switch (target) {
+          case "notice":
+            this.setState({ recentNotices: slicePosts });
+            break;
+          case "QnA":
+            this.setState({ recentQnA: slicePosts });
+            break;
+          default:
+            break;
+        }
+      })
+      .catch(err => console.log(err));
+  }
 
   render() {
     return (
@@ -37,6 +69,37 @@ class Main extends React.Component {
               </Carousel>
             </Grid>
           </Grid>
+          <hr />
+          <div>
+            <Grid container spacing={3}>
+              <Grid item xs={6}>
+                <h4 className={"main-recentTitle"}>최근 공지사항</h4>
+                <Paper>
+                  {this.state.recentNotices.map(post => (
+                    <RecentPost
+                      key={post.id}
+                      id={post.id}
+                      title={post.title}
+                      body={post.body}
+                    />
+                  ))}
+                </Paper>
+              </Grid>
+              <Grid item xs={6}>
+                <h4 className={"main-recentTitle"}>최근 QnA</h4>
+                <Paper>
+                  {this.state.recentQnA.map(post => (
+                    <RecentPost
+                      key={post.id}
+                      id={post.id}
+                      title={post.title}
+                      body={post.body}
+                    />
+                  ))}
+                </Paper>
+              </Grid>
+            </Grid>
+          </div>
         </Container>
       </div>
     );
