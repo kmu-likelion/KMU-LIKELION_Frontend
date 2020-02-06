@@ -19,6 +19,7 @@
   border-width: 3rem;
   border-color: #fdd7ab;
   padding-top: 2rem;
+  font-weight: bold;
 }
 
 .left-footer {
@@ -83,6 +84,7 @@ a:hover, a:active {text-decoration: none; color:#fff; background-color:#f59000;}
 
 .main-recentTitle {
   text-align: center;
+  font-weight: bold;
 }
 .main-postTitle {
   font-size: x-large;

@@ -17,6 +17,7 @@ class Mypage extends Component {
     // const _id = window.sessionStorage.getItem("id");
     const _id = this.props.match.params.id;
     this.getUser(_id);
+    // console.log(window.sessionStorage.getItem("token"));
   }
 
   async getUser(userId) {

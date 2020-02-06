@@ -4,6 +4,8 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import moment from "moment";
 
+import { tokenConfig } from "../../../action/auth";
+
 // @material-ui
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
@@ -41,7 +43,7 @@ class NoticeDetail extends Component {
 
   async getComments() {
     await api
-      .getPost("notice_comment", this.state.id)
+      .getComments("notice_comment", this.props.match.params.id, tokenConfig())
       .then(res => {
         const _data = res.data;
         this.setState({
@@ -53,7 +55,7 @@ class NoticeDetail extends Component {
 
   async getNotice() {
     await api
-      .getPost("notice", this.props.match.params.id)
+      .getPost("notice", this.props.match.params.id, tokenConfig())
       .then(res => {
         const data = res.data;
 
@@ -70,7 +72,7 @@ class NoticeDetail extends Component {
   }
 
   handlingDelete = async (target, id) => {
-    await api.deletePost(target, id);
+    await api.deletePost(target, id, tokenConfig());
     console.log(`delete ${target} 성공.`);
     if (target === "notice") {
       document.location.href = "/notice";
@@ -88,12 +90,18 @@ class NoticeDetail extends Component {
     console.log("body:", this.state.input_cmt);
     console.log("board:", this.state.id);
     console.log("writer:", this.state.writer);
+    // console.log("token:", window.sessionStorage.getItem("token"));
     let result = await api
-      .createPost("notice_comment", {
-        body: this.state.input_cmt,
-        board: this.state.id,
-        writer: this.state.writer
-      })
+      .createPost(
+        "notice_comment",
+        {
+          body: this.state.input_cmt,
+          board: this.state.id,
+          writer: this.state.writer //id
+          // token: window.sessionStorage.getItem("token")
+        },
+        tokenConfig()
+      )
       .catch(err => console.log(err));
     console.log("정상적으로 생성됨.", result);
     this.setState({ input_cmt: "" });

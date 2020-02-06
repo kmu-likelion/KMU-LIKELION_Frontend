@@ -1,7 +1,7 @@
 import React from "react";
 import api from "../../api/api_board";
 import RecentPost from "./RecentPost";
-
+import { tokenConfig } from "../../action/auth";
 import logo from "./logo.png";
 import Container from "@material-ui/core/Container";
 import Grid from "@material-ui/core/Grid";
@@ -24,7 +24,7 @@ class Main extends React.Component {
 
   async getRecentPosts(target) {
     await api
-      .getAllPosts(target)
+      .getAllPosts(target, tokenConfig())
       .then(recentPosts => {
         console.log(recentPosts);
         var posts = recentPosts.data.results;
@@ -72,7 +72,7 @@ class Main extends React.Component {
           <hr />
           <div>
             <Grid container spacing={3}>
-              <Grid item xs={6}>
+              <Grid item xs={12} sm={6}>
                 <h4 className={"main-recentTitle"}>최근 공지사항</h4>
                 <Paper>
                   {this.state.recentNotices.map(post => (
@@ -85,7 +85,7 @@ class Main extends React.Component {
                   ))}
                 </Paper>
               </Grid>
-              <Grid item xs={6}>
+              <Grid item xs={12} sm={6}>
                 <h4 className={"main-recentTitle"}>최근 QnA</h4>
                 <Paper>
                   {this.state.recentQnA.map(post => (

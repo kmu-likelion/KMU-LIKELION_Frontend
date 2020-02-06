@@ -4,6 +4,7 @@ import Container from "@material-ui/core/Container";
 import { Link } from "react-router-dom";
 import api from "../../../api/api_board";
 import StudyView from "./StudyView";
+import { tokenConfig } from "../../../action/auth";
 
 class StudyList extends React.Component {
   constructor(props) {
@@ -18,7 +19,7 @@ class StudyList extends React.Component {
   }
 
   async getStudy() {
-    const _studyList = await api.getAllPosts("study");
+    const _studyList = await api.getAllPosts("study", tokenConfig());
     console.log("getStudy 메서드 실행.");
     console.log(_studyList);
     this.setState({ studyList: _studyList.data.results });

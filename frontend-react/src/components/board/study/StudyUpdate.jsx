@@ -6,6 +6,8 @@ import { Link } from "react-router-dom";
 import Container from "@material-ui/core/Container";
 import Paper from "@material-ui/core/Paper";
 
+import { tokenConfig } from "../../../action/auth";
+
 // @material-ui
 // import Button from "@material-ui/core/Button";
 
@@ -32,7 +34,7 @@ class StudyUpdate extends Component {
 
   async getStudy() {
     await api
-      .getPost("study", this.props.match.params.id)
+      .getPost("study", this.props.match.params.id, tokenConfig())
       .then(res => {
         const data = res.data;
 

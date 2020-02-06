@@ -4,6 +4,7 @@ import Container from "@material-ui/core/Container";
 import { Link } from "react-router-dom";
 import api from "../../../api/api_board";
 import PostView from "./PostView";
+import { tokenConfig } from "../../../action/auth";
 
 class NoticeList extends React.Component {
   constructor(props) {
@@ -18,7 +19,8 @@ class NoticeList extends React.Component {
   }
 
   async getNotices() {
-    const _noticeList = await api.getAllPosts("notice");
+    const _noticeList = await api.getAllPosts("notice", tokenConfig());
+
     console.log("getnotice 메서드 실행.");
     console.log(_noticeList);
     this.setState({ noticeList: _noticeList.data.results });
