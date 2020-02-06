@@ -141,9 +141,11 @@ class NoticeDetail extends Component {
             <div>
               {this.state.comments.map(comment => (
                 <>
-                  <span> 작성자 : {comment.writer}</span>
+                  작성자 :
+                  <Link to={`/Mypage/${comment.writer}`}>{comment.writer}</Link>
                   <br />
                   <span>{comment.body}</span>
+                  <br />
                   <Button
                     color="secondary"
                     size="small"

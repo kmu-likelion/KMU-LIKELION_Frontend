@@ -4,6 +4,7 @@ import Container from "@material-ui/core/Container";
 import { Link } from "react-router-dom";
 import api from "../../../api/api_board";
 import RecruitView from "./RecruitView";
+import { tokenConfig } from "../../../action/auth";
 
 class RecruitList extends React.Component {
   constructor(props) {
@@ -18,7 +19,7 @@ class RecruitList extends React.Component {
   }
 
   async getRecruit() {
-    const _recruitList = await api.getAllPosts("recruit");
+    const _recruitList = await api.getAllPosts("recruit", tokenConfig());
     console.log("getRecruit 메서드 실행.");
     console.log(_recruitList);
     this.setState({ recruitList: _recruitList.data.results });

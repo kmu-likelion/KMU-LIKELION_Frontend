@@ -1,11 +1,11 @@
-import axios from "axios";
-import {
-  USER_LOADING,
-  USER_LOADED,
-  AUTH_ERROR,
-  LOGIN_SUCCESS,
-  LOGIN_FAIL
-} from "./types";
+// import axios from "axios";
+// import {
+//   USER_LOADING,
+//   USER_LOADED,
+//   AUTH_ERROR,
+//   LOGIN_SUCCESS,
+//   LOGIN_FAIL
+// } from "./types";
 
 // LOAD USER
 // export const loadUser = () => async (dispatch, getState) => {

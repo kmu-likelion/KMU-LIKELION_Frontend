@@ -11,6 +11,7 @@ import Card from "@material-ui/core/Card";
 import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
+import { tokenConfig } from "../../../action/auth";
 
 axios.defaults.xsrfCookieName = "csrftoken";
 axios.defaults.xsrfHeaderName = "X-CSRFToken";
@@ -31,7 +32,7 @@ class RecruitDetail extends Component {
 
   async getRecruit() {
     await api
-      .getPost("recruit", this.props.match.params.id)
+      .getPost("recruit", this.props.match.params.id, tokenConfig())
       .then(res => {
         const data = res.data;
 

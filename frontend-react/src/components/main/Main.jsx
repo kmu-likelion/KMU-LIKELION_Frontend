@@ -100,6 +100,22 @@ class Main extends React.Component {
               </Grid>
             </Grid>
           </div>
+          <hr />
+          <div>
+            <Grid container spacing={3}>
+              <Grid item xs={12} sm={12}>
+                일정 캘린더
+              </Grid>
+            </Grid>
+          </div>
+          <hr />
+          <div>
+            <Grid container spacing={3}>
+              <Grid item xs={12} sm={12}>
+                What We Made!
+              </Grid>
+            </Grid>
+          </div>
         </Container>
       </div>
     );

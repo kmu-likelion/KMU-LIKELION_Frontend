@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import api from "../../../api/api_board";
 import axios from "axios";
 import { Link } from "react-router-dom";
-// import moment from "moment";
+
 import Container from "@material-ui/core/Container";
 import Paper from "@material-ui/core/Paper";
 
@@ -28,7 +28,6 @@ class StudyUpdate extends Component {
 
   componentDidMount() {
     console.log("Detail ComponentDidMount");
-    //this._getQnA(this.props.match.params.id);
     this.getStudy();
   }
 

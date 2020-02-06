@@ -4,6 +4,7 @@ import Container from "@material-ui/core/Container";
 import { Link } from "react-router-dom";
 import api from "../../../api/api_board";
 import QnAView from "./QnAView";
+import { tokenConfig } from "../../../action/auth";
 
 class QnAList extends React.Component {
   constructor(props) {
@@ -18,7 +19,7 @@ class QnAList extends React.Component {
   }
 
   async getQnA() {
-    const _qnaList = await api.getAllPosts("QnA");
+    const _qnaList = await api.getAllPosts("QnA", tokenConfig());
     console.log("getqna 메서드 실행.");
     console.log(_qnaList);
     this.setState({ qnaList: _qnaList.data.results });

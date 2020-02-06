@@ -107,11 +107,18 @@ export default function Header(props) {
               </Button>
             </div>
           ) : (
-            <Button color="inherit">
-              <Link to={"/login"} className="auth-link link">
-                Login
-              </Link>
-            </Button>
+            <>
+              <Button color="inherit">
+                <Link to={"/login"} className="auth-link link">
+                  Login
+                </Link>
+              </Button>
+              <Button color="inherit">
+                <Link to={""} className="auth-link link">
+                  입부신청
+                </Link>
+              </Button>
+            </>
           )}
         </Toolbar>
       </AppBar>
