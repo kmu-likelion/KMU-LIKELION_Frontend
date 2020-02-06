@@ -11,27 +11,7 @@ import Login from "./components/accounts/LoginContainer";
 import Mypage from "./components/accounts/Mypage";
 import Store from "./Store/store";
 
-import NoticeList from "./components/board/NoticeList";
-import NoticeDetail from "./components/board/NoticeDetail";
-import NoticeNew from "./components/board/NoticeNew";
-import NoticeUpdate from "./components/board/NoticeUpdate";
-
-import QnANew from "./components/board/QnANew";
-import QnAList from "./components/board/QnAList";
-import QnADetail from "./components/board/QnADetail";
-import QnAUpdate from "./components/board/QnAUpdate";
-
-import StudyNew from "./components/board/StudyNew";
-import StudyList from "./components/board/StudyList";
-import StudyDetail from "./components/board/StudyDetail";
-import StudyUpdate from "./components/board/StudyUpdate";
-
-import RecruitNew from "./components/board/RecruitNew";
-import RecruitList from "./components/board/RecruitList";
-import RecruitDetail from "./components/board/RecruitDetail";
-import RecruitUpdate from "./components/board/RecruitUpdate";
-
-
+import BoardRouter from "./components/board/BoardRouter";
 
 class App extends React.Component {
   constructor(props) {
@@ -79,27 +59,10 @@ class App extends React.Component {
           <Header logged={logged} onLogout={onLogout} />
           <Route exact path="/" component={Main} />
 
-          <Route exact path="/notice" component={NoticeList} />
-          <Route exact path="/notice/new" component={NoticeNew} />
-          <Route path="/notice/detail/:id" component={NoticeDetail} id="number" />
-          <Route path="/notice/update/:id" component={NoticeUpdate} id="number" />
-
-          <Route exact path="/QnA" component={QnAList} />
-          <Route exact path="/QnA/new" component={QnANew} />
-          <Route path="/QnA/detail/:id" component={QnADetail} id="number" />
-          <Route path="/QnA/update/:id" component={QnAUpdate} id="number" />
-
-          <Route exact path="/study" component={StudyList} />
-          <Route exact path="/study/new" component={StudyNew} />
-          <Route path="/study/detail/:id" component={StudyDetail} id="number" />
-          <Route path="/study/update/:id" component={StudyUpdate} id="number" />
-
-          <Route exact path="/recruit" component={RecruitList} />
-          <Route exact path="/recruit/new" component={RecruitNew} />
-          <Route path="/recruit/detail/:id" component={RecruitDetail} id="number" />
-          <Route path="/recruit/update/:id" component={RecruitUpdate} id="number" />
-
-
+          <Route path="/notice" component={BoardRouter} />
+          <Route path="/QnA" component={BoardRouter} />
+          <Route path="/study" component={BoardRouter} />
+          <Route path="/recruit" component={BoardRouter} />
 
           <Route path="/login" component={Login} />
           <Route path="/mypage/:id" component={Mypage} id="number" />

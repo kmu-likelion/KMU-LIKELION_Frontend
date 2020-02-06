@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import api from "../../api/api_board";
+import api from "../../../api/api_board";
 import { Link } from "react-router-dom";
 import Container from "@material-ui/core/Container";
 import Paper from "@material-ui/core/Paper";

@@ -1,27 +1,27 @@
 import React from "react";
 import Container from "@material-ui/core/Container";
-// import Grid from '@material-ui/core/Grid';
+// import Grid from "@material-ui/core/Grid";
 import { Link } from "react-router-dom";
-import api from "../../api/api_board";
-import PostView from "./PostView";
+import api from "../../../api/api_board";
+import QnAView from "./QnAView";
 
-class NoticeList extends React.Component {
+class QnAList extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      noticeList: []
+      qnaList: []
     };
   }
 
   componentDidMount() {
-    this.getNotices();
+    this.getQnA();
   }
 
-  async getNotices() {
-    const _noticeList = await api.getAllPosts("notice");
-    console.log("getnotice 메서드 실행.");
-    console.log(_noticeList);
-    this.setState({ noticeList: _noticeList.data.results });
+  async getQnA() {
+    const _qnaList = await api.getAllPosts("QnA");
+    console.log("getqna 메서드 실행.");
+    console.log(_qnaList);
+    this.setState({ qnaList: _qnaList.data.results });
     // console.log('postList의 타입은 : ' , typeof(this.state.postList))
   }
 
@@ -29,18 +29,18 @@ class NoticeList extends React.Component {
     return (
       <div>
         <Container maxWidth="lg" className="main-container">
-          <h1>Notice List</h1>
+          <h1>QnA List</h1>
           <h4>
-            <Link to={"/notice/new"}>New Notice</Link>
+            <Link to={"/QnA/new"}>New QnA</Link>
           </h4>
           <br />
-          {this.state.noticeList.map(post => (
-            <PostView
+          {this.state.qnaList.map(post => (
+            <QnAView
               key={post.id}
               id={post.id}
               title={post.title}
               body={post.body}
-              runDate={post.run_date}
+              subject={post.subject}
             />
           ))}
         </Container>
@@ -49,4 +49,4 @@ class NoticeList extends React.Component {
   }
 }
 
-export default NoticeList;
+export default QnAList;

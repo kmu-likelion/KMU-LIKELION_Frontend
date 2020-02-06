@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import api from "../../api/api_board";
+import api from "../../../api/api_board";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import moment from "moment";
