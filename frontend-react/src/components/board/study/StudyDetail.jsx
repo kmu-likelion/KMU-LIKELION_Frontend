@@ -25,8 +25,7 @@ class StudyDetail extends Component {
     title: "",
     body: "",
     pub_date: "",
-    how_many_people: "",
-    is_scraped: ""
+    how_many_people: ""
   };
 
   componentDidMount() {
@@ -58,19 +57,6 @@ class StudyDetail extends Component {
     document.location.href = "/study";
   };
 
-  changeScrapStatus = status => {
-    if (status) {
-      //true
-      this.setState({
-        is_scraped: "true"
-      });
-    } else {
-      this.setState({
-        is_scraped: "false"
-      });
-    }
-  };
-
   render() {
     return (
       <Card className={"card"}>
@@ -85,7 +71,7 @@ class StudyDetail extends Component {
         </CardContent>
 
         <CardActions>
-          <ScrapView id={this.status.id} is_scraped={this.status.is_scraped} />>
+          <ScrapView board_id={this.props.match.params.id} />
           <Button
             color="secondary"
             size="small"

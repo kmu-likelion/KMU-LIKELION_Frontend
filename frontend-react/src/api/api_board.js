@@ -37,8 +37,12 @@ export default {
     console.log("getComments 실행.");
     return axios.get(`Board/${url}/?search=` + String(id), auth);
   },
-  scrapPost(url, id, auth) {
-    console.log("scrapPost 실행.");
-    return axios.get(`Board/${url}/${id}/scrap`, auth);
+  getScrap(url, id, auth) {
+    console.log("get scrap api 실행.");
+    return axios.get(`Board/${url}/${id}/get_scrap`, auth);
+  },
+  changeScrap(url, id, auth) {
+    console.log("change scrap status api 실행.");
+    return axios.get(`Board/${url}/${id}/change_scrap`, auth);
   }
 };
