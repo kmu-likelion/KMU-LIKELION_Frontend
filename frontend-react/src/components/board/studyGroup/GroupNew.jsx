@@ -1,21 +1,17 @@
 import React, { Component } from "react";
 import api from "../../../api/api_board";
 import { Link } from "react-router-dom";
-// import { Router } from "react-router";
+import { tokenConfig } from "../../../action/auth";
 
-// material-ui
 import Container from "@material-ui/core/Container";
 import Paper from "@material-ui/core/Paper";
-import { tokenConfig } from "../../../action/auth";
-// import moment from 'moment';
 
-class NoticeNew extends Component {
+class GroupNew extends Component {
   state = {
-    id: "",
-    username: "",
     title: "",
-    body: "",
-    run_date: ""
+    introduction: "",
+    username: "",
+    id: ""
   };
 
   componentDidMount() {
@@ -32,44 +28,30 @@ class NoticeNew extends Component {
 
   handlingChange = event => {
     this.setState({ [event.target.name]: event.target.value });
-    console.log(event.target.value);
   };
 
   handlingSubmit = async event => {
-    event.preventDefault(); //event의 디폴트 기능(새로고침 되는 것 등..)
-    // var rDate = moment(this.state.run_date).format();
-    // rDate = moment(rDate).add(1,'d');
-    console.log("user-id: ", this.state.id);
-    // var user_id = parseInt(this.state.id);
-
-    let result = await api
-      .createPost(
-        "notice",
-        {
-          title: this.state.title,
-          body: this.state.body,
-          run_date: this.state.run_date,
-          writer: this.state.id
-        },
-        tokenConfig()
-      )
-      .catch(err => console.log(err));
+    event.preventDefault();
+    // console.log("user-id: ", this.state.id);
+    let result = await api.createPost(
+      {
+        title: this.state.title,
+        introduction: this.state.introduction
+      },
+      tokenConfig()
+    );
     console.log("정상적으로 생성됨.", result);
-    this.setState({
-      title: "",
-      content: "",
-      run_date: ""
-    });
+    this.setState({ title: "", content: "" });
     // this.getPosts()
-    // document.location.href = "/notice";
-    this.props.history.push("/notice"); //새로고침되지 않고, 리다이렉트해줌.
+    //document.location.href = "/QnA";
+    this.props.history.push("/study"); //새로고침되지 않고, 리다이렉트해줌.
   };
 
   render() {
     return (
       <Container maxWidth="lg" className="PostingSection">
         <Paper className="PostingPaper">
-          <h2>New Notice</h2>
+          <h2>New Study</h2>
           <form onSubmit={this.handlingSubmit} className="PostingForm">
             <input
               id="title"
@@ -79,7 +61,6 @@ class NoticeNew extends Component {
               required="required"
               placeholder="Title"
             />
-            <br />
             <input
               id="body"
               name="body"
@@ -88,25 +69,22 @@ class NoticeNew extends Component {
               required="required"
               placeholder="Content"
             />
-            <br />
             <input
-              type="date"
-              name="run_date"
-              value={this.state.run_date}
+              name="how_many_people"
+              value={this.state.how_many_people}
               onChange={this.handlingChange}
               required="required"
-              placeholder="Run Date"
+              placeholder="how_many_people"
             />
-            <br />
-            <br />
+
             <button type="submit">제출</button>
           </form>
 
-          <Link to="/notice">Cancle</Link>
+          <Link to="/study">Cancle</Link>
         </Paper>
       </Container>
     );
   }
 }
 
-export default NoticeNew;
+export default GroupNew;

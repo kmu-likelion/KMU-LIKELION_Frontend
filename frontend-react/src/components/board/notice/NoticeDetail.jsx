@@ -74,6 +74,7 @@ class NoticeDetail extends Component {
 
   handlingDelete = async (target, id) => {
     await api.deletePost(target, id, tokenConfig());
+    console.log(`delete id : ${id}`);
     console.log(`delete ${target} 성공.`);
     if (target === "notice") {
       document.location.href = "/notice";
