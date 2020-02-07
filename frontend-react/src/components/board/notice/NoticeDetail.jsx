@@ -3,6 +3,7 @@ import api from "../../../api/api_board";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import moment from "moment";
+import ScrapView from "../ScrapView";
 
 import { tokenConfig } from "../../../action/auth";
 
@@ -123,6 +124,10 @@ class NoticeDetail extends Component {
           </CardContent>
 
           <CardActions>
+            <ScrapView
+              board_id={this.props.match.params.id}
+              board_name={"notice"}
+            />
             <Button
               color="secondary"
               size="small"
@@ -142,7 +147,9 @@ class NoticeDetail extends Component {
               {this.state.comments.map(comment => (
                 <>
                   작성자 :
-                  <Link to={`/Mypage/${comment.writer}`}>{comment.writer}</Link>
+                  <Link to={`/Mypage/${comment.writer}`}>
+                    {comment.author_name}
+                  </Link>
                   <br />
                   <span>{comment.body}</span>
                   <br />

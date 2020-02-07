@@ -6,7 +6,7 @@ import moment from "moment";
 
 import { tokenConfig } from "../../../action/auth";
 
-import ScrapView from "./ScrapView";
+import ScrapView from "../ScrapView";
 
 // @material-ui
 import Button from "@material-ui/core/Button";
@@ -71,7 +71,10 @@ class StudyDetail extends Component {
         </CardContent>
 
         <CardActions>
-          <ScrapView board_id={this.props.match.params.id} />
+          <ScrapView
+            board_id={this.props.match.params.id}
+            board_name={"study"}
+          />
           <Button
             color="secondary"
             size="small"
