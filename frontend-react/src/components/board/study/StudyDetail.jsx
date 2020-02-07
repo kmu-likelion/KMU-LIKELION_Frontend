@@ -6,6 +6,8 @@ import moment from "moment";
 
 import { tokenConfig } from "../../../action/auth";
 
+import ScrapView from "./ScrapView";
+
 // @material-ui
 import Button from "@material-ui/core/Button";
 
@@ -23,7 +25,8 @@ class StudyDetail extends Component {
     title: "",
     body: "",
     pub_date: "",
-    how_many_people: ""
+    how_many_people: "",
+    is_scraped: ""
   };
 
   componentDidMount() {
@@ -55,6 +58,19 @@ class StudyDetail extends Component {
     document.location.href = "/study";
   };
 
+  changeScrapStatus = status => {
+    if (status) {
+      //true
+      this.setState({
+        is_scraped: "true"
+      });
+    } else {
+      this.setState({
+        is_scraped: "false"
+      });
+    }
+  };
+
   render() {
     return (
       <Card className={"card"}>
@@ -69,6 +85,7 @@ class StudyDetail extends Component {
         </CardContent>
 
         <CardActions>
+          <ScrapView id={this.status.id} is_scraped={this.status.is_scraped} />>
           <Button
             color="secondary"
             size="small"

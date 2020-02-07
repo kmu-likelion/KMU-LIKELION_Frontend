@@ -34,7 +34,11 @@ export default {
   },
 
   getComments(url, id, auth) {
-    console.log("geComments 실행.");
+    console.log("getComments 실행.");
     return axios.get(`Board/${url}/?search=` + String(id), auth);
+  },
+  scrapPost(url, id, auth) {
+    console.log("scrapPost 실행.");
+    return axios.get(`Board/${url}/${id}/scrap`, auth);
   }
 };
