@@ -3,6 +3,7 @@ import api from "../../../api/api_board";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import moment from "moment";
+import ScrapView from "../ScrapView";
 
 // @material-ui
 import Button from "@material-ui/core/Button";
@@ -67,6 +68,7 @@ class RecruitDetail extends Component {
         </CardContent>
 
         <CardActions>
+          <ScrapView board_id={this.props.match.params.id} />
           <Button
             color="secondary"
             size="small"

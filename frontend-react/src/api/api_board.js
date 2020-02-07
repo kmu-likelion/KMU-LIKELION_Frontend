@@ -37,12 +37,12 @@ export default {
     console.log("getComments 실행.");
     return axios.get(`Board/${url}/?search=` + String(id), auth);
   },
-  getScrap(url, id, auth) {
+  getScrap(id, auth) {
     console.log("get scrap api 실행.");
-    return axios.get(`Board/${url}/${id}/get_scrap`, auth);
-  },
-  changeScrap(url, id, auth) {
+    return axios.get(`Board/board/${id}/get_scrap`, auth);
+  }, //Board/board/3/get_scrap, auth
+  changeScrap(id, auth) {
     console.log("change scrap status api 실행.");
-    return axios.get(`Board/${url}/${id}/change_scrap`, auth);
+    return axios.get(`Board/board/${id}/change_scrap`, auth);
   }
 };

@@ -71,10 +71,7 @@ class StudyDetail extends Component {
         </CardContent>
 
         <CardActions>
-          <ScrapView
-            board_id={this.props.match.params.id}
-            board_name={"study"}
-          />
+          <ScrapView board_id={this.props.match.params.id} />
           <Button
             color="secondary"
             size="small"

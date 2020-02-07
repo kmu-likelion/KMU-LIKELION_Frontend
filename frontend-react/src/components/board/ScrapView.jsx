@@ -7,23 +7,21 @@ import { tokenConfig } from "../../action/auth";
 export default class ScarpView extends Component {
   state = {
     board_id: "",
-    board_name: "",
     is_scraped: ""
   };
 
   componentDidMount() {
     console.log("ScrapView ComponentDidMount");
-    const { board_id, board_name } = this.props;
+    const { board_id } = this.props;
     this.setState({
-      board_id: board_id,
-      board_name: board_name
+      board_id: board_id
     });
-    this.getScrapStatus(board_id, board_name);
+    this.getScrapStatus(board_id);
   }
 
-  getScrapStatus = async (id, name) => {
+  getScrapStatus = async id => {
     await api
-      .getScrap(name, id, tokenConfig())
+      .getScrap(id, tokenConfig())
       .then(status => {
         this.changeScrapStatus(status.data.status);
         console.log("현재 스크랩 상태 : ", status.data.status);
@@ -32,9 +30,9 @@ export default class ScarpView extends Component {
     console.log("get scrap 성공.");
   };
 
-  handlingScrap = async (id, name) => {
+  handlingScrap = async id => {
     await api
-      .changeScrap(name, id, tokenConfig())
+      .changeScrap(id, tokenConfig())
       .then(status => {
         this.changeScrapStatus(status.data.status);
         console.log("변경된 스크랩 상태 : ", status.data.status);
@@ -65,9 +63,7 @@ export default class ScarpView extends Component {
         <Button
           color="primary"
           size="small"
-          onClick={event =>
-            this.handlingScrap(this.state.board_id, this.state.board_name)
-          }
+          onClick={event => this.handlingScrap(this.state.board_id)}
         >
           Scraped
         </Button>
@@ -78,9 +74,7 @@ export default class ScarpView extends Component {
         <Button
           color="secondary"
           size="small"
-          onClick={event =>
-            this.handlingScrap(this.state.board_id, this.state.board_name)
-          }
+          onClick={event => this.handlingScrap(this.state.board_id)}
         >
           Scrap
         </Button>
