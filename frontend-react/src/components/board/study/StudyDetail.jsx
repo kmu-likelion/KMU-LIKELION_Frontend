@@ -69,7 +69,6 @@ class StudyDetail extends Component {
             <p>작성일 : {this.state.pub_date}</p>
           </Typography>
         </CardContent>
-
         <CardActions>
           <ScrapView board_id={this.props.match.params.id} />
           <Button

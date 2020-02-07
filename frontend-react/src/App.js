@@ -12,6 +12,7 @@ import Mypage from "./components/accounts/Mypage";
 import Store from "./Store/store";
 
 import BoardRouter from "./components/board/BoardRouter";
+import StudyRouter from "./components/board/StudyRouter";
 
 class App extends React.Component {
   constructor(props) {
@@ -61,7 +62,7 @@ class App extends React.Component {
 
           <Route path="/notice" component={BoardRouter} />
           <Route path="/QnA" component={BoardRouter} />
-          <Route path="/study" component={BoardRouter} />
+          <Route path="/study" component={StudyRouter} />
           <Route path="/recruit" component={BoardRouter} />
 
           <Route path="/login" component={Login} />

@@ -8,11 +8,6 @@ import QnAList from "./qna/QnAList";
 import QnADetail from "./qna/QnADetail";
 import QnAUpdate from "./qna/QnAUpdate";
 
-import StudyNew from "./study/StudyNew";
-import StudyList from "./study/StudyList";
-import StudyDetail from "./study/StudyDetail";
-import StudyUpdate from "./study/StudyUpdate";
-
 import RecruitNew from "./recruit/RecruitNew";
 import RecruitList from "./recruit/RecruitList";
 import RecruitDetail from "./recruit/RecruitDetail";
@@ -37,13 +32,6 @@ function BoardRouter({ match }) {
       newComponent = QnANew;
       detailComponent = QnADetail;
       updateComponent = QnAUpdate;
-      break;
-
-    case "/study":
-      listComponent = StudyList;
-      newComponent = StudyNew;
-      detailComponent = StudyDetail;
-      updateComponent = StudyUpdate;
       break;
 
     case "/recruit":

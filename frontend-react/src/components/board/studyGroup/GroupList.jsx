@@ -2,10 +2,10 @@ import React from "react";
 import Container from "@material-ui/core/Container";
 
 import { Link } from "react-router-dom";
-import api from "../../../api/api_studygroup";
+import api from "../../../api/api_group";
 // import StudyView from "./StudyView";
 import { tokenConfig } from "../../../action/auth";
-
+import GroupView from "./GroupView";
 class GroupList extends React.Component {
   constructor(props) {
     super(props);
@@ -15,15 +15,16 @@ class GroupList extends React.Component {
   }
 
   componentDidMount() {
-    // this.getStudy();
+    this.getAllGroup();
+    // console.log("fdsfdsfdsa");
   }
 
   async getAllGroup() {
-    const _groupList = await api.getAllGroups(tokenConfig());
-    console.log("getStudy 메서드 실행.");
-    console.log(_groupList);
-    this.setState({ groupList: _groupList.data.results });
-    // console.log('postList의 타입은 : ' , typeof(this.state.postList))
+    await api.getAllGroups(tokenConfig()).then(results => {
+      console.log("getAllGroups 메서드 실행.");
+      console.log(results);
+      this.setState({ groupList: results.data });
+    });
   }
 
   render() {
@@ -35,15 +36,14 @@ class GroupList extends React.Component {
             <Link to={"/study/new"}>New Group</Link>
           </h4>
           <br />
-          {/* {this.state.groupList.map(post => (
-            <StudyView
-              key={post.id}
-              id={post.id}
-              title={post.title}
-              body={post.body}
-              how_many_people={post.how_many_people}
+          {this.state.groupList.map(group => (
+            <GroupView
+              key={group.id}
+              id={group.id}
+              title={group.title}
+              introduction={group.introduction}
             />
-          ))} */}
+          ))}
         </Container>
       </div>
     );

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import api from "../../../api/api_board";
+import api from "../../../api/api_group";
 import { Link } from "react-router-dom";
 import { tokenConfig } from "../../../action/auth";
 
@@ -33,17 +33,21 @@ class GroupNew extends Component {
   handlingSubmit = async event => {
     event.preventDefault();
     // console.log("user-id: ", this.state.id);
-    let result = await api.createPost(
-      {
-        title: this.state.title,
-        introduction: this.state.introduction
-      },
-      tokenConfig()
-    );
-    console.log("정상적으로 생성됨.", result);
-    this.setState({ title: "", content: "" });
+    await api
+      .createGroup(
+        {
+          title: this.state.title,
+          introduction: this.state.introduction
+        },
+        tokenConfig()
+      )
+      .then(result => {
+        console.log("정상적으로 생성됨.", result);
+        this.setState({ title: "", introduction: "" });
+      })
+      .catch(err => console.log(err));
+
     // this.getPosts()
-    //document.location.href = "/QnA";
     this.props.history.push("/study"); //새로고침되지 않고, 리다이렉트해줌.
   };
 
@@ -51,7 +55,7 @@ class GroupNew extends Component {
     return (
       <Container maxWidth="lg" className="PostingSection">
         <Paper className="PostingPaper">
-          <h2>New Study</h2>
+          <h2>New StudyGroup</h2>
           <form onSubmit={this.handlingSubmit} className="PostingForm">
             <input
               id="title"
@@ -62,22 +66,15 @@ class GroupNew extends Component {
               placeholder="Title"
             />
             <input
-              id="body"
-              name="body"
-              value={this.state.body}
+              id="introduction"
+              name="introduction"
+              value={this.state.introduction}
               onChange={this.handlingChange}
               required="required"
-              placeholder="Content"
-            />
-            <input
-              name="how_many_people"
-              value={this.state.how_many_people}
-              onChange={this.handlingChange}
-              required="required"
-              placeholder="how_many_people"
+              placeholder="introduction"
             />
 
-            <button type="submit">제출</button>
+            <button type="submit">생성</button>
           </form>
 
           <Link to="/study">Cancle</Link>
