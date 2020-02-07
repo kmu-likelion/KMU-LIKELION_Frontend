@@ -8,10 +8,11 @@ import Paper from "@material-ui/core/Paper";
 
 class GroupNew extends Component {
   state = {
+    group_id: "",
     title: "",
     introduction: "",
     username: "",
-    id: ""
+    user_id: ""
   };
 
   componentDidMount() {
@@ -19,7 +20,7 @@ class GroupNew extends Component {
     const _id = window.sessionStorage.getItem("id");
     const _user = window.sessionStorage.getItem("username");
     if (_id) {
-      this.setState({ id: _id, username: _user });
+      this.setState({ user_id: _id, username: _user });
       console.log("접근모드 : 로그인 상태");
     } else {
       console.log("접근모드 : 로그아웃 상태");
@@ -41,9 +42,20 @@ class GroupNew extends Component {
         },
         tokenConfig()
       )
-      .then(result => {
+      .then(async result => {
         console.log("정상적으로 생성됨.", result);
-        this.setState({ title: "", introduction: "" });
+        // console.log("그룹 id : ", result.data.id);
+        this.setState({ group_id: result.data.id });
+        // console.log("상태 그룹 id : ", this.state.group_id);
+        await api
+          .addGroupUser(
+            {
+              participant: this.state.user_id,
+              group: this.state.group_id
+            },
+            tokenConfig()
+          )
+          .catch(err => console.log(err));
       })
       .catch(err => console.log(err));
 

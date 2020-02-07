@@ -13,7 +13,17 @@ export default class GroupView extends Component {
       <Card className={"card"}>
         <CardContent>
           <Typography>
-            <Link to={`/study/${title}`}>{title}</Link>
+            <Link
+              to={{
+                pathname: `/study/group/${title}`,
+                state: {
+                  group_id: id,
+                  group_name: title
+                }
+              }}
+            >
+              {title}
+            </Link>
           </Typography>
         </CardContent>
       </Card>

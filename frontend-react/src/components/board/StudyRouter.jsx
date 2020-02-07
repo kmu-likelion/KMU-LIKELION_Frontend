@@ -15,7 +15,7 @@ function StudyRouter({ match }) {
   return (
     <>
       <Route exact path={match.path} component={GroupList} />
-      <Route path={`${match.path}/new`} component={GroupNew} />
+      <Route exact path={`${match.path}/new`} component={GroupNew} />
       {/* <Route
         path={`${match.path}/detail/:id`}
         component={GroupDetail}
@@ -26,15 +26,15 @@ function StudyRouter({ match }) {
         component={GroupUpdate}
         id="number"
       /> */}
-      <Route exact path={`${match.path}/:group`} component={StudyList} />
-      <Route path={`${match.path}/:group/new`} component={StudyNew} />
+      <Route exact path={`${match.path}/group/:group`} component={StudyList} />
+      <Route path={`${match.path}/group/:group/new`} component={StudyNew} />
       <Route
-        path={`${match.path}/:group/detail/:id`}
+        path={`${match.path}/group/:group/detail/:id`}
         component={StudyDetail}
         id="number"
       />
       <Route
-        path={`${match.path}/:group/update/:id`}
+        path={`${match.path}/group/:group/update/:id`}
         component={StudyUpdate}
         id="number"
       />
