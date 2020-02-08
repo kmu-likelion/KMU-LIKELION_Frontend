@@ -7,11 +7,11 @@ export default {
 
   authLogin(data) {
     console.log("login api 실행.");
-    return axios.post("account/auth/login/", data);
+    return axios.post("accounts/auth/login/", data);
   },
   getUser(userId) {
     console.log("getUser api 실행.");
-    return axios.get("account/user/" + String(userId));
+    return axios.get("accounts/user/" + String(userId));
   }
   // authlogout()
 };

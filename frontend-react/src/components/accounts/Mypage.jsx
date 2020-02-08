@@ -9,6 +9,11 @@ class Mypage extends Component {
     id: "",
     username: "",
     password: "",
+    major: "",
+    student_id: "",
+    start_num: "",
+    sns_id: "",
+    email: "",
     token: ""
   };
 
@@ -28,7 +33,12 @@ class Mypage extends Component {
         console.log(userData);
         this.setState({
           id: userData.id,
-          username: userData.username
+          username: userData.username,
+          major: userData.major,
+          student_id: userData.student_id,
+          start_num: userData.start_number,
+          sns_id: userData.sns_id,
+          email: userData.email
         });
       })
       .catch(err => console.log(err));
@@ -38,10 +48,15 @@ class Mypage extends Component {
     return (
       <Container maxWidth="lg" className="PostingSection">
         <Paper className="PostingPaper">
-          My page <br />
+          Mypage <br />
           <br />
-          id {this.state.id} <br />
-          Username {this.state.username}
+          ID {this.state.id} <br />
+          Username {this.state.username} <br />
+          Email {this.state.email} <br />
+          학과 {this.state.major} <br />
+          멋쟁이사자 {this.state.start_num} <br />
+          학번 {this.state.student_id} <br />
+          SNS {this.state.sns_id} <br />
           <br />
         </Paper>
       </Container>
