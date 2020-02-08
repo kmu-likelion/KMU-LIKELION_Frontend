@@ -11,6 +11,9 @@ import Login from "./components/accounts/LoginContainer";
 import Mypage from "./components/accounts/Mypage";
 import Store from "./Store/store";
 
+import api_auth from "./api/api_auth";
+import { tokenConfig } from "./action/auth";
+
 import BoardRouter from "./components/board/BoardRouter";
 import StudyRouter from "./components/board/StudyRouter";
 
@@ -31,13 +34,22 @@ class App extends React.Component {
     console.log("login 되었습니다.");
   };
 
-  onLogout = () => {
-    this.setState({
-      logged: false
-    });
-    console.log("logout 되었습니다.");
-    // const token = window.sessionStorage.getItem('token');
-    window.sessionStorage.clear();
+  onLogout = async () => {
+    if (this.state.logged) {
+      console.log(tokenConfig());
+      await api_auth.authlogout(tokenConfig()).then(() => {
+        this.setState({
+          logged: false
+        });
+        window.sessionStorage.clear();
+        console.log("logout 되었습니다.");
+        // const token = window.sessionStorage.getItem('token');
+      });
+      // this.setState({
+      //   logged: false
+      // });
+      // window.sessionStorage.clear();
+    }
   };
 
   componentDidMount() {

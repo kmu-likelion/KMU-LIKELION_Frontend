@@ -12,6 +12,10 @@ export default {
   getUser(userId) {
     console.log("getUser api 실행.");
     return axios.get("accounts/user/" + String(userId));
+  },
+  authlogout(token) {
+    console.log("logout api 실행.");
+    console.log("토큰 잘감? : ", token);
+    return axios.post("accounts/auth/logout/", token);
   }
-  // authlogout()
 };

@@ -33,14 +33,18 @@ export default {
     return axios.delete(`Board/${url}/` + String(id), auth);
   },
 
+  //댓글 불러오기
   getComments(url, id, auth) {
     console.log("getComments 실행.");
     return axios.get(`Board/${url}/?search=` + String(id), auth);
   },
+
+  //현재 like 상태 get
   getScrap(id, auth) {
     console.log("get scrap api 실행.");
     return axios.get(`Board/board/${id}/get_scrap`, auth);
-  }, //Board/board/3/get_scrap, auth
+  },
+  //like 상태 변경요청.
   changeScrap(id, auth) {
     console.log("change scrap status api 실행.");
     return axios.get(`Board/board/${id}/change_scrap`, auth);
