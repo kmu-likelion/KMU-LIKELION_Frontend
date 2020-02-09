@@ -8,10 +8,10 @@ import { Link } from "react-router-dom";
 
 class RecentPost extends React.Component {
   render() {
-    const { id, title, body } = this.props;
+    const { id, title, body, board_name } = this.props;
     return (
       <div className={"RecentForm"}>
-        <Link to={`/notice/detail/${id}`} className={"main-postTitle"}>
+        <Link to={`/${board_name}/detail/${id}`} className={"main-postTitle"}>
           {title}
         </Link>
         <p>{body}</p>

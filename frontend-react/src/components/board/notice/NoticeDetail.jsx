@@ -117,7 +117,10 @@ class NoticeDetail extends Component {
           </CardContent>
 
           <CardActions>
-            <LikeView board_id={this.props.match.params.id} />
+            <LikeView
+              board_id={this.props.match.params.id}
+              board_name="notice"
+            />
             <Button
               color="secondary"
               size="small"

@@ -68,7 +68,7 @@ class StudyDetail extends Component {
           </Typography>
         </CardContent>
         <CardActions>
-          <LikeView board_id={this.props.match.params.id} />
+          <LikeView board_id={this.props.match.params.id} board_name="study" />
           <Button
             color="secondary"
             size="small"

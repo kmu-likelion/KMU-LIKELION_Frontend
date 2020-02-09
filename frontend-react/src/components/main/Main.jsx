@@ -75,12 +75,13 @@ class Main extends React.Component {
               <Grid item xs={12} sm={6}>
                 <h4 className={"main-recentTitle"}>최근 공지사항</h4>
                 <Paper>
-                  {this.state.recentNotices.map(post => (
+                  {this.state.recentNotices.map(notice_post => (
                     <RecentPost
-                      key={post.id}
-                      id={post.id}
-                      title={post.title}
-                      body={post.body}
+                      key={notice_post.id}
+                      id={notice_post.id}
+                      title={notice_post.title}
+                      body={notice_post.body}
+                      board_name="notice"
                     />
                   ))}
                 </Paper>
@@ -88,12 +89,13 @@ class Main extends React.Component {
               <Grid item xs={12} sm={6}>
                 <h4 className={"main-recentTitle"}>최근 QnA</h4>
                 <Paper>
-                  {this.state.recentQnA.map(post => (
+                  {this.state.recentQnA.map(qna_post => (
                     <RecentPost
-                      key={post.id}
-                      id={post.id}
-                      title={post.title}
-                      body={post.body}
+                      key={qna_post.id}
+                      id={qna_post.id}
+                      title={qna_post.title}
+                      body={qna_post.body}
+                      board_name="QnA"
                     />
                   ))}
                 </Paper>
