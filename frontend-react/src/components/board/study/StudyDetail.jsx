@@ -4,7 +4,7 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import moment from "moment";
 
-import ScrapView from "../ScrapView";
+import LikeView from "../LikeView";
 
 // @material-ui
 import Button from "@material-ui/core/Button";
@@ -68,7 +68,7 @@ class StudyDetail extends Component {
           </Typography>
         </CardContent>
         <CardActions>
-          <ScrapView board_id={this.props.match.params.id} />
+          <LikeView board_id={this.props.match.params.id} />
           <Button
             color="secondary"
             size="small"

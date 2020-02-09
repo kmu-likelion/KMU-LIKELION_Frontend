@@ -37,7 +37,7 @@ class RecruitNew extends Component {
       title: this.state.title,
       body: this.state.body,
       purpose: this.state.purpose,
-      writer: this.state.id
+      user_id: this.state.id
     });
     console.log("정상적으로 생성됨.", result);
     this.setState({ title: "", content: "" });

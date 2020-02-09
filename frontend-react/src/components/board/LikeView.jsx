@@ -3,52 +3,53 @@ import Button from "@material-ui/core/Button";
 // import CardActions from '@material-ui/core/CardActions';
 import api from "../../api/api_board";
 
-export default class ScarpView extends Component {
+export default class LikeView extends Component {
   state = {
     board_id: "",
-    is_scraped: ""
+    is_liked: ""
   };
 
   componentDidMount() {
-    console.log("ScrapView ComponentDidMount");
+    console.log("LikeView ComponentDidMount");
     const { board_id } = this.props;
     this.setState({
       board_id: board_id
     });
-    this.getScrapStatus(board_id);
+    this.getLikeStatus(board_id);
   }
 
-  getScrapStatus = async id => {
+  getLikeStatus = async id => {
     await api
-      .getScrap(id)
+      .getLike("recruit", id)
       .then(status => {
-        this.changeScrapStatus(status.data.status);
+        console.log("return : ", status);
         console.log("현재 스크랩 상태 : ", status.data.status);
+        this.changeLikeStatus(status.data.state);
       })
       .catch(err => console.log(err));
-    console.log("get scrap 성공.");
+    console.log("get Like 성공.");
   };
 
-  handlingScrap = async id => {
+  handlingLike = async id => {
     await api
-      .changeScrap(id)
+      .changeLike("recruit", id)
       .then(status => {
-        this.changeScrapStatus(status.data.status);
-        console.log("변경된 스크랩 상태 : ", status.data.status);
+        console.log("변경된 스크랩 상태 : ", status);
+        this.changeLikeStatus(status.data.state);
       })
       .catch(err => console.log(err));
     console.log("change scrap 성공.");
     // document.location.href = "/study";
   };
 
-  changeScrapStatus = status => {
+  changeLikeStatus = status => {
     if (status === true) {
       this.setState({
-        is_scraped: "true"
+        is_liked: "true"
       });
     } else if (status === false) {
       this.setState({
-        is_scraped: "false"
+        is_liked: "false"
       });
     }
   };
@@ -56,15 +57,15 @@ export default class ScarpView extends Component {
   render() {
     // const { board_id } = this.props;
 
-    if (this.state.is_scraped === "true") {
+    if (this.state.is_liked === "true") {
       console.log("true값이며 id는 : ", this.state.board_id);
       return (
         <Button
           color="primary"
           size="small"
-          onClick={event => this.handlingScrap(this.state.board_id)}
+          onClick={event => this.handlingLike(this.state.board_id)}
         >
-          Scraped
+          Liked
         </Button>
       );
     } else {
@@ -73,9 +74,9 @@ export default class ScarpView extends Component {
         <Button
           color="secondary"
           size="small"
-          onClick={event => this.handlingScrap(this.state.board_id)}
+          onClick={event => this.handlingLike(this.state.board_id)}
         >
-          Scrap
+          Like
         </Button>
       );
     }

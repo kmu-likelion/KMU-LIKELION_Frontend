@@ -1,7 +1,8 @@
 import axios from "axios";
 import { tokenConfig } from "./api_auth";
 axios.defaults.baseURL = "http://127.0.0.1:8000/";
-
+axios.defaults.xsrfCookieName = "csrftoken";
+axios.defaults.xsrfHeaderName = "X-CSRFToken";
 export default {
   /* Board CRUD api */
   //모든글 불러오기
@@ -41,13 +42,13 @@ export default {
   },
 
   //현재 like 상태 get
-  getScrap(id) {
-    console.log("get scrap api 실행.");
-    return axios.get(`Board/board/${id}/get_scrap`, tokenConfig());
+  getLike(url, id) {
+    console.log("get like api 실행.");
+    return axios.get(`Board/${url}/${id}/like/`, tokenConfig());
   },
   //like 상태 변경요청.
-  changeScrap(id) {
-    console.log("change scrap status api 실행.");
-    return axios.get(`Board/board/${id}/change_scrap`, tokenConfig());
+  changeLike(url, id) {
+    console.log("change like status api 실행.");
+    return axios.post(`Board/${url}/${id}/like/`, null, tokenConfig());
   }
 };
