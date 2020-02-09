@@ -54,15 +54,19 @@ export const tokenConfig = () => {
   // Get token
   const token = window.sessionStorage.getItem("token");
   // Headers
+
+  // Headers
   const config = {
     headers: {
       "Content-Type": "application/json"
     }
   };
 
+  // If token, add to headers
   if (token) {
     config.headers["Authorization"] = `Token ${token}`;
   }
-  console.log("token:", config);
-  return config;
+  // const config = `Authorization:Token ${token}`;
+  // console.log("token:", config);
+  return headers;
 };

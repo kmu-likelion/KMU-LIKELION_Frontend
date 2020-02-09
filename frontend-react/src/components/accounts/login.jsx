@@ -40,7 +40,7 @@ class Login extends Component {
         );
         this.props.onLogin();
         // this.props.history.push("/");
-        document.location.href = "/";
+        // document.location.href = "/";
       })
       .catch(err => console.log(err));
 
@@ -51,9 +51,14 @@ class Login extends Component {
     // console.log("id : ", id);
     // console.log("token :", token);
     // console.log("username :", name);
+    console.log("파라미터 토큰 : ", token);
     window.sessionStorage.setItem("id", id);
     window.sessionStorage.setItem("username", name);
     window.sessionStorage.setItem("token", token);
+    console.log(
+      "세션에 저장된 토큰 : ",
+      window.sessionStorage.getItem("token")
+    );
   };
 
   render() {

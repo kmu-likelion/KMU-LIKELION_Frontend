@@ -36,15 +36,27 @@ class App extends React.Component {
 
   onLogout = async () => {
     if (this.state.logged) {
-      console.log(tokenConfig());
-      await api_auth.authlogout(tokenConfig()).then(() => {
-        this.setState({
-          logged: false
+      // console.log(tokenConfig());
+      const token = tokenConfig();
+      // const t = window.sessionStorage.getItem("token");
+      // const token = `Authorization:Token ${t}`;
+      await api_auth
+        .authlogout(token)
+        .then(() => {
+          this.setState({
+            logged: false
+          });
+          window.sessionStorage.clear();
+          console.log("logout 되었습니다.");
+          // const token = window.sessionStorage.getItem('token');
+        })
+        .catch(err => {
+          console.log(err);
+          this.setState({
+            logged: false
+          });
+          window.sessionStorage.clear();
         });
-        window.sessionStorage.clear();
-        console.log("logout 되었습니다.");
-        // const token = window.sessionStorage.getItem('token');
-      });
       // this.setState({
       //   logged: false
       // });
