@@ -94,7 +94,7 @@ class QnADetail extends Component {
         </CardContent>
 
         <CardActions>
-          <LikeView board_id={this.props.match.params.id} />
+          <LikeView board_id={this.props.match.params.id} board_name="QnA" />
           <Button
             color="secondary"
             size="small"

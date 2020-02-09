@@ -29,16 +29,6 @@ export default function Header(props) {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const id = window.sessionStorage.getItem("id");
 
-  // if (_user) {
-  //   setUsername(_user);
-  // }
-  //캐러셀 관련 코드?
-
-  // React.useEffect();
-
-  //새로고침 안되게 하는코든데 작동이 안되누..
-  // const preventDefault = event => event.preventDefault();
-
   const handleClick = event => {
     setAnchorEl(event.currentTarget);
   };
@@ -95,7 +85,7 @@ export default function Header(props) {
             </Menu>
           </Typography>
           {store.logged ? (
-            <div>
+            <>
               <Button color="inherit">
                 <Link
                   to={"/"}
@@ -110,17 +100,22 @@ export default function Header(props) {
                   Mypage
                 </Link>
               </Button>
-            </div>
+            </>
           ) : (
             <>
               <Button color="inherit">
-                <Link to={"/login"} className="auth-link link">
-                  Login
+                <Link to={"/admission/join"} className="auth-link link">
+                  지원하기
                 </Link>
               </Button>
               <Button color="inherit">
-                <Link to={"/admission/join"} className="auth-link link">
-                  입부신청
+                <Link to={"/"} className="auth-link link">
+                  지원내역
+                </Link>
+              </Button>
+              <Button color="inherit">
+                <Link to={"/login"} className="auth-link link">
+                  Login
                 </Link>
               </Button>
             </>

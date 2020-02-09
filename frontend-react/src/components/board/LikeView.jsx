@@ -6,21 +6,23 @@ import api from "../../api/api_board";
 export default class LikeView extends Component {
   state = {
     board_id: "",
+    board_name: "",
     is_liked: ""
   };
 
   componentDidMount() {
     console.log("LikeView ComponentDidMount");
-    const { board_id } = this.props;
+    const { board_id, board_name } = this.props;
     this.setState({
-      board_id: board_id
+      board_id: board_id,
+      board_name: board_name
     });
-    this.getLikeStatus(board_id);
+    this.getLikeStatus(board_name, board_id);
   }
 
-  getLikeStatus = async id => {
+  getLikeStatus = async (url, id) => {
     await api
-      .getLike("recruit", id)
+      .getLike(url, id)
       .then(status => {
         console.log("return : ", status);
         console.log("현재 스크랩 상태 : ", status.data.status);
@@ -30,9 +32,9 @@ export default class LikeView extends Component {
     console.log("get Like 성공.");
   };
 
-  handlingLike = async id => {
+  handlingLike = async (url, id) => {
     await api
-      .changeLike("recruit", id)
+      .changeLike(url, id)
       .then(status => {
         console.log("변경된 스크랩 상태 : ", status);
         this.changeLikeStatus(status.data.state);
@@ -63,7 +65,9 @@ export default class LikeView extends Component {
         <Button
           color="primary"
           size="small"
-          onClick={event => this.handlingLike(this.state.board_id)}
+          onClick={event =>
+            this.handlingLike(this.state.board_name, this.state.board_id)
+          }
         >
           Liked
         </Button>
@@ -74,7 +78,9 @@ export default class LikeView extends Component {
         <Button
           color="secondary"
           size="small"
-          onClick={event => this.handlingLike(this.state.board_id)}
+          onClick={event =>
+            this.handlingLike(this.state.board_name, this.state.board_id)
+          }
         >
           Like
         </Button>
