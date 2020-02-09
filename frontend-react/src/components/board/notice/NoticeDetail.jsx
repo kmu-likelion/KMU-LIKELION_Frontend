@@ -87,16 +87,14 @@ class NoticeDetail extends Component {
 
   commentSubmit = async event => {
     event.preventDefault();
-    console.log("body:", this.state.input_cmt);
-    console.log("board:", this.state.id);
-    console.log("writer:", this.state.writer);
-    // console.log("token:", window.sessionStorage.getItem("token"));
+
+    const current_user_id = window.sessionStorage.getItem("id");
+
     let result = await api
       .createPost("notice_comment", {
         body: this.state.input_cmt,
         board: this.state.id,
-        writer: this.state.writer //id
-        // token: window.sessionStorage.getItem("token")
+        user_id: current_user_id
       })
       .catch(err => console.log(err));
     console.log("정상적으로 생성됨.", result);
@@ -139,7 +137,7 @@ class NoticeDetail extends Component {
               {this.state.comments.map(comment => (
                 <>
                   작성자 :
-                  <Link to={`/Mypage/${comment.writer}`}>
+                  <Link to={`/Mypage/${comment.user_id}`}>
                     {comment.author_name}
                   </Link>
                   <br />

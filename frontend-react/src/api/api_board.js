@@ -18,6 +18,7 @@ export default {
   //글 생성
   createPost(url, data) {
     console.log("createPost 실행.");
+    console.log(data);
     return axios.post(`Board/${url}/`, data, tokenConfig());
   },
 
@@ -36,7 +37,7 @@ export default {
   //댓글 불러오기
   getComments(url, id) {
     console.log("getComments 실행.");
-    return axios.get(`Board/${url}/?search=` + String(id), tokenConfig());
+    return axios.get(`Board/${url}/?id=` + String(id), tokenConfig());
   },
 
   //현재 like 상태 get

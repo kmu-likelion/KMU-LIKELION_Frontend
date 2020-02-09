@@ -45,8 +45,8 @@ class NoticeNew extends Component {
       .createPost("notice", {
         title: this.state.title,
         body: this.state.body,
-        run_date: this.state.run_date,
-        writer: this.state.id
+        notice_date: this.state.run_date,
+        user_id: this.state.id
       })
       .catch(err => console.log(err));
     console.log("정상적으로 생성됨.", result);
