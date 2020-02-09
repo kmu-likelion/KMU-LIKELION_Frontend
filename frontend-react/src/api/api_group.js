@@ -1,41 +1,41 @@
 // import StudyGroup from "./account/studygroup";
 
 import axios from "axios";
-
+import { tokenConfig } from "./api_auth";
 // axios.defaults.baseURL = "http://127.0.0.1:8000/";
 
 export default {
   /* Group CRUD api */
   //모든글 불러오기
-  getAllGroups(auth) {
+  getAllGroups() {
     console.log("getAllGroups api 실행.");
-    return axios.get(`account/studygroup/`, auth);
+    return axios.get(`account/studygroup/`, tokenConfig());
   },
   //단일 글 불러오기 및 단일댓글 불러오기?
-  getGroup(id, auth) {
+  getGroup(id) {
     console.log("getGroup api 실행");
-    return axios.get(`account/studygroup/${id}`, auth);
+    return axios.get(`account/studygroup/${id}`, tokenConfig());
   },
 
   //글 생성
-  createGroup(data, auth) {
+  createGroup(data) {
     console.log("createGroup api 실행.");
-    return axios.post(`account/studygroup/`, data, auth);
+    return axios.post(`account/studygroup/`, data, tokenConfig());
   },
 
   //글 수정
-  updateGroup(id, data, auth) {
+  updateGroup(id, data) {
     console.log("updateGroup api 실행.");
-    return axios.put(`account/studygroup/${id}/`, data, auth);
+    return axios.put(`account/studygroup/${id}/`, data, tokenConfig());
   },
 
   //글 삭제
-  deleteGroup(id, auth) {
+  deleteGroup(id) {
     console.log("deleteGroup api 실행.");
-    return axios.delete(`account/studygroup/${id}`, auth);
+    return axios.delete(`account/studygroup/${id}`, tokenConfig());
   },
-  addGroupUser(data, auth) {
+  addGroupUser(data) {
     console.log("addGroupUser api 실행.");
-    return axios.post("account/studygroup_user/", data, auth);
+    return axios.post("account/studygroup_user/", data, tokenConfig());
   }
 };

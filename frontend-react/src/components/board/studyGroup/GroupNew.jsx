@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import api from "../../../api/api_group";
 import { Link } from "react-router-dom";
-import { tokenConfig } from "../../../action/auth";
 
 import Container from "@material-ui/core/Container";
 import Paper from "@material-ui/core/Paper";
@@ -35,26 +34,20 @@ class GroupNew extends Component {
     event.preventDefault();
     // console.log("user-id: ", this.state.id);
     await api
-      .createGroup(
-        {
-          title: this.state.title,
-          introduction: this.state.introduction
-        },
-        tokenConfig()
-      )
+      .createGroup({
+        title: this.state.title,
+        introduction: this.state.introduction
+      })
       .then(async result => {
         console.log("정상적으로 생성됨.", result);
         // console.log("그룹 id : ", result.data.id);
         this.setState({ group_id: result.data.id });
         // console.log("상태 그룹 id : ", this.state.group_id);
         await api
-          .addGroupUser(
-            {
-              participant: this.state.user_id,
-              group: this.state.group_id
-            },
-            tokenConfig()
-          )
+          .addGroupUser({
+            participant: this.state.user_id,
+            group: this.state.group_id
+          })
           .catch(err => console.log(err));
       })
       .catch(err => console.log(err));

@@ -1,7 +1,7 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
-
+import Store from "../Store/store";
 // @material-ui
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
@@ -23,8 +23,9 @@ const useStyles = makeStyles(theme => ({
 }));
 
 export default function Header(props) {
+  const store = useContext(Store);
   const classes = useStyles();
-  const { logged, onLogout } = props;
+  // const { logged, onLogout } = props;
   const [anchorEl, setAnchorEl] = React.useState(null);
   const id = window.sessionStorage.getItem("id");
 
@@ -93,10 +94,14 @@ export default function Header(props) {
               </MenuItem>
             </Menu>
           </Typography>
-          {logged ? (
+          {store.logged ? (
             <div>
               <Button color="inherit">
-                <Link to={"/"} onClick={onLogout} className="auth-link link">
+                <Link
+                  to={"/"}
+                  onClick={store.onLogout}
+                  className="auth-link link"
+                >
                   Logout
                 </Link>
               </Button>

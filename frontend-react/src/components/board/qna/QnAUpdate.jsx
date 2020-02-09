@@ -5,7 +5,6 @@ import { Link } from "react-router-dom";
 // import moment from "moment";
 import Container from "@material-ui/core/Container";
 import Paper from "@material-ui/core/Paper";
-import { tokenConfig } from "../../../action/auth";
 
 // @material-ui
 // import Button from "@material-ui/core/Button";
@@ -33,7 +32,7 @@ class QnAUpdate extends Component {
 
   async getQnA() {
     await api
-      .getPost("QnA", this.props.match.params.id, tokenConfig())
+      .getPost("QnA", this.props.match.params.id)
       .then(res => {
         const data = res.data;
 
@@ -48,7 +47,7 @@ class QnAUpdate extends Component {
   }
   async updateQnA(id, data) {
     await api
-      .updatePost("QnA", id, data, tokenConfig())
+      .updatePost("QnA", id, data)
       .then(result => console.log("정상적으로 update됨.", result))
       .catch(err => console.log(err));
   }

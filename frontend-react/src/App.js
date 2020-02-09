@@ -7,12 +7,11 @@ import Header from "./components/Header";
 import Footer from "./components/Footer";
 import Main from "./components/main/Main";
 
-import Login from "./components/accounts/LoginContainer";
+import Login from "./components/accounts/login";
 import Mypage from "./components/accounts/Mypage";
 import Store from "./Store/store";
 
-import api_auth from "./api/api_auth";
-import { tokenConfig } from "./action/auth";
+import { authlogout, tokenConfig } from "./api/api_auth";
 
 import BoardRouter from "./components/board/BoardRouter";
 import StudyRouter from "./components/board/StudyRouter";
@@ -31,44 +30,28 @@ class App extends React.Component {
     this.setState({
       logged: true
     });
-    console.log("login 되었습니다.");
   };
 
   onLogout = async () => {
     if (this.state.logged) {
       // console.log(tokenConfig());
-      const token = tokenConfig();
-      // const t = window.sessionStorage.getItem("token");
-      // const token = `Authorization:Token ${t}`;
-      await api_auth
-        .authlogout(token)
+      await authlogout(tokenConfig())
         .then(() => {
           this.setState({
             logged: false
           });
           window.sessionStorage.clear();
           console.log("logout 되었습니다.");
-          // const token = window.sessionStorage.getItem('token');
         })
         .catch(err => {
           console.log(err);
-          this.setState({
-            logged: false
-          });
-          window.sessionStorage.clear();
         });
-      // this.setState({
-      //   logged: false
-      // });
-      // window.sessionStorage.clear();
     }
   };
 
   componentDidMount() {
-    // const name = window.sessionStorage.getItem("name");
-    const id = window.sessionStorage.getItem("id");
-
-    if (id) {
+    const token = window.sessionStorage.getItem("token");
+    if (token) {
       this.onLogin();
     } else {
       this.onLogout();
@@ -76,12 +59,10 @@ class App extends React.Component {
   }
 
   render() {
-    const { logged, onLogout } = this.state;
-
     return (
       <Store.Provider value={this.state}>
         <Router>
-          <Header logged={logged} onLogout={onLogout} />
+          <Header />
           <Route exact path="/" component={Main} />
 
           <Route path="/notice" component={BoardRouter} />

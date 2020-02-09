@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import Button from "@material-ui/core/Button";
 // import CardActions from '@material-ui/core/CardActions';
 import api from "../../api/api_board";
-import { tokenConfig } from "../../action/auth";
 
 export default class ScarpView extends Component {
   state = {
@@ -21,7 +20,7 @@ export default class ScarpView extends Component {
 
   getScrapStatus = async id => {
     await api
-      .getScrap(id, tokenConfig())
+      .getScrap(id)
       .then(status => {
         this.changeScrapStatus(status.data.status);
         console.log("현재 스크랩 상태 : ", status.data.status);
@@ -32,7 +31,7 @@ export default class ScarpView extends Component {
 
   handlingScrap = async id => {
     await api
-      .changeScrap(id, tokenConfig())
+      .changeScrap(id)
       .then(status => {
         this.changeScrapStatus(status.data.status);
         console.log("변경된 스크랩 상태 : ", status.data.status);

@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 
 import Container from "@material-ui/core/Container";
 import Paper from "@material-ui/core/Paper";
-import { tokenConfig } from "../../../action/auth";
 
 class QnANew extends Component {
   state = {
@@ -34,16 +33,12 @@ class QnANew extends Component {
   handlingSubmit = async event => {
     event.preventDefault(); //event의 디폴트 기능(새로고침 되는 것 등..) -> 막는다.
     console.log("user-id: ", this.state.id);
-    let result = await api.createPost(
-      "QnA",
-      {
-        title: this.state.title,
-        body: this.state.body,
-        subject: this.state.subject,
-        writer: this.state.id
-      },
-      tokenConfig()
-    );
+    let result = await api.createPost("QnA", {
+      title: this.state.title,
+      body: this.state.body,
+      subject: this.state.subject,
+      writer: this.state.id
+    });
     console.log("정상적으로 생성됨.", result);
     this.setState({ title: "", content: "" });
     // this.getPosts()

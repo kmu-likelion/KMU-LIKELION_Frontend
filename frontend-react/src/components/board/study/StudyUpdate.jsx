@@ -1,23 +1,10 @@
 import React, { Component } from "react";
 import api from "../../../api/api_board";
-import axios from "axios";
+
 import { Link } from "react-router-dom";
 
 import Container from "@material-ui/core/Container";
 import Paper from "@material-ui/core/Paper";
-
-import { tokenConfig } from "../../../action/auth";
-
-// @material-ui
-// import Button from "@material-ui/core/Button";
-
-// import Card from "@material-ui/core/Card";
-// import CardActions from "@material-ui/core/CardActions";
-// import CardContent from "@material-ui/core/CardContent";
-// import Typography from "@material-ui/core/Typography";
-
-axios.defaults.xsrfCookieName = "csrftoken";
-axios.defaults.xsrfHeaderName = "X-CSRFToken";
 
 class StudyUpdate extends Component {
   state = {
@@ -33,7 +20,7 @@ class StudyUpdate extends Component {
 
   async getStudy() {
     await api
-      .getPost("study", this.props.match.params.id, tokenConfig())
+      .getPost("study", this.props.match.params.id)
       .then(res => {
         const data = res.data;
 

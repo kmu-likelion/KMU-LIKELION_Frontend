@@ -1,17 +1,17 @@
 import React, { Component } from "react";
-import api from "../../api/api_auth";
-import { Link } from "react-router-dom";
+import { authlogin } from "../../api/api_auth";
+import Store from "../../Store/store";
+
+import { Link, Redirect } from "react-router-dom";
 import Container from "@material-ui/core/Container";
 import Paper from "@material-ui/core/Paper";
-// var moment = require('moment');
-// import moment from 'moment';
 
 class Login extends Component {
+  static contextType = Store; //contextType으로 context 접근.
+
   state = {
-    id: "",
     username: "",
-    password: "",
-    token: ""
+    password: ""
   };
 
   componentDidMount() {
@@ -26,11 +26,10 @@ class Login extends Component {
   handlingSubmit = async event => {
     event.preventDefault(); //event의 디폴트 기능(새로고침 되는 것 등..) -> 막는다.
 
-    await api
-      .authLogin({
-        username: this.state.username,
-        password: this.state.password
-      })
+    await authlogin({
+      username: this.state.username,
+      password: this.state.password
+    })
       .then(result => {
         console.log("로그인 성공!", result);
         this.doSignup(
@@ -38,9 +37,7 @@ class Login extends Component {
           result.data.user.username,
           result.data.token
         );
-        this.props.onLogin();
-        // this.props.history.push("/");
-        // document.location.href = "/";
+        this.context.onLogin();
       })
       .catch(err => console.log(err));
 
@@ -48,20 +45,16 @@ class Login extends Component {
   };
 
   doSignup = (id, name, token) => {
-    // console.log("id : ", id);
-    // console.log("token :", token);
-    // console.log("username :", name);
-    console.log("파라미터 토큰 : ", token);
     window.sessionStorage.setItem("id", id);
     window.sessionStorage.setItem("username", name);
     window.sessionStorage.setItem("token", token);
-    console.log(
-      "세션에 저장된 토큰 : ",
-      window.sessionStorage.getItem("token")
-    );
+    console.log("token in session : ", window.sessionStorage.getItem("token"));
   };
 
   render() {
+    if (this.context.logged) {
+      return <Redirect to="/" />; //logged 상태가 true일 시, main page로 리다이렉트.
+    }
     return (
       <Container maxWidth="lg" className="PostingSection">
         <Paper className="PostingPaper">

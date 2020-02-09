@@ -1,22 +1,9 @@
 import React, { Component } from "react";
 import api from "../../../api/api_board";
-import axios from "axios";
 import { Link } from "react-router-dom";
-// import moment from "moment";
+
 import Container from "@material-ui/core/Container";
 import Paper from "@material-ui/core/Paper";
-import { tokenConfig } from "../../../action/auth";
-
-// @material-ui
-// import Button from "@material-ui/core/Button";
-
-// import Card from "@material-ui/core/Card";
-// import CardActions from "@material-ui/core/CardActions";
-// import CardContent from "@material-ui/core/CardContent";
-// import Typography from "@material-ui/core/Typography";
-
-axios.defaults.xsrfCookieName = "csrftoken";
-axios.defaults.xsrfHeaderName = "X-CSRFToken";
 
 class RecruitUpdate extends Component {
   state = {
@@ -32,7 +19,7 @@ class RecruitUpdate extends Component {
 
   async getRecruit() {
     await api
-      .getPost("recruit", this.props.match.params.id, tokenConfig())
+      .getPost("recruit", this.props.match.params.id)
       .then(res => {
         const data = res.data;
 
@@ -47,7 +34,7 @@ class RecruitUpdate extends Component {
   }
   async updateRecruit(id, data) {
     await api
-      .updatePost("recruit", id, data, tokenConfig())
+      .updatePost("recruit", id, data)
       .then(result => console.log("정상적으로 update됨.", result))
       .catch(err => console.log(err));
   }

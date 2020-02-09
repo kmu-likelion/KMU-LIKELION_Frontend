@@ -1,10 +1,9 @@
 import React from "react";
 import Container from "@material-ui/core/Container";
-// import Grid from "@material-ui/core/Grid";
+
 import { Link } from "react-router-dom";
 import api_group from "../../../api/api_group";
-// import StudyView from "./StudyView";
-import { tokenConfig } from "../../../action/auth";
+
 import Button from "@material-ui/core/Button";
 
 class StudyList extends React.Component {
@@ -29,7 +28,7 @@ class StudyList extends React.Component {
 
   async getGroup() {
     await api_group
-      .getGroup(this.state.group_id, tokenConfig())
+      .getGroup(this.state.group_id)
       .then(result => {
         console.log("getGroup 메서드 실행.");
         console.log("결과값임", result);
@@ -43,7 +42,7 @@ class StudyList extends React.Component {
   }
 
   groupDelete = async () => {
-    await api_group.deleteGroup(this.state.group_id, tokenConfig());
+    await api_group.deleteGroup(this.state.group_id);
     console.log("delete post 성공.");
     document.location.href = "/study";
   };

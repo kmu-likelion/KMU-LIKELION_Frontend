@@ -5,8 +5,6 @@ import { Link } from "react-router-dom";
 import moment from "moment";
 import ScrapView from "../ScrapView";
 
-import { tokenConfig } from "../../../action/auth";
-
 // @material-ui
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
@@ -44,7 +42,7 @@ class NoticeDetail extends Component {
 
   async getComments() {
     await api
-      .getComments("notice_comment", this.props.match.params.id, tokenConfig())
+      .getComments("notice_comment", this.props.match.params.id)
       .then(res => {
         const _data = res.data;
         this.setState({
@@ -56,7 +54,7 @@ class NoticeDetail extends Component {
 
   async getNotice() {
     await api
-      .getPost("notice", this.props.match.params.id, tokenConfig())
+      .getPost("notice", this.props.match.params.id)
       .then(res => {
         const data = res.data;
 
@@ -73,7 +71,7 @@ class NoticeDetail extends Component {
   }
 
   handlingDelete = async (target, id) => {
-    await api.deletePost(target, id, tokenConfig());
+    await api.deletePost(target, id);
     console.log(`delete id : ${id}`);
     console.log(`delete ${target} 성공.`);
     if (target === "notice") {
@@ -94,16 +92,12 @@ class NoticeDetail extends Component {
     console.log("writer:", this.state.writer);
     // console.log("token:", window.sessionStorage.getItem("token"));
     let result = await api
-      .createPost(
-        "notice_comment",
-        {
-          body: this.state.input_cmt,
-          board: this.state.id,
-          writer: this.state.writer //id
-          // token: window.sessionStorage.getItem("token")
-        },
-        tokenConfig()
-      )
+      .createPost("notice_comment", {
+        body: this.state.input_cmt,
+        board: this.state.id,
+        writer: this.state.writer //id
+        // token: window.sessionStorage.getItem("token")
+      })
       .catch(err => console.log(err));
     console.log("정상적으로 생성됨.", result);
     this.setState({ input_cmt: "" });

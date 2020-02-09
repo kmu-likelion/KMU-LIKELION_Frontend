@@ -6,7 +6,6 @@ import { Link } from "react-router-dom";
 // material-ui
 import Container from "@material-ui/core/Container";
 import Paper from "@material-ui/core/Paper";
-import { tokenConfig } from "../../../action/auth";
 // import moment from 'moment';
 
 class NoticeNew extends Component {
@@ -43,16 +42,12 @@ class NoticeNew extends Component {
     // var user_id = parseInt(this.state.id);
 
     let result = await api
-      .createPost(
-        "notice",
-        {
-          title: this.state.title,
-          body: this.state.body,
-          run_date: this.state.run_date,
-          writer: this.state.id
-        },
-        tokenConfig()
-      )
+      .createPost("notice", {
+        title: this.state.title,
+        body: this.state.body,
+        run_date: this.state.run_date,
+        writer: this.state.id
+      })
       .catch(err => console.log(err));
     console.log("정상적으로 생성됨.", result);
     this.setState({

@@ -4,8 +4,6 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import moment from "moment";
 
-import { tokenConfig } from "../../../action/auth";
-
 import ScrapView from "../ScrapView";
 
 // @material-ui
@@ -36,7 +34,7 @@ class StudyDetail extends Component {
 
   async getStudy() {
     await api
-      .getPost("study", this.props.match.params.id, tokenConfig())
+      .getPost("study", this.props.match.params.id)
       .then(res => {
         const data = res.data;
 
@@ -52,7 +50,7 @@ class StudyDetail extends Component {
   }
 
   handlingDelete = async id => {
-    await api.deletePost("study", id, tokenConfig());
+    await api.deletePost("study", id);
     console.log("delete post 성공.");
     document.location.href = "/study";
   };

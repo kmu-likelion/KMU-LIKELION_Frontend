@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import api from "../../api/api_auth";
+import { getUser } from "../../api/api_auth";
 
 import Container from "@material-ui/core/Container";
 import Paper from "@material-ui/core/Paper";
@@ -26,8 +26,7 @@ class Mypage extends Component {
   }
 
   async getUser(userId) {
-    await api
-      .getUser(userId)
+    await getUser(userId)
       .then(res => {
         const userData = res.data;
         console.log(userData);

@@ -3,7 +3,6 @@ import api from "../../../api/api_board";
 import { Link } from "react-router-dom";
 import Container from "@material-ui/core/Container";
 import Paper from "@material-ui/core/Paper";
-import { tokenConfig } from "../../../action/auth";
 
 // import moment from 'moment';
 
@@ -21,7 +20,7 @@ class NoticeUpdate extends Component {
 
   async getNotice() {
     await api
-      .getPost("notice", this.props.match.params.id, tokenConfig())
+      .getPost("notice", this.props.match.params.id)
       .then(res => {
         const data = res.data;
         this.setState({
@@ -36,7 +35,7 @@ class NoticeUpdate extends Component {
 
   async updateNotice(id, data) {
     await api
-      .updatePost("notice", id, data, tokenConfig())
+      .updatePost("notice", id, data)
       .then(result => console.log("정상적으로 update됨.", result))
       .catch(err => console.log(err));
   }

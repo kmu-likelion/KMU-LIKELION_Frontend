@@ -3,8 +3,7 @@ import Container from "@material-ui/core/Container";
 
 import { Link } from "react-router-dom";
 import api from "../../../api/api_group";
-// import StudyView from "./StudyView";
-import { tokenConfig } from "../../../action/auth";
+
 import GroupView from "./GroupView";
 class GroupList extends React.Component {
   constructor(props) {
@@ -20,7 +19,7 @@ class GroupList extends React.Component {
   }
 
   async getAllGroup() {
-    await api.getAllGroups(tokenConfig()).then(results => {
+    await api.getAllGroups().then(results => {
       console.log("getAllGroups 메서드 실행.");
       console.log(results);
       this.setState({ groupList: results.data });

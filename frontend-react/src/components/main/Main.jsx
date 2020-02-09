@@ -1,7 +1,7 @@
 import React from "react";
 import api from "../../api/api_board";
 import RecentPost from "./RecentPost";
-import { tokenConfig } from "../../action/auth";
+
 import logo from "./logo.png";
 import Container from "@material-ui/core/Container";
 import Grid from "@material-ui/core/Grid";
@@ -24,7 +24,7 @@ class Main extends React.Component {
 
   async getRecentPosts(target) {
     await api
-      .getAllPosts(target, tokenConfig())
+      .getAllPosts(target)
       .then(recentPosts => {
         console.log(recentPosts);
         var posts = recentPosts.data.results;
