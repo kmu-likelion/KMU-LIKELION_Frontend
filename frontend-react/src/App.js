@@ -15,6 +15,7 @@ import { authlogout, tokenConfig } from "./api/api_auth";
 
 import BoardRouter from "./components/board/BoardRouter";
 import StudyRouter from "./components/board/StudyRouter";
+import AdmissionRouter from "./components/admission/AdmissionRouter";
 
 class App extends React.Component {
   constructor(props) {
@@ -69,6 +70,8 @@ class App extends React.Component {
           <Route path="/QnA" component={BoardRouter} />
           <Route path="/study" component={StudyRouter} />
           <Route path="/recruit" component={BoardRouter} />
+
+          <Route path="/admission" component={AdmissionRouter} />
 
           <Route path="/login" component={Login} />
           <Route path="/mypage/:id" component={Mypage} id="number" />

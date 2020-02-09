@@ -119,7 +119,7 @@ export default function Header(props) {
                 </Link>
               </Button>
               <Button color="inherit">
-                <Link to={""} className="auth-link link">
+                <Link to={"/admission/join"} className="auth-link link">
                   입부신청
                 </Link>
               </Button>
