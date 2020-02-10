@@ -35,7 +35,7 @@ class GroupNew extends Component {
     // console.log("user-id: ", this.state.id);
     await api
       .createGroup({
-        title: this.state.title,
+        name: this.state.title,
         introduction: this.state.introduction
       })
       .then(async result => {

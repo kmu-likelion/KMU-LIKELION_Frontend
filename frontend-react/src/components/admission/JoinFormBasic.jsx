@@ -1,6 +1,6 @@
 import "date-fns";
-import React, { useState } from "react";
-import api from "../../api/auth_admission";
+import React, { useState, useContext, useEffect } from "react";
+import JoinStore from "./joinStore";
 
 import { makeStyles } from "@material-ui/core/styles";
 import Radio from "@material-ui/core/Radio";
@@ -25,7 +25,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export default function RadioButtonsGroup() {
+export default function RadioButtonsGroup(props) {
   const [name, setName] = useState("");
   const [phoneNum, setPhoneNum] = useState("");
   const [major, setMajor] = useState("");
@@ -33,50 +33,62 @@ export default function RadioButtonsGroup() {
   const [birth, setBirth] = useState(new Date());
   const [sex, setSex] = useState("female");
   const [email, setEmail] = useState("");
+  // const [recorded, setRecorded] = useState(false);
+
+  useEffect(() => {
+    handlingContext();
+  });
 
   const classes = useStyles();
+  const appli_info = useContext(JoinStore);
 
-  //   const handleChange = event => {
-  //     setValue(event.target.value);
-  //   };
-  const handlingSubmit = async event => {
-    event.preventDefault(); //event의 디폴트 기능(새로고침 되는 것 등..) -> 막는다.
-
-    await api
-      .submitJoinForm({
-        name: name,
-        phone_number: phoneNum,
-        student_id: studentId,
-        birth: "2020-12-31",
-        sex: sex,
-        major: major,
-        email: email
-      })
-      .then(res => {
-        console.log("정상적으로 제출됨", res);
-        document.location.href = "/";
-      })
-      .catch(err => {
-        console.log(err);
-      });
-    // await api
-    //   .createPost("QnA", {
-    //     title: this.state.title,
-    //     body: this.state.body,
-    //     subject: this.state.subject,
-    //     writer: this.state.id
-    //   })
-    //   .then(result => {
-    //     console.log("정상적으로 생성됨.", result);
-    //   })
-    //   .catch(err => {
-    //     console.log(err);
-    //   });
-
-    // this.getPosts()
-
-    // this.props.history.push("/");
+  const handlingContext = async () => {
+    await saveContent();
+    // console.log(appli_info);
   };
+
+  const saveContent = () => {
+    // let infos = [];
+    // let info = {
+    //   name: name,
+    //   phoneNum: phoneNum,
+    //   major: major,
+    //   studentId: studentId,
+    //   birth: birth,
+    //   sex: sex,
+    //   email: email
+    // };
+    // infos.push(info);
+
+    appli_info.name = name;
+    appli_info.phoneNum = phoneNum;
+    appli_info.major = major;
+    appli_info.studentId = studentId;
+    appli_info.birth = birth;
+    appli_info.sex = sex;
+    appli_info.email = email;
+  };
+
+  // const handlingNext = async event => {
+  //   event.preventDefault();
+  //   await api
+  //     .submitJoinForm({
+  //       name: name,
+  //       phone_number: phoneNum,
+  //       student_id: studentId,
+  //       birth: "2020-12-31",
+  //       sex: sex,
+  //       major: major,
+  //       email: email
+  //     })
+  //     .then(res => {
+  //       console.log("정상적으로 제출됨", res);
+  //       document.location.href = "/";
+  //     })
+  //     .catch(err => {
+  //       console.log(err);
+  //     });
+  // };
 
   return (
     <div>
@@ -84,7 +96,7 @@ export default function RadioButtonsGroup() {
         <h2>Join Form</h2>
         <hr />
       </InputLabel>
-      <form onSubmit={handlingSubmit} className="PostingForm">
+      <form onSubmit={props.setFlag} className="PostingForm">
         <FormControl className={classes.formControl}>
           <InputLabel>Name</InputLabel>
           <Input
@@ -182,11 +194,17 @@ export default function RadioButtonsGroup() {
           </RadioGroup>
         </FormControl>
         <br />
-        <Button type="submit" variant="contained" color="primary">
-          Submit
+        <Button
+          variant="contained"
+          color="primary"
+          // onClick={props.setFlag}
+          type="submit"
+        >
+          Next
         </Button>
-        <br />
       </form>
+
+      <br />
 
       <hr />
     </div>
