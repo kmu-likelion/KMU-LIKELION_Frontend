@@ -44,7 +44,6 @@ export default function RadioButtonsGroup(props) {
 
   const handlingContext = async () => {
     await saveContent();
-    // console.log(appli_info);
   };
 
   const saveContent = () => {

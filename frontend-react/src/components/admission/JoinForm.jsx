@@ -15,7 +15,7 @@ class JoinForm extends Component {
     birth: "",
     sex: "",
     email: "",
-    is_recorded: false
+    is_recorded: false //default :false임.
   };
   // JoinStore = this.state;
   setFlag = () => {
