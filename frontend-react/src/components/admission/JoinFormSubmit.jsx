@@ -20,6 +20,7 @@ import Button from "@material-ui/core/Button";
 export default function JoinFormSubmit() {
   const [questions, setQuestions] = useState([]);
   const [answers, setAnswers] = useState({});
+  const [joinId, setJoinId] = useState();
 
   const appli_info = useContext(JoinStore);
 
@@ -49,13 +50,15 @@ export default function JoinFormSubmit() {
   const handlingSubmit = event => {
     event.preventDefault();
     console.log("submit 실행.");
-    createJoinData().then(joinId => {
-      for (let idx = 1; idx < questions.length - 1; ++idx) {
-        //해당 idx는 question ID 이기도 함.
-        console.log("받아온 :", joinId);
-        createAnswer(answers[idx], idx, joinId);
-      }
-    });
+    // createJoinData().then(joinId => {
+    //   for (let idx = 1; idx < questions.length - 1; ++idx) {
+    //     //해당 idx는 question ID 이기도 함.
+    //     console.log("받아온 :", joinId);
+    //     createAnswer(answers[idx], idx, joinId);
+    //   }
+    // });
+    createJoinData();
+
     // console.log("ans size :", questions.length);
   };
 
@@ -72,25 +75,35 @@ export default function JoinFormSubmit() {
         email: appli_info.email,
         pw: "1234"
       })
-      .then(res => {
+      .then(async res => {
         console.log("joinform이 정상적으로 생성됨.");
         console.log(res);
         let joinForm_id = res.data.id;
         console.log("생성된 조인폼 ID : ", joinForm_id);
-        return joinForm_id;
+
+        for (let idx = 1; idx < questions.length - 1; ++idx) {
+          //해당 idx는 question ID 이기도 함.
+          createAnswer(answers[idx], idx, joinForm_id);
+        }
       })
       .catch(err => console.log(err));
   };
 
-  const createAnswer = (answer, qus_id, join_id) => {
+  const createAnswer = async (answer, qus_id, join_id) => {
     console.log("create answer 실행.");
-    console.log("ans : ", answer);
-    console.log("qus : ", qus_id);
-    console.log("join_idfdf : ", join_id);
-    // await api
-    //   .createAnswer()
-    //   .then()
-    //   .catch(err => console.log(err));
+    // console.log("ans : ", answer);
+    // console.log("qus : ", qus_id);
+    // console.log("join_idfdf : ", join_id);
+    await api
+      .createAnswer({
+        body: answer,
+        joinform_id: join_id,
+        question_id: qus_id
+      })
+      .then(res => {
+        console.log("생성된 답변 : ", res);
+      })
+      .catch(err => console.log(err));
   };
 
   return (
