@@ -2,20 +2,10 @@ import React, { useState, useContext, useEffect } from "react";
 import JoinStore from "./joinStore";
 import api from "../../api/api_admission";
 
+import moment from "moment";
 import Input from "@material-ui/core/Input";
 import InputLabel from "@material-ui/core/InputLabel";
 import Button from "@material-ui/core/Button";
-// class JoinFormSubmit extends React.Component {
-
-//   handleChange = prop => event => {
-//     this.setState({ [prop]: event.target.value });
-//   };
-
-//   render() {
-//       return ()
-//   }
-// }
-// export default JoinFormSubmit;
 
 export default function JoinFormSubmit() {
   const [questions, setQuestions] = useState([]);
@@ -24,7 +14,7 @@ export default function JoinFormSubmit() {
   const appli_info = useContext(JoinStore);
 
   useEffect(() => {
-    console.log("자기소개서 폼 실행.", appli_info);
+    // console.log("자기소개서 폼 실행.", appli_info);
     getQuestions();
   }, []);
 
@@ -48,49 +38,49 @@ export default function JoinFormSubmit() {
 
   const handlingSubmit = event => {
     event.preventDefault();
-    console.log("submit 실행.");
-    createJoinData().then(joinId => {
-      for (let idx = 1; idx < questions.length - 1; ++idx) {
-        //해당 idx는 question ID 이기도 함.
-        console.log("받아온 :", joinId);
-        createAnswer(answers[idx], idx, joinId);
-      }
-    });
-    // console.log("ans size :", questions.length);
+    // console.log("handlingSubmit 실행.");
+    createJoinData();
   };
 
   const createJoinData = async () => {
-    console.log("보내기 전 정보:", appli_info);
     await api
       .createJoinForm({
         name: appli_info.name,
         phone_number: appli_info.phoneNum,
         student_id: appli_info.studentId,
-        birth: "2020-02-11",
+        birth: moment(appli_info.birth).format("YYYY-MM-DD"),
         sex: appli_info.sex,
         major: appli_info.major,
         email: appli_info.email,
-        pw: "1234"
+        pw: appli_info.pw
       })
-      .then(res => {
-        console.log("joinform이 정상적으로 생성됨.");
-        console.log(res);
+      .then(async res => {
+        console.log("joinform이 정상적으로 생성됨.", res);
         let joinForm_id = res.data.id;
-        console.log("생성된 조인폼 ID : ", joinForm_id);
-        return joinForm_id;
+        let answer_list = {};
+
+        for (let idx = 1; idx < questions.length + 1; ++idx) {
+          //답변들을 딕셔너리형으로 리스트에 담아줌.
+          answer_list[idx] = answers[idx];
+        }
+        createAnswer(answer_list, joinForm_id);
       })
       .catch(err => console.log(err));
   };
 
-  const createAnswer = (answer, qus_id, join_id) => {
-    console.log("create answer 실행.");
-    console.log("ans : ", answer);
-    console.log("qus : ", qus_id);
-    console.log("join_idfdf : ", join_id);
-    // await api
-    //   .createAnswer()
-    //   .then()
-    //   .catch(err => console.log(err));
+  const createAnswer = async (answer_list, join_id) => {
+    await api
+      .createAnswers({
+        answers: answer_list,
+        joinform_id: join_id
+      })
+      .then(res => {
+        console.log("생성된 답변 : ", res);
+        alert("정상적으로 제출되었습니다! 지원내역에서 확인 가능함!");
+        // this.props.history.push("/");
+        document.location.href = "/";
+      })
+      .catch(err => console.log(err));
   };
 
   return (

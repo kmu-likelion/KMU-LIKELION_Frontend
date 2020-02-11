@@ -10,13 +10,22 @@ export default {
     return axios.post("admission/joinform/", data);
   },
 
+  getJoinInfo(data) {
+    console.log("getJoinInfo 실행.");
+    return axios.post("admission/joinform/get_joinform/", data);
+  },
+
   getAllQuestions() {
     console.log("getAllQuestions 실행");
     return axios.get("admission/question/");
   },
-  //body, joinform_id, question_id
+
   createAnswer(data) {
     console.log("createAnswer 실행.");
     return axios.post("admission/answer/", data);
+  },
+  createAnswers(data) {
+    console.log("createAnswers 실행.");
+    return axios.post("admission/answer/post_answers/", data);
   }
 };
