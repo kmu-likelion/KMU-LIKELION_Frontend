@@ -7,11 +7,12 @@ import LikeView from "../LikeView";
 
 // @material-ui
 import Button from "@material-ui/core/Button";
-
+import TextField from "@material-ui/core/TextField";
 import Card from "@material-ui/core/Card";
 import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
+import CommentView from "../CommentView";
 
 class QnADetail extends Component {
   state = {
@@ -19,13 +20,29 @@ class QnADetail extends Component {
     title: "",
     body: "",
     pub_date: "",
-    subject: ""
+    subject: "",
+    input_cmt: "",
+    comments: [],
+    board:""
   };
 
   componentDidMount() {
     console.log("Detail ComponentDidMount");
     //this._getQnA(this.props.match.params.id);
     this.getQnA();
+    this.getComments(this.state.id);
+  }
+
+  async getComments() {
+    await api
+      .getComments("QnA_comment", this.props.match.params.id)
+      .then(res => {
+        const _data = res.data;
+        this.setState({
+          comments: _data.results
+        });
+      })
+      .catch(err => console.log(err));
   }
 
   async getQnA() {
@@ -45,43 +62,73 @@ class QnADetail extends Component {
       .catch(err => console.log(err));
   }
 
-  _getQnA = (id = "") => {
-    console.log("get QnA Method 실행");
-    let URL;
-    if (id) {
-      URL = `QnA/${id}`;
-    } else {
-      // URL = `api/notice/`;
-      console.log(`${id}번째 포스트 가져오기 실패!`);
-    }
-    let data = [];
-    axios
-      .get(URL)
-      .then(res => {
-        console.log("End Point: ", URL);
-        const postData = res.data;
-        this.setState({
-          title: postData.title,
-          body: postData.body,
-          id: postData.id,
-          pub_date: postData.pub_date,
-          subject: postData.subject
-        });
-        console.log("get post 성공.");
-      })
-      .catch(err => console.log(err));
+  
 
-    return data;
+  handlingDelete = async (target, id) => {
+    await api.deletePost(target, id);
+    console.log(`delete id : ${id}`);
+    console.log(`delete ${target} 성공.`);
+    if (target === "QnA") {
+      document.location.href = "/QnA";
+    } else {
+      this.getComments();
+    }
   };
 
-  handlingDelete = async id => {
-    await api.deletePost("QnA", id);
-    console.log("delete post 성공.");
-    document.location.href = "/QnA";
+  handlingChange = event => {
+    this.setState({ [event.target.name]: event.target.value });
+  };
+
+  async updateQnA_comment(id, data) {
+    await api
+      .updatePost("QnA_comment", id, data)
+      .then(result => {
+        console.log("정상적으로 update됨.", result);
+        this.getComments();
+      })
+
+      .catch(err => console.log(err ,"err@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"));
+  }
+
+  commentUpdateSubmit = (event,cmt,board_id,user_id,comment_id) => {
+    event.preventDefault(); //event의 디폴트 기능(새로고침 되는 것 등..) -> 막는다.
+    console.log("submit요청청청청")
+    console.log("cmt",cmt)
+    console.log("boardid",board_id)
+    console.log("userid",user_id)
+    console.log("id",comment_id)
+
+    this.updateQnA_comment(comment_id, {
+      body: cmt,
+      user_id:user_id,
+      board: board_id
+    });
+    this.setState({ body: "", board: ""});
+    
+    //document.location.href = "/QnA";
+  };
+
+  commentSubmit = async event => {
+    event.preventDefault();
+
+    const current_user_id = window.sessionStorage.getItem("id");
+
+    let result = await api
+      .createPost("QnA_comment", {
+        body: this.state.input_cmt,
+        board: this.state.id,
+        user_id: current_user_id
+      })
+      .catch(err => console.log(err));
+    console.log("정상적으로 생성됨.", result);
+    this.setState({ input_cmt: "" });
+    
+    this.getComments();
   };
 
   render() {
     return (
+      <>
       <Card className={"card"}>
         <CardContent>
           <Typography>
@@ -106,6 +153,45 @@ class QnADetail extends Component {
           <Link to={"/QnA"}>Back</Link>
         </CardActions>
       </Card>
+
+      <Card className={"card"}>
+      <CardContent>
+        <h5>Comment</h5>
+        <div>
+          {this.state.comments.map(comment => (
+            <CommentView 
+            user_id ={comment.user_id}
+            author_name={comment.author_name}
+            body = {comment.body}
+            comment_id = {comment.id}
+            handlingDelete = {this.handlingDelete}
+            getComments = {this.getComments}
+            board_id = {comment.board}
+            handlingChange = {this.handlingChange}
+            commentUpdateSubmit = {this.commentUpdateSubmit}
+            url ="QnA_comment"
+            />
+          ))}
+        </div>
+        <form onSubmit={this.commentSubmit} className="commentForm">
+          <TextField
+            id="outlined-name"
+            label="comment"
+            name="input_cmt"
+            value={this.state.input_cmt}
+            onChange={this.handlingChange}
+            margin="normal"
+            // variant="outlined"
+          />
+          <Button type="submit" variant="contained" color="primary">
+            제출
+          </Button>
+        </form>
+      </CardContent>
+      </Card>
+      </>
+
+
     );
   }
 }
