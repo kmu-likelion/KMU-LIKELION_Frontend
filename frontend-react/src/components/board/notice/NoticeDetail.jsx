@@ -1,20 +1,18 @@
 import React, { Component } from "react";
 import api from "../../../api/api_board";
-import axios from "axios";
 import { Link } from "react-router-dom";
 import moment from "moment";
+
 import LikeView from "../LikeView";
+import CommentNew from "../CommentNew";
+import CommentView from "../CommentView";
 
 // @material-ui
 import Button from "@material-ui/core/Button";
-import TextField from "@material-ui/core/TextField";
 import Card from "@material-ui/core/Card";
 import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
-
-axios.defaults.xsrfCookieName = "csrftoken";
-axios.defaults.xsrfHeaderName = "X-CSRFToken";
 
 class NoticeDetail extends Component {
   state = {
@@ -24,20 +22,14 @@ class NoticeDetail extends Component {
     writer: "",
     pub_date: "",
     run_date: "",
-    input_cmt: "",
     comments: []
   };
   //...
   componentDidMount() {
     console.log("Detail ComponentDidMount");
-    // this._getNotice(this.props.match.params.id);
+
     this.getNotice();
     this.getComments();
-  }
-
-  componentDidUpdate() {
-    // this.getComments();
-    console.log("post id : ", this.state.id);
   }
 
   async getComments() {
@@ -51,6 +43,11 @@ class NoticeDetail extends Component {
       })
       .catch(err => console.log(err));
   }
+
+  //하위컴포넌트에서 직접적으로 getComments를 하지 못하므로, 중계하는 함수를 props로 보냄.
+  callGetComments = () => {
+    this.getComments();
+  };
 
   async getNotice() {
     await api
@@ -72,34 +69,13 @@ class NoticeDetail extends Component {
 
   handlingDelete = async (target, id) => {
     await api.deletePost(target, id);
-    console.log(`delete id : ${id}`);
-    console.log(`delete ${target} 성공.`);
+    // console.log(`delete id : ${id}`);
+    // console.log(`delete ${target} 성공.`);
     if (target === "notice") {
       document.location.href = "/notice";
     } else {
       this.getComments();
     }
-  };
-
-  handlingChange = event => {
-    this.setState({ [event.target.name]: event.target.value });
-  };
-
-  commentSubmit = async event => {
-    event.preventDefault();
-
-    const current_user_id = window.sessionStorage.getItem("id");
-
-    let result = await api
-      .createPost("notice_comment", {
-        body: this.state.input_cmt,
-        board: this.state.id,
-        user_id: current_user_id
-      })
-      .catch(err => console.log(err));
-    console.log("정상적으로 생성됨.", result);
-    this.setState({ input_cmt: "" });
-    this.getComments();
   };
 
   render() {
@@ -138,43 +114,25 @@ class NoticeDetail extends Component {
             <h5>Comment</h5>
             <div>
               {this.state.comments.map(comment => (
-                <>
-                  작성자 :
-                  <Link to={`/Mypage/${comment.user_id}`}>
-                    {comment.author_name}
-                  </Link>
-                  <br />
-                  <span>{comment.body}</span>
-                  <br />
-                  <Button
-                    color="secondary"
-                    size="small"
-                    onClick={event =>
-                      this.handlingDelete("notice_comment", comment.id)
-                    }
-                  >
-                    Delete
-                  </Button>
-                  <hr />
-                </>
+                <CommentView
+                  user_id={comment.user_id}
+                  author_name={comment.author_name}
+                  body={comment.body}
+                  comment_id={comment.id}
+                  handlingDelete={this.handlingDelete}
+                  getComments={this.callGetComments}
+                  board_id={comment.board}
+                  url="notice_comment"
+                />
               ))}
             </div>
-            <form onSubmit={this.commentSubmit} className="commentForm">
-              <TextField
-                id="outlined-name"
-                label="comment"
-                name="input_cmt"
-                value={this.state.input_cmt}
-                onChange={this.handlingChange}
-                margin="normal"
-                // variant="outlined"
-              />
-              <Button type="submit" variant="contained" color="primary">
-                제출
-              </Button>
-            </form>
           </CardContent>
         </Card>
+        <CommentNew
+          url="notice_comment"
+          board_id={this.state.id}
+          getComments={this.callGetComments}
+        />
       </div>
     );
   }

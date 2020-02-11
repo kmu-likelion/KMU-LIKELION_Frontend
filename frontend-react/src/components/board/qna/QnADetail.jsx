@@ -97,7 +97,7 @@ class QnADetail extends Component {
             <Button
               color="secondary"
               size="small"
-              onClick={event => this.handlingDelete(this.state.id)}
+              onClick={event => this.handlingDelete("QnA", this.state.id)}
             >
               Delete
             </Button>
@@ -126,6 +126,7 @@ class QnADetail extends Component {
           </CardContent>
         </Card>
         <CommentNew
+          url="QnA_comment"
           board_id={this.state.id}
           getComments={this.callGetComments}
         />

@@ -1,20 +1,18 @@
 import React, { Component } from "react";
 import api from "../../../api/api_board";
-import axios from "axios";
 import { Link } from "react-router-dom";
 import moment from "moment";
+
 import LikeView from "../LikeView";
+import CommentNew from "../CommentNew";
+import CommentView from "../CommentView";
 
 // @material-ui
 import Button from "@material-ui/core/Button";
-
 import Card from "@material-ui/core/Card";
 import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
-
-axios.defaults.xsrfCookieName = "csrftoken";
-axios.defaults.xsrfHeaderName = "X-CSRFToken";
 
 class RecruitDetail extends Component {
   state = {
@@ -22,19 +20,39 @@ class RecruitDetail extends Component {
     title: "",
     body: "",
     pub_date: "",
-    purpose: ""
+    purpose: "",
+    comments: []
   };
 
   componentDidMount() {
     console.log("Detail ComponentDidMount");
     this.getRecruit();
+    this.getComments();
   }
+
+  async getComments() {
+    await api
+      .getComments("recruit_comment", this.props.match.params.id)
+      .then(res => {
+        const _data = res.data;
+        this.setState({
+          comments: _data.results
+        });
+      })
+      .catch(err => console.log(err));
+  }
+
+  //하위컴포넌트에서 직접적으로 getComments를 하지 못하므로, 중계하는 함수를 props로 보냄.
+  callGetComments = () => {
+    this.getComments();
+  };
 
   async getRecruit() {
     await api
       .getPost("recruit", this.props.match.params.id)
       .then(res => {
         const data = res.data;
+        console.log("fdfd", data);
 
         this.setState({
           title: data.title,
@@ -47,41 +65,70 @@ class RecruitDetail extends Component {
       .catch(err => console.log(err));
   }
 
-  handlingDelete = async id => {
-    await api.deletePost("recruit", id);
-    console.log("delete post 성공.");
-    document.location.href = "/recruit";
+  handlingDelete = async (target, id) => {
+    await api.deletePost(target, id);
+    if (target === "recruit") {
+      document.location.href = "/recruit";
+    } else {
+      this.getComments();
+    }
   };
 
   render() {
     return (
-      <Card className={"card"}>
-        <CardContent>
-          <Typography>
-            <h6>Title : {this.state.title}</h6>
-            <p>body : {this.state.body}</p>
-            <p>목적 : {this.state.purpose}</p>
-            <br />
-            <p>작성일 : {this.state.pub_date}</p>
-          </Typography>
-        </CardContent>
+      <div>
+        <Card className={"card"}>
+          <CardContent>
+            <Typography>
+              <h6>Title : {this.state.title}</h6>
+              <p>body : {this.state.body}</p>
+              <p>목적 : {this.state.purpose}</p>
+              <br />
+              <p>작성일 : {this.state.pub_date}</p>
+            </Typography>
+          </CardContent>
 
-        <CardActions>
-          <LikeView
-            board_id={this.props.match.params.id}
-            board_name="recruit"
-          />
-          <Button
-            color="secondary"
-            size="small"
-            onClick={event => this.handlingDelete(this.state.id)}
-          >
-            Delete
-          </Button>
-          <Link to={`/recruit/update/${this.state.id}`}>Update</Link>
-          <Link to={"/recruit"}>Back</Link>
-        </CardActions>
-      </Card>
+          <CardActions>
+            <LikeView
+              board_id={this.props.match.params.id}
+              board_name="recruit"
+            />
+            <Button
+              color="secondary"
+              size="small"
+              onClick={event => this.handlingDelete(this.state.id)}
+            >
+              Delete
+            </Button>
+            <Link to={`/recruit/update/${this.state.id}`}>Update</Link>
+            <Link to={"/recruit"}>Back</Link>
+          </CardActions>
+        </Card>
+        <Card className={"card"}>
+          <CardContent>
+            <h5>Comment</h5>
+            <div>
+              {this.state.comments.map(comment => (
+                <CommentView
+                  user_id={comment.user_id}
+                  author_name={comment.author_name}
+                  body={comment.body}
+                  comment_id={comment.id}
+                  handlingDelete={this.handlingDelete}
+                  getComments={this.callGetComments}
+                  board_id={comment.board}
+                  url="recruit_comment"
+                />
+              ))}
+            </div>
+            <CommentNew
+              url="recruit_comment"
+              board_id={this.state.id}
+              getComments={this.callGetComments}
+            />
+          </CardContent>
+        </Card>
+      </div>
     );
   }
 }

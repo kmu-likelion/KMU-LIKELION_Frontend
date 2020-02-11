@@ -28,11 +28,11 @@ export default class CommentView extends Component {
     this.setState({ [event.target.name]: event.target.value });
   };
 
-  handlingSubmit = async (event, board_id) => {
+  handlingSubmit = async (event, url, board_id) => {
     event.preventDefault();
 
     await api
-      .createPost("QnA_comment", {
+      .createPost(url, {
         body: this.state.body,
         board: board_id,
         user_id: this.state.userid
@@ -47,13 +47,13 @@ export default class CommentView extends Component {
   };
 
   render() {
-    const { board_id } = this.props;
+    const { board_id, url } = this.props;
     return (
       <>
         <Card className={"card"}>
           <CardContent>
             <form
-              onSubmit={event => this.handlingSubmit(event, board_id)}
+              onSubmit={event => this.handlingSubmit(event, url, board_id)}
               className="commentForm"
             >
               <span>{this.state.username}</span>
