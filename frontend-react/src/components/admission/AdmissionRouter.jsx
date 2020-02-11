@@ -2,12 +2,14 @@ import React from "react";
 import { Route } from "react-router-dom";
 
 import JoinForm from "./JoinForm";
+import CheckJoin from "./CheckJoin";
 
 function AdmissionRouter({ match }) {
   return (
     <>
       {/* <Route exact path={match.path} component={listComponent} /> */}
       <Route path={`${match.path}/join`} component={JoinForm} />
+      <Route path={`${match.path}/checkjoin`} component={CheckJoin} />
       {/* <Route
         path={`${match.path}/detail/:id`}
         component={detailComponent}

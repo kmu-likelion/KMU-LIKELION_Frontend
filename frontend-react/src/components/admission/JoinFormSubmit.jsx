@@ -14,7 +14,7 @@ export default function JoinFormSubmit() {
   const appli_info = useContext(JoinStore);
 
   useEffect(() => {
-    console.log("자기소개서 폼 실행.", appli_info);
+    // console.log("자기소개서 폼 실행.", appli_info);
     getQuestions();
   }, []);
 
@@ -39,7 +39,6 @@ export default function JoinFormSubmit() {
   const handlingSubmit = event => {
     event.preventDefault();
     // console.log("handlingSubmit 실행.");
-
     createJoinData();
   };
 
@@ -77,6 +76,9 @@ export default function JoinFormSubmit() {
       })
       .then(res => {
         console.log("생성된 답변 : ", res);
+        alert("정상적으로 제출되었습니다! 지원내역에서 확인 가능함!");
+        // this.props.history.push("/");
+        document.location.href = "/";
       })
       .catch(err => console.log(err));
   };
