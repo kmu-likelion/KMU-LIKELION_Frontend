@@ -5,125 +5,103 @@ import api from "../../api/api_board";
 import TextField from "@material-ui/core/TextField";
 import { Link } from "react-router-dom";
 
-
 export default class CommentView extends Component {
-    state={
-        is_update:false,
-        input_cmt:""
+  state = {
+    is_update: false,
+    update_body: "",
+    request_user: ""
+  };
 
-    }
-  
   componentDidMount() {
-
-    
+    const user_id = window.sessionStorage.getItem("id");
+    console.log("현재 유저 아이디 : ", user_id);
+    this.setState({
+      request_user: user_id
+    });
   }
+
   handlingChange = event => {
     this.setState({ [event.target.name]: event.target.value });
   };
-  
+
+  handlingUpdate = async (event, url, board_id, user_id, comment_id) => {
+    event.preventDefault();
+    await api
+      .updatePost(url, comment_id, {
+        body: this.state.update_body,
+        user_id: user_id,
+        board: board_id
+      })
+      .then(res => {
+        console.log(res);
+        this.setState({ is_update: false });
+        this.props.getComments();
+      });
+  };
+
   render() {
-    const{user_id,author_name,body,comment_id,board_id, url}= this.props;
-    if (this.state.is_update){
-        return (
-            <>
-            작성자 :
-            <Link to={`/Mypage/${user_id}`}>
-              {author_name}
-            </Link>
-            
-            
-            <form onSubmit = {event => {
-                this.setState({is_update:false});
-                this.props.commentUpdateSubmit(event,this.state.input_cmt,board_id,user_id,comment_id)
-                
-                
-                }} 
-                className="commentForm">
-                <TextField
-                    id="outlined-name"
-                    label="comment"
-                    name="input_cmt"
-                    value={this.state.input_cmt}
-                    onChange={this.handlingChange}
-                    margin="normal"
-                    // variant="outlined"
-                />
-                <Button type="submit" variant="contained" color="primary">
-                    제출
-                </Button>
-            </form>
-        
-            
-    
-                
-             
-    
-            <Button
-              color="primary"
-              size="small"
-              onClick={event =>
-                this.setState({is_update:true})
-                
-              }
-            >
-              Update
-            </Button>
-    
-            <Button
-              color="secondary"
-              size="small"
-              onClick={event =>
-                this.props.handlingDelete(url, comment_id)
-              }
-            >
-              Delete
-            </Button>
-            <hr />
-          </>
-          );
+    const {
+      user_id,
+      author_name,
+      body,
+      comment_id,
+      board_id,
+      url
+    } = this.props;
 
-    } else {
-    return(
+    if (this.state.is_update) {
+      return (
         <>
-            작성자 :
-            <Link to={`/Mypage/${user_id}`}>
-              {author_name}
-            </Link>
-            
-            <br/>
-            <span>{body}</span>
-            <br/>
-              
+          <form
+            onSubmit={event => {
+              this.handlingUpdate(event, url, board_id, user_id, comment_id);
+            }}
+            className="commentForm"
+          >
+            <TextField
+              id="outlined-name"
+              label="comment"
+              name="update_body"
+              value={this.state.update_body}
+              onChange={this.handlingChange}
+              margin="normal"
+            />
+            <Button type="submit" variant="contained" color="primary">
+              제출
+            </Button>
+          </form>
+          <hr />
+        </>
+      );
+    } else {
+      return (
+        <>
+          <Link to={`/Mypage/${user_id}`}>{author_name}</Link>
+          <br />
+          <span>{body}</span>
+          <br />
+          <>
             <Button
               color="primary"
               size="small"
               onClick={event =>
-                this.setState({is_update:true, input_cmt:body})
-                
+                this.setState({ is_update: true, update_body: body })
               }
             >
               Update
             </Button>
-    
             <Button
               color="secondary"
               size="small"
-              onClick={event =>
-                this.props.handlingDelete(url, comment_id)
-              }
+              onClick={event => this.props.handlingDelete(url, comment_id)}
             >
               Delete
             </Button>
-            <hr />
           </>
-    );
 
-      
+          <hr />
+        </>
+      );
     }
   }
 }
-
-
-
-
-
