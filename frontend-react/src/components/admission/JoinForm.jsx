@@ -15,26 +15,19 @@ class JoinForm extends Component {
     birth: "",
     sex: "",
     email: "",
+    pw: "",
     is_recorded: false //default :false임.
   };
-  // JoinStore = this.state;
+
   setFlag = () => {
     this.setState((prevState, props) => {
       return { is_recorded: !this.state.is_recorded };
     });
-
-    // this.setState({
-    //   is_recorded: !this.state.is_recorded
-    // });
   };
 
   componentDidMount() {
     console.log("New ComponentDidMount");
   }
-
-  // componentDidUpdate() {
-  //   console.log("test다");
-  // }
 
   render() {
     return (

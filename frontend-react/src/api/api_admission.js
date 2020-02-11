@@ -14,9 +14,13 @@ export default {
     console.log("getAllQuestions 실행");
     return axios.get("admission/question/");
   },
-  //body, joinform_id, question_id
+
   createAnswer(data) {
     console.log("createAnswer 실행.");
     return axios.post("admission/answer/", data);
+  },
+  createAnswers(data) {
+    console.log("createAnswers 실행.");
+    return axios.post("admission/answer/post_answers/", data);
   }
 };

@@ -33,7 +33,7 @@ export default function RadioButtonsGroup(props) {
   const [birth, setBirth] = useState(new Date());
   const [sex, setSex] = useState("female");
   const [email, setEmail] = useState("");
-  // const [recorded, setRecorded] = useState(false);
+  const [pw, setPw] = useState("");
 
   useEffect(() => {
     handlingContext();
@@ -66,28 +66,8 @@ export default function RadioButtonsGroup(props) {
     appli_info.birth = birth;
     appli_info.sex = sex;
     appli_info.email = email;
+    appli_info.pw = pw;
   };
-
-  // const handlingNext = async event => {
-  //   event.preventDefault();
-  //   await api
-  //     .submitJoinForm({
-  //       name: name,
-  //       phone_number: phoneNum,
-  //       student_id: studentId,
-  //       birth: "2020-12-31",
-  //       sex: sex,
-  //       major: major,
-  //       email: email
-  //     })
-  //     .then(res => {
-  //       console.log("정상적으로 제출됨", res);
-  //       document.location.href = "/";
-  //     })
-  //     .catch(err => {
-  //       console.log(err);
-  //     });
-  // };
 
   return (
     <div>
@@ -147,7 +127,7 @@ export default function RadioButtonsGroup(props) {
           />
         </FormControl>
         <br />
-        <FormControl>
+        <FormControl className={classes.formControl}>
           <InputLabel>Birth Date</InputLabel>
           <br />
           <MuiPickersUtilsProvider utils={DateFnsUtils}>
@@ -193,11 +173,23 @@ export default function RadioButtonsGroup(props) {
           </RadioGroup>
         </FormControl>
         <br />
+        <FormControl className={classes.formControl}>
+          <small>*지원내역 열람/수정을 위한 임시 비밀번호입니다.*</small>
+          <InputLabel>Password</InputLabel>
+          <Input
+            id="component-simple"
+            value={pw}
+            onChange={e => setPw(e.target.value)}
+            required
+          />
+        </FormControl>
+        <br />
         <Button
           variant="contained"
           color="primary"
           // onClick={props.setFlag}
           type="submit"
+          className={classes.formControl}
         >
           Next
         </Button>
