@@ -3,7 +3,7 @@ import Container from "@material-ui/core/Container";
 
 import { Link } from "react-router-dom";
 import api_group from "../../../api/api_group";
-
+import StudyView from "./StudyView";
 import Button from "@material-ui/core/Button";
 
 class StudyList extends React.Component {
@@ -54,7 +54,7 @@ class StudyList extends React.Component {
           {/* <h1>Study List</h1> */}
 
           <br />
-          <h3>{this.state.group_info.title}</h3>
+          <h3>{this.state.group_info.name}</h3>
           <h6>{this.state.group_info.introduction}</h6>
           <Button
             color="secondary"
@@ -65,16 +65,16 @@ class StudyList extends React.Component {
           </Button>
           <hr />
           <h6>
-            <Link to={`/study/group/${this.state.group_name}/new`}>New</Link>
+            <Link to={
+              {
+                pathname:`/study/group/${this.state.group_name}/new`,
+                state:{
+                  group_name: this.state.group_name
+
+                }
+            }}>New</Link>
           </h6>
-          {/* {this.state.studyList.map(post => (
-            <StudyView
-              key={post.id}
-              id={post.id}
-              title={post.title}
-              body={post.body}
-            />
-          ))} */}
+          
         </Container>
       </div>
     );

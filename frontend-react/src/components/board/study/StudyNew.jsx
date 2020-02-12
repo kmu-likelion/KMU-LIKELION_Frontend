@@ -10,7 +10,8 @@ class StudyNew extends Component {
     title: "",
     body: "",
     how_many_people: "",
-    id: ""
+    id: "",
+    group_name:""
   };
 
   componentDidMount() {
@@ -23,6 +24,7 @@ class StudyNew extends Component {
     } else {
       console.log("접근모드 : 로그아웃 상태");
     }
+    this.setState({group_name:this.props.location.state.group_name});
     // this._getPost(this.props.match.params.id);
   }
 
@@ -33,7 +35,7 @@ class StudyNew extends Component {
   handlingSubmit = async event => {
     event.preventDefault(); //event의 디폴트 기능(새로고침 되는 것 등..) -> 막는다.
     console.log("user-id: ", this.state.id);
-    let result = await api.createPost("study", {
+    let result = await api.createPost(`study/group/${this.state.group_name}`, {
       title: this.state.title,
       body: this.state.body,
       how_many_people: this.state.how_many_people,
@@ -43,7 +45,7 @@ class StudyNew extends Component {
     this.setState({ title: "", content: "" });
     // this.getPosts()
     //document.location.href = "/QnA";
-    this.props.history.push("/study"); //새로고침되지 않고, 리다이렉트해줌.
+    this.props.history.push(`/study/group/${this.state.group_name}`); //새로고침되지 않고, 리다이렉트해줌.
   };
 
   render() {

@@ -103,7 +103,7 @@ class Mypage extends Component {
             </Paper>
           </Grid>
           <Grid item xs={12} sm ={4}>
-          <Paper className="PostingPaper">
+          <Paper elevation={10} className="PostingPaper">
           <h1>Liked Post</h1>
           {this.state.likeNotice.map(liked_post => (
             <div>

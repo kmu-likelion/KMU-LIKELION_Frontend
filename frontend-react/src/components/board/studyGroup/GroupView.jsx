@@ -8,21 +8,21 @@ import Typography from "@material-ui/core/Typography";
 
 export default class GroupView extends Component {
   render() {
-    const { id, title } = this.props;
+    const { id, name , introduction} = this.props;
     return (
       <Card className={"card"}>
         <CardContent>
           <Typography>
             <Link
               to={{
-                pathname: `/study/group/${title}`,
+                pathname: `/study/group/${name}`,
                 state: {
                   group_id: id,
-                  group_name: title
+                  group_name: name
                 }
               }}
             >
-              {title}
+              {name}
             </Link>
           </Typography>
         </CardContent>

@@ -45,8 +45,8 @@ class GroupNew extends Component {
         // console.log("상태 그룹 id : ", this.state.group_id);
         await api
           .addGroupUser({
-            participant: this.state.user_id,
-            group: this.state.group_id
+            user_id: this.state.user_id,
+            group_id: this.state.group_id
           })
           .catch(err => console.log(err));
       })
