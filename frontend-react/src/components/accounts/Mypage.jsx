@@ -6,7 +6,8 @@ import Paper from "@material-ui/core/Paper";
 import api from "../../api/api_board";
 import VirtualizedList from "./likedPostView";
 import { Link } from "react-router-dom";
-
+import MyLike from "./MyLike";
+import Button from "@material-ui/core/Button";
 
 
 class Mypage extends Component {
@@ -20,10 +21,8 @@ class Mypage extends Component {
     sns_id: "",
     email: "",
     token: "",
-    likeNotice:[],
-    likeQnA:[],
-    likeStudy:[],
-    likeRecruit:[]
+    type:"Myprofile"
+    
   };
 
   componentDidMount() {
@@ -31,37 +30,16 @@ class Mypage extends Component {
     // const _id = window.sessionStorage.getItem("id");
     const _id = this.props.match.params.id;
     this.getUser(_id);
-    this.getLikePosts("notice");
-    this.getLikePosts("QnA");
-    this.getLikePosts("study");
-    this.getLikePosts("recruit");
+
+    console.log(this.state.type);
+    // this.getLikePosts("notice");
+    // this.getLikePosts("QnA");
+    // this.getLikePosts("study");
+    // this.getLikePosts("recruit");
   }
 
-  async getLikePosts(target) {
-    await api
-      .getUserLikePost(target)
-      .then(likePosts => {
-        console.log(likePosts);
-        var posts = likePosts.data.board_contents;
-        switch (target) {
-          case "notice":
-            this.setState({ likeNotice: posts });
-            break;
-          case "QnA":
-            this.setState({ likeQnA: posts });
-            break;
-          case "study":
-            this.setState({ likeStudy: posts });
-            break;
-          case "recruit":
-            this.setState({ likeRecruit: posts });
-            break;
-          default:
-            break;
-        }
-      })
-      .catch(err => console.log(err));
-  }
+
+  
 
   async getUser(userId) {
     await getUser(userId)
@@ -80,74 +58,111 @@ class Mypage extends Component {
       })
       .catch(err => console.log(err));
   }
+  handlingSubmit1 = async event => {
+    event.preventDefault(); //event의 디폴트 기능(새로고침 되는 것 등..) -> 막는다.
+    this.setState({type:"Myprofile" });
+  };
+  handlingSubmit = async event => {
+    event.preventDefault(); //event의 디폴트 기능(새로고침 되는 것 등..) -> 막는다.
+    this.setState({type:"MyLike" });
+  };
   
 
   render() {
-    return (
-      <Container maxWidth="lg" className="PostingSection">
-        <Grid container spacing={2}>
-          <Grid item xs={12} sm={8}>
-            <Paper elevation={10} className="PostingPaper">
-              Mypage <br />
-              <br />
-              ID {this.state.id} <br />
-              Username {this.state.username} <br />
-              Email {this.state.email} <br />
-              학과 {this.state.major} <br />
-              멋쟁이사자 {this.state.start_num} <br />
-              학번 {this.state.student_id} <br />
-              SNS {this.state.sns_id} <br />
-              <br />
 
-              
-            </Paper>
-          </Grid>
-          <Grid item xs={12} sm ={4}>
-          <Paper elevation={10} className="PostingPaper">
-          <h1>Liked Post</h1>
-          {this.state.likeNotice.map(liked_post => (
-            <div>
-              <h4>notice board</h4>
-              <Link to={`/notice/detail/${liked_post.id}`} className={"main-postTitle"}>
-              -{liked_post.title}
-              </Link>
-              
-            </div>
-          ))}
-          <br/>
-          {this.state.likeQnA.map(liked_post => (
-            <div>
-              <h4>QnA board</h4>
-              <Link to={`/QnA/detail/${liked_post.id}`} className={"main-postTitle"}>
-              -{liked_post.title}
-              </Link>
-            </div>
-          ))}
-          <br/>
-          {this.state.likeStudy.map(liked_post => (
-            <div>
-              <h4>study board</h4>
-              <Link to={`/study/detail/${liked_post.id}`} className={"main-postTitle"}>
-              -{liked_post.title}
-              </Link>
-              
-            </div>
-          ))}
-          <br/>
-          {this.state.likeRecruit.map(liked_post => (
-            <div>
-              <h4>recruit board</h4>
-              <Link to={`/recruit/detail/${liked_post.id}`} className={"main-postTitle"}>
-              -{liked_post.title}
-              </Link>
-              
-            </div>
-          ))}
-            </Paper>
-          </Grid>
-        </Grid>
-      </Container>
-    );
+      switch(this.state.type) {
+          case 'Myprofile':
+              return (
+                <Container maxWidth="lg" className="PostingSection">
+                  <Grid container spacing={2} className ="firstbox">
+                    <Grid item xs={12} sm={4}>
+                      <Paper elevation={10} className="PostingPaper">
+                        Mypage <br />
+                        <br />
+                        ID {this.state.id} <br />
+                        Username {this.state.username} <br />
+                        Email {this.state.email} <br />
+                        학과 {this.state.major} <br />
+                        멋쟁이사자 {this.state.start_num} <br />
+                        학번 {this.state.student_id} <br />
+                        SNS {this.state.sns_id} <br />
+                        
+                        <form onSubmit={event => this.handlingSubmit1(event)} className="commentForm">
+                          <Button type="submit" variant="contained" color="primary">
+                          myProfile
+                          </Button>
+                        </form>
+                        <br/>
+                        <form onSubmit={event => this.handlingSubmit(event)} className="commentForm">
+                          <Button type="submit" variant="contained" color="primary">
+                          mylike
+                          </Button>
+                        </form>
+                        
+          
+                        
+                      </Paper>
+                    </Grid>
+                    <Grid item xs={12} sm ={8}>
+                      <Paper elevation={10} className="PostingPaper">
+                          Mypage <br />
+                          <br />
+                          ID {this.state.id} <br />
+                          Username {this.state.username} <br />
+                          Email {this.state.email} <br />
+                          학과 {this.state.major} <br />
+                          멋쟁이사자 {this.state.start_num} <br />
+                          학번 {this.state.student_id} <br />
+                          SNS {this.state.sns_id} <br />
+                          
+                      </Paper>
+                    </Grid>
+                  </Grid>
+                  
+                </Container>
+              );
+          case 'MyLike':
+              return (
+                <Container maxWidth="lg" className="PostingSection">
+                  <Grid container spacing={2} className ="firstbox">
+                    <Grid item xs={12} sm={4}>
+                      <Paper elevation={10} className="PostingPaper">
+                        Mypage <br />
+                        <br />
+                        ID {this.state.id} <br />
+                        Username {this.state.username} <br />
+                        Email {this.state.email} <br />
+                        학과 {this.state.major} <br />
+                        멋쟁이사자 {this.state.start_num} <br />
+                        학번 {this.state.student_id} <br />
+                        SNS {this.state.sns_id} <br />
+                        
+
+                        <form onSubmit={event => this.handlingSubmit1(event)} className="commentForm">
+                          <Button type="submit" variant="contained" color="primary">
+                          myProfile
+                          </Button>
+                        </form>
+                        <br/>
+                        <form onSubmit={event => this.handlingSubmit(event)} className="commentForm">
+                          <Button type="submit" variant="contained" color="primary">
+                          mylike
+                          </Button>
+                        </form>
+                        
+                      </Paper>
+                    </Grid>
+                    <Grid item xs={12} sm ={8}>
+                      <MyLike />
+                    </Grid>
+                  </Grid>
+                  
+                </Container>
+              );
+          default:
+              return null;
+      }
+    
   }
 }
 

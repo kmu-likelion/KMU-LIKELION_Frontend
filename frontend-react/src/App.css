@@ -90,3 +90,6 @@ a:hover, a:active {text-decoration: none; color:#fff; background-color:#f59000;}
 .main-postTitle {
   font-size: x-large;
 }
+.PostingSection{
+  padding: 3rem;
+}
