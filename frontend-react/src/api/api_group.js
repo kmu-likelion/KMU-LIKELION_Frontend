@@ -16,6 +16,10 @@ export default {
     console.log("getGroup api 실행");
     return axios.get(`accounts/studygroup/${id}`, tokenConfig());
   },
+  getGroupWithName(name) {
+    console.log("get Group with name 실행.");
+    return axios.get(`accounts/studygroup?group_name=${name}`, tokenConfig());
+  },
 
   //글 생성
   createGroup(data) {
