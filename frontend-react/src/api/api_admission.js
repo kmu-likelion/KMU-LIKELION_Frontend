@@ -30,6 +30,11 @@ export default {
     return axios.post("admission/question/", data);
   },
 
+  updateQuestion(id, data) {
+    console.log("createQuestion 실행.");
+    return axios.put(`admission/question/${id}/`, data);
+  },
+
   deleteQuestion(id) {
     console.log("createQuestion 실행.");
     return axios.delete(`admission/question/${id}/`);

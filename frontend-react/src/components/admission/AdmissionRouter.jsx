@@ -8,20 +8,9 @@ import ManageJoin from "./ManageJoin";
 function AdmissionRouter({ match }) {
   return (
     <>
-      {/* <Route exact path={match.path} component={listComponent} /> */}
       <Route path={`${match.path}/join`} component={JoinForm} />
       <Route path={`${match.path}/checkjoin`} component={CheckJoin} />
       <Route path={`${match.path}/management`} component={ManageJoin} />
-      {/* <Rout e
-        path={`${match.path}/detail/:id`}
-        component={detailComponent}
-        id="number"
-      />
-      <Route
-        path={`${match.path}/update/:id`}
-        component={updateComponent}
-        id="number"
-      /> */}
     </>
   );
 }

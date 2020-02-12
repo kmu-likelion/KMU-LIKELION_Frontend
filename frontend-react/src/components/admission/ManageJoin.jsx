@@ -5,7 +5,7 @@ import Paper from "@material-ui/core/Paper";
 import api from "../../api/api_admission";
 
 import Input from "@material-ui/core/Input";
-import InputLabel from "@material-ui/core/InputLabel";
+// import InputLabel from "@material-ui/core/InputLabel";
 import Button from "@material-ui/core/Button";
 import { makeStyles } from "@material-ui/core/styles";
 import Table from "@material-ui/core/Table";
@@ -14,6 +14,7 @@ import TableCell from "@material-ui/core/TableCell";
 import TableContainer from "@material-ui/core/TableContainer";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
+import ManageQuestionForm from "./ManageQuestionForm";
 
 class CheckJoin extends Component {
   state = {
@@ -112,18 +113,14 @@ class CheckJoin extends Component {
                   <TableCell colSpan={3}>Question</TableCell>
                 </TableRow>
                 {this.state.questions.map(qus => {
-                  var qus_id = qus.id;
                   return (
-                    <TableRow key={qus.id}>
-                      <TableCell>{qus.id}</TableCell>
-                      <TableCell colSpan={2}>{qus.body}</TableCell>
-                      <TableCell>
-                        <Button>수정</Button>
-                        <Button onClick={event => this.deleteQuestion(qus_id)}>
-                          삭제
-                        </Button>
-                      </TableCell>
-                    </TableRow>
+                    <ManageQuestionForm
+                      key={qus.id}
+                      id={qus.id}
+                      body={qus.body}
+                      deleteQuestion={this.deleteQuestion}
+                      getAllQuestions={this.getAllQuestions}
+                    />
                   );
                 })}
                 <TableRow>
