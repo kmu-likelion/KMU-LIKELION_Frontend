@@ -70,6 +70,7 @@ a:hover, a:active {text-decoration: none; color:#fff; background-color:#f59000;}
 .auth-link:active {
   color: #fff;
 }
+
 .commentForm {
   display: flex;
   flex-direction: column;

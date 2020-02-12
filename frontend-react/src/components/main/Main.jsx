@@ -62,9 +62,9 @@ class Main extends React.Component {
                 </Carousel.Item>
                 <Carousel.Item>
                   <img className="d-block w-100" src={logo} alt="Third slide" />
-                  <Carousel.Caption>
+                  {/* <Carousel.Caption>
                     <h3>Third slide label</h3>
-                  </Carousel.Caption>
+                  </Carousel.Caption> */}
                 </Carousel.Item>
               </Carousel>
             </Grid>

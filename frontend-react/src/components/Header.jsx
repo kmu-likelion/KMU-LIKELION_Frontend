@@ -6,12 +6,11 @@ import Store from "../Store/store";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
-// import IconButton from "@material-ui/core/IconButton";
-// import MenuIcon from "@material-ui/icons/Menu";
+
 import Button from "@material-ui/core/Button";
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
-// import Link from '@material-ui/core/Link';
+import PopupState, { bindTrigger, bindMenu } from "material-ui-popup-state";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -26,15 +25,15 @@ export default function Header(props) {
   const store = useContext(Store);
   const classes = useStyles();
   // const { logged, onLogout } = props;
-  const [anchorEl, setAnchorEl] = React.useState(null);
+  // const [anchorEl, setAnchorEl] = React.useState(null);
   const id = window.sessionStorage.getItem("id");
 
-  const handleClick = event => {
-    setAnchorEl(event.currentTarget);
-  };
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
+  // const handleClick = event => {
+  //   setAnchorEl(event.currentTarget);
+  // };
+  // const handleClose = () => {
+  //   setAnchorEl(null);
+  // };
 
   const NavItem = ({ children, to }) => (
     <Link to={to} className="link nav-link">
@@ -55,7 +54,7 @@ export default function Header(props) {
             <NavItem to={"/"}>KMU LIKELION</NavItem>
           </Typography>
           <Typography variant="h6" className={classes.title}>
-            <Button
+            {/* <Button
               aria-controls="simple-menu"
               aria-haspopup="true"
               onClick={handleClick}
@@ -82,7 +81,34 @@ export default function Header(props) {
               <MenuItem onClick={handleClose}>
                 <DropItem to={"/recruit"}>Recruit</DropItem>
               </MenuItem>
-            </Menu>
+            </Menu> */}
+            <PopupState variant="popover" popupId="popup-menu">
+              {popupState => (
+                <>
+                  <Button
+                    // variant="contained"
+                    style={{ color: "white" }}
+                    {...bindTrigger(popupState)}
+                  >
+                    BOARD
+                  </Button>
+                  <Menu {...bindMenu(popupState)}>
+                    <MenuItem onClick={popupState.close}>
+                      <DropItem to={"/notice"}>Notice</DropItem>
+                    </MenuItem>
+                    <MenuItem onClick={popupState.close}>
+                      <DropItem to={"/study"}>Study</DropItem>
+                    </MenuItem>
+                    <MenuItem onClick={popupState.close}>
+                      <DropItem to={"/QnA"}>QnA</DropItem>
+                    </MenuItem>
+                    <MenuItem onClick={popupState.close}>
+                      <DropItem to={"/recruit"}>Recruit</DropItem>
+                    </MenuItem>
+                  </Menu>
+                </>
+              )}
+            </PopupState>
           </Typography>
           {store.logged ? (
             <>
@@ -103,16 +129,35 @@ export default function Header(props) {
             </>
           ) : (
             <>
-              <Button color="inherit">
-                <Link to={"/admission/join"} className="auth-link link">
-                  지원하기
-                </Link>
-              </Button>
-              <Button color="inherit">
-                <Link to={"/admission/checkjoin"} className="auth-link link">
-                  지원내역
-                </Link>
-              </Button>
+              <PopupState variant="popover" popupId="demo-popup-menu">
+                {popupState => (
+                  <React.Fragment>
+                    <Button
+                      // variant="contained"
+
+                      style={{ color: "white" }}
+                      {...bindTrigger(popupState)}
+                    >
+                      Admission
+                    </Button>
+                    <Menu {...bindMenu(popupState)}>
+                      <MenuItem onClick={popupState.close}>
+                        <DropItem to={"/admission/join"}>지원하기</DropItem>
+                      </MenuItem>
+                      <MenuItem onClick={popupState.close}>
+                        <DropItem to={"/admission/checkjoin"}>
+                          지원내역
+                        </DropItem>
+                      </MenuItem>
+                      <MenuItem onClick={popupState.close}>
+                        <DropItem to={"/admission/management"}>
+                          지원관리
+                        </DropItem>
+                      </MenuItem>
+                    </Menu>
+                  </React.Fragment>
+                )}
+              </PopupState>
               <Button color="inherit">
                 <Link to={"/login"} className="auth-link link">
                   Login

@@ -57,7 +57,7 @@ class CheckJoin extends Component {
   render() {
     return (
       <Container maxWidth="lg" className="PostingSection">
-        <Paper className="PostingPaper">이력서 검토 페이지.</Paper>
+        <Paper className="PostingPaper">나의 지원내역</Paper>
         <br />
         {this.state.is_accessed ? (
           <>
