@@ -15,9 +15,24 @@ export default {
     return axios.post("admission/joinform/get_joinform/", data);
   },
 
+  getAllJoinData() {
+    console.log("getAllJoinData 실행.");
+    return axios.get("admission/joinform/");
+  },
+
   getAllQuestions() {
     console.log("getAllQuestions 실행");
     return axios.get("admission/question/");
+  },
+
+  createQuestion(data) {
+    console.log("createQuestion 실행.");
+    return axios.post("admission/question/", data);
+  },
+
+  deleteQuestion(id) {
+    console.log("createQuestion 실행.");
+    return axios.delete(`admission/question/${id}/`);
   },
 
   createAnswer(data) {
