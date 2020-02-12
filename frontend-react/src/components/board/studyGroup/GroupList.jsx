@@ -15,7 +15,6 @@ class GroupList extends React.Component {
 
   componentDidMount() {
     this.getAllGroup();
-    // console.log("fdsfdsfdsa");
   }
 
   async getAllGroup() {
@@ -39,7 +38,7 @@ class GroupList extends React.Component {
             <GroupView
               key={group.id}
               id={group.id}
-              title={group.title}
+              name={group.name}
               introduction={group.introduction}
             />
           ))}

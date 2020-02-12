@@ -36,6 +36,6 @@ export default {
   },
   addGroupUser(data) {
     console.log("addGroupUser api 실행.");
-    return axios.post("accounts/studygroup_user/", data, tokenConfig());
+    return axios.post("accounts/group_user/", data, tokenConfig());
   }
 };
