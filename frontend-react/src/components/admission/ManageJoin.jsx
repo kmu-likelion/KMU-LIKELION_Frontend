@@ -169,7 +169,7 @@ class CheckJoin extends Component {
                     <TableCell>{row.birth}</TableCell>
                     <TableCell>{row.sex}</TableCell>
                     <TableCell>0.0</TableCell>
-                    <TableCell>심사 중</TableCell>
+                    <TableCell>{row.status}</TableCell>
                     <TableCell>
                       <Button>보러가기</Button>
                     </TableCell>
