@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import api from "../../../api/api_board";
-import axios from "axios";
 import { Link } from "react-router-dom";
 import moment from "moment";
 
@@ -8,42 +7,35 @@ import LikeView from "../LikeView";
 
 // @material-ui
 import Button from "@material-ui/core/Button";
+import Container from "@material-ui/core/Container";
+import Paper from "@material-ui/core/Paper";
 
-import Card from "@material-ui/core/Card";
-import CardActions from "@material-ui/core/CardActions";
-import CardContent from "@material-ui/core/CardContent";
-import Typography from "@material-ui/core/Typography";
-
-axios.defaults.xsrfCookieName = "csrftoken";
-axios.defaults.xsrfHeaderName = "X-CSRFToken";
-
-class StudyDetail extends Component {
+class PostDetail extends Component {
   state = {
     id: "",
     title: "",
     body: "",
-    pub_date: "",
-    how_many_people: ""
+    study_type: "",
+    pub_date: ""
   };
 
   componentDidMount() {
-    console.log("Detail ComponentDidMount");
     //this._getQnA(this.props.match.params.id);
-    this.getStudy();
+    this.getPost();
   }
 
-  async getStudy() {
+  async getPost() {
     await api
       .getPost("study", this.props.match.params.id)
       .then(res => {
         const data = res.data;
-
+        console.log(data);
         this.setState({
           title: data.title,
           body: data.body,
           id: data.id,
-          pub_date: moment(data.pub_date).format("YYYY-MM-DD hh:mm"),
-          how_many_people: data.how_many_people
+          study_type: data.study_type,
+          pub_date: moment(data.pub_date).format("YYYY-MM-DD hh:mm")
         });
       })
       .catch(err => console.log(err));
@@ -52,22 +44,19 @@ class StudyDetail extends Component {
   handlingDelete = async id => {
     await api.deletePost("study", id);
     console.log("delete post 성공.");
-    document.location.href = "/study";
+    // document.location.href = "/study";
   };
 
   render() {
     return (
-      <Card className={"card"}>
-        <CardContent>
-          <Typography>
-            <h6>Title : {this.state.title}</h6>
-            <p>body : {this.state.body}</p>
-            <p>참여인원 : {this.state.how_many_people}</p>
-            <br />
-            <p>작성일 : {this.state.pub_date}</p>
-          </Typography>
-        </CardContent>
-        <CardActions>
+      <Container maxWidth="lg" className="post-container">
+        <Paper className="PostingSection">
+          <p>{this.state.study_type}</p>
+          <h4>{this.state.title}</h4>
+          <p>{this.state.body}</p>
+          <br />
+          <small>pub date : {this.state.pub_date}</small>
+          <hr />
           <LikeView board_id={this.props.match.params.id} board_name="study" />
           <Button
             color="secondary"
@@ -76,12 +65,17 @@ class StudyDetail extends Component {
           >
             Delete
           </Button>
-          <Link to={`/study/update/${this.state.id}`}>Update</Link>
-          <Link to={"/study"}>Back</Link>
-        </CardActions>
-      </Card>
+          <Link
+            to={`/study/${this.props.match.params.group}/update/${this.state.id}`}
+          >
+            Update
+          </Link>{" "}
+          &nbsp;
+          <hr />
+        </Paper>
+      </Container>
     );
   }
 }
 
-export default StudyDetail;
+export default PostDetail;

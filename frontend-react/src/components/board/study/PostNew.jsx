@@ -57,7 +57,7 @@ class StudyNew extends Component {
     this.setState({ title: "", body: "" });
     // this.getPosts()
     //document.location.href = "/QnA";
-    // this.props.history.push(`/study/group/${this.props.match.params.group}`); //새로고침되지 않고, 리다이렉트해줌.
+    this.props.history.push(`/study/group/${this.props.match.params.group}`); //새로고침되지 않고, 리다이렉트해줌.
   };
 
   render() {

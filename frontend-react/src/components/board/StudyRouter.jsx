@@ -5,6 +5,9 @@ import StudyMain from "./study/StudyMain";
 import GroupDetail from "./study/GroupDetail";
 import GroupNew from "./study/GroupNew";
 import PostNew from "./study/PostNew";
+import PostDetail from "./study/PostDetail";
+import PostUpdate from "./study/PostUpdate";
+
 function StudyRouter({ match }) {
   return (
     <>
@@ -19,16 +22,16 @@ function StudyRouter({ match }) {
       /> */}
       <Route exact path={`${match.path}/:group`} component={GroupDetail} />
       <Route path={`${match.path}/:group/new`} component={PostNew} />
-      {/* <Route
+      <Route
         path={`${match.path}/:group/detail/:id`}
-        component={StudyDetail}
+        component={PostDetail}
         id="number"
       />
       <Route
         path={`${match.path}/:group/update/:id`}
-        component={StudyUpdate}
+        component={PostUpdate}
         id="number"
-      /> */}
+      />
     </>
   );
 }
