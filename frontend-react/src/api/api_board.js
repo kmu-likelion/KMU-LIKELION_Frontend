@@ -45,6 +45,11 @@ export default {
   getLike(url, id) {
     console.log("get like api 실행.");
     return axios.get(`Board/${url}/${id}/like/`, tokenConfig());
+
+  },
+  getUserLikePost(url){
+    console.log("get User Liked Post 실행.");
+    return axios.post(`Board/${url}/user_like/`, null ,tokenConfig());
   },
   //like 상태 변경요청.
   changeLike(url, id) {
