@@ -9,13 +9,14 @@ export default {
   //모든글 불러오기
   getAllGroups() {
     console.log("getAllGroups api 실행.");
-    return axios.get(`accounts/studygroup/`, tokenConfig());
+    return axios.get("accounts/studygroup/", tokenConfig());
   },
   //단일 글 불러오기 및 단일댓글 불러오기?
   getGroup(id) {
     console.log("getGroup api 실행");
     return axios.get(`accounts/studygroup/${id}`, tokenConfig());
   },
+
   getGroupWithName(name) {
     console.log("get Group with name 실행.");
     return axios.get(`accounts/studygroup?group_name=${name}`, tokenConfig());

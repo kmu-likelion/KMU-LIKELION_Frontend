@@ -3,6 +3,7 @@ import { tokenConfig } from "./api_auth";
 axios.defaults.baseURL = "http://127.0.0.1:8000/";
 axios.defaults.xsrfCookieName = "csrftoken";
 axios.defaults.xsrfHeaderName = "X-CSRFToken";
+
 export default {
   /* Board CRUD api */
   //모든글 불러오기
@@ -45,11 +46,10 @@ export default {
   getLike(url, id) {
     console.log("get like api 실행.");
     return axios.get(`Board/${url}/${id}/like/`, tokenConfig());
-
   },
-  getUserLikePost(url){
+  getUserLikePost(url) {
     console.log("get User Liked Post 실행.");
-    return axios.post(`Board/${url}/user_like/`, null ,tokenConfig());
+    return axios.post(`Board/${url}/user_like/`, null, tokenConfig());
   },
   //like 상태 변경요청.
   changeLike(url, id) {

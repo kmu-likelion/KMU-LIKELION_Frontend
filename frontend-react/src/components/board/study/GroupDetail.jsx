@@ -12,6 +12,7 @@ class GroupDetail extends React.Component {
     this.state = {
       group_name: "",
       group_id: "",
+      group_body: "",
       group_info: []
     };
   }
@@ -25,19 +26,26 @@ class GroupDetail extends React.Component {
     this.getGroup();
   }
 
-  async getGroup() {
+  getGroup = async () => {
     let group_name = this.props.match.params.group;
     await api
       .getGroupWithName(group_name)
       .then(res => {
-        console.log("getGroup 메서드 실행.");
         console.log("결과 : ", res);
-        this.setState({ group_info: res.data });
+        this.setState({
+          group_name: res.data[0].name,
+          group_id: res.data[0].id,
+          group_body: res.data[0].introduction
+        });
       })
       .catch(err => {
         console.log(err);
       });
-  }
+  };
+
+  getGroupPost = async () => {
+    await api.getGroupPost;
+  };
 
   groupDelete = async () => {
     await api.deleteGroup(this.state.group_id);
@@ -50,8 +58,8 @@ class GroupDetail extends React.Component {
       <div>
         <Container maxWidth="lg" className="main-container">
           <br />
-          <h3>{this.state.group_info.name}</h3>
-          <h6>{this.state.group_info.introduction}</h6>
+          <h3>{this.state.group_name}</h3>
+          <h6>{this.state.group_body}</h6>
           <Button
             color="secondary"
             size="small"
@@ -70,7 +78,7 @@ class GroupDetail extends React.Component {
                 }
               }}
             >
-              New
+              New Post
             </Link>
           </h6>
         </Container>
