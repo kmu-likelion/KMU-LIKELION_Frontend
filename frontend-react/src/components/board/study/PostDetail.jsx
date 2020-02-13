@@ -44,14 +44,20 @@ class PostDetail extends Component {
   handlingDelete = async id => {
     await api.deletePost("study", id);
     console.log("delete post 성공.");
-    // document.location.href = "/study";
+    document.location.href = `/study/${this.props.match.params.group}`;
+    // this.props.history.push(`/study/${this.props.match.params.group}`);
   };
 
   render() {
+    const post_type = {
+      0: "공식모임",
+      1: "정보공유",
+      2: "기타"
+    };
     return (
       <Container maxWidth="lg" className="post-container">
         <Paper className="PostingSection">
-          <p>{this.state.study_type}</p>
+          <p>[{post_type[this.state.study_type]}]</p>
           <h4>{this.state.title}</h4>
           <p>{this.state.body}</p>
           <br />
@@ -71,6 +77,7 @@ class PostDetail extends Component {
             Update
           </Link>{" "}
           &nbsp;
+          <Link to={`/study/${this.props.match.params.group}`}>List</Link>
           <hr />
         </Paper>
       </Container>

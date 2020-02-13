@@ -1,159 +1,135 @@
 import "date-fns";
-import React, { useState, useContext, useEffect } from "react";
+import React from "react";
 import JoinStore from "./joinStore";
 
-import { makeStyles } from "@material-ui/core/styles";
 import Radio from "@material-ui/core/Radio";
 import RadioGroup from "@material-ui/core/RadioGroup";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
-import FormControl from "@material-ui/core/FormControl";
 import FormLabel from "@material-ui/core/FormLabel";
-
-import Input from "@material-ui/core/Input";
-import InputLabel from "@material-ui/core/InputLabel";
 import Button from "@material-ui/core/Button";
 
+import TextField from "@material-ui/core/TextField";
 import DateFnsUtils from "@date-io/date-fns";
 import {
   MuiPickersUtilsProvider,
   KeyboardDatePicker
 } from "@material-ui/pickers";
 
-const useStyles = makeStyles(theme => ({
-  formControl: {
-    margin: theme.spacing(2)
-  }
-}));
-
-export default function RadioButtonsGroup(props) {
-  const [name, setName] = useState("");
-  const [phoneNum, setPhoneNum] = useState("");
-  const [major, setMajor] = useState("");
-  const [studentId, setStudentId] = useState("");
-  const [birth, setBirth] = useState(new Date());
-  const [sex, setSex] = useState("female");
-  const [email, setEmail] = useState("");
-  const [pw, setPw] = useState("");
-
-  useEffect(() => {
-    handlingContext();
-  });
-
-  const classes = useStyles();
-  const appli_info = useContext(JoinStore);
-
-  const handlingContext = async () => {
-    await saveContent();
+class JoinFormBasic extends React.Component {
+  static contextType = JoinStore;
+  state = {
+    name: "",
+    phoneNum: "",
+    major: "",
+    studentId: "",
+    birth: new Date(),
+    sex: "female",
+    email: "",
+    password: ""
   };
 
-  const saveContent = () => {
-    // let infos = [];
-    // let info = {
-    //   name: name,
-    //   phoneNum: phoneNum,
-    //   major: major,
-    //   studentId: studentId,
-    //   birth: birth,
-    //   sex: sex,
-    //   email: email
-    // };
-    // infos.push(info);
-
-    appli_info.name = name;
-    appli_info.phoneNum = phoneNum;
-    appli_info.major = major;
-    appli_info.studentId = studentId;
-    appli_info.birth = birth;
-    appli_info.sex = sex;
-    appli_info.email = email;
-    appli_info.pw = pw;
+  handlingContext = async event => {
+    event.preventDefault();
+    await this.saveContent();
   };
 
-  return (
-    <div>
-      <InputLabel className={classes.formControl}>
-        <h2>Join Form</h2>
-        <hr />
-      </InputLabel>
-      <form onSubmit={props.setFlag} className="PostingForm">
-        <FormControl className={classes.formControl}>
-          <InputLabel>Name</InputLabel>
-          <Input
-            id="component-simple"
-            value={name}
-            onChange={e => setName(e.target.value)}
+  handlingChange = event => {
+    this.setState({ [event.target.name]: event.target.value });
+  };
+
+  saveContent = () => {
+    //contextAPI 전역상태에 form데이터를 저장.
+    this.context.name = this.state.name;
+    this.context.phoneNum = this.state.phoneNum;
+    this.context.major = this.state.major;
+    this.context.studentId = this.state.studentId;
+    this.context.birth = this.state.birth;
+    this.context.sex = this.state.sex;
+    this.context.email = this.state.email;
+    this.context.pw = this.state.password;
+  };
+
+  render() {
+    return (
+      <>
+        <form
+          onSubmit={event => {
+            this.props.setFlag();
+            this.handlingContext(event);
+          }}
+          className="PostingForm"
+        >
+          <h2>Join Form</h2>
+          <TextField
+            label="Name"
+            name="name"
+            value={this.state.name}
+            onChange={this.handlingChange}
+            margin="normal"
             required
           />
-        </FormControl>
-        <br />
-        <FormControl className={classes.formControl}>
-          <InputLabel>Phone Number</InputLabel>
-          <Input
-            id="component-simple"
-            value={phoneNum}
-            onChange={e => setPhoneNum(e.target.value)}
-            required
-          />
-        </FormControl>
-        <br />
-        <FormControl className={classes.formControl}>
-          <InputLabel>Major</InputLabel>
-          <Input
-            id="component-simple"
-            value={major}
-            onChange={e => setMajor(e.target.value)}
-            required
-          />
-        </FormControl>
-        <br />
-        <FormControl className={classes.formControl}>
-          <InputLabel>Student ID</InputLabel>
-          <Input
-            id="component-simple"
-            value={studentId}
-            onChange={e => setStudentId(e.target.value)}
-            required
-          />
-        </FormControl>
-        <br />
-        <FormControl className={classes.formControl}>
-          <InputLabel>E-Mail</InputLabel>
-          <Input
-            type="email"
-            id="component-simple"
-            value={email}
-            onChange={e => setEmail(e.target.value)}
-            required
-          />
-        </FormControl>
-        <br />
-        <FormControl className={classes.formControl}>
-          <InputLabel>Birth Date</InputLabel>
           <br />
+          <TextField
+            label="Phone Number"
+            name="phoneNum"
+            value={this.state.phoneNum}
+            onChange={this.handlingChange}
+            margin="normal"
+            required
+          />
+          <br />
+          <TextField
+            label="Major"
+            name="major"
+            value={this.state.major}
+            onChange={this.handlingChange}
+            margin="normal"
+            required
+          />
+          <br />
+          <TextField
+            label="Student ID"
+            name="studentId"
+            value={this.state.studentId}
+            onChange={this.handlingChange}
+            margin="normal"
+            required
+          />
+          <br />
+          <TextField
+            label="E-Mail"
+            name="email"
+            type="email"
+            value={this.state.email}
+            onChange={this.handlingChange}
+            margin="normal"
+            required
+          />
+
+          <br />
+
           <MuiPickersUtilsProvider utils={DateFnsUtils}>
             <KeyboardDatePicker
+              label="birth Date"
               margin="normal"
-              // id="date-picker-dialog"
-              // label="Date picker dialog"
-              format="MM/dd/yyyy"
-              value={birth}
-              onChange={e => setBirth(e)}
+              format="yyyy/MM/dd"
+              name="birth"
+              value={this.state.birth}
+              onChange={event => this.setState({ birth: event })}
               KeyboardButtonProps={{
                 "aria-label": "change date"
               }}
             />
           </MuiPickersUtilsProvider>
-        </FormControl>
+          <br />
+          <br />
 
-        <br />
-
-        <FormControl component="fieldset" className={classes.formControl}>
           <FormLabel component="legend">Gender</FormLabel>
           <RadioGroup
-            aria-label="gender"
-            name="gender"
-            value={sex}
-            onChange={e => setSex(e.target.value)}
+            aria-label="sex"
+            name="sex"
+            value={this.state.sex}
+            onChange={this.handlingChange}
           >
             <FormControlLabel
               value="female"
@@ -171,33 +147,33 @@ export default function RadioButtonsGroup(props) {
               label="Other"
             />
           </RadioGroup>
-        </FormControl>
-        <br />
-        <FormControl className={classes.formControl}>
-          <small>*지원내역 열람/수정을 위한 임시 비밀번호입니다.*</small>
-          <InputLabel>Password</InputLabel>
-          <Input
-            id="component-simple"
-            value={pw}
-            onChange={e => setPw(e.target.value)}
+
+          <TextField
+            label="Password"
+            name="password"
+            value={this.state.password}
+            onChange={this.handlingChange}
+            margin="normal"
             required
           />
-        </FormControl>
+          <br />
+          <small>*지원내역 열람/수정을 위한 임시 비밀번호입니다.*</small>
+          <br />
+          <br />
+          <Button
+            variant="contained"
+            color="primary"
+            // onClick={props.setFlag}
+            type="submit"
+          >
+            Next
+          </Button>
+        </form>
+
         <br />
-        <Button
-          variant="contained"
-          color="primary"
-          // onClick={props.setFlag}
-          type="submit"
-          className={classes.formControl}
-        >
-          Next
-        </Button>
-      </form>
-
-      <br />
-
-      <hr />
-    </div>
-  );
+      </>
+    );
+  }
 }
+
+export default JoinFormBasic;

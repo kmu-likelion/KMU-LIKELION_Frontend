@@ -16,6 +16,9 @@
 .post-container {
   padding-bottom: 1rem;
 }
+.PostingForm {
+  padding: 1rem;
+}
 
 .footer {
   border-top: solid;

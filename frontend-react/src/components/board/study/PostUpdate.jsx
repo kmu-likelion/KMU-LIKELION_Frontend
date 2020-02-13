@@ -57,7 +57,10 @@ class PostUpdate extends Component {
 
     this.setState({ title: "", content: "" });
     // this.getPosts()
-    document.location.href = "/study";
+    // document.location.href = "/study";
+    this.props.history.push(
+      `/study/${this.props.match.params.group}/detail/${this.state.id}`
+    );
   };
 
   render() {

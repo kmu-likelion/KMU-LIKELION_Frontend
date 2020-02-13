@@ -13,17 +13,13 @@ class GroupDetail extends React.Component {
       group_name: "",
       group_id: "",
       group_body: "",
-      group_info: []
+      posts: []
     };
   }
 
   componentDidMount() {
-    // console.log("파라미터:", this.props.match.params.group);
-    // await this.setState({
-    //   group_name: this.props.match.params.group,
-    //   group_id: this.props.location.state.group_id
-    // });
     this.getGroup();
+    this.getGroupPost();
   }
 
   getGroup = async () => {
@@ -44,7 +40,15 @@ class GroupDetail extends React.Component {
   };
 
   getGroupPost = async () => {
-    await api.getGroupPost;
+    await api
+      .getPostWithGroupId(this.state.group_id)
+      .then(res => {
+        console.log("그룹의 posts 가져오기 성공.", res.data);
+        this.setState({
+          posts: res.data.results
+        });
+      })
+      .catch(err => console.log(err));
   };
 
   groupDelete = async () => {
@@ -68,19 +72,28 @@ class GroupDetail extends React.Component {
             Group Delete
           </Button>
           <hr />
-          <h6>
-            <Link
-              to={{
-                pathname: `/study/${this.state.group_name}/new`,
-                state: {
-                  group_name: this.state.group_name,
-                  group_id: this.state.group_id
-                }
-              }}
-            >
-              New Post
-            </Link>
-          </h6>
+          <Link
+            to={{
+              pathname: `/study/${this.state.group_name}/new`,
+              state: {
+                group_name: this.state.group_name,
+                group_id: this.state.group_id
+              }
+            }}
+          >
+            New Post
+          </Link>
+          {this.state.posts.map(post => (
+            <PostView
+              post_id={post.id}
+              author_id={post.user_id}
+              author_name={post.author_name}
+              title={post.title}
+              body={post.body}
+              study_type={post.study_type}
+              group_name={this.state.group_name}
+            />
+          ))}
         </Container>
       </div>
     );
