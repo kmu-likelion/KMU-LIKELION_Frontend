@@ -3,6 +3,7 @@ import React from "react";
 import { Calendar, momentLocalizer } from "react-big-calendar";
 import moment from "moment";
 import "react-big-calendar/lib/css/react-big-calendar.css";
+import api from "../../api/api_calendar.js";
 
 const localizer = momentLocalizer(moment);
 
@@ -24,7 +25,40 @@ class ClubCalendar extends React.Component {
         }
       ]
     });
+    this.getAllEvent();
   }
+
+  addEvent = (id, title, start, end, body, notice_id) => {
+    var list = this.state.eventList;
+    list.push({
+      id: id,
+      title: title,
+      body: body,
+      allDay: true,
+      start: start,
+      end: end,
+      notice_id: notice_id
+    });
+    this.setState({
+      eventList: list
+    });
+  };
+
+  getAllEvent = async () => {
+    await api.getAllCalendar().then(res => {
+      console.log("가져오기 성공!", res);
+      res.data.map(event => {
+        this.addEvent(
+          event.id,
+          event.title,
+          event.start_date,
+          event.end_date,
+          event.contents,
+          event.notice_id
+        );
+      });
+    });
+  };
 
   render() {
     return (
@@ -38,7 +72,6 @@ class ClubCalendar extends React.Component {
           views={["month"]}
           onSelectEvent={(event, e) => {
             alert(event.body);
-            // console.log("event:", event.body, " === ", e);
           }}
         />
       </div>

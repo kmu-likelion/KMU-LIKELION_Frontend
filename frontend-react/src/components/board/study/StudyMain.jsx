@@ -44,6 +44,7 @@ class StudyMain extends React.Component {
                   id={group.id}
                   name={group.name}
                   introduction={group.introduction}
+                  img={group.img}
                 />
               </Grid>
             ))}

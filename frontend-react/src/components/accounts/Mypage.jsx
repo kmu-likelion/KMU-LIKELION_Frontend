@@ -12,6 +12,7 @@ import Button from "@material-ui/core/Button";
 class Mypage extends Component {
   state = {
     id: "",
+    img: "",
     username: "",
     password: "",
     major: "",
@@ -43,6 +44,7 @@ class Mypage extends Component {
         console.log(userData);
         this.setState({
           id: userData.id,
+          img: userData.img,
           username: userData.username,
           major: userData.major,
           student_id: userData.student_id,
@@ -72,13 +74,10 @@ class Mypage extends Component {
                 <Paper elevation={10} className="PostingPaper">
                   Mypage <br />
                   <br />
+                  <img src={this.state.img} alt="" />
                   ID {this.state.id} <br />
                   Username {this.state.username} <br />
                   Email {this.state.email} <br />
-                  학과 {this.state.major} <br />
-                  멋쟁이사자 {this.state.start_num} <br />
-                  학번 {this.state.student_id} <br />
-                  SNS {this.state.sns_id} <br />
                   <form
                     onSubmit={event => this.handlingSubmit1(event)}
                     className="commentForm"

@@ -7,11 +7,12 @@ import Typography from "@material-ui/core/Typography";
 
 export default class GroupView extends Component {
   render() {
-    const { name, introduction } = this.props;
+    const { name, introduction, img } = this.props;
     return (
       <Card className={"card"}>
         <CardContent>
           <Typography>
+            <img src={img} alt="" />
             <Link to={`/study/${name}`}>{name}</Link>
             <hr />
             {introduction}

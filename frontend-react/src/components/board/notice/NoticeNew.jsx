@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import api from "../../../api/api_board";
+import api_cal from "../../../api/api_calendar";
 import { Link } from "react-router-dom";
 // import { Router } from "react-router";
 
@@ -53,35 +54,39 @@ class NoticeNew extends Component {
   handlingSubmit = async event => {
     event.preventDefault();
 
-    if (!this.state.mark_calendar) {
-      //달력미표기 시 공지일정은 기록되지 않음.
-      await api
-        .createPost("notice", {
-          title: this.state.title,
-          body: this.state.body,
-          user_id: this.state.id,
-          notice_date: ""
-        })
-        .then(res => {
-          console.log("정상처리(달력 미표기)", res);
-        })
-        .catch(err => console.log(err));
-    } else {
-      //달력표기 시 공지일정이 기록됨.
-      await api
-        .createPost("notice", {
-          title: this.state.title,
-          body: this.state.body,
-          user_id: this.state.id,
-          notice_date: moment(this.state.notice_date).format("YYYY-MM-DD")
-        })
-        .then(res => {
-          console.log("정상처리(달력표기)", res);
-        })
-        .catch(err => console.log(err));
-    }
+    await api
+      .createPost("notice", {
+        title: this.state.title,
+        body: this.state.body,
+        user_id: this.state.id,
+        notice_date: moment(this.state.notice_date).format("YYYY-MM-DD"),
+        is_valid_date: this.state.mark_calendar //캘린더표기 여부에 따라 notice_date는 유효한값인지 판단 가능.
+      })
+      .then(res => {
+        console.log("정상처리 : ", res);
+        this.createCalendarEvent(res.data.id);
+      })
+      .catch(err => console.log(err));
 
     this.props.history.push("/notice");
+  };
+
+  createCalendarEvent = async notice_id => {
+    await api_cal
+      .createCalendar({
+        title: this.state.mark_name,
+        start_date: moment(this.state.notice_date).format("YYYY-MM-DD"),
+        end_date: moment(this.state.notice_date).format("YYYY-MM-DD"),
+        contents: this.state.body,
+        plan_type: 0,
+        notice_id: notice_id
+      })
+      .then(res => {
+        console.log("캘린더이벤트 생성완료 : ", res.data);
+      })
+      .catch(err => {
+        console.log(err);
+      });
   };
 
   render() {

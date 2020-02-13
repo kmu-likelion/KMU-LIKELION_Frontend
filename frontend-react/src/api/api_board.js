@@ -9,51 +9,51 @@ export default {
   //모든글 불러오기
   getAllPosts(url) {
     console.log("getAllPosts 실행.");
-    return axios.get(`Board/${url}/`, tokenConfig());
+    return axios.get(`board/${url}/`, tokenConfig());
   },
   //단일 글 불러오기 및 단일댓글 불러오기?
   getPost(url, id) {
     console.log("getPost 실행");
-    return axios.get(`Board/${url}/` + String(id), tokenConfig());
+    return axios.get(`board/${url}/` + String(id), tokenConfig());
   },
 
   //글 생성
   createPost(url, data) {
     console.log("createPost 실행.");
     console.log(data);
-    return axios.post(`Board/${url}/`, data, tokenConfig());
+    return axios.post(`board/${url}/`, data, tokenConfig());
   },
 
   //글 수정
   updatePost(url, id, data) {
     console.log("updatePost 실행.");
-    return axios.put(`Board/${url}/` + String(id) + "/", data, tokenConfig());
+    return axios.put(`board/${url}/` + String(id) + "/", data, tokenConfig());
   },
 
   //글 삭제
   deletePost(url, id) {
     console.log("deletePost 실행.");
-    return axios.delete(`Board/${url}/` + String(id), tokenConfig());
+    return axios.delete(`board/${url}/` + String(id), tokenConfig());
   },
 
   //댓글 불러오기
   getComments(url, id) {
     console.log("getComments 실행.");
-    return axios.get(`Board/${url}/?id=` + String(id), tokenConfig());
+    return axios.get(`board/${url}/?id=` + String(id), tokenConfig());
   },
 
   //현재 like 상태 get
   getLike(url, id) {
     console.log("get like api 실행.");
-    return axios.get(`Board/${url}/${id}/like/`, tokenConfig());
+    return axios.get(`board/${url}/${id}/like/`, tokenConfig());
   },
   getUserLikePost(url) {
     console.log("get User Liked Post 실행.");
-    return axios.post(`Board/${url}/user_like/`, null, tokenConfig());
+    return axios.post(`board/${url}/user_like/`, null, tokenConfig());
   },
   //like 상태 변경요청.
   changeLike(url, id) {
     console.log("change like status api 실행.");
-    return axios.post(`Board/${url}/${id}/like/`, null, tokenConfig());
+    return axios.post(`board/${url}/${id}/like/`, null, tokenConfig());
   }
 };
