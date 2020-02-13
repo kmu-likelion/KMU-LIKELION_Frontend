@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from "react";
+import React from "react";
 import JoinStore from "./joinStore";
 import api from "../../api/api_admission";
 

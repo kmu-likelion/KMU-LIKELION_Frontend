@@ -9,6 +9,10 @@
   font-family: "Eoe_Zno_L";
 }
 
+.main-calendar {
+  border-radius: 3%;
+}
+
 .main-container {
   padding-top: 1rem;
   padding-bottom: 1rem;
@@ -18,6 +22,12 @@
 }
 .PostingForm {
   padding: 1rem;
+  margin: 1rem;
+  text-align: center;
+}
+.join-table-section {
+  padding-left: 1rem;
+  padding-right: 1rem;
 }
 
 .footer {
