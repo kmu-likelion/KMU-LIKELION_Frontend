@@ -21,7 +21,7 @@ class NoticeDetail extends Component {
     body: "",
     writer: "",
     pub_date: "",
-    run_date: "",
+    notice_date: "",
     comments: []
   };
   //...
@@ -61,7 +61,8 @@ class NoticeDetail extends Component {
           id: data.id,
           writer: data.writer,
           pub_date: moment(data.pub_date).format("YYYY-MM-DD hh:mm"),
-          run_date: moment(data.run_date).format("YYYY-MM-DD")
+          // notice_date: moment(data.notice_date).format("YYYY-MM-DD")
+          notice_date: moment(data.notice_date).format("YYYY-MM-DD")
         });
       })
       .catch(err => console.log(err));
@@ -84,11 +85,11 @@ class NoticeDetail extends Component {
         <Card className={"card"}>
           <CardContent>
             <Typography>
-              Title : {this.state.title} <br />
-              body : {this.state.body} <br />
-              시각 : {this.state.run_date}
+              제목 : {this.state.title} <br />
+              내용 : {this.state.body} <br />
+              일자 : {this.state.notice_date}
               <br />
-              작성일 : {this.state.pub_date} <br />
+              <small>pub date : {this.state.pub_date}</small> <br />
             </Typography>
           </CardContent>
 

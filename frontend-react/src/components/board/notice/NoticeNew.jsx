@@ -6,7 +6,17 @@ import { Link } from "react-router-dom";
 // material-ui
 import Container from "@material-ui/core/Container";
 import Paper from "@material-ui/core/Paper";
-// import moment from 'moment';
+import moment from "moment";
+import TextField from "@material-ui/core/TextField";
+import TextareaAutosize from "@material-ui/core/TextareaAutosize";
+import Button from "@material-ui/core/Button";
+import FormControlLabel from "@material-ui/core/FormControlLabel";
+import Checkbox from "@material-ui/core/Checkbox";
+import DateFnsUtils from "@date-io/date-fns";
+import {
+  MuiPickersUtilsProvider,
+  KeyboardDatePicker
+} from "@material-ui/pickers";
 
 class NoticeNew extends Component {
   state = {
@@ -14,7 +24,9 @@ class NoticeNew extends Component {
     username: "",
     title: "",
     body: "",
-    run_date: ""
+    notice_date: new Date(),
+    mark_calendar: false,
+    mark_name: ""
   };
 
   componentDidMount() {
@@ -23,9 +35,9 @@ class NoticeNew extends Component {
     const _user = window.sessionStorage.getItem("username");
     if (_id) {
       this.setState({ id: _id, username: _user });
-      console.log("접근모드 : 로그인 상태");
+      // console.log("접근모드 : 로그인 상태");
     } else {
-      console.log("접근모드 : 로그아웃 상태");
+      // console.log("접근모드 : 로그아웃 상태");
     }
   }
 
@@ -34,67 +46,112 @@ class NoticeNew extends Component {
     console.log(event.target.value);
   };
 
-  handlingSubmit = async event => {
-    event.preventDefault(); //event의 디폴트 기능(새로고침 되는 것 등..)
-    // var rDate = moment(this.state.run_date).format();
-    // rDate = moment(rDate).add(1,'d');
-    console.log("user-id: ", this.state.id);
-    // var user_id = parseInt(this.state.id);
+  handleCheck = event => {
+    this.setState({ [event.target.name]: event.target.checked });
+  };
 
-    let result = await api
-      .createPost("notice", {
-        title: this.state.title,
-        body: this.state.body,
-        notice_date: this.state.run_date,
-        user_id: this.state.id
-      })
-      .catch(err => console.log(err));
-    console.log("정상적으로 생성됨.", result);
-    this.setState({
-      title: "",
-      content: "",
-      run_date: ""
-    });
-    // this.getPosts()
-    // document.location.href = "/notice";
-    this.props.history.push("/notice"); //새로고침되지 않고, 리다이렉트해줌.
+  handlingSubmit = async event => {
+    event.preventDefault();
+
+    if (!this.state.mark_calendar) {
+      //달력미표기 시 공지일정은 기록되지 않음.
+      await api
+        .createPost("notice", {
+          title: this.state.title,
+          body: this.state.body,
+          user_id: this.state.id,
+          notice_date: ""
+        })
+        .then(res => {
+          console.log("정상처리(달력 미표기)", res);
+        })
+        .catch(err => console.log(err));
+    } else {
+      //달력표기 시 공지일정이 기록됨.
+      await api
+        .createPost("notice", {
+          title: this.state.title,
+          body: this.state.body,
+          user_id: this.state.id,
+          notice_date: moment(this.state.notice_date).format("YYYY-MM-DD")
+        })
+        .then(res => {
+          console.log("정상처리(달력표기)", res);
+        })
+        .catch(err => console.log(err));
+    }
+
+    this.props.history.push("/notice");
   };
 
   render() {
     return (
-      <Container maxWidth="lg" className="PostingSection">
-        <Paper className="PostingPaper">
-          <h2>New Notice</h2>
-          <form onSubmit={this.handlingSubmit} className="PostingForm">
-            <input
-              id="title"
+      <Container maxWidth="lg">
+        <Paper className="PostingSection">
+          <h2>공지글 작성</h2>
+          <form onSubmit={this.handlingSubmit}>
+            <TextField
+              label="Title"
               name="title"
               value={this.state.title}
               onChange={this.handlingChange}
-              required="required"
-              placeholder="Title"
+              margin="normal"
+              required
             />
             <br />
-            <input
-              id="body"
+            <TextareaAutosize
+              label="Body"
               name="body"
+              rowsMin={3}
+              rowsMax={7}
+              placeholder="Contents"
               value={this.state.body}
               onChange={this.handlingChange}
-              required="required"
-              placeholder="Content"
+              margin="normal"
+              required
+            />
+            <hr />
+            <FormControlLabel
+              control={
+                <Checkbox
+                  checked={this.state.mark_calendar}
+                  onChange={this.handleCheck}
+                  name="mark_calendar"
+                  color="primary"
+                />
+              }
+              label="달력표시 여부"
             />
             <br />
-            <input
-              type="date"
-              name="run_date"
-              value={this.state.run_date}
+            <TextField
+              label="Mark Name"
+              name="mark_name"
+              value={this.state.mark_name}
               onChange={this.handlingChange}
-              required="required"
-              placeholder="Run Date"
+              // required
+              disabled={!this.state.mark_calendar}
+              required={this.state.mark_calendar}
             />
             <br />
+            <small>*달력에 표시될 이벤트명</small>
             <br />
-            <button type="submit">제출</button>
+            <MuiPickersUtilsProvider utils={DateFnsUtils}>
+              <KeyboardDatePicker
+                label="Mark Date"
+                margin="normal"
+                format="yyyy/MM/dd"
+                name="notice_date"
+                value={this.state.notice_date}
+                onChange={event => this.setState({ notice_date: event })}
+                KeyboardButtonProps={{
+                  "aria-label": "change date"
+                }}
+                disabled={!this.state.mark_calendar}
+                required={this.state.mark_calendar}
+              />
+            </MuiPickersUtilsProvider>
+            <br />
+            <Button type="submit">제출</Button>
           </form>
 
           <Link to="/notice">Cancle</Link>

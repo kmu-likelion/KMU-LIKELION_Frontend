@@ -8,8 +8,8 @@ import Typography from "@material-ui/core/Typography";
 
 export default class PostView extends Component {
   render() {
-    const { id, title, body, runDate } = this.props;
-    const run_date = moment(runDate).format("YYYY-MM-DD");
+    const { id, title, body, noticeDate } = this.props;
+    const date = moment(noticeDate).format("YYYY-MM-DD");
     return (
       <Card className={"card"}>
         <CardContent>
@@ -18,7 +18,7 @@ export default class PostView extends Component {
               <Link to={`/notice/detail/${id}`}>{title}</Link>
             </h4>
             <p>{body}</p>
-            <small>Run-Date : {run_date}</small>
+            <small>Notice-Date : {date}</small>
           </Typography>
         </CardContent>
       </Card>

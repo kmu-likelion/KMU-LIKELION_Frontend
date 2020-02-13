@@ -41,7 +41,7 @@ class NoticeList extends React.Component {
               id={post.id}
               title={post.title}
               body={post.body}
-              runDate={post.run_date}
+              noticeDate={post.notice_date}
             />
           ))}
         </Container>
