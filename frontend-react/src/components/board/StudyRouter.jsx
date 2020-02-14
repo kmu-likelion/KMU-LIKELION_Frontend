@@ -1,38 +1,35 @@
 import React from "react";
 import { Route } from "react-router-dom";
 
-import StudyNew from "./study/StudyNew";
-import StudyList from "./study/StudyList";
-import StudyDetail from "./study/StudyDetail";
-import StudyUpdate from "./study/StudyUpdate";
-
-import GroupNew from "./studyGroup/GroupNew";
-import GroupList from "./studyGroup/GroupList";
-// import StudyDetail from "./study/StudyDetail";
-// import StudyUpdate from "./study/StudyUpdate";
+import StudyMain from "./study/StudyMain";
+import GroupDetail from "./study/GroupDetail";
+import GroupNew from "./study/GroupNew";
+import PostNew from "./study/PostNew";
+import PostDetail from "./study/PostDetail";
+import PostUpdate from "./study/PostUpdate";
 
 function StudyRouter({ match }) {
   return (
     <>
-      <Route exact path={match.path} component={GroupList} />
-      <Route exact path={`${match.path}/new`} component={GroupNew} />
+      <Route exact path={match.path} component={StudyMain} />
+      <Route exact path={`${match.path}/group/new`} component={GroupNew} />
       {/* <Route path={`${match.path}/detail/:id`} component={StudyList} id="number"/> */}
-      
+
       {/* <Route
         path={`${match.path}/update/:id`}
         component={GroupUpdate}
         id="number"
       /> */}
-      <Route exact path={`${match.path}/group/:group`} component={StudyList}/>
-      <Route path={`${match.path}/group/:group/new`} component={StudyNew} />
+      <Route exact path={`${match.path}/:group`} component={GroupDetail} />
+      <Route path={`${match.path}/:group/post/new`} component={PostNew} />
       <Route
         path={`${match.path}/:group/detail/:id`}
-        component={StudyDetail}
+        component={PostDetail}
         id="number"
       />
       <Route
-        path={`${match.path}/group/:group/update/:id`}
-        component={StudyUpdate}
+        path={`${match.path}/:group/update/:id`}
+        component={PostUpdate}
         id="number"
       />
     </>

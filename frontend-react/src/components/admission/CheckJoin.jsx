@@ -3,26 +3,23 @@ import React, { Component } from "react";
 import Container from "@material-ui/core/Container";
 import Paper from "@material-ui/core/Paper";
 import api from "../../api/api_admission";
+import CheckJoinView from "./CheckJoinView";
 
 // import FormControl from "@material-ui/core/FormControl";
-import Input from "@material-ui/core/Input";
-import InputLabel from "@material-ui/core/InputLabel";
+import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
+// import Input from "@material-ui/core/Input";
+// import InputLabel from "@material-ui/core/InputLabel";
 
 class CheckJoin extends Component {
   state = {
-    // joinform_id: "",
-    // name: "",
-    // phoneNum: "",
-    // major: "",
-    // studentId: "",
-    // birth: "",
-    // sex: "",
-    joinform: {},
+    join_info: {},
     answers: [],
     email: "",
     password: "",
-    is_accessed: false
+    is_accessed: false,
+    ACCESS_DENIED: false,
+    ERROR_MSG: ""
   };
 
   componentDidMount() {
@@ -35,7 +32,8 @@ class CheckJoin extends Component {
 
   accessJoin = async event => {
     event.preventDefault();
-    console.log("서브밋!");
+    console.log("Submit.");
+
     await api
       .getJoinInfo({
         email: this.state.email,
@@ -45,74 +43,94 @@ class CheckJoin extends Component {
         console.log(res);
         console.log("joinform : ", res.data.join_forms);
         console.log("answers : ", res.data.answers);
+
         this.setState({
           is_accessed: true,
           answers: res.data.answers,
-          joinform: res.data.join_forms
+          join_info: res.data.join_forms
         });
-        console.log(this.state.joinform);
+        console.log(this.state.join_info);
+      })
+      .catch(err => {
+        console.log(err);
+        // this.setState({
+        //   ACCESS_DENIED: true,
+        //   ERROR_MSG: "해당하는 입부내역이 존재하지 않습니다!"
+        // });
+        // alert(this.state.ERROR_MSG);
       });
   };
 
   render() {
-    return (
-      <Container maxWidth="lg" className="PostingSection">
-        <Paper className="PostingPaper">나의 지원내역</Paper>
-        <br />
-        {this.state.is_accessed ? (
-          <>
-            <h4>지원 상태 : {this.state.joinform.status}</h4>
-            지원번호 : {this.state.joinform.id} <br />
-            이름 : {this.state.joinform.name} <br />
-            전화번호 : {this.state.joinform.phone_number} <br />
-            학번 : {this.state.joinform.student_id} <br />
-            학과 : {this.state.joinform.major} <br />
-            성별 : {this.state.joinform.sex} <br />
-            생일 :{this.state.joinform.birth} <br />
-            <hr />
-            {this.state.answers.map(ans => {
-              return (
-                <>
-                  {ans.question_id}번 문항: <br />
-                  {ans.body}
-                  <br />
-                </>
-              );
-            })}
-          </>
-        ) : (
-          <form onSubmit={this.accessJoin}>
-            <InputLabel>Email</InputLabel>
-            <Input
-              type="email"
-              name="email"
-              value={this.state.email}
-              onChange={this.handlingChange}
-              required
-            />
-
-            <InputLabel>Password</InputLabel>
-            <Input
-              name="password"
-              type="password"
-              value={this.state.password}
-              onChange={this.handlingChange}
-              required
-            />
-            <br />
-            <br />
-            <Button
-              variant="contained"
-              color="primary"
-              // onClick={props.setFlag}
-              type="submit"
-            >
-              confirm
-            </Button>
-          </form>
-        )}
-      </Container>
-    );
+    if (this.state.is_accessed && this.state.ACCESS_DENIED === false) {
+      return (
+        <CheckJoinView
+          join_info={this.state.join_info}
+          answers={this.state.answers}
+        />
+      );
+    } else {
+      return (
+        <Container maxWidth="lg" className="PostingSection">
+          <Paper className="PostingForm">
+            <form onSubmit={this.accessJoin}>
+              <TextField
+                label="E-Mail"
+                autoFocus
+                // error={this.state.email === "" ? true : false}
+                // helperText="This is Helper Text"
+                name="email"
+                type="email"
+                value={this.state.email}
+                onChange={this.handlingChange}
+                margin="normal"
+                placeholder="E-Mail"
+                // variant="outlined"
+                required
+              />
+              <br />
+              <TextField
+                label="Password"
+                autoFocus
+                // error={this.state.password === "" ? true : false}
+                // helperText=""
+                name="password"
+                type="password"
+                value={this.state.password}
+                onChange={this.handlingChange}
+                margin="normal"
+                // placeholder="Password"
+                required
+              />
+              {/* <InputLabel htmlFor="standard-adornment-password">
+                Password
+              </InputLabel>
+              <Input
+                type={values.showPassword ? "text" : "password"}
+                value={this.state.password}
+                onChange={this.handleChange}
+                endAdornment={
+                  <InputAdornment position="end">
+                    <IconButton
+                      aria-label="toggle password visibility"
+                      onClick={handleClickShowPassword}
+                      onMouseDown={handleMouseDownPassword}
+                    >
+                      {values.showPassword ? <Visibility /> : <VisibilityOff />}
+                    </IconButton>
+                  </InputAdornment>
+                }
+              /> */}
+              <br />
+              <br />
+              <Button variant="contained" color="primary" type="submit">
+                confirm
+              </Button>
+            </form>
+          </Paper>
+        </Container>
+      );
+    }
   }
 }
 

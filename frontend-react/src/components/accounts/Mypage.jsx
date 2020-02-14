@@ -3,19 +3,19 @@ import { getUser } from "../../api/api_auth";
 import Grid from "@material-ui/core/Grid";
 import Container from "@material-ui/core/Container";
 import Paper from "@material-ui/core/Paper";
-import api from "../../api/api_board";
-import VirtualizedList from "./likedPostView";
-import { Link } from "react-router-dom";
+// import api from "../../api/api_board";
+// import VirtualizedList from "./likedPostView";
+// import { Link } from "react-router-dom";
 import MyLike from "./MyLike";
 import Button from "@material-ui/core/Button";
 import TextField from '@material-ui/core/TextField';
 import LeftProfileView from "./LeftProfileView";
 import MyProfile from "./MyProfile";
 
-
 class Mypage extends Component {
   state = {
     id: "",
+    img: "",
     username: "",
     password: "",
     major: "",
@@ -24,8 +24,7 @@ class Mypage extends Component {
     sns_id: "",
     email: "",
     token: "",
-    type:"Myprofile"
-    
+    type: "Myprofile"
   };
 
   componentDidMount() {
@@ -41,9 +40,6 @@ class Mypage extends Component {
     // this.getLikePosts("recruit");
   }
 
-
-  
-
   async getUser(userId) {
     await getUser(userId)
       .then(res => {
@@ -51,6 +47,7 @@ class Mypage extends Component {
         console.log(userData);
         this.setState({
           id: userData.id,
+          img: userData.img,
           username: userData.username,
           major: userData.major,
           student_id: userData.student_id,
@@ -63,16 +60,14 @@ class Mypage extends Component {
   }
   handlingSubmit1 = async event => {
     event.preventDefault(); //event의 디폴트 기능(새로고침 되는 것 등..) -> 막는다.
-    this.setState({type:"Myprofile" });
+    this.setState({ type: "Myprofile" });
   };
   handlingSubmit = async event => {
     event.preventDefault(); //event의 디폴트 기능(새로고침 되는 것 등..) -> 막는다.
-    this.setState({type:"MyLike" });
+    this.setState({ type: "MyLike" });
   };
-  
 
   render() {
-
       switch(this.state.type) {
           case 'Myprofile':
               return (
@@ -124,7 +119,6 @@ class Mypage extends Component {
           default:
               return null;
       }
-    
   }
 }
 

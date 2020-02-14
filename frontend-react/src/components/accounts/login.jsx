@@ -24,7 +24,7 @@ class Login extends Component {
   };
 
   handlingSubmit = async event => {
-    event.preventDefault(); //event의 디폴트 기능(새로고침 되는 것 등..) -> 막는다.
+    event.preventDefault();
 
     await authlogin({
       username: this.state.username,

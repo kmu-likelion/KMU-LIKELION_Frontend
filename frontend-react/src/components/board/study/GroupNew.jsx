@@ -48,6 +48,9 @@ class GroupNew extends Component {
             user_id: this.state.user_id,
             group_id: this.state.group_id
           })
+          .then(res => {
+            console.log("group_user 추가 성공! ", res.data);
+          })
           .catch(err => console.log(err));
       })
       .catch(err => console.log(err));

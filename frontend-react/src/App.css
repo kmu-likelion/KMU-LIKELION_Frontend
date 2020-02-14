@@ -9,9 +9,25 @@
   font-family: "Eoe_Zno_L";
 }
 
+.main-calendar {
+  border-radius: 3%;
+}
+
 .main-container {
-  padding-top: 2rem;
-  padding-bottom: 2rem;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+.post-container {
+  padding-bottom: 1rem;
+}
+.PostingForm {
+  padding: 1rem;
+  margin: 1rem;
+  text-align: center;
+}
+.join-table-section {
+  padding-left: 1rem;
+  padding-right: 1rem;
 }
 
 .footer {
@@ -90,8 +106,8 @@ a:hover, a:active {text-decoration: none; color:#fff; background-color:#f59000;}
 .main-postTitle {
   font-size: x-large;
 }
-.PostingSection{
-  padding: 3rem;
+.PostingSection {
+  padding: 2rem;
 }
 
 .LeftProfile{

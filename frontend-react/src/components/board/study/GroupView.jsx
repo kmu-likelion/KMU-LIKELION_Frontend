@@ -2,28 +2,20 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 
 import Card from "@material-ui/core/Card";
-// import CardActions from '@material-ui/core/CardActions';
 import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
 
 export default class GroupView extends Component {
   render() {
-    const { id, name , introduction} = this.props;
+    const { name, introduction, img } = this.props;
     return (
       <Card className={"card"}>
         <CardContent>
           <Typography>
-            <Link
-              to={{
-                pathname: `/study/group/${name}`,
-                state: {
-                  group_id: id,
-                  group_name: name
-                }
-              }}
-            >
-              {name}
-            </Link>
+            <img src={img} alt="" />
+            <Link to={`/study/${name}`}>{name}</Link>
+            <hr />
+            {introduction}
           </Typography>
         </CardContent>
       </Card>
