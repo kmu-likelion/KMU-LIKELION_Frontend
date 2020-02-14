@@ -93,3 +93,38 @@ a:hover, a:active {text-decoration: none; color:#fff; background-color:#f59000;}
 .PostingSection{
   padding: 3rem;
 }
+
+.LeftProfile{
+  text-align: center;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+  height: 100%;
+}
+.MyProfile{
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+  padding-inline-start: 2rem;
+  padding-inline-end: 8rem;
+  height: 100%;
+  width:100%;
+}
+.standard-read-only-input{
+  width: 100%;
+}
+
+.MyLike{
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+  padding-inline-start: 2rem;
+  height: 100%;
+}
+
+.faked{
+  float: right;
+  margin-bottom: 2rem;
+}
+
+.avatar{
+  display: flex;
+  justify-content: space-between;
+}

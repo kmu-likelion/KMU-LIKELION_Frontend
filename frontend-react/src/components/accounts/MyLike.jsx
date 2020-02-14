@@ -6,6 +6,11 @@ import Card from '@material-ui/core/Card';
 // import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
+import PropTypes from 'prop-types';
+import { makeStyles } from '@material-ui/core/styles';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemText from '@material-ui/core/ListItemText';
+import {FixedSizeList} from 'react-window';
 
 
 export default class MyLike extends Component {
@@ -47,22 +52,32 @@ export default class MyLike extends Component {
           })
           .catch(err => console.log(err));
       }
-
+      
 
 
     render() {
         const { id, title, body, purpose } = this.props
+        
         return (
-            <Paper elevation={10} className="PostingPaper">
+            
+            <Paper elevation={10} className="MyLike">
+                <>
                 <h1>Liked Post</h1>
+                <br/>
                 {this.state.likeNotice.map(liked_post => (
                     <div>
-                        <h4>notice board</h4>
-                        <Link to={`/notice/detail/${liked_post.id}`} className={"main-postTitle"}>
-                            -{liked_post.title}
-                        </Link>
-
+                    <h4>Notice board</h4>
+                    
+                    <Link to={`/notice/detail/${liked_post.id}`} className={"main-postTitle"}>
+                        -{liked_post.title}
+                    </Link>
+                    
+                    
                     </div>
+                        
+                        
+
+                    
                 ))}
                 <br />
                 {this.state.likeQnA.map(liked_post => (
@@ -93,6 +108,7 @@ export default class MyLike extends Component {
 
                     </div>
                 ))}
+                </>
             </Paper>
 
         );
