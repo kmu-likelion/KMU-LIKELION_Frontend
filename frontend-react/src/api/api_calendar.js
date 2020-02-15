@@ -20,5 +20,9 @@ export default {
   createCalendar(data) {
     console.log("Calendar api 실행");
     return axios.post(`main/calendar/`, data, tokenConfig());
+  },
+  deleteCalendar(id) {
+    console.log("delete Calendar api 실행.");
+    return axios.delete(`main/calendar/${id}`, tokenConfig());
   }
 };

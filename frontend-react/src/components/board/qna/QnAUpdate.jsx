@@ -32,7 +32,7 @@ class QnAUpdate extends Component {
 
   async getQnA() {
     await api
-      .getPost("QnA", this.props.match.params.id)
+      .getPost("qna", this.props.match.params.id)
       .then(res => {
         const data = res.data;
 
@@ -47,7 +47,7 @@ class QnAUpdate extends Component {
   }
   async updateQnA(id, data) {
     await api
-      .updatePost("QnA", id, data)
+      .updatePost("qna", id, data)
       .then(result => console.log("정상적으로 update됨.", result))
       .catch(err => console.log(err));
   }

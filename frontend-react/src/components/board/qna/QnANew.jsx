@@ -33,7 +33,7 @@ class QnANew extends Component {
   handlingSubmit = async event => {
     event.preventDefault(); //event의 디폴트 기능(새로고침 되는 것 등..) -> 막는다.
     console.log("user-id: ", this.state.id);
-    let result = await api.createPost("QnA", {
+    let result = await api.createPost("qna", {
       title: this.state.title,
       body: this.state.body,
       subject: this.state.subject,

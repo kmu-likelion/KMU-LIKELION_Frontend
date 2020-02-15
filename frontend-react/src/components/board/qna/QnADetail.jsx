@@ -35,7 +35,7 @@ class QnADetail extends Component {
 
   async getComments() {
     await api
-      .getComments("QnA_comment", this.props.match.params.id)
+      .getComments("qna_comment", this.props.match.params.id)
       .then(res => {
         const _data = res.data;
         this.setState({
@@ -52,7 +52,7 @@ class QnADetail extends Component {
 
   async getQnA() {
     await api
-      .getPost("QnA", this.props.match.params.id)
+      .getPost("qna", this.props.match.params.id)
       .then(res => {
         const data = res.data;
 

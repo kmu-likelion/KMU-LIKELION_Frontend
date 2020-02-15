@@ -20,7 +20,7 @@ class Main extends React.Component {
   }
   componentDidMount() {
     this.getRecentPosts("notice");
-    this.getRecentPosts("QnA");
+    this.getRecentPosts("qna");
   }
 
   async getRecentPosts(target) {
@@ -34,7 +34,7 @@ class Main extends React.Component {
           case "notice":
             this.setState({ recentNotices: slicePosts });
             break;
-          case "QnA":
+          case "qna":
             this.setState({ recentQnA: slicePosts });
             break;
           default:

@@ -18,7 +18,7 @@ class QnAList extends React.Component {
   }
 
   async getQnA() {
-    const _qnaList = await api.getAllPosts("QnA");
+    const _qnaList = await api.getAllPosts("qna");
     console.log("getqna 메서드 실행.");
     console.log(_qnaList);
     this.setState({ qnaList: _qnaList.data.results });
