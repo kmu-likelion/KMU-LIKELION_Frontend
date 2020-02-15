@@ -3,8 +3,7 @@ import { Calendar, momentLocalizer } from "react-big-calendar";
 import moment from "moment";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import api from "../../api/api_calendar.js";
-
-import CalendarModal from "./_CalendarModal";
+import EventModal from "./EventModal";
 
 const localizer = momentLocalizer(moment);
 
@@ -100,7 +99,7 @@ class ClubCalendar extends React.Component {
             this.modalEvent(event);
           }}
         />
-        <CalendarModal
+        <EventModal
           eventInfo={this.state.modalEvent}
           open={this.state.modalFlag}
           handlingOpen={this.modalOpen}

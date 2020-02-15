@@ -4,7 +4,7 @@ import Button from "@material-ui/core/Button";
 import { Link } from "react-router-dom";
 import api from "../../api/api_calendar.js";
 
-class CalendarModal extends React.Component {
+class EventModal extends React.Component {
   deleteEvent = async (event, id) => {
     event.preventDefault();
     await api
@@ -47,4 +47,4 @@ class CalendarModal extends React.Component {
   }
 }
 
-export default CalendarModal;
+export default EventModal;
