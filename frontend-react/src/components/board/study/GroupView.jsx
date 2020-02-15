@@ -13,6 +13,7 @@ export default class GroupView extends Component {
         <CardContent>
           <Typography>
             <img src={img} alt="" />
+            <br />
             <Link to={`/study/${name}`}>{name}</Link>
             <hr />
             {introduction}

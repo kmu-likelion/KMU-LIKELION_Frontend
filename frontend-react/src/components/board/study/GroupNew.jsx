@@ -73,6 +73,7 @@ class GroupNew extends Component {
               required="required"
               placeholder="Title"
             />
+            <br />
             <input
               id="introduction"
               name="introduction"
@@ -81,7 +82,7 @@ class GroupNew extends Component {
               required="required"
               placeholder="introduction"
             />
-
+            <br />
             <button type="submit">생성</button>
           </form>
 

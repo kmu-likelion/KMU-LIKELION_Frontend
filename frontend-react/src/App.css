@@ -8,6 +8,10 @@
 #root {
   font-family: "Eoe_Zno_L";
 }
+.card {
+  align-items: center;
+  text-align: center;
+}
 
 .main-calendar {
   border-radius: 3%;
@@ -23,7 +27,7 @@
 .PostingForm {
   padding: 1rem;
   margin: 1rem;
-  text-align: center;
+  /* text-align: center; */
 }
 .join-table-section {
   padding-left: 1rem;

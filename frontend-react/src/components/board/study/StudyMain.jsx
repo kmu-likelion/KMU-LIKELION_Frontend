@@ -38,7 +38,7 @@ class StudyMain extends React.Component {
           <br />
           <Grid container spacing={2}>
             {this.state.groupList.map(group => (
-              <Grid item xs={6} sm={4} key={group.id}>
+              <Grid item xs={6} sm={3} key={group.id}>
                 <GroupView
                   key={group.id}
                   id={group.id}

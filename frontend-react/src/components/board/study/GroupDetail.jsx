@@ -77,7 +77,7 @@ class GroupDetail extends React.Component {
           <hr />
           <Link
             to={{
-              pathname: `/study/${this.state.group_name}/new`,
+              pathname: `/study/${this.state.group_name}/post/new`,
               state: {
                 group_name: this.state.group_name,
                 group_id: this.state.group_id

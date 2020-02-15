@@ -64,7 +64,7 @@ class StudyNew extends Component {
     return (
       <Container maxWidth="lg" className="PostingSection">
         <Paper className="PostingPaper">
-          <h2>[{this.state.group_name}Group] 새 글 작성</h2>
+          <h2>[{this.state.group_name}] 새 글 작성</h2>
           <form onSubmit={this.handlingSubmit} className="PostingForm">
             <Select
               labelId="demo-controlled-open-select-label"
@@ -106,7 +106,7 @@ class StudyNew extends Component {
             <Button variant="contained" color="primary" type="submit">
               작성
             </Button>
-            <Link to="/study">Cancle</Link>
+            <Link to="/study">Cancel</Link>
           </form>
           <br />
         </Paper>

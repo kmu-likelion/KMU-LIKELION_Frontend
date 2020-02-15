@@ -54,34 +54,6 @@ export default function Header(props) {
             <NavItem to={"/"}>KMU LIKELION</NavItem>
           </Typography>
           <Typography variant="h6" className={classes.title}>
-            {/* <Button
-              aria-controls="simple-menu"
-              aria-haspopup="true"
-              onClick={handleClick}
-              style={{ color: "white" }}
-            >
-              Board
-            </Button>
-            <Menu
-              id="simple-menu"
-              anchorEl={anchorEl}
-              keepMounted
-              open={Boolean(anchorEl)}
-              onClose={handleClose}
-            >
-              <MenuItem onClick={handleClose}>
-                <DropItem to={"/notice"}>Notice</DropItem>
-              </MenuItem>
-              <MenuItem onClick={handleClose}>
-                <DropItem to={"/study"}>Study</DropItem>
-              </MenuItem>
-              <MenuItem onClick={handleClose}>
-                <DropItem to={"/QnA"}>QnA</DropItem>
-              </MenuItem>
-              <MenuItem onClick={handleClose}>
-                <DropItem to={"/recruit"}>Recruit</DropItem>
-              </MenuItem>
-            </Menu> */}
             <PopupState variant="popover" popupId="popup-menu">
               {popupState => (
                 <>
@@ -112,6 +84,28 @@ export default function Header(props) {
           </Typography>
           {store.logged ? (
             <>
+              <PopupState variant="popover" popupId="demo-popup-menu">
+                {popupState => (
+                  <React.Fragment>
+                    <Button
+                      style={{ color: "white" }}
+                      {...bindTrigger(popupState)}
+                    >
+                      Admin-Menu
+                    </Button>
+                    <Menu {...bindMenu(popupState)}>
+                      <MenuItem onClick={popupState.close}>
+                        <DropItem to={"/mentoring"}>멘토링관리</DropItem>
+                      </MenuItem>
+                      <MenuItem onClick={popupState.close}>
+                        <DropItem to={"/admission/management"}>
+                          입부관리
+                        </DropItem>
+                      </MenuItem>
+                    </Menu>
+                  </React.Fragment>
+                )}
+              </PopupState>
               <Button color="inherit">
                 <Link
                   to={"/"}
@@ -151,7 +145,7 @@ export default function Header(props) {
                       </MenuItem>
                       <MenuItem onClick={popupState.close}>
                         <DropItem to={"/admission/management"}>
-                          지원관리
+                          입부관리
                         </DropItem>
                       </MenuItem>
                     </Menu>

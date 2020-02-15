@@ -52,7 +52,7 @@ class RecruitDetail extends Component {
       .getPost("recruit", this.props.match.params.id)
       .then(res => {
         const data = res.data;
-        console.log("fdfd", data);
+        console.log("정상적으로 가져옴.", data);
 
         this.setState({
           title: data.title,
@@ -96,7 +96,7 @@ class RecruitDetail extends Component {
             <Button
               color="secondary"
               size="small"
-              onClick={event => this.handlingDelete(this.state.id)}
+              onClick={event => this.handlingDelete("recruit", this.state.id)}
             >
               Delete
             </Button>

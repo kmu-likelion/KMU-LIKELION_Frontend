@@ -21,7 +21,7 @@ export default {
   //groupname으로 그룹 가져오기
   getGroupWithName(name) {
     console.log("get Group with name 실행.");
-    return axios.get(`accounts/studygroup?group_name=${name}`, tokenConfig());
+    return axios.get(`accounts/studygroup?name=${name}`, tokenConfig());
   },
 
   //그룹 생성하기
@@ -51,6 +51,6 @@ export default {
   /* ------StudyPost api------ */
   getPostWithGroupId(id) {
     console.log("get Post with groupid 실행.");
-    return axios.get(`Board/study?group_id=${id}`, tokenConfig());
+    return axios.get(`board/study?group_id=${id}`, tokenConfig());
   }
 };

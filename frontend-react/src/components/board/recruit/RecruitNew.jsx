@@ -79,7 +79,7 @@ class RecruitNew extends Component {
             <button type="submit">제출</button>
           </form>
 
-          <Link to="/recruit">Cancle</Link>
+          <Link to="/recruit">Cancel</Link>
         </Paper>
       </Container>
     );

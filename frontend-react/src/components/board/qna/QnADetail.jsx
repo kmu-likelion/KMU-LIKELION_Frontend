@@ -71,7 +71,7 @@ class QnADetail extends Component {
     await api.deletePost(target, id);
     console.log(`delete id : ${id}`);
     console.log(`delete ${target} 성공.`);
-    if (target === "QnA") {
+    if (target === "qna") {
       document.location.href = "/QnA";
     } else {
       this.getComments();
@@ -93,11 +93,11 @@ class QnADetail extends Component {
           </CardContent>
 
           <CardActions>
-            <LikeView board_id={this.props.match.params.id} board_name="QnA" />
+            <LikeView board_id={this.props.match.params.id} board_name="qna" />
             <Button
               color="secondary"
               size="small"
-              onClick={event => this.handlingDelete("QnA", this.state.id)}
+              onClick={event => this.handlingDelete("qna", this.state.id)}
             >
               Delete
             </Button>
@@ -119,14 +119,14 @@ class QnADetail extends Component {
                   handlingDelete={this.handlingDelete}
                   getComments={this.callGetComments}
                   board_id={comment.board}
-                  url="QnA_comment"
+                  url="qna_comment"
                 />
               ))}
             </div>
           </CardContent>
         </Card>
         <CommentNew
-          url="QnA_comment"
+          url="qna_comment"
           board_id={this.state.id}
           getComments={this.callGetComments}
         />
