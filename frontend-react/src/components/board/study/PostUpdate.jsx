@@ -110,7 +110,7 @@ class PostUpdate extends Component {
             </Button>
           </form>
 
-          <Link to="/study">Cancle</Link>
+          <Link to="/study">Cancel</Link>
         </Paper>
       </Container>
     );

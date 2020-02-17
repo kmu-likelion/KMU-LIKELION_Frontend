@@ -38,6 +38,7 @@ class RecruitDetail extends Component {
         this.setState({
           comments: _data.results
         });
+        console.log(_data.results);
       })
       .catch(err => console.log(err));
   }
@@ -111,6 +112,7 @@ class RecruitDetail extends Component {
               {this.state.comments.map(comment => (
                 <CommentView
                   user_id={comment.user_id}
+                  user_img={comment.user_img}
                   author_name={comment.author_name}
                   body={comment.body}
                   comment_id={comment.id}

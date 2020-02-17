@@ -90,7 +90,7 @@ class NoticeUpdate extends Component {
             <button type="submit">제출</button>
           </form>
 
-          <Link to="/notice">Cancle</Link>
+          <Link to="/notice">Cancel</Link>
         </Paper>
       </Container>
     );

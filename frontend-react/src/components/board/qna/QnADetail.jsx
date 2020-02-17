@@ -119,6 +119,7 @@ class QnADetail extends Component {
                   handlingDelete={this.handlingDelete}
                   getComments={this.callGetComments}
                   board_id={comment.board}
+                  user_img={comment.user_img}
                   url="qna_comment"
                 />
               ))}

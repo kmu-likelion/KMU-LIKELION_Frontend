@@ -17,7 +17,7 @@ import BoardRouter from "./components/board/BoardRouter";
 import StudyRouter from "./components/board/StudyRouter";
 import AdmissionRouter from "./components/admission/AdmissionRouter";
 
-import MentoringManage from "./components/mentoring/MentoringManage";
+import MentoringContainer from "./components/mentoring/MentoringContainer";
 
 class App extends React.Component {
   constructor(props) {
@@ -74,7 +74,7 @@ class App extends React.Component {
           <Route path="/recruit" component={BoardRouter} />
 
           <Route path="/admission" component={AdmissionRouter} />
-          <Route path="/mentoring" component={MentoringManage} />
+          <Route path="/mentoring" component={MentoringContainer} />
 
           <Route path="/login" component={Login} />
           <Route path="/mypage/:id" component={Mypage} id="number" />

@@ -159,7 +159,7 @@ class NoticeNew extends Component {
             <Button type="submit">제출</Button>
           </form>
 
-          <Link to="/notice">Cancle</Link>
+          <Link to="/notice">Cancel</Link>
         </Paper>
       </Container>
     );

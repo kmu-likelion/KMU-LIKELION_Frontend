@@ -39,7 +39,7 @@ export default {
   //댓글 불러오기
   getComments(url, id) {
     console.log("getComments 실행.");
-    return axios.get(`board/${url}/?id=` + String(id), tokenConfig());
+    return axios.get(`board/${url}/?board_id=` + String(id), tokenConfig());
   },
 
   //현재 like 상태 get

@@ -38,6 +38,11 @@ export const getUser = userId => {
   return axios.get("accounts/user/" + String(userId));
 };
 
+export const getAllUser = () => {
+  console.log("get all user api 실행.");
+  return axios.get("accounts/user/");
+};
+
 export const tokenConfig = () => {
   const token = window.sessionStorage.getItem("token");
   // Headers

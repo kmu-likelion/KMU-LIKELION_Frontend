@@ -79,7 +79,7 @@ class QnANew extends Component {
             <button type="submit">제출</button>
           </form>
 
-          <Link to="/QnA">Cancle</Link>
+          <Link to="/QnA">Cancel</Link>
         </Paper>
       </Container>
     );

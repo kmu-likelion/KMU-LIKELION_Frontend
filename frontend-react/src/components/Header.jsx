@@ -2,15 +2,16 @@ import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 import Store from "../Store/store";
+
 // @material-ui
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
-
 import Button from "@material-ui/core/Button";
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
 import PopupState, { bindTrigger, bindMenu } from "material-ui-popup-state";
+import Avatar from "@material-ui/core/Avatar";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -24,16 +25,8 @@ const useStyles = makeStyles(theme => ({
 export default function Header(props) {
   const store = useContext(Store);
   const classes = useStyles();
-  // const { logged, onLogout } = props;
-  // const [anchorEl, setAnchorEl] = React.useState(null);
   const id = window.sessionStorage.getItem("id");
-
-  // const handleClick = event => {
-  //   setAnchorEl(event.currentTarget);
-  // };
-  // const handleClose = () => {
-  //   setAnchorEl(null);
-  // };
+  // const user_img = window.sessionStorage.getItem("user_img");
 
   const NavItem = ({ children, to }) => (
     <Link to={to} className="link nav-link">
@@ -86,7 +79,7 @@ export default function Header(props) {
             <>
               <PopupState variant="popover" popupId="demo-popup-menu">
                 {popupState => (
-                  <React.Fragment>
+                  <>
                     <Button
                       style={{ color: "white" }}
                       {...bindTrigger(popupState)}
@@ -103,29 +96,40 @@ export default function Header(props) {
                         </DropItem>
                       </MenuItem>
                     </Menu>
-                  </React.Fragment>
+                  </>
                 )}
               </PopupState>
-              <Button color="inherit">
-                <Link
-                  to={"/"}
-                  onClick={store.onLogout}
-                  className="auth-link link"
-                >
-                  Logout
-                </Link>
-              </Button>
-              <Button color="inherit">
-                <Link to={`/Mypage/${id}`} className="auth-link link">
-                  Mypage
-                </Link>
-              </Button>
+
+              <PopupState variant="popover" popupId="popup-menu">
+                {popupState => (
+                  <>
+                    <Button
+                      style={{ color: "white" }}
+                      {...bindTrigger(popupState)}
+                    >
+                      <Avatar alt="User" src="" />
+                    </Button>
+                    <Menu {...bindMenu(popupState)}>
+                      <MenuItem onClick={popupState.close}>
+                        <DropItem to={"/"}>
+                          <Button color="inherit" onClick={store.onLogout}>
+                            Logout
+                          </Button>
+                        </DropItem>
+                      </MenuItem>
+                      <MenuItem onClick={popupState.close}>
+                        <DropItem to={`/Mypage/${id}`}>Mypage</DropItem>
+                      </MenuItem>
+                    </Menu>
+                  </>
+                )}
+              </PopupState>
             </>
           ) : (
             <>
               <PopupState variant="popover" popupId="demo-popup-menu">
                 {popupState => (
-                  <React.Fragment>
+                  <>
                     <Button
                       // variant="contained"
 
@@ -143,13 +147,8 @@ export default function Header(props) {
                           지원내역
                         </DropItem>
                       </MenuItem>
-                      <MenuItem onClick={popupState.close}>
-                        <DropItem to={"/admission/management"}>
-                          입부관리
-                        </DropItem>
-                      </MenuItem>
                     </Menu>
-                  </React.Fragment>
+                  </>
                 )}
               </PopupState>
               <Button color="inherit">

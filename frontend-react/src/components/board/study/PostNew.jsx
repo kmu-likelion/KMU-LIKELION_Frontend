@@ -44,7 +44,7 @@ class StudyNew extends Component {
   };
 
   handlingSubmit = async event => {
-    event.preventDefault(); //event의 디폴트 기능(새로고침 되는 것 등..) -> 막는다.
+    event.preventDefault();
     console.log("user-id: ", this.state.user_id);
     let result = await api.createPost("study", {
       title: this.state.title,

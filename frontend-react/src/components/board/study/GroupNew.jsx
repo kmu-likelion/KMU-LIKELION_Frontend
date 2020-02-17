@@ -86,7 +86,7 @@ class GroupNew extends Component {
             <button type="submit">생성</button>
           </form>
 
-          <Link to="/study">Cancle</Link>
+          <Link to="/study">Cancel</Link>
         </Paper>
       </Container>
     );

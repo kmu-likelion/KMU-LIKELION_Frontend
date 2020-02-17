@@ -35,6 +35,7 @@ class Login extends Component {
         this.doSignup(
           result.data.user.id,
           result.data.user.username,
+          result.data.img,
           result.data.token
         );
         this.context.onLogin();
@@ -44,9 +45,10 @@ class Login extends Component {
     this.setState({ username: "", password: "" });
   };
 
-  doSignup = (id, name, token) => {
+  doSignup = (id, name, img, token) => {
     window.sessionStorage.setItem("id", id);
     window.sessionStorage.setItem("username", name);
+    window.sessionStorage.setItem("user_img", img);
     window.sessionStorage.setItem("token", token);
     console.log("token in session : ", window.sessionStorage.getItem("token"));
   };
@@ -83,7 +85,7 @@ class Login extends Component {
             <button type="submit">Login</button>
           </form>
 
-          <Link to="/">Cancle</Link>
+          <Link to="/">Cancel</Link>
         </Paper>
       </Container>
     );

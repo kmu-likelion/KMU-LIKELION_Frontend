@@ -46,7 +46,8 @@ export default class CommentView extends Component {
       body,
       comment_id,
       board_id,
-      url
+      url,
+      user_img
     } = this.props;
 
     if (this.state.is_update) {
@@ -76,6 +77,7 @@ export default class CommentView extends Component {
     } else {
       return (
         <>
+          <img src={user_img} alt="" />
           <Link to={`/Mypage/${user_id}`}>{author_name}</Link>
           <br />
           <span>{body}</span>

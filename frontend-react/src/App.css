@@ -27,8 +27,17 @@
 .PostingForm {
   padding: 1rem;
   margin: 1rem;
-  /* text-align: center; */
 }
+
+.mentoring-form {
+  display: flex;
+}
+.mentoring-select {
+  margin-left: 1rem;
+  min-width: 6rem;
+  text-align: center;
+}
+
 .join-table-section {
   padding-left: 1rem;
   padding-right: 1rem;
@@ -57,13 +66,6 @@
   color: #f38104;
   line-height: 0.6rem;
 }
-
-/* a:link { color: red; text-decoration: none;}
-a:visited { color: black; text-decoration: none;}
-a:hover { color: blue; text-decoration: underline;} */
-/* a {color: #fff; text-decoration: none; outline: none}
-a:hover, a:active {text-decoration: none; color:#fff; background-color:#f59000;} */
-
 .link {
   text-decoration: none;
   outline: none;
@@ -147,4 +149,21 @@ a:hover, a:active {text-decoration: none; color:#fff; background-color:#f59000;}
 .avatar {
   display: flex;
   justify-content: space-between;
+}
+
+/* metoring page */
+.mentoring-table {
+  /* align: center; */
+  /* align-content: center;
+  vertical-align: auto; */
+}
+.mentoring-list {
+  width: 100%;
+  position: relative;
+  overflow: auto;
+  /* max-height: 50px; */
+  height: 10rem;
+}
+.mentoring-ul {
+  padding: 0%;
 }
