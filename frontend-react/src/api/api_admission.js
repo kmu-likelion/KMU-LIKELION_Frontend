@@ -10,9 +10,9 @@ export default {
     return axios.post("admission/joinform/", data);
   },
 
-  getJoinInfo(data) {
+  getJoinData(id) {
     console.log("getJoinInfo 실행.");
-    return axios.post("admission/joinform/get_joinform/", data);
+    return axios.get(`admission/joinform/${id}/`);
   },
 
   getAllJoinData() {

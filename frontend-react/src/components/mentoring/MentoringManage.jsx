@@ -69,7 +69,7 @@ class MentoringManage extends React.Component {
         mentee: this.state.selected_mentee
       })
       .then(res => {
-        console.log("멘토링 추가 성공 :", res.data);
+        console.log("Add metoring:", res.data);
         this.getAllMentoring();
       })
       .catch(err => {

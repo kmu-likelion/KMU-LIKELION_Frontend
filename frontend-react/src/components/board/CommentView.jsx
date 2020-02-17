@@ -4,7 +4,7 @@ import Button from "@material-ui/core/Button";
 import api from "../../api/api_board";
 import TextField from "@material-ui/core/TextField";
 import { Link } from "react-router-dom";
-
+import Avatar from "@material-ui/core/Avatar";
 export default class CommentView extends Component {
   state = {
     is_update: false,
@@ -76,33 +76,34 @@ export default class CommentView extends Component {
       );
     } else {
       return (
-        <>
-          <img src={user_img} alt="" />
-          <Link to={`/Mypage/${user_id}`}>{author_name}</Link>
+        <div>
+          <div className={"comment-info"}>
+            <Link to={`/Mypage/${user_id}`}>
+              <Avatar src={user_img} alt="User-Image" />
+              {author_name}
+            </Link>
+            <span>{body}</span>
+          </div>
           <br />
-          <span>{body}</span>
-          <br />
-          <>
-            <Button
-              color="primary"
-              size="small"
-              onClick={event =>
-                this.setState({ is_update: true, update_body: body })
-              }
-            >
-              Update
-            </Button>
-            <Button
-              color="secondary"
-              size="small"
-              onClick={event => this.props.handlingDelete(url, comment_id)}
-            >
-              Delete
-            </Button>
-          </>
+          <Button
+            color="primary"
+            size="small"
+            onClick={event =>
+              this.setState({ is_update: true, update_body: body })
+            }
+          >
+            Update
+          </Button>
+          <Button
+            color="secondary"
+            size="small"
+            onClick={event => this.props.handlingDelete(url, comment_id)}
+          >
+            Delete
+          </Button>
 
           <hr />
-        </>
+        </div>
       );
     }
   }

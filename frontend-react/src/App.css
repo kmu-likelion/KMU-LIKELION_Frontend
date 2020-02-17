@@ -151,6 +151,11 @@
   justify-content: space-between;
 }
 
+.comment-info {
+  display: flex;
+  vertical-align: center;
+}
+
 /* metoring page */
 .mentoring-table {
   /* align: center; */

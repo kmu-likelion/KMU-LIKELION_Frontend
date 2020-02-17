@@ -3,6 +3,7 @@ import React, { Component } from "react";
 import Container from "@material-ui/core/Container";
 import Paper from "@material-ui/core/Paper";
 import api from "../../api/api_admission";
+import { Link } from "react-router-dom";
 
 import Input from "@material-ui/core/Input";
 
@@ -67,10 +68,9 @@ class CheckJoin extends Component {
   };
 
   deleteQuestion = async id => {
-    console.log("지우려는 질문 id :", id);
+    // console.log("지우려는 질문 id :", id);
     await api.deleteQuestion(id).then(res => {
       console.log("질문삭제 성공!", res);
-
       this.getAllQuestions();
     });
   };
@@ -81,8 +81,6 @@ class CheckJoin extends Component {
     const useStyles = makeStyles({
       table: {
         minWidth: 650
-        // verticalAlign: "middle",
-        // textAlign: "middle"
       }
     });
     return (
@@ -112,10 +110,10 @@ class CheckJoin extends Component {
                   <TableCell>Num</TableCell>
                   <TableCell colSpan={3}>Question</TableCell>
                 </TableRow>
-                {this.state.questions.map(qus => {
+                {this.state.questions.map((qus, index) => {
                   return (
                     <ManageQuestionForm
-                      key={qus.id}
+                      index={index}
                       id={qus.id}
                       body={qus.body}
                       deleteQuestion={this.deleteQuestion}
@@ -171,7 +169,9 @@ class CheckJoin extends Component {
                     <TableCell>0.0</TableCell>
                     <TableCell>{row.status}</TableCell>
                     <TableCell>
-                      <Button>보러가기</Button>
+                      <Link to={`/admission/management/${row.id}`}>
+                        보러가기
+                      </Link>
                     </TableCell>
                   </TableRow>
                 ))}

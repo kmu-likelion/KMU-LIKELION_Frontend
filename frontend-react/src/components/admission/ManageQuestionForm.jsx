@@ -35,12 +35,12 @@ export default class ManageQuestionForm extends Component {
   };
 
   render() {
-    const { id, body, deleteQuestion } = this.props;
+    const { index, id, body, deleteQuestion } = this.props;
 
     if (this.state.update_flag) {
       return (
-        <TableRow key={id}>
-          <TableCell>{id}</TableCell>
+        <TableRow key={index}>
+          <TableCell>{index + 1}</TableCell>
           <TableCell colSpan={4}>
             <form onSubmit={event => this.updateQuestion(event, id)}>
               <Input
@@ -56,8 +56,8 @@ export default class ManageQuestionForm extends Component {
       );
     } else {
       return (
-        <TableRow key={id}>
-          <TableCell>{id}</TableCell>
+        <TableRow key={index}>
+          <TableCell>{index + 1}</TableCell>
           <TableCell colSpan={2}>{body}</TableCell>
           <TableCell>
             <Button
