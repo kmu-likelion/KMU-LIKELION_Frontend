@@ -10,7 +10,7 @@ class Login extends Component {
   static contextType = Store; //contextType으로 context 접근.
 
   state = {
-    username: "",
+    email: "",
     password: ""
   };
 
@@ -27,7 +27,7 @@ class Login extends Component {
     event.preventDefault();
 
     await authlogin({
-      username: this.state.username,
+      username: this.state.email,
       password: this.state.password
     })
       .then(result => {
@@ -42,7 +42,7 @@ class Login extends Component {
       })
       .catch(err => console.log(err));
 
-    this.setState({ username: "", password: "" });
+    this.setState({ email: "", password: "" });
   };
 
   doSignup = (id, name, img, token) => {
@@ -64,12 +64,12 @@ class Login extends Component {
           <form onSubmit={this.handlingSubmit} className="PostingForm">
             <input
               type="text"
-              id="username"
-              name="username"
-              value={this.state.username}
+              id="email"
+              name="email"
+              value={this.state.email}
               onChange={this.handlingChange}
               required="required"
-              placeholder="Username"
+              placeholder="E-mail"
             />
             <br />
             <input

@@ -80,13 +80,15 @@ class NoticeDetail extends Component {
   };
 
   render() {
+    // console.log("f------------------df", this.state.body);
+    // var contents = this.state.body.replace("\n",);
     return (
       <div>
         <Card className={"card"}>
           <CardContent>
             <Typography>
               제목 : {this.state.title} <br />
-              내용 : {this.state.body} <br />
+              내용 : <pre>{this.state.body}</pre> <br />
               일자 : {this.state.notice_date}
               <br />
               <small>pub date : {this.state.pub_date}</small> <br />

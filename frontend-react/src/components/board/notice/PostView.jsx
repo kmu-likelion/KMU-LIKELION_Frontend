@@ -10,15 +10,18 @@ export default class PostView extends Component {
   render() {
     const { id, title, body, noticeDate } = this.props;
     const date = moment(noticeDate).format("YYYY-MM-DD");
+
     return (
       <Card className={"card"}>
         <CardContent>
           <Typography>
-            <h4>
-              <Link to={`/notice/detail/${id}`}>{title}</Link>
-            </h4>
-            <p>{body}</p>
-            <small>Notice-Date : {date}</small>
+            <pre>
+              <h4>
+                <Link to={`/notice/detail/${id}`}>{title}</Link>
+              </h4>
+              <p>{body}</p>
+              <small>Notice-Date : {date}</small>
+            </pre>
           </Typography>
         </CardContent>
       </Card>
