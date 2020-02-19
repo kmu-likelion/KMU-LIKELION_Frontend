@@ -2,7 +2,7 @@ import React from "react";
 import Container from "@material-ui/core/Container";
 
 import { Link } from "react-router-dom";
-import api from "../../../api/api_group";
+import api from "../../../api/GroupAPI";
 import PostView from "./PostView";
 import Button from "@material-ui/core/Button";
 

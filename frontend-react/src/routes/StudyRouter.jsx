@@ -1,12 +1,12 @@
 import React from "react";
 import { Route } from "react-router-dom";
 
-import StudyMain from "./study/StudyMain";
-import GroupDetail from "./study/GroupDetail";
-import GroupNew from "./study/GroupNew";
-import PostNew from "./study/PostNew";
-import PostDetail from "./study/PostDetail";
-import PostUpdate from "./study/PostUpdate";
+import StudyMain from "../components/board/study/StudyMain";
+import GroupDetail from "../components/board/study/GroupDetail";
+import GroupNew from "../components/board/study/GroupNew";
+import PostNew from "../components/board/study/PostNew";
+import PostDetail from "../components/board/study/PostDetail";
+import PostUpdate from "../components/board/study/PostUpdate";
 
 function StudyRouter({ match }) {
   return (

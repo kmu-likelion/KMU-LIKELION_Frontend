@@ -10,33 +10,40 @@ const Footer = () => (
   <footer className="footer">
     <Container maxWidth="lg">
       <Grid container spacing={3}>
-        <Grid item sm={3}></Grid>
-        <Grid item sm={2} className="left-footer">
-          <span>
-            <p>CONTACT</p>
-          </span>
-          <a href="https://likelion.net/">
-            <img
-              src={lion_logo}
-              alt="lion로고"
-              style={{ width: "40%", padding: "5px" }}
-            />
-          </a>
-          <a href="https://www.facebook.com/LikeLionKookmin/">
-            <img
-              src={facebook_logo}
-              alt="페북로고"
-              style={{ width: "42%", padding: "5px" }}
-            />
-          </a>
+        <Grid item sm={3} xs={2}></Grid>
+        <Grid item sm={3} xs={4} className="left-footer">
+        <table>
+          <tr>
+            <th><p>CONTACT</p></th>
+          </tr>
+          <tr>
+            <th>
+              <a href="https://likelion.net/">
+                <img
+                  src={lion_logo}
+                  alt="lion로고"
+                  // style={{ width: "40%", padding: "5px" }}
+                />
+              </a>
+              <a href="https://www.facebook.com/LikeLionKookmin/">
+                <img
+                  src={facebook_logo}
+                  alt="페북로고"
+                  // style={{ width: "42%", padding: "5px" }}
+                />
+              </a>
+            </th>
+          </tr>
+        </table>
         </Grid>
-        <Grid item sm={7} className="right-footer">
+        <Grid item sm={3} xs={4} className="right-footer">
           <p>20707 서울특별시 성북구 정릉로 77 국민대학교</p>
           <br />
           <p>Email kmu@likelion.org</p>
-          <p>COPYRIGHT © 2019 KOOKMIN-LIKELION.</p>
+          <p>COPYRIGHT © 2020 KMU-LIKELION.</p>
           <p>ALL RIGHTS RESERVED</p>
         </Grid>
+        <Grid item sm={3} xs={2}></Grid>
       </Grid>
       <br />
       <br />

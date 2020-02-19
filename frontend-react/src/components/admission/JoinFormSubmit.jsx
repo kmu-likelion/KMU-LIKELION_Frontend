@@ -1,6 +1,6 @@
 import React from "react";
 import JoinStore from "./joinStore";
-import api from "../../api/api_admission";
+import api from "../../api/AdmissionAPI";
 
 import moment from "moment";
 import Input from "@material-ui/core/Input";

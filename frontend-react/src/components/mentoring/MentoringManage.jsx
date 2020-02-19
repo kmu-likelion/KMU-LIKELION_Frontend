@@ -1,6 +1,6 @@
 import React from "react";
-import api from "../../api/api_mentoring";
-import { getAllUser } from "../../api/api_auth";
+import api from "../../api/MentoringAPI";
+import { getAllUser } from "../../api/AuthAPI";
 
 import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";

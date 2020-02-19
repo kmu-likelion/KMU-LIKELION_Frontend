@@ -2,7 +2,7 @@ import React from "react";
 import { Calendar, momentLocalizer } from "react-big-calendar";
 import moment from "moment";
 import "react-big-calendar/lib/css/react-big-calendar.css";
-import api from "../../api/api_calendar.js";
+// import api from "../../api/api_calendar.js";
 import EventModal from "./EventModal";
 
 const localizer = momentLocalizer(moment);
@@ -27,7 +27,7 @@ class ClubCalendar extends React.Component {
         }
       ]
     });
-    this.getAllEvent();
+    // this.getAllEvent();
   }
 
   addEvent = (id, title, start, end, body, notice_id) => {
@@ -47,21 +47,21 @@ class ClubCalendar extends React.Component {
     });
   };
 
-  getAllEvent = async () => {
-    await api.getAllCalendar().then(res => {
-      console.log("가져오기 성공!", res);
-      res.data.map(event => {
-        this.addEvent(
-          event.id,
-          event.title,
-          event.start_date,
-          event.end_date,
-          event.contents,
-          event.notice_id
-        );
-      });
-    });
-  };
+  // getAllEvent = async () => {
+  //   await api.getAllCalendar().then(res => {
+  //     console.log("가져오기 성공!", res);
+  //     res.data.map(event => {
+  //       this.addEvent(
+  //         event.id,
+  //         event.title,
+  //         event.start_date,
+  //         event.end_date,
+  //         event.contents,
+  //         event.notice_id
+  //       );
+  //     });
+  //   });
+  // };
 
   modalOpen = () => {
     this.setState({

@@ -1,10 +1,9 @@
 import React from "react";
 import { Route } from "react-router-dom";
-
-import JoinForm from "./JoinForm";
-import CheckJoin from "./CheckJoin";
-import ManageJoin from "./ManageJoin";
-import ManageJoinDetail from "./ManageJoinDetail";
+import JoinForm from "../components/admission/JoinForm";
+import CheckJoin from "../components/admission/CheckJoin";
+import ManageJoin from "../components/admission/ManageJoin";
+import ManageJoinDetail from "../components/admission/ManageJoinDetail";
 
 function AdmissionRouter({ match }) {
   return (

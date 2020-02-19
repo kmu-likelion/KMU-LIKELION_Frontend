@@ -1,8 +1,6 @@
-// import StudyGroup from "./account/studygroup";
-
 import axios from "axios";
-import { tokenConfig } from "./api_auth";
-// axios.defaults.baseURL = "http://127.0.0.1:8000/";
+import { tokenConfig } from "./AuthAPI";
+
 
 export default {
   /* ------Group CRUD api------ */

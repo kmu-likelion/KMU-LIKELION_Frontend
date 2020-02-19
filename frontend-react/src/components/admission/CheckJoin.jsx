@@ -2,7 +2,7 @@ import React, { Component } from "react";
 
 import Container from "@material-ui/core/Container";
 import Paper from "@material-ui/core/Paper";
-import api from "../../api/api_admission";
+import api from "../../api/AdmissionAPI";
 import CheckJoinView from "./CheckJoinView";
 
 // import FormControl from "@material-ui/core/FormControl";

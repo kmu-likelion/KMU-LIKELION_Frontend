@@ -1,43 +1,45 @@
 import React, { Component } from "react";
-import { getUser } from "../../api/api_auth";
+import { getUser } from "../../../api/AuthAPI";
 import Grid from "@material-ui/core/Grid";
 import Container from "@material-ui/core/Container";
-import Paper from "@material-ui/core/Paper";
+// import Paper from "@material-ui/core/Paper";
 // import api from "../../api/api_board";
 // import VirtualizedList from "./likedPostView";
 // import { Link } from "react-router-dom";
+
+
 import MyLike from "./MyLike";
-import Button from "@material-ui/core/Button";
-import TextField from '@material-ui/core/TextField';
 import LeftProfileView from "./LeftProfileView";
 import MyProfile from "./MyProfile";
+import MyPost from "./MyPost";
+import MyComment from "./MyComment";
 
 class Mypage extends Component {
-  state = {
-    id: "",
-    img: "",
-    username: "",
-    password: "",
-    major: "",
-    student_id: "",
-    start_num: "",
-    sns_id: "",
-    email: "",
-    token: "",
-    type: "Myprofile"
-  };
+  constructor(props){
+    super(props);
+    this.state = {
+      id: "",
+      img: "",
+      username: "",
+      password: "",
+      major: "",
+      student_id: "",
+      start_num: "",
+      sns_id: "",
+      email: "",
+      token: "",
+      type: "Myprofile",
+      authname:"",
+    };
+
+  }
+  
 
   componentDidMount() {
     console.log("New ComponentDidMount");
-    // const _id = window.sessionStorage.getItem("id");
     const _id = this.props.match.params.id;
     this.getUser(_id);
-
     console.log(this.state.type);
-    // this.getLikePosts("notice");
-    // this.getLikePosts("QnA");
-    // this.getLikePosts("study");
-    // this.getLikePosts("recruit");
   }
 
   async getUser(userId) {
@@ -58,13 +60,9 @@ class Mypage extends Component {
       })
       .catch(err => console.log(err));
   }
-  handlingSubmit1 = async event => {
+  handlingSubmit = async (event, typename) => {
     event.preventDefault(); //event의 디폴트 기능(새로고침 되는 것 등..) -> 막는다.
-    this.setState({ type: "Myprofile" });
-  };
-  handlingSubmit = async event => {
-    event.preventDefault(); //event의 디폴트 기능(새로고침 되는 것 등..) -> 막는다.
-    this.setState({ type: "MyLike" });
+    this.setState({ type: typename });
   };
 
   render() {
@@ -77,7 +75,6 @@ class Mypage extends Component {
                       <LeftProfileView 
                         username ={this.state.username} 
                         sns_id={this.state.sns_id} 
-                        handlingSubmit1={this.handlingSubmit1}
                         handlingSubmit= {this.handlingSubmit}
                         />
                     </Grid>
@@ -103,7 +100,6 @@ class Mypage extends Component {
                       <LeftProfileView 
                           username ={this.state.username} 
                           sns_id={this.state.sns_id} 
-                          handlingSubmit1={this.handlingSubmit1}
                           handlingSubmit= {this.handlingSubmit}
                           />
                         
@@ -116,6 +112,48 @@ class Mypage extends Component {
                   
                 </Container>
               );
+          case 'MyPost':
+            return (
+              <Container maxWidth="lg" className="PostingSection">
+                <Grid container spacing={2} className ="firstbox">
+                  <Grid item xs={12} sm={4}>
+                    <LeftProfileView 
+                        username ={this.state.username} 
+                        sns_id={this.state.sns_id} 
+                        handlingSubmit= {this.handlingSubmit}
+                        />
+                      
+                  </Grid>
+                  <Grid item xs={12} sm ={8}>
+                    <MyPost
+                    id={this.state.id}
+                      />
+                  </Grid>
+                </Grid>
+                
+              </Container>
+            );
+          case 'MyComment':
+            return (
+              <Container maxWidth="lg" className="PostingSection">
+                <Grid container spacing={2} className ="firstbox">
+                  <Grid item xs={12} sm={4}>
+                    <LeftProfileView 
+                        username ={this.state.username} 
+                        sns_id={this.state.sns_id} 
+                        handlingSubmit= {this.handlingSubmit}
+                        />
+                      
+                  </Grid>
+                  <Grid item xs={12} sm ={8}>
+                    <MyComment
+                    id={this.state.id}
+                      />
+                  </Grid>
+                </Grid>
+                
+              </Container>
+            );
           default:
               return null;
       }

@@ -2,7 +2,7 @@ import React from "react";
 import Container from "@material-ui/core/Container";
 // import Grid from '@material-ui/core/Grid';
 import { Link } from "react-router-dom";
-import api from "../../../api/api_board";
+import api from "../../../api/BoardAPI";
 import PostView from "./PostView";
 
 class NoticeList extends React.Component {

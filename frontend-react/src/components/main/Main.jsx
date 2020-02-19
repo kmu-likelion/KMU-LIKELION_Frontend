@@ -1,5 +1,5 @@
 import React from "react";
-import api from "../../api/api_board";
+import api from "../../api/BoardAPI";
 import RecentPost from "./RecentPost";
 
 import logo from "./logo.png";
@@ -8,7 +8,7 @@ import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
 
 import Carousel from "react-bootstrap/Carousel";
-import { ClubCalendar } from "./ClubCalendar";
+import { ClubCalendar } from "../calendar/ClubCalendar";
 
 class Main extends React.Component {
   constructor(props) {

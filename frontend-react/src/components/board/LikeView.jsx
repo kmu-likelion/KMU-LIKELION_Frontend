@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import Button from "@material-ui/core/Button";
-// import CardActions from '@material-ui/core/CardActions';
-import api from "../../api/api_board";
+import api from "../../api/BoardAPI";
 
 export default class LikeView extends Component {
   state = {

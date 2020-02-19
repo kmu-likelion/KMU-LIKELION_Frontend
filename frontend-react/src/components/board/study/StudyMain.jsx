@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import api from "../../../api/api_group";
+import api from "../../../api/GroupAPI";
 
 import GroupView from "./GroupView";
 

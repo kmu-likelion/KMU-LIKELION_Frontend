@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
-import SwitchBase from "@material-ui/core/internal/SwitchBase";
+// import SwitchBase from "@material-ui/core/internal/SwitchBase";
 
 export default class PostView extends Component {
   render() {

@@ -53,18 +53,22 @@
 
 .left-footer {
   text-align: center;
+  /* align-items: center; */
   border-right: solid;
   border-color: #f38014;
   border-width: 0.01rem;
   /* height: 93px; */
   font-size: 15px;
   color: #f38104;
+  float: right;
 }
 
 .right-footer {
   font-size: 0.9em;
+  width: auto;
   color: #f38104;
   line-height: 0.6rem;
+  float: left;
 }
 .link {
   text-decoration: none;
@@ -141,6 +145,20 @@
   height: 100%;
 }
 
+.MyPost {
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+  padding-inline-start: 2rem;
+  height: 100%;
+}
+
+.MyComment {
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+  padding-inline-start: 2rem;
+  height: 100%;
+}
+
 .faked {
   float: right;
   margin-bottom: 2rem;
@@ -171,4 +189,8 @@
 }
 .mentoring-ul {
   padding: 0%;
+}
+
+.post-body {
+  height: 300px;
 }

@@ -1,11 +1,11 @@
 import React, { Component } from "react";
-import api from "../../../api/api_board";
+import api from "../../../api/BoardAPI";
 import { Link } from "react-router-dom";
 import moment from "moment";
 
 import LikeView from "../LikeView";
-import CommentNew from "../CommentNew";
-import CommentView from "../CommentView";
+import CommentNew from "../comment/CommentNew";
+import CommentView from "../comment/CommentView";
 
 // @material-ui
 import Button from "@material-ui/core/Button";

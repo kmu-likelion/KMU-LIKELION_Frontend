@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import api from "../../../api/api_board";
+import api from "../../../api/BoardAPI";
 
 import { Link } from "react-router-dom";
 

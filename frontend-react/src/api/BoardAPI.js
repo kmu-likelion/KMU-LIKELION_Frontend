@@ -1,5 +1,5 @@
 import axios from "axios";
-import { tokenConfig } from "./api_auth";
+import { tokenConfig } from "./AuthAPI";
 axios.defaults.baseURL = "http://127.0.0.1:8000/";
 axios.defaults.xsrfCookieName = "csrftoken";
 axios.defaults.xsrfHeaderName = "X-CSRFToken";
@@ -55,5 +55,9 @@ export default {
   changeLike(url, id) {
     console.log("change like status api 실행.");
     return axios.post(`board/${url}/${id}/like/`, null, tokenConfig());
+  },
+  getMyPost(id){
+    console.log("get MyPost api 실행");
+    return axios.get(`accounts/user/${id}/activity/`,tokenConfig());
   }
 };

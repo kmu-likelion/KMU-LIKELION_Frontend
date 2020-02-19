@@ -1,5 +1,5 @@
 import axios from "axios";
-import { tokenConfig } from "./api_auth";
+import { tokenConfig } from "./AuthAPI";
 
 export default {
   /* ------Group CRUD api------ */

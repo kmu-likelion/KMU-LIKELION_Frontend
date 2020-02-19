@@ -1,8 +1,7 @@
 import React, { Component } from "react";
-import api from "../../../api/api_board";
-import api_cal from "../../../api/api_calendar";
+import api from "../../../api/BoardAPI";
+// import api_cal from "../../../api/api_calendar";
 import { Link } from "react-router-dom";
-// import { Router } from "react-router";
 
 // material-ui
 import Container from "@material-ui/core/Container";
@@ -64,30 +63,30 @@ class NoticeNew extends Component {
       })
       .then(res => {
         console.log("정상처리 : ", res);
-        this.createCalendarEvent(res.data.id);
+        // this.createCalendarEvent(res.data.id);
       })
       .catch(err => console.log(err));
 
     this.props.history.push("/notice");
   };
 
-  createCalendarEvent = async notice_id => {
-    await api_cal
-      .createCalendar({
-        title: this.state.mark_name,
-        start_date: moment(this.state.notice_date).format("YYYY-MM-DD"),
-        end_date: moment(this.state.notice_date).format("YYYY-MM-DD"),
-        contents: this.state.body,
-        plan_type: 0,
-        notice_id: notice_id
-      })
-      .then(res => {
-        console.log("캘린더이벤트 생성완료 : ", res.data);
-      })
-      .catch(err => {
-        console.log(err);
-      });
-  };
+  // createCalendarEvent = async notice_id => {
+  //   await api_cal
+  //     .createCalendar({
+  //       title: this.state.mark_name,
+  //       start_date: moment(this.state.notice_date).format("YYYY-MM-DD"),
+  //       end_date: moment(this.state.notice_date).format("YYYY-MM-DD"),
+  //       contents: this.state.body,
+  //       plan_type: 0,
+  //       notice_id: notice_id
+  //     })
+  //     .then(res => {
+  //       console.log("캘린더이벤트 생성완료 : ", res.data);
+  //     })
+  //     .catch(err => {
+  //       console.log(err);
+  //     });
+  // };
 
   render() {
     return (

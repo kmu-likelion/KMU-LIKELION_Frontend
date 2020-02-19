@@ -4,7 +4,7 @@ import Button from "@material-ui/core/Button";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 
-import api from "../../api/api_board";
+import api from "../../../api/BoardAPI";
 import TextField from "@material-ui/core/TextField";
 
 export default class CommentView extends Component {
