@@ -37,23 +37,30 @@ class NoticeForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      id: "",
+      userId: "",
       username: "",
       title: "",
       body: "",
       noticeDate: new Date(),
       isRecorded: false,
       eventName: "",
-      endSubmit: false
+      endSubmit: false,
+
+      isEdit: false,
+      postId: ""
     };
   }
 
   componentDidMount() {
-    console.log("New ComponentDidMount");
-    const _id = window.sessionStorage.getItem("id");
-    const _user = window.sessionStorage.getItem("username");
-    if (_id) {
-      this.setState({ id: _id, username: _user });
+    if (window.sessionStorage.getItem("id")) {
+      this.setState({
+        userId: window.sessionStorage.getItem("id"),
+        username: window.sessionStorage.getItem("username")
+      });
+    }
+
+    if (this.props.isEdit) {
+      this.getPostInfo();
     }
   }
 
@@ -65,25 +72,61 @@ class NoticeForm extends Component {
     this.setState({ [event.target.name]: event.target.checked });
   };
 
+  getPostInfo = async () => {
+    let post_id = this.props.editId;
+    await api.getPost("notice", post_id).then(res => {
+      console.log(res.data);
+      this.setState({
+        title: res.data.title,
+        body: res.data.body,
+        noticeDate: res.data.notice_date,
+        isRecorded: res.data.is_recorded,
+        eventName: res.data.event_name
+      });
+    });
+  };
+
   handlingSubmit = async event => {
     event.preventDefault();
 
-    await api
-      .createPost("notice", {
-        title: this.state.title,
-        body: this.state.body,
-        user_id: this.state.id,
-        notice_date: moment(this.state.noticeDate).format("YYYY-MM-DD"),
-        is_recorded: this.state.isRecorded, //캘린더표기 여부에 따라 notice_date는 유효한값인지 판단 가능.
-        event_name: this.state.eventName
-      })
-      .then(res => {
-        console.log("정상처리 : ", res);
-        this.setState({
-          endSubmit: true
-        });
-      })
-      .catch(err => console.log(err));
+    switch (this.props.isEdit) {
+      case true: //edit function
+        await api
+          .updatePost("notice", this.props.editId, {
+            title: this.state.title,
+            body: this.state.body,
+            user_id: this.state.id,
+            notice_date: moment(this.state.noticeDate).format("YYYY-MM-DD"),
+            is_recorded: this.state.isRecorded, //캘린더표기 여부에 따라 notice_date는 유효한값인지 판단 가능.
+            event_name: this.state.eventName
+          })
+          .then(res => {
+            console.log("정상적으로 수정됨. ", res);
+            this.setState({
+              endSubmit: true
+            });
+          })
+          .catch(err => console.log(err));
+        break;
+      case false: //create function
+        await api
+          .createPost("notice", {
+            title: this.state.title,
+            body: this.state.body,
+            user_id: this.state.userId,
+            notice_date: moment(this.state.noticeDate).format("YYYY-MM-DD"),
+            is_recorded: this.state.isRecorded, //캘린더표기 여부에 따라 notice_date는 유효한값인지 판단 가능.
+            event_name: this.state.eventName
+          })
+          .then(res => {
+            console.log("정상적으로 생성됨. ", res);
+            this.setState({
+              endSubmit: true
+            });
+          })
+          .catch(err => console.log(err));
+        break;
+    }
   };
 
   render() {
@@ -147,7 +190,7 @@ class NoticeForm extends Component {
                 margin="normal"
                 format="yyyy/MM/dd"
                 name="noticeDate"
-                value={this.state.notice_date}
+                value={this.state.noticeDate}
                 onChange={event => this.setState({ noticeDate: event })}
                 KeyboardButtonProps={{
                   "aria-label": "change date"

@@ -90,7 +90,7 @@ class PostUpdateContainer extends Component {
         component = (
           <>
             {header}
-            <NoticeForm isEdit={isEdit} id={editId} />
+            <NoticeForm isEdit={isEdit} editId={editId} />
           </>
         );
         break;
@@ -99,7 +99,7 @@ class PostUpdateContainer extends Component {
         component = (
           <>
             {header}
-            <LectureForm isEdit={isEdit} id={editId} />
+            <LectureForm isEdit={isEdit} editId={editId} />
           </>
         );
         break;
