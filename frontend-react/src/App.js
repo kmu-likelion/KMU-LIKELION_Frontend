@@ -10,7 +10,7 @@ import Main from "./components/main/Main";
 import Login from "./components/accounts/Login";
 import Mypage from "./components/accounts/mypage/Mypage";
 
-import Store from "./store/store";
+import Store from "./store/Store";
 
 import { authlogout, tokenConfig } from "./api/AuthAPI";
 

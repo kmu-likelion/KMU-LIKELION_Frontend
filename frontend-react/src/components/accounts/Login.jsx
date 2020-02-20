@@ -1,43 +1,42 @@
 import React, { Component } from "react";
 import { authlogin } from "../../api/AuthAPI";
-import Store from "../../store/store";
+import Store from "../../store/Store";
 import { Link, Redirect } from "react-router-dom";
 import Container from "@material-ui/core/Container";
 import Paper from "@material-ui/core/Paper";
-import Avatar from '@material-ui/core/Avatar';
-import Button from '@material-ui/core/Button';
-import TextField from '@material-ui/core/TextField';
-import Grid from '@material-ui/core/Grid';
-import Typography from '@material-ui/core/Typography';
-import PersonOutlineOutlinedIcon from '@material-ui/icons/PersonOutlineOutlined';
-import { withStyles } from '@material-ui/core/styles';
-
+import Avatar from "@material-ui/core/Avatar";
+import Button from "@material-ui/core/Button";
+import TextField from "@material-ui/core/TextField";
+import Grid from "@material-ui/core/Grid";
+import Typography from "@material-ui/core/Typography";
+import PersonOutlineOutlinedIcon from "@material-ui/icons/PersonOutlineOutlined";
+import { withStyles } from "@material-ui/core/styles";
 
 const useStyles = theme => ({
   paper: {
     marginTop: theme.spacing(8),
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center"
   },
   avatar: {
     margin: theme.spacing(1),
-    backgroundColor: theme.palette.primary.main,
+    backgroundColor: theme.palette.primary.main
   },
   form: {
-    width: '100%',
-    marginTop: theme.spacing(3),
+    width: "100%",
+    marginTop: theme.spacing(3)
   },
   submit: {
-    margin: theme.spacing(3, 0, 2),
+    margin: theme.spacing(3, 0, 2)
   },
   button: {
-    margin: theme.spacing(0, 0, 3),
+    margin: theme.spacing(0, 0, 3)
   },
   center: {
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center"
   }
 });
 
@@ -97,12 +96,12 @@ class Login extends Component {
     return (
       <Container maxWidth="xs" className="signup-container">
         <Paper className={classes.paper} elevation={0}>
-        <Avatar className={classes.avatar}>
-          <PersonOutlineOutlinedIcon />
-        </Avatar>
-        <Typography component="h1" variant="h5">
-          Sign In
-        </Typography>
+          <Avatar className={classes.avatar}>
+            <PersonOutlineOutlinedIcon />
+          </Avatar>
+          <Typography component="h1" variant="h5">
+            Sign In
+          </Typography>
           <form onSubmit={this.handlingSubmit} className={classes.form}>
             <Grid container spacing={2}>
               <Grid item xs={12}>
@@ -138,7 +137,7 @@ class Login extends Component {
               className={classes.submit}
             >
               Sign in
-            </Button>          
+            </Button>
             <Button
               type="submit"
               fullWidth
@@ -148,9 +147,9 @@ class Login extends Component {
               href="/register"
             >
               Sign Up
-          </Button>
+            </Button>
           </form>
-          
+
           <Link to="/">Cancel</Link>
         </Paper>
       </Container>
@@ -189,4 +188,4 @@ class Login extends Component {
   }
 }
 
-export default withStyles(useStyles)(Login)
+export default withStyles(useStyles)(Login);

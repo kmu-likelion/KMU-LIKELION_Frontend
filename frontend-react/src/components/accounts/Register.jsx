@@ -1,16 +1,16 @@
 import React from "react";
 // import { authlogin } from "../../api/AuthAPI";
-import Store from "../../store/store";
+import Store from "../../store/Store";
 import { Link, Redirect } from "react-router-dom";
 import Container from "@material-ui/core/Container";
 import Paper from "@material-ui/core/Paper";
-import Avatar from '@material-ui/core/Avatar';
-import Button from '@material-ui/core/Button';
-import TextField from '@material-ui/core/TextField';
-import Grid from '@material-ui/core/Grid';
-import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
-import Typography from '@material-ui/core/Typography';
-import { withStyles } from '@material-ui/core/styles';
+import Avatar from "@material-ui/core/Avatar";
+import Button from "@material-ui/core/Button";
+import TextField from "@material-ui/core/TextField";
+import Grid from "@material-ui/core/Grid";
+import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
+import Typography from "@material-ui/core/Typography";
+import { withStyles } from "@material-ui/core/styles";
 
 // import CssBaseline from '@material-ui/core/CssBaseline';
 // import FormControlLabel from '@material-ui/core/FormControlLabel';
@@ -18,29 +18,28 @@ import { withStyles } from '@material-ui/core/styles';
 // import Link from '@material-ui/core/Link';
 // import Box from '@material-ui/core/Box';
 
-
 const useStyles = theme => ({
   paper: {
     marginTop: theme.spacing(8),
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center"
   },
   avatar: {
     margin: theme.spacing(1),
-    backgroundColor: theme.palette.secondary.main,
+    backgroundColor: theme.palette.secondary.main
   },
   form: {
-    width: '100%',
-    marginTop: theme.spacing(3),
+    width: "100%",
+    marginTop: theme.spacing(3)
   },
   submit: {
-    margin: theme.spacing(3, 0, 2),
+    margin: theme.spacing(3, 0, 2)
   },
   center: {
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center"
   }
 });
 
@@ -56,8 +55,8 @@ class Register extends React.Component {
     email: "",
     major: "",
     studentID: "",
-    startNum : "",
-    snsID : "",
+    startNum: "",
+    snsID: "",
     userImg: "",
     birth: "",
     phoneNum: ""
@@ -73,11 +72,11 @@ class Register extends React.Component {
   };
 
   checkPassword = event => {
-    this.setState({[event.target.name]: event.target.value});
-    if(this.state.password !== event.target.value) {
+    this.setState({ [event.target.name]: event.target.value });
+    if (this.state.password !== event.target.value) {
       event.target.error = true;
     }
-  }
+  };
 
   doSignup = (id, name, img, token) => {
     window.sessionStorage.setItem("id", id);
@@ -86,8 +85,6 @@ class Register extends React.Component {
     window.sessionStorage.setItem("token", token);
     console.log("token in session : ", window.sessionStorage.getItem("token"));
   };
-
-  
 
   render() {
     const { classes } = this.props;
@@ -98,12 +95,12 @@ class Register extends React.Component {
     return (
       <Container maxWidth="xs" className="signup-container">
         <Paper className={classes.paper} elevation={0}>
-        <Avatar className={classes.avatar}>
-          <LockOutlinedIcon />
-        </Avatar>
-        <Typography component="h1" variant="h5">
-          Welcome to KMU LikeLion!
-        </Typography>
+          <Avatar className={classes.avatar}>
+            <LockOutlinedIcon />
+          </Avatar>
+          <Typography component="h1" variant="h5">
+            Welcome to KMU LikeLion!
+          </Typography>
           <form onSubmit={this.handlingSubmit} className={classes.form}>
             <Grid container spacing={2}>
               <Grid item xs={12}>
@@ -140,28 +137,38 @@ class Register extends React.Component {
                   type="password"
                   value={this.state.repassword}
                   onChange={this.handlingChange}
-                  error = {this.state.password === this.state.repassword ? false : true}
-                  helperText={this.state.password === this.state.repassword ? "" : "incorrect!"}
+                  error={
+                    this.state.password === this.state.repassword ? false : true
+                  }
+                  helperText={
+                    this.state.password === this.state.repassword
+                      ? ""
+                      : "incorrect!"
+                  }
                 />
               </Grid>
-              <Grid item xs={12} >
-              <hr/>
-              <Typography component="h1" variant="h5" className={classes.center}>
-                Additional Info
-              </Typography>
+              <Grid item xs={12}>
+                <hr />
+                <Typography
+                  component="h1"
+                  variant="h5"
+                  className={classes.center}
+                >
+                  Additional Info
+                </Typography>
               </Grid>
               <Grid item xs={12} sm={6}>
                 <TextField
-                    autoComplete="fname"
-                    name="firstName"
-                    variant="outlined"
-                    required
-                    fullWidth
-                    label="First Name"
-                    value={this.state.firstName}
-                    onChange={this.handlingChange}
-                    // autoFocus
-                  />
+                  autoComplete="fname"
+                  name="firstName"
+                  variant="outlined"
+                  required
+                  fullWidth
+                  label="First Name"
+                  value={this.state.firstName}
+                  onChange={this.handlingChange}
+                  // autoFocus
+                />
               </Grid>
               <Grid item xs={12} sm={6}>
                 <TextField
@@ -232,7 +239,7 @@ class Register extends React.Component {
               className={classes.submit}
             >
               Sign Up
-            </Button>          
+            </Button>
           </form>
           <Link to="/">Cancel</Link>
         </Paper>
@@ -241,4 +248,4 @@ class Register extends React.Component {
   }
 }
 
-export default withStyles(useStyles)(Register)
+export default withStyles(useStyles)(Register);

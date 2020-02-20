@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 // import { makeStyles } from "@material-ui/core/styles";
-import Store from "../store/store";
+import Store from "../store/Store";
 
 // @material-ui
 import Button from "@material-ui/core/Button";
@@ -10,7 +10,7 @@ import MenuItem from "@material-ui/core/MenuItem";
 import PopupState, { bindTrigger, bindMenu } from "material-ui-popup-state";
 import Avatar from "@material-ui/core/Avatar";
 // bootstrap
-import { Nav, Navbar, NavDropdown } from 'react-bootstrap';
+import { Nav, Navbar, NavDropdown } from "react-bootstrap";
 
 export default function Header(props) {
   const store = useContext(Store);
@@ -25,63 +25,87 @@ export default function Header(props) {
 
   return (
     <div>
-     <Navbar collapseOnSelect expand="lg" variant="dark" style={{ background: "#f38014" }}>
-        <Navbar.Brand as={Link} to="/">KMU-LIKELION</Navbar.Brand>
+      <Navbar
+        collapseOnSelect
+        expand="lg"
+        variant="dark"
+        style={{ background: "#f38014" }}
+      >
+        <Navbar.Brand as={Link} to="/">
+          KMU-LIKELION
+        </Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
-            <Nav className="mr-auto">
-            <Nav.Link as={Link} to="/notice">Notice</Nav.Link>
-            <Nav.Link as={Link} to="/lecture">Lecture</Nav.Link>
-            <Nav.Link as={Link} to="/study">StudyGroup</Nav.Link>
-            <Nav.Link as={Link} to="/QnA">QnA</Nav.Link>
-            </Nav>
-            {store.logged ? (
-                <>
-                <Nav>
-                    <NavDropdown title="Admin-Menu" id="collasible-nav-dropdown">
-                        <NavDropdown.Item as={Link} to="/mentoring">멘토링관리</NavDropdown.Item>
-                        <NavDropdown.Item as={Link} to="/admission/management">입부관리</NavDropdown.Item>
-                    </NavDropdown>
-                </Nav>
-                <Nav>  
-                    <PopupState variant="popover" popupId="popup-menu">
-                        {popupState => (
-                        <>
-                            <Button
-                            style={{ color: "white" }}
-                            {...bindTrigger(popupState)}
-                            >
-                            <Avatar alt="User" src="" />
+          <Nav className="mr-auto">
+            <Nav.Link as={Link} to="/notice">
+              Notice
+            </Nav.Link>
+            <Nav.Link as={Link} to="/lecture">
+              Lecture
+            </Nav.Link>
+            <Nav.Link as={Link} to="/study">
+              StudyGroup
+            </Nav.Link>
+            <Nav.Link as={Link} to="/QnA">
+              QnA
+            </Nav.Link>
+          </Nav>
+          {store.logged ? (
+            <>
+              <Nav>
+                <NavDropdown title="Admin-Menu" id="collasible-nav-dropdown">
+                  <NavDropdown.Item as={Link} to="/mentoring">
+                    멘토링관리
+                  </NavDropdown.Item>
+                  <NavDropdown.Item as={Link} to="/admission/management">
+                    입부관리
+                  </NavDropdown.Item>
+                </NavDropdown>
+              </Nav>
+              <Nav>
+                <PopupState variant="popover" popupId="popup-menu">
+                  {popupState => (
+                    <>
+                      <Button
+                        style={{ color: "white" }}
+                        {...bindTrigger(popupState)}
+                      >
+                        <Avatar alt="User" src="" />
+                      </Button>
+                      <Menu {...bindMenu(popupState)}>
+                        <MenuItem onClick={popupState.close}>
+                          <DropItem to={"/"}>
+                            <Button color="inherit" onClick={store.onLogout}>
+                              Logout
                             </Button>
-                            <Menu {...bindMenu(popupState)}>
-                            <MenuItem onClick={popupState.close}>
-                                <DropItem to={"/"}>
-                                <Button color="inherit" onClick={store.onLogout}>
-                                    Logout
-                                </Button>
-                                </DropItem>
-                            </MenuItem>
-                            <MenuItem onClick={popupState.close}>
-                                <DropItem to={`/Mypage/${id}`}>Mypage</DropItem>
-                            </MenuItem>
-                            </Menu>
-                        </>
-                        )}
-                    </PopupState>
-
-                </Nav>
-                </>
-            ):(
-                <Nav>
-                    <NavDropdown title="Admission" id="collasible-nav-dropdown">
-                        <NavDropdown.Item as={Link} to="/admission/join">입부신청</NavDropdown.Item>
-                        <NavDropdown.Item as={Link} to="/admission/checkjoin">지원내역</NavDropdown.Item>
-                    </NavDropdown>
-                    <Nav.Link as={Link} to="/login">Login</Nav.Link>
-                </Nav>
-            )}
+                          </DropItem>
+                        </MenuItem>
+                        <MenuItem onClick={popupState.close}>
+                          <DropItem to={`/Mypage/${id}`}>Mypage</DropItem>
+                        </MenuItem>
+                      </Menu>
+                    </>
+                  )}
+                </PopupState>
+              </Nav>
+            </>
+          ) : (
+            <Nav>
+              <NavDropdown title="Admission" id="collasible-nav-dropdown">
+                <NavDropdown.Item as={Link} to="/admission/join">
+                  입부신청
+                </NavDropdown.Item>
+                <NavDropdown.Item as={Link} to="/admission/checkjoin">
+                  지원내역
+                </NavDropdown.Item>
+              </NavDropdown>
+              <Nav.Link as={Link} to="/login">
+                Login
+              </Nav.Link>
+            </Nav>
+          )}
         </Navbar.Collapse>
-        </Navbar>
+      </Navbar>
     </div>
   );
 }
