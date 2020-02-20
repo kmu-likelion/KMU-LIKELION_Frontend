@@ -1,0 +1,196 @@
+@font-face {
+  font-family: "Eoe_Zno_L";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_eight@1.0/Eoe_Zno_L.woff")
+    format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+#root {
+  font-family: "Eoe_Zno_L";
+}
+.card {
+  align-items: center;
+  text-align: center;
+}
+
+.main-calendar {
+  border-radius: 3%;
+}
+
+.main-container {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+.post-container {
+  padding-bottom: 1rem;
+}
+.PostingForm {
+  padding: 1rem;
+  margin: 1rem;
+}
+
+.mentoring-form {
+  display: flex;
+}
+.mentoring-select {
+  margin-left: 1rem;
+  min-width: 6rem;
+  text-align: center;
+}
+
+.join-table-section {
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+.footer {
+  border-top: solid;
+  border-width: 3rem;
+  border-color: #fdd7ab;
+  padding-top: 2rem;
+  font-weight: bold;
+}
+
+.left-footer {
+  text-align: center;
+  /* align-items: center; */
+  border-right: solid;
+  border-color: #f38014;
+  border-width: 0.01rem;
+  /* height: 93px; */
+  font-size: 15px;
+  color: #f38104;
+  float: right;
+}
+
+.right-footer {
+  font-size: 0.9em;
+  width: auto;
+  color: #f38104;
+  line-height: 0.6rem;
+  float: left;
+}
+.link {
+  text-decoration: none;
+  outline: none;
+}
+.link:hover,
+.link:active {
+  text-decoration: none;
+}
+
+.nav-link,
+.nav-link:hover,
+.nav-link:active {
+  color: #fff;
+}
+
+.drop-link,
+.drop-link:hover,
+.drop-link:active {
+  color: black;
+}
+
+.auth-link,
+.auth-link:hover,
+.auth-link:active {
+  color: #fff;
+}
+
+.commentForm {
+  display: flex;
+  flex-direction: column;
+  width: 25rem;
+}
+
+.RecentForm {
+  padding: 0.5rem;
+  padding-left: 1rem;
+  /* margin: 3rem; */
+}
+
+.main-recentTitle {
+  text-align: center;
+  font-weight: bold;
+}
+.main-postTitle {
+  font-size: x-large;
+}
+.PostingSection {
+  padding: 2rem;
+}
+
+.LeftProfile {
+  text-align: center;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+  height: 100%;
+}
+.MyProfile {
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+  padding-inline-start: 2rem;
+  padding-inline-end: 8rem;
+  height: 100%;
+  width: 100%;
+}
+.standard-read-only-input {
+  width: 100%;
+}
+
+.MyLike {
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+  padding-inline-start: 2rem;
+  height: 100%;
+}
+
+.MyPost {
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+  padding-inline-start: 2rem;
+  height: 100%;
+}
+
+.MyComment {
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+  padding-inline-start: 2rem;
+  height: 100%;
+}
+
+.faked {
+  float: right;
+  margin-bottom: 2rem;
+}
+
+.avatar {
+  display: flex;
+  justify-content: space-between;
+}
+
+.comment-info {
+  display: flex;
+  vertical-align: center;
+}
+
+/* metoring page */
+.mentoring-table {
+  /* align: center; */
+  /* align-content: center;
+  vertical-align: auto; */
+}
+.mentoring-list {
+  width: 100%;
+  position: relative;
+  overflow: auto;
+  /* max-height: 50px; */
+  height: 10rem;
+}
+.mentoring-ul {
+  padding: 0%;
+}
+
+.post-body {
+  height: 300px;
+}
