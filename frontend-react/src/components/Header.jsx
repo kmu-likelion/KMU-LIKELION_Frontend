@@ -38,13 +38,13 @@ export default function Header(props) {
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="mr-auto">
             <Nav.Link as={Link} to="/notice">
-              Notice
+              공지사항
             </Nav.Link>
             <Nav.Link as={Link} to="/lecture">
-              Lecture
+              강의
             </Nav.Link>
             <Nav.Link as={Link} to="/study">
-              StudyGroup
+              스터디그룹
             </Nav.Link>
             <Nav.Link as={Link} to="/QnA">
               QnA
@@ -53,7 +53,7 @@ export default function Header(props) {
           {store.logged ? (
             <>
               <Nav>
-                <NavDropdown title="Admin-Menu" id="collasible-nav-dropdown">
+                <NavDropdown title="동아리관리" id="collasible-nav-dropdown">
                   <NavDropdown.Item as={Link} to="/mentoring">
                     멘토링관리
                   </NavDropdown.Item>
@@ -76,12 +76,12 @@ export default function Header(props) {
                         <MenuItem onClick={popupState.close}>
                           <DropItem to={"/"}>
                             <Button color="inherit" onClick={store.onLogout}>
-                              Logout
+                              로그아웃
                             </Button>
                           </DropItem>
                         </MenuItem>
                         <MenuItem onClick={popupState.close}>
-                          <DropItem to={`/Mypage/${id}`}>Mypage</DropItem>
+                          <DropItem to={`/Mypage/${id}`}>마이페이지</DropItem>
                         </MenuItem>
                       </Menu>
                     </>
@@ -91,7 +91,7 @@ export default function Header(props) {
             </>
           ) : (
             <Nav>
-              <NavDropdown title="Admission" id="collasible-nav-dropdown">
+              <NavDropdown title="지원하기" id="collasible-nav-dropdown">
                 <NavDropdown.Item as={Link} to="/admission/join">
                   입부신청
                 </NavDropdown.Item>
@@ -100,7 +100,7 @@ export default function Header(props) {
                 </NavDropdown.Item>
               </NavDropdown>
               <Nav.Link as={Link} to="/login">
-                Login
+                로그인
               </Nav.Link>
             </Nav>
           )}

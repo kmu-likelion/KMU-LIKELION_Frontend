@@ -29,7 +29,9 @@ class EventModal extends React.Component {
           <Modal.Header closeButton>
             <Modal.Title>{eventInfo.title}</Modal.Title>
           </Modal.Header>
-          <Modal.Body>{eventInfo.body}</Modal.Body>
+          <Modal.Body>
+            <pre className="preTag">{eventInfo.body}</pre>
+          </Modal.Body>
           <Modal.Footer>
             <Button onClick={handlingClose}>Close</Button>
             <Button

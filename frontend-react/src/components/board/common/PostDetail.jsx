@@ -11,12 +11,12 @@ import CommentView from "../comment/CommentView";
 import Button from "@material-ui/core/Button";
 import Container from "@material-ui/core/Container";
 import Paper from "@material-ui/core/Paper";
-import Typography from '@material-ui/core/Typography';
-import Grid from '@material-ui/core/Grid';
+import Typography from "@material-ui/core/Typography";
+import Grid from "@material-ui/core/Grid";
 import Table from "@material-ui/core/Table";
 import TableRow from "@material-ui/core/TableRow";
 import TableCell from "@material-ui/core/TableCell";
-import Divider from '@material-ui/core/Divider';
+import Divider from "@material-ui/core/Divider";
 
 class NoticeDetail extends Component {
   state = {
@@ -86,89 +86,91 @@ class NoticeDetail extends Component {
     // console.log("f------------------df", this.state.body);
     // var contents = this.state.body.replace("\n",);
     return (
-        <Container maxWidth="lg" className="main-container">
-            <Paper>
-                <Grid container spacing={2}>
-                    <Grid item xs={1} sm={1}></Grid>
-                    <Grid item xs={10} sm={10}>
-                        <Table className={"post-table"}>
-                            <TableRow>
-                                <TableCell>
-                                    <Typography component="h1" variant="h5">
-                                        {this.state.title}
-                                    </Typography>
-                                    
-                                </TableCell>
-                            </TableRow>                            
-                            <TableRow>
-                                <small>작성일 {this.state.pub_date}</small>  /&nbsp;
-                                <small>작성자 {this.state.author_name}</small>
-                            </TableRow> 
-                            <TableRow>
-                                <TableCell className="post-body">
-                                    <pre>{this.state.body}</pre>
-                                </TableCell>
-                            </TableRow>
+      <Container maxWidth="lg" className="main-container">
+        <Paper>
+          <Grid container spacing={2}>
+            <Grid item xs={1} sm={1}></Grid>
+            <Grid item xs={10} sm={10}>
+              <Table className={"post-table"}>
+                <TableRow>
+                  <TableCell>
+                    <Typography component="h1" variant="h5">
+                      {this.state.title}
+                    </Typography>
+                  </TableCell>
+                </TableRow>
+                <TableRow>
+                  <small>작성일 {this.state.pub_date}</small> /&nbsp;
+                  <small>작성자 {this.state.author_name}</small>
+                </TableRow>
+                <TableRow>
+                  <TableCell className="post-body">
+                    <pre className="preTag">{this.state.body}</pre>
+                  </TableCell>
+                </TableRow>
 
-                            <TableRow>
-                                <TableCell>
-                                    <LikeView
-                                        board_id={this.props.match.params.id}
-                                        board_name="notice"
-                                    />
-                                    <Button
-                                        color="primary"
-                                        size="small"
-                                        onClick={event => this.handlingDelete("notice", this.state.id)}
-                                    >
-                                        Delete
-                                    </Button>
-                                    <Button
-                                        color="primary"
-                                        size="small"
-                                        component={Link} to={`/notice/update/${this.state.id}`}
-                                    >
-                                        Update
-                                    </Button>
-                                    <Button
-                                        color="primary"
-                                        size="small"
-                                        component={Link} to={"/notice"}
-                                    >
-                                        Back
-                                    </Button>    
-                                </TableCell>
-                            </TableRow>
-                        </Table>
-                        <Divider />
-                        <Typography component="h1" variant="h6">
-                            Comment
-                        </Typography>
-                        
-                        {this.state.comments.map(comment => (
-                            <CommentView
-                            user_id={comment.user_id}
-                            author_name={comment.author_name}
-                            body={comment.body}
-                            comment_id={comment.id}
-                            handlingDelete={this.handlingDelete}
-                            getComments={this.callGetComments}
-                            board_id={comment.board}
-                            user_img={comment.user_img}
-                            url="notice_comment"
-                            />
-                        ))}
-                        <CommentNew
-                            url="notice_comment"
-                            board_id={this.state.id}
-                            getComments={this.callGetComments}
-                            />
-                    </Grid>
-                    <Grid item xs={1} sm={1}></Grid>
-                </Grid>
-            </Paper>
-        </Container>
-      
+                <TableRow>
+                  <TableCell>
+                    <LikeView
+                      board_id={this.props.match.params.id}
+                      board_name="notice"
+                    />
+                    <Button
+                      color="primary"
+                      size="small"
+                      onClick={event =>
+                        this.handlingDelete("notice", this.state.id)
+                      }
+                    >
+                      Delete
+                    </Button>
+                    <Button
+                      color="primary"
+                      size="small"
+                      component={Link}
+                      to={`/notice/update/${this.state.id}`}
+                    >
+                      Update
+                    </Button>
+                    <Button
+                      color="primary"
+                      size="small"
+                      component={Link}
+                      to={"/notice"}
+                    >
+                      Back
+                    </Button>
+                  </TableCell>
+                </TableRow>
+              </Table>
+              <Divider />
+              <Typography component="h1" variant="h6">
+                Comment
+              </Typography>
+
+              {this.state.comments.map(comment => (
+                <CommentView
+                  user_id={comment.user_id}
+                  author_name={comment.author_name}
+                  body={comment.body}
+                  comment_id={comment.id}
+                  handlingDelete={this.handlingDelete}
+                  getComments={this.callGetComments}
+                  board_id={comment.board}
+                  user_img={comment.user_img}
+                  url="notice_comment"
+                />
+              ))}
+              <CommentNew
+                url="notice_comment"
+                board_id={this.state.id}
+                getComments={this.callGetComments}
+              />
+            </Grid>
+            <Grid item xs={1} sm={1}></Grid>
+          </Grid>
+        </Paper>
+      </Container>
     );
   }
 }

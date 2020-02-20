@@ -15,7 +15,7 @@ export default class PostView extends Component {
       <Card className={"card"}>
         <CardContent>
           <Typography>
-            <pre>
+            <pre className="preTag">
               <h4>
                 <Link to={`/notice/detail/${id}`}>{title}</Link>
               </h4>

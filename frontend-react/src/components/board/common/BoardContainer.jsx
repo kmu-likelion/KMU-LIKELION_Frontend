@@ -63,20 +63,6 @@ class BoardContainer extends React.Component {
               <Grid item xs={0} sm={1}></Grid>
             </Grid>
           </Paper>
-          {/* <h1>Notice List</h1>
-          <h4>
-            <Link to={"/notice/new"}>New Notice</Link>
-          </h4>
-          <br />
-          {this.state.noticeList.map(post => (
-            <PostView
-              key={post.id}
-              id={post.id}
-              title={post.title}
-              body={post.body}
-              noticeDate={post.notice_date}
-            />
-          ))} */}
         </Container>
       </div>
     );

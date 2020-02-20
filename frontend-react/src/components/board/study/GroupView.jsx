@@ -16,7 +16,7 @@ export default class GroupView extends Component {
             <br />
             <Link to={`/study/${name}`}>{name}</Link>
             <hr />
-            {introduction}
+            <pre className="preTag">{introduction}</pre>
           </Typography>
         </CardContent>
       </Card>
