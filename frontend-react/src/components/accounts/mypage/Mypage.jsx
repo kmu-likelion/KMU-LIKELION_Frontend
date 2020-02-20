@@ -7,7 +7,6 @@ import Container from "@material-ui/core/Container";
 // import VirtualizedList from "./likedPostView";
 // import { Link } from "react-router-dom";
 
-
 import MyLike from "./MyLike";
 import LeftProfileView from "./LeftProfileView";
 import MyProfile from "./MyProfile";
@@ -15,7 +14,7 @@ import MyPost from "./MyPost";
 import MyComment from "./MyComment";
 
 class Mypage extends Component {
-  constructor(props){
+  constructor(props) {
     super(props);
     this.state = {
       id: "",
@@ -29,11 +28,9 @@ class Mypage extends Component {
       email: "",
       token: "",
       type: "Myprofile",
-      authname:"",
+      authname: ""
     };
-
   }
-  
 
   componentDidMount() {
     console.log("New ComponentDidMount");
@@ -66,97 +63,88 @@ class Mypage extends Component {
   };
 
   render() {
-      switch(this.state.type) {
-          case 'Myprofile':
-              return (
-                <Container maxWidth="lg" className="PostingSection">
-                  <Grid container spacing={2} className ="firstbox">
-                    <Grid item xs={12} sm={4} >
-                      <LeftProfileView 
-                        username ={this.state.username} 
-                        sns_id={this.state.sns_id} 
-                        handlingSubmit= {this.handlingSubmit}
-                        />
-                    </Grid>
-                    <Grid item xs={12} sm ={8} >
-                      <MyProfile 
-                        id={this.state.id}
-                        major ={this.state.major}
-                        start_num={this.state.start_num}
-                        student_id={this.state.student_id}
-                        email={this.state.email}
-                      
-                      />
-                    </Grid>
-                  </Grid>
-                  
-                </Container>
-              );
-          case 'MyLike':
-              return (
-                <Container maxWidth="lg" className="PostingSection">
-                  <Grid container spacing={2} className ="firstbox">
-                    <Grid item xs={12} sm={4}>
-                      <LeftProfileView 
-                          username ={this.state.username} 
-                          sns_id={this.state.sns_id} 
-                          handlingSubmit= {this.handlingSubmit}
-                          />
-                        
-                    </Grid>
-                    <Grid item xs={12} sm ={8}>
-                      <MyLike
-                        />
-                    </Grid>
-                  </Grid>
-                  
-                </Container>
-              );
-          case 'MyPost':
-            return (
-              <Container maxWidth="lg" className="PostingSection">
-                <Grid container spacing={2} className ="firstbox">
-                  <Grid item xs={12} sm={4}>
-                    <LeftProfileView 
-                        username ={this.state.username} 
-                        sns_id={this.state.sns_id} 
-                        handlingSubmit= {this.handlingSubmit}
-                        />
-                      
-                  </Grid>
-                  <Grid item xs={12} sm ={8}>
-                    <MyPost
-                    id={this.state.id}
-                      />
-                  </Grid>
-                </Grid>
-                
-              </Container>
-            );
-          case 'MyComment':
-            return (
-              <Container maxWidth="lg" className="PostingSection">
-                <Grid container spacing={2} className ="firstbox">
-                  <Grid item xs={12} sm={4}>
-                    <LeftProfileView 
-                        username ={this.state.username} 
-                        sns_id={this.state.sns_id} 
-                        handlingSubmit= {this.handlingSubmit}
-                        />
-                      
-                  </Grid>
-                  <Grid item xs={12} sm ={8}>
-                    <MyComment
-                    id={this.state.id}
-                      />
-                  </Grid>
-                </Grid>
-                
-              </Container>
-            );
-          default:
-              return null;
-      }
+    switch (this.state.type) {
+      case "Myprofile":
+        return (
+          <Container maxWidth="lg" className="PostingSection">
+            <Grid container spacing={2} className="firstbox">
+              <Grid item xs={12} sm={4}>
+                <LeftProfileView
+                  username={this.state.username}
+                  sns_id={this.state.sns_id}
+                  user_img={this.state.img}
+                  handlingSubmit={this.handlingSubmit}
+                />
+              </Grid>
+              <Grid item xs={12} sm={8}>
+                <MyProfile
+                  id={this.state.id}
+                  major={this.state.major}
+                  start_num={this.state.start_num}
+                  student_id={this.state.student_id}
+                  email={this.state.email}
+                />
+              </Grid>
+            </Grid>
+          </Container>
+        );
+      case "MyLike":
+        return (
+          <Container maxWidth="lg" className="PostingSection">
+            <Grid container spacing={2} className="firstbox">
+              <Grid item xs={12} sm={4}>
+                <LeftProfileView
+                  username={this.state.username}
+                  sns_id={this.state.sns_id}
+                  user_img={this.state.img}
+                  handlingSubmit={this.handlingSubmit}
+                />
+              </Grid>
+              <Grid item xs={12} sm={8}>
+                <MyLike />
+              </Grid>
+            </Grid>
+          </Container>
+        );
+      case "MyPost":
+        return (
+          <Container maxWidth="lg" className="PostingSection">
+            <Grid container spacing={2} className="firstbox">
+              <Grid item xs={12} sm={4}>
+                <LeftProfileView
+                  username={this.state.username}
+                  sns_id={this.state.sns_id}
+                  user_img={this.state.img}
+                  handlingSubmit={this.handlingSubmit}
+                />
+              </Grid>
+              <Grid item xs={12} sm={8}>
+                <MyPost id={this.state.id} />
+              </Grid>
+            </Grid>
+          </Container>
+        );
+      case "MyComment":
+        return (
+          <Container maxWidth="lg" className="PostingSection">
+            <Grid container spacing={2} className="firstbox">
+              <Grid item xs={12} sm={4}>
+                <LeftProfileView
+                  username={this.state.username}
+                  sns_id={this.state.sns_id}
+                  user_img={this.state.img}
+                  handlingSubmit={this.handlingSubmit}
+                />
+              </Grid>
+              <Grid item xs={12} sm={8}>
+                <MyComment id={this.state.id} />
+              </Grid>
+            </Grid>
+          </Container>
+        );
+      default:
+        return null;
+    }
   }
 }
 

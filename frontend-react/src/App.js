@@ -73,7 +73,7 @@ class App extends React.Component {
           <Route path="/notice" component={BoardRouter} />
           <Route path="/QnA" component={BoardRouter} />
           <Route path="/study" component={StudyRouter} />
-          <Route path="/recruit" component={BoardRouter} />
+          <Route path="/lecture" component={BoardRouter} />
 
           <Route path="/admission" component={AdmissionRouter} />
           <Route path="/mentoring" component={MentoringContainer} />

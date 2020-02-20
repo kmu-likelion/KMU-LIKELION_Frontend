@@ -13,9 +13,10 @@ import QnAUpdate from "../components/board/qna/QnAUpdate";
 // import RecruitDetail from "./recruit/RecruitDetail";
 // import RecruitUpdate from "./recruit/RecruitUpdate";
 
-import BoardContainer from "../components/board/common/BoardContainer"
-import PostDetial from "../components/board/common/PostDetail"
-
+import BoardContainer from "../components/board/common/BoardContainer";
+import PostDetail from "../components/board/common/PostDetail";
+import PostNew from "../components/board/common/PostNew";
+import PostUpdateContainer from "../components/board/common/PostUpdateContainer";
 import React from "react";
 import { Route } from "react-router-dom";
 
@@ -55,15 +56,15 @@ function BoardRouter({ match }) {
   return (
     <>
       <Route exact path={match.path} component={BoardContainer} />
-      <Route path={`${match.path}/new`} component={newComponent} />
+      <Route path={`${match.path}/new`} component={PostUpdateContainer} />
       <Route
         path={`${match.path}/detail/:id`}
-        component={PostDetial}
+        component={PostDetail}
         id="number"
       />
       <Route
         path={`${match.path}/update/:id`}
-        component={updateComponent}
+        component={PostUpdateContainer}
         id="number"
       />
     </>

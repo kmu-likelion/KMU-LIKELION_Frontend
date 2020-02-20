@@ -1,0 +1,178 @@
+import React, { Component } from "react";
+import api from "../../../api/BoardAPI";
+import { Link, Redirect } from "react-router-dom";
+// material-ui
+import moment from "moment";
+import TextField from "@material-ui/core/TextField";
+import TextareaAutosize from "@material-ui/core/TextareaAutosize";
+import Button from "@material-ui/core/Button";
+import FormControlLabel from "@material-ui/core/FormControlLabel";
+import Checkbox from "@material-ui/core/Checkbox";
+import DateFnsUtils from "@date-io/date-fns";
+
+import { withStyles } from "@material-ui/core/styles";
+import Grid from "@material-ui/core/Grid";
+
+import {
+  MuiPickersUtilsProvider,
+  KeyboardDatePicker
+} from "@material-ui/pickers";
+import { isThursday } from "date-fns";
+
+const useStyles = theme => ({
+  form: {
+    width: "100%",
+    alignItems: "center",
+    marginTop: theme.spacing(5)
+  },
+  formContent: {
+    alignItems: "center"
+  },
+  submit: {
+    margin: theme.spacing(3, 0, 2)
+  }
+});
+
+class NoticeForm extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      id: "",
+      username: "",
+      title: "",
+      body: "",
+      noticeDate: new Date(),
+      isRecorded: false,
+      eventName: "",
+      endSubmit: false
+    };
+  }
+
+  componentDidMount() {
+    console.log("New ComponentDidMount");
+    const _id = window.sessionStorage.getItem("id");
+    const _user = window.sessionStorage.getItem("username");
+    if (_id) {
+      this.setState({ id: _id, username: _user });
+    }
+  }
+
+  handlingChange = event => {
+    this.setState({ [event.target.name]: event.target.value });
+  };
+
+  handleCheck = event => {
+    this.setState({ [event.target.name]: event.target.checked });
+  };
+
+  handlingSubmit = async event => {
+    event.preventDefault();
+
+    await api
+      .createPost("notice", {
+        title: this.state.title,
+        body: this.state.body,
+        user_id: this.state.id,
+        notice_date: moment(this.state.noticeDate).format("YYYY-MM-DD"),
+        is_recorded: this.state.isRecorded, //캘린더표기 여부에 따라 notice_date는 유효한값인지 판단 가능.
+        event_name: this.state.eventName
+      })
+      .then(res => {
+        console.log("정상처리 : ", res);
+        this.setState({
+          endSubmit: true
+        });
+      })
+      .catch(err => console.log(err));
+  };
+
+  render() {
+    const { classes } = this.props;
+    if (this.state.endSubmit) {
+      return <Redirect to="/notice" />;
+    }
+    return (
+      <form onSubmit={this.handlingSubmit}>
+        <Grid container spacing={2}>
+          <Grid item xs={1} sm={1}></Grid>
+          <Grid item xs={10} sm={10} className={classes.formContent}>
+            <TextField
+              label="Title"
+              name="title"
+              value={this.state.title}
+              onChange={this.handlingChange}
+              margin="normal"
+              required
+            />
+            <br />
+            <TextareaAutosize
+              label="Body"
+              name="body"
+              rowsMin={3}
+              rowsMax={7}
+              placeholder="Contents"
+              value={this.state.body}
+              onChange={this.handlingChange}
+              margin="normal"
+              required
+            />
+            <hr />
+            <FormControlLabel
+              control={
+                <Checkbox
+                  checked={this.state.isRecorded}
+                  onChange={this.handleCheck}
+                  name="isRecorded"
+                  color="primary"
+                />
+              }
+              label="달력기록 여부"
+            />
+            <br />
+            <TextField
+              label="Eventname"
+              name="eventName"
+              value={this.state.eventName}
+              onChange={this.handlingChange}
+              // required
+              disabled={!this.state.isRecorded}
+              required={this.state.isRecorded}
+            />
+            <br />
+            <small>*달력에 표시될 이벤트명</small>
+            <br />
+            <MuiPickersUtilsProvider utils={DateFnsUtils}>
+              <KeyboardDatePicker
+                label="Event Date"
+                margin="normal"
+                format="yyyy/MM/dd"
+                name="noticeDate"
+                value={this.state.notice_date}
+                onChange={event => this.setState({ noticeDate: event })}
+                KeyboardButtonProps={{
+                  "aria-label": "change date"
+                }}
+                disabled={!this.state.isRecorded}
+                required={this.state.isRecorded}
+              />
+            </MuiPickersUtilsProvider>
+            <br />
+          </Grid>
+          <Grid item xs={1} sm={1}></Grid>
+        </Grid>
+
+        <Button
+          type="submit"
+          fullWidth
+          variant="contained"
+          color="primary"
+          className={classes.submit}
+        >
+          작성
+        </Button>
+      </form>
+    );
+  }
+}
+
+export default withStyles(useStyles)(NoticeForm);

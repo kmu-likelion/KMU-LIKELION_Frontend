@@ -1,6 +1,7 @@
 import React from "react";
 import api from "../../api/BoardAPI";
-import RecentPost from "./RecentPost";
+// import RecentPost from "./RecentPost";
+import RecentPost from "../board/common/PostView";
 
 import logo from "./logo.png";
 import Container from "@material-ui/core/Container";
@@ -75,17 +76,13 @@ class Main extends React.Component {
             <Grid container spacing={3}>
               <Grid item xs={12} sm={6}>
                 <h4 className={"main-recentTitle"}>최근 공지사항</h4>
-                <Paper>
-                  {this.state.recentNotices.map(notice_post => (
-                    <RecentPost
-                      key={notice_post.id}
-                      id={notice_post.id}
-                      title={notice_post.title}
-                      body={notice_post.body}
-                      board_name="notice"
-                    />
-                  ))}
-                </Paper>
+                {this.state.recentNotices.map(notice_post => (
+                  <RecentPost
+                    key={notice_post.id}
+                    postInfo={notice_post}
+                    board_name="notice"
+                  />
+                ))}
               </Grid>
               <Grid item xs={12} sm={6}>
                 <h4 className={"main-recentTitle"}>최근 QnA</h4>
@@ -93,9 +90,7 @@ class Main extends React.Component {
                   {this.state.recentQnA.map(qna_post => (
                     <RecentPost
                       key={qna_post.id}
-                      id={qna_post.id}
-                      title={qna_post.title}
-                      body={qna_post.body}
+                      postInfo={qna_post}
                       board_name="QnA"
                     />
                   ))}

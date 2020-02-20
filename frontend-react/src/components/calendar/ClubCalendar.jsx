@@ -2,7 +2,7 @@ import React from "react";
 import { Calendar, momentLocalizer } from "react-big-calendar";
 import moment from "moment";
 import "react-big-calendar/lib/css/react-big-calendar.css";
-// import api from "../../api/api_calendar.js";
+import api from "../../api/BoardAPI";
 import EventModal from "./EventModal";
 
 const localizer = momentLocalizer(moment);
@@ -27,19 +27,19 @@ class ClubCalendar extends React.Component {
         }
       ]
     });
-    // this.getAllEvent();
+    this.getAllEvent();
   }
 
-  addEvent = (id, title, start, end, body, notice_id) => {
+  addEvent = (postId, title, date, body) => {
     var list = this.state.eventList;
     list.push({
-      id: id,
+      id: postId,
       title: title,
       body: body,
       allDay: true,
-      start: start,
-      end: end,
-      notice_id: notice_id,
+      start: date,
+      end: date,
+      notice_id: postId,
       modalFlag: false
     });
     this.setState({
@@ -47,21 +47,21 @@ class ClubCalendar extends React.Component {
     });
   };
 
-  // getAllEvent = async () => {
-  //   await api.getAllCalendar().then(res => {
-  //     console.log("가져오기 성공!", res);
-  //     res.data.map(event => {
-  //       this.addEvent(
-  //         event.id,
-  //         event.title,
-  //         event.start_date,
-  //         event.end_date,
-  //         event.contents,
-  //         event.notice_id
-  //       );
-  //     });
-  //   });
-  // };
+  getAllEvent = async () => {
+    await api.getAllPosts("notice").then(res => {
+      console.log("가져오기 성공!", res);
+      res.data.results.map(event => {
+        if (event.is_recorded) {
+          this.addEvent(
+            event.id,
+            event.event_name,
+            event.notice_date,
+            event.body
+          );
+        }
+      });
+    });
+  };
 
   modalOpen = () => {
     this.setState({
