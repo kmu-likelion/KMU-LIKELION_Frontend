@@ -1,10 +1,12 @@
 import React, { Component } from "react";
 import api from "../../../api/BoardAPI";
 import { Link, Redirect } from "react-router-dom";
+import Editor from "../../Editor";
+
 // material-ui
 import moment from "moment";
 import TextField from "@material-ui/core/TextField";
-import TextareaAutosize from "@material-ui/core/TextareaAutosize";
+// import TextareaAutosize from "@material-ui/core/TextareaAutosize";
 import Button from "@material-ui/core/Button";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Checkbox from "@material-ui/core/Checkbox";
@@ -17,19 +19,39 @@ import {
   MuiPickersUtilsProvider,
   KeyboardDatePicker
 } from "@material-ui/pickers";
-import { isThursday } from "date-fns";
+// import { isThursday } from "date-fns";
 
 const useStyles = theme => ({
   form: {
     width: "100%",
-    alignItems: "center",
-    marginTop: theme.spacing(5)
+    marginTop: theme.spacing(2)
   },
   formContent: {
-    alignItems: "center"
+    // alignItems: "center"
+  },
+  textField: {
+    width: "25%",
+    paddingBottom: "1.5rem"
+  },
+  editor: {
+    width: "100%",
+    height: "100%"
+  },
+  editorWrap: {
+    // overflow: "auto",
+    minHeight: "300px",
+    height: "auto",
+    overflow: "hidden"
+    // display: "flex",
+    // flexWrap: "wrap"
   },
   submit: {
-    margin: theme.spacing(3, 0, 2)
+    margin: theme.spacing(3, 0, 2),
+    maxWidth: "40%"
+  },
+  submitWrap: {
+    textAlign: "center",
+    alignItems: "center"
   }
 });
 
@@ -70,6 +92,10 @@ class NoticeForm extends Component {
 
   handleCheck = event => {
     this.setState({ [event.target.name]: event.target.checked });
+  };
+
+  handlingEditorChange = ({ html, text }) => {
+    this.setState({ body: text });
   };
 
   getPostInfo = async () => {
@@ -135,20 +161,20 @@ class NoticeForm extends Component {
       return <Redirect to="/notice" />;
     }
     return (
-      <form onSubmit={this.handlingSubmit}>
-        <Grid container spacing={2}>
-          <Grid item xs={1} sm={1}></Grid>
-          <Grid item xs={10} sm={10} className={classes.formContent}>
+      <Grid container alignItems="stretch">
+        <Grid item xs={12} sm={12} className={classes.formContent}>
+          <form onSubmit={this.handlingSubmit}>
             <TextField
               label="Title"
               name="title"
               value={this.state.title}
               onChange={this.handlingChange}
               margin="normal"
+              className={classes.textField}
               required
             />
             <br />
-            <TextareaAutosize
+            {/* <TextareaAutosize
               label="Body"
               name="body"
               rowsMin={3}
@@ -158,7 +184,15 @@ class NoticeForm extends Component {
               onChange={this.handlingChange}
               margin="normal"
               required
-            />
+            /> */}
+            <div className={classes.editorWrap}>
+              <Editor
+                value={this.state.body}
+                handlingChange={this.handlingEditorChange}
+                className={classes.editor}
+              />
+            </div>
+
             <hr />
             <FormControlLabel
               control={
@@ -200,20 +234,20 @@ class NoticeForm extends Component {
               />
             </MuiPickersUtilsProvider>
             <br />
-          </Grid>
-          <Grid item xs={1} sm={1}></Grid>
+            <div className={classes.submitWrap}>
+              <Button
+                type="submit"
+                fullWidth
+                variant="contained"
+                color="primary"
+                className={classes.submit}
+              >
+                작성
+              </Button>
+            </div>
+          </form>
         </Grid>
-
-        <Button
-          type="submit"
-          fullWidth
-          variant="contained"
-          color="primary"
-          className={classes.submit}
-        >
-          작성
-        </Button>
-      </form>
+      </Grid>
     );
   }
 }

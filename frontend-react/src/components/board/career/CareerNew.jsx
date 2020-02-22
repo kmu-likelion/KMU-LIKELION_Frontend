@@ -6,17 +6,8 @@ import { Link } from "react-router-dom";
 // material-ui
 import Container from "@material-ui/core/Container";
 import Paper from "@material-ui/core/Paper";
-import moment from "moment";
 import TextField from "@material-ui/core/TextField";
-import TextareaAutosize from "@material-ui/core/TextareaAutosize";
 import Button from "@material-ui/core/Button";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import Checkbox from "@material-ui/core/Checkbox";
-import DateFnsUtils from "@date-io/date-fns";
-import {
-  MuiPickersUtilsProvider,
-  KeyboardDatePicker
-} from "@material-ui/pickers";
 
 import Editor from "../../Editor";
 
@@ -26,7 +17,7 @@ class CareerNew extends Component {
     username: "",
     title: "",
     body: "",
-    link: "",
+    link: ""
   };
 
   componentDidMount() {
@@ -41,13 +32,13 @@ class CareerNew extends Component {
     }
   }
 
-  handlingChange = (event) => {
-    this.setState({[event.target.name]: event.target.value});
-  }
+  handlingChange = event => {
+    this.setState({ [event.target.name]: event.target.value });
+  };
 
   handlingEditorChange = ({ html, text }) => {
     this.setState({ body: text });
-  }
+  };
 
   handleCheck = event => {
     this.setState({ [event.target.name]: event.target.checked });
@@ -61,7 +52,7 @@ class CareerNew extends Component {
         title: this.state.title,
         body: this.state.body,
         user_id: this.state.id,
-        link: this.state.link,
+        link: this.state.link
       })
       .then(res => {
         console.log("정상처리 : ", res);

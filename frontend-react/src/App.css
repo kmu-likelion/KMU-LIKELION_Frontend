@@ -8,8 +8,11 @@
 #root {
   font-family: "Eoe_Zno_L";
 }
+html,
 body {
   font-family: "Eoe_Zno_L";
+  /* height: 100%; */
+  /* overflow: hidden; */
 }
 .preTag {
   font-family: "Eoe_Zno_L";

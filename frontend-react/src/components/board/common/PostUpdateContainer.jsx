@@ -20,6 +20,7 @@ const useStyles = theme => ({
     marginTop: theme.spacing(5),
     display: "flex",
     flexDirection: "column",
+    height: "100%",
     alignItems: "center"
   },
   editIcon: {
@@ -119,7 +120,7 @@ class PostUpdateContainer extends Component {
     const { classes } = this.props;
 
     return (
-      <Container maxWidth="xs">
+      <Container maxWidth="lg">
         <Paper className={classes.paper} elevation={0}>
           {this.renderConponent(
             this.state.boardType,

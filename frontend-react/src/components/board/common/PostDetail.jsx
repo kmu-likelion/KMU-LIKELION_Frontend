@@ -6,7 +6,7 @@ import moment from "moment";
 import LikeView from "../LikeView";
 import CommentNew from "../comment/CommentNew";
 import CommentView from "../comment/CommentView";
-
+import Viewer from "../../Viewer";
 import AnswerView from "./AnswerView";
 
 // @material-ui
@@ -19,7 +19,9 @@ import Table from "@material-ui/core/Table";
 import TableRow from "@material-ui/core/TableRow";
 import TableCell from "@material-ui/core/TableCell";
 import Divider from "@material-ui/core/Divider";
-import { isValid } from "date-fns/esm";
+
+import Editor from "../../Editor";
+// import { isValid } from "date-fns/esm";
 
 class postDetail extends Component {
   state = {
@@ -117,7 +119,7 @@ class postDetail extends Component {
                 <TableRow>
                   <TableCell className="post-body">
                     <Typography color="textSecondary" component="pre">
-                      {this.state.body}
+                      <Viewer value={this.state.body} />
                     </Typography>
                   </TableCell>
                 </TableRow>
