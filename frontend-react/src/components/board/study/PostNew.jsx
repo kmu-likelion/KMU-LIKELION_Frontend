@@ -76,8 +76,8 @@ class StudyNew extends Component {
               value={this.state.study_type}
               onChange={e => this.setState({ study_type: e.target.value })}
             >
-              <MenuItem value={0}>공식모임</MenuItem>
-              <MenuItem value={1}>정보공유</MenuItem>
+              <MenuItem value={0}>공지사항</MenuItem>
+              <MenuItem value={1}>스터디</MenuItem>
               <MenuItem value={2}>기타</MenuItem>
             </Select>
             <br />

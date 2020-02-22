@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 //component
 import NoticeForm from "./NoticeForm";
 import LectureForm from "./LectureForm";
-// import QnAForm from ""
+import QnAForm from "./QnAForm";
 
 // material-ui
 import Container from "@material-ui/core/Container";
@@ -103,6 +103,14 @@ class PostUpdateContainer extends Component {
           </>
         );
         break;
+      case "qna":
+        component = (
+          <>
+            {header}
+            <QnAForm isEdit={isEdit} editId={editId} />
+          </>
+        );
+        break;
     }
     return component;
   };
@@ -118,7 +126,7 @@ class PostUpdateContainer extends Component {
             this.state.isEdit,
             this.state.editId
           )}
-          <Link to="/notice">Cancel</Link>
+          <Link to={`/${this.state.boardType}`}>Cancel</Link>
         </Paper>
       </Container>
     );

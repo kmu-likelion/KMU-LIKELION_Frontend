@@ -205,3 +205,9 @@ body {
 .post-body {
   height: 300px;
 }
+
+.answer-paper {
+  padding: 1rem;
+  margin: 1rem;
+  text-align: center;
+}

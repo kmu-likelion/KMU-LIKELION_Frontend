@@ -20,7 +20,6 @@ class PostDetail extends Component {
   };
 
   componentDidMount() {
-    //this._getQnA(this.props.match.params.id);
     this.getPost();
   }
 
@@ -50,8 +49,8 @@ class PostDetail extends Component {
 
   render() {
     const post_type = {
-      0: "공식모임",
-      1: "정보공유",
+      0: "공지사항",
+      1: "스터디",
       2: "기타"
     };
     return (

@@ -26,6 +26,7 @@ class BoardContainer extends React.Component {
   }
 
   async getPosts(boardType) {
+    // console.log(boardType);
     await api
       .getAllPosts(boardType.toLowerCase())
       .then(res => {
@@ -41,11 +42,11 @@ class BoardContainer extends React.Component {
     return (
       <div>
         <Container maxWidth="lg" className="main-container">
-          <Paper>
+          <Paper className="Paper">
             <Typography component="h1" variant="h4">
-              {this.state.boardType.toUpperCase()} Board
+              {this.state.boardType.toUpperCase()} 게시판
             </Typography>
-            <Link to={`/${this.state.boardType}/new`}>New Post</Link>
+            <Link to={`/${this.state.boardType}/new`}>새 글 작성</Link>
             <hr />
             <Grid container spacing={2}>
               <Grid item xs={0} sm={1}></Grid>

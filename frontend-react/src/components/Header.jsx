@@ -46,7 +46,7 @@ export default function Header(props) {
             <Nav.Link as={Link} to="/study">
               스터디그룹
             </Nav.Link>
-            <Nav.Link as={Link} to="/QnA">
+            <Nav.Link as={Link} to="/qna">
               QnA
             </Nav.Link>
           </Nav>

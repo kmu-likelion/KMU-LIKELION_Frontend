@@ -71,7 +71,7 @@ class App extends React.Component {
           <Route exact path="/" component={Main} />
 
           <Route path="/notice" component={BoardRouter} />
-          <Route path="/QnA" component={BoardRouter} />
+          <Route path="/qna" component={BoardRouter} />
           <Route path="/study" component={StudyRouter} />
           <Route path="/lecture" component={BoardRouter} />
 

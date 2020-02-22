@@ -39,6 +39,13 @@ export default class CommentView extends Component {
       });
   };
 
+  handlingDelete = async (target, id) => {
+    if (window.confirm("댓글을 삭제하시겠습니까?") == true) {
+      await api.deletePost(target, id);
+      this.props.getComments();
+    }
+  };
+
   render() {
     const {
       user_id,
@@ -97,7 +104,7 @@ export default class CommentView extends Component {
           <Button
             color="secondary"
             size="small"
-            onClick={event => this.props.handlingDelete(url, comment_id)}
+            onClick={event => this.handlingDelete(url, comment_id)}
           >
             Delete
           </Button>
