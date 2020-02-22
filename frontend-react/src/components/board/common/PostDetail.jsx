@@ -46,6 +46,7 @@ class postDetail extends Component {
       .getComments(`${board_name}_comment`, this.props.match.params.id)
       .then(res => {
         const _data = res.data;
+        console.log("가져온 댓글 : ", _data.results);
         this.setState({
           comments: _data.results,
           board_name: board_name
@@ -176,7 +177,7 @@ class postDetail extends Component {
                         author_name={comment.author_name}
                         body={comment.body}
                         comment_id={comment.id}
-                        handlingDelete={this.handlingDelete}
+                        recomments={comment.recomments}
                         getComments={this.callGetComments}
                         board_id={comment.board}
                         user_img={comment.user_img}
@@ -202,7 +203,7 @@ class postDetail extends Component {
                         author_name={comment.author_name}
                         body={comment.body}
                         comment_id={comment.id}
-                        handlingDelete={this.handlingDelete}
+                        recomments={comment.recomments}
                         getComments={this.callGetComments}
                         board_id={comment.board}
                         user_img={comment.user_img}

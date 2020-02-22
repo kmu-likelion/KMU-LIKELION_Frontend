@@ -35,7 +35,8 @@ export default class CommentView extends Component {
       .createPost(url, {
         body: this.state.body,
         board: board_id,
-        user_id: this.state.userid
+        user_id: this.state.userid,
+        parent_id: null
       })
       .then(res => {
         console.log("댓글생성 성공 !", res.data);

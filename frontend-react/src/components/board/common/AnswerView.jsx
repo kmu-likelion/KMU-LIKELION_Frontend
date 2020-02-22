@@ -1,11 +1,12 @@
 import React, { Component } from "react";
 import Button from "@material-ui/core/Button";
 import api from "../../../api/BoardAPI";
-// import TextField from "@material-ui/core/TextField";
 import TextareaAutosize from "@material-ui/core/TextareaAutosize";
 import { Link } from "react-router-dom";
 import Avatar from "@material-ui/core/Avatar";
-// import Paper from "@material-ui/core/Paper";
+import RecommentNew from "../comment/RecommentNew";
+// import CommentView from "../comment/CommentView";
+import RecommentView from "../comment/RecommentView";
 import Typography from "@material-ui/core/Typography";
 import Card from "@material-ui/core/Card";
 import CardHeader from "@material-ui/core/CardHeader";
@@ -17,7 +18,8 @@ export default class AnswerView extends Component {
   state = {
     is_update: false,
     update_body: "",
-    request_user: ""
+    request_user: "",
+    openRecomment: false
   };
 
   componentDidMount() {
@@ -54,6 +56,12 @@ export default class AnswerView extends Component {
     }
   };
 
+  closeRecomment = () => {
+    this.setState({
+      openRecomment: false
+    });
+  };
+
   render() {
     const {
       user_id,
@@ -62,8 +70,10 @@ export default class AnswerView extends Component {
       comment_id,
       board_id,
       url,
+      recomments,
       user_img,
-      pub_date
+      pub_date,
+      getComments
     } = this.props;
 
     const pubDate = moment(pub_date).format("YY-MM-DD HH:MM");
@@ -150,6 +160,43 @@ export default class AnswerView extends Component {
               </Button>
             </CardActions>
           </Card>
+          <details>
+            <summary> {recomments.length}개의 댓글이 있습니다.</summary>
+            {recomments.map(recmt => (
+              <RecommentView
+                user_id={recmt.user_id}
+                author_name={recmt.author_name}
+                body={recmt.body}
+                comment_id={recmt.id}
+                getComments={getComments}
+                board_id={recmt.board}
+                user_img={recmt.user_img}
+                url={`qna_comment`}
+              />
+            ))}
+            <Button
+              color="primary"
+              size=""
+              onClick={event =>
+                this.setState(prevState => ({
+                  openRecomment: !prevState.openRecomment
+                }))
+              }
+            >
+              {this.state.openRecomment === true ? "작성취소" : "댓글작성"}
+            </Button>
+            {this.state.openRecomment == true ? (
+              <RecommentNew
+                url={`qna_comment`}
+                board_id={board_id}
+                comment_id={comment_id}
+                getComments={getComments}
+                closeRecomment={this.closeRecomment}
+              />
+            ) : (
+              <></>
+            )}
+          </details>
 
           <br />
         </div>

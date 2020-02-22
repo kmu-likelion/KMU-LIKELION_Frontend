@@ -86,15 +86,13 @@ class Main extends React.Component {
               </Grid>
               <Grid item xs={12} sm={6}>
                 <h4 className={"main-recentTitle"}>최근 QnA</h4>
-                <Paper>
-                  {this.state.recentQnA.map(qna_post => (
-                    <RecentPost
-                      key={qna_post.id}
-                      postInfo={qna_post}
-                      board_name="QnA"
-                    />
-                  ))}
-                </Paper>
+                {this.state.recentQnA.map(qna_post => (
+                  <RecentPost
+                    key={qna_post.id}
+                    postInfo={qna_post}
+                    board_name="QnA"
+                  />
+                ))}
               </Grid>
             </Grid>
           </div>

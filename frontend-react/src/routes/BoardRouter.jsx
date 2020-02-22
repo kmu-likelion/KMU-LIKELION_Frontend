@@ -20,31 +20,6 @@ import React from "react";
 import { Route } from "react-router-dom";
 
 function BoardRouter({ match }) {
-  // var listComponent, newComponent, detailComponent, updateComponent;
-
-  // switch (match.path) {
-  //   case "/notice":
-  //     listComponent = NoticeList;
-  //     newComponent = NoticeNew;
-  //     detailComponent = NoticeDetail;
-  //     updateComponent = NoticeUpdate;
-  //     break;
-
-  //   case "/QnA":
-  //     listComponent = QnAList;
-  //     newComponent = QnANew;
-  //     detailComponent = QnADetail;
-  //     updateComponent = QnAUpdate;
-  //     break;
-
-  //   default:
-  //     listComponent = "";
-  //     newComponent = "";
-  //     detailComponent = "";
-  //     updateComponent = "";
-  //     break;
-  // }
-
   return (
     <>
       <Route exact path={match.path} component={BoardContainer} />
