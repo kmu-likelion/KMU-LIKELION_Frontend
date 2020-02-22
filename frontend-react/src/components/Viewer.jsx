@@ -1,0 +1,17 @@
+import React, { memo, useState } from 'react';
+import MdParser from './MdParser';
+import 'react-markdown-editor-lite/lib/index.css';
+
+const Viewer = memo(({ value }) => {
+    const renderHTML = (text) => {
+        // return text;
+        return {__html: MdParser.render(text)};
+    }
+
+    return (
+        <div dangerouslySetInnerHTML={renderHTML(value)} class="html-wrap">
+        </div>
+    )
+});
+
+export default Viewer;

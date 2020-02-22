@@ -15,6 +15,7 @@ import Store from "./store/Store";
 import { authlogout, tokenConfig } from "./api/AuthAPI";
 
 import BoardRouter from "./routes/BoardRouter";
+import CareerRouter from "./routes/CareerRouter";
 import StudyRouter from "./routes/StudyRouter";
 import AdmissionRouter from "./routes/AdmissionRouter";
 
@@ -69,7 +70,8 @@ class App extends React.Component {
         <Router>
           <Header />
           <Route exact path="/" component={Main} />
-
+          
+          <Route path="/career" component={CareerRouter} />
           <Route path="/notice" component={BoardRouter} />
           <Route path="/qna" component={BoardRouter} />
           <Route path="/study" component={StudyRouter} />
