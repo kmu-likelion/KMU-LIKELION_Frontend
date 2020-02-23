@@ -15,7 +15,6 @@ import Store from "./store/Store";
 import { authlogout, tokenConfig } from "./api/AuthAPI";
 
 import BoardRouter from "./routes/BoardRouter";
-import CareerRouter from "./routes/CareerRouter";
 import StudyRouter from "./routes/StudyRouter";
 import AdmissionRouter from "./routes/AdmissionRouter";
 
@@ -74,8 +73,8 @@ class App extends React.Component {
           <Route path="/career" component={BoardRouter} />
           <Route path="/notice" component={BoardRouter} />
           <Route path="/qna" component={BoardRouter} />
-          <Route path="/study" component={StudyRouter} />
           <Route path="/lecture" component={BoardRouter} />
+          <Route path="/study" component={StudyRouter} />
 
           <Route path="/admission" component={AdmissionRouter} />
           <Route path="/mentoring" component={MentoringContainer} />

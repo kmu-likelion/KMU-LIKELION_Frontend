@@ -3,7 +3,7 @@ import Modal from "react-bootstrap/Modal";
 import Button from "@material-ui/core/Button";
 import { Link } from "react-router-dom";
 import api from "../../api/BoardAPI";
-
+import Viewer from "../Viewer";
 class EventModal extends React.Component {
   deleteEvent = async (event, id) => {
     event.preventDefault();
@@ -12,8 +12,6 @@ class EventModal extends React.Component {
         .deletePost("notice", id)
         .then(res => {
           console.log("이벤트가 정상적으로 제거되었음.", res);
-          // this.props.handlingClose();
-          // this.props.getAllEvent();
           document.location.href = "/";
         })
         .catch(err => {
@@ -34,7 +32,7 @@ class EventModal extends React.Component {
             <Modal.Title>{eventInfo.title}</Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            <pre className="preTag">{eventInfo.body}</pre>
+            <Viewer value={String(eventInfo.body)} />
           </Modal.Body>
           <Modal.Footer>
             <Button onClick={handlingClose}>Close</Button>

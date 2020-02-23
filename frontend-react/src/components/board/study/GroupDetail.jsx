@@ -17,6 +17,8 @@ class GroupDetail extends React.Component {
       group_id: "",
       group_body: "",
       group_img: "",
+      group_captain: {},
+      group_members: [],
       noticePosts: [],
       studyPosts: []
     };
@@ -42,6 +44,8 @@ class GroupDetail extends React.Component {
           group_img: group_info.img
         });
         this.getGroupPost();
+        this.getGroupMember();
+        this.getGroupCaptain();
       })
       .catch(err => {
         console.log(err);
@@ -72,6 +76,31 @@ class GroupDetail extends React.Component {
       .catch(err => console.log(err));
   };
 
+  getGroupMember = async () => {
+    await api
+      .getMemberWithGroupId(this.state.group_id)
+      .then(res => {
+        console.log(res.data);
+
+        this.setState({
+          group_members: res.data.results
+        });
+      })
+      .catch(err => console.log(err));
+  };
+
+  getGroupCaptain = async () => {
+    await api
+      .getCaptainWithGroupId(this.state.group_id)
+      .then(res => {
+        console.log("후 이즈 캡틴?", res.data.results);
+        this.setState({
+          group_captain: res.data.results[0]
+        });
+      })
+      .catch(err => console.log(err));
+  };
+
   //그룹 삭제
   groupDelete = async () => {
     await api.deleteGroup(this.state.group_id);
@@ -88,9 +117,20 @@ class GroupDetail extends React.Component {
           <Typography component="h4" variant="h4">
             [{this.state.group_name}]
           </Typography>
+          <Typography>스터디장:{this.state.group_captain.user_id}</Typography>
+
           <Typography component="pre" className="preTag">
             {this.state.group_body}
           </Typography>
+          <div>
+            <Typography component="h5" variant="h5">
+              그룹멤버
+            </Typography>
+            <Typography component="pre" className="preTag">
+              {this.state.group_members.map(member => member.user_id)}
+            </Typography>
+          </div>
+
           <Button
             color="secondary"
             size="small"

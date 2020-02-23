@@ -36,7 +36,14 @@ class StudyMain extends React.Component {
   render() {
     return (
       <div>
-        <Container maxWidth="lg" className="main-container">
+        <Container
+          maxWidth="lg"
+          className="main-container"
+          style={{
+            flexGrow: 1,
+            overflow: "hidden"
+          }}
+        >
           <Paper className="Paper">
             <Typography component="h1" variant="h4">
               스터디그룹
@@ -45,7 +52,7 @@ class StudyMain extends React.Component {
             <hr />
             <Grid container spacing={2}>
               {this.state.groupList.map(group => (
-                <Grid item xs={6} sm={3} key={group.id}>
+                <Grid item xs={6} sm={2} key={group.id}>
                   <GroupView
                     key={group.id}
                     id={group.id}

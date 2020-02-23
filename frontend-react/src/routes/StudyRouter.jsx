@@ -13,13 +13,6 @@ function StudyRouter({ match }) {
     <>
       <Route exact path={match.path} component={StudyMain} />
       <Route exact path={`${match.path}/group/new`} component={GroupNew} />
-      {/* <Route path={`${match.path}/detail/:id`} component={StudyList} id="number"/> */}
-
-      {/* <Route
-        path={`${match.path}/update/:id`}
-        component={GroupUpdate}
-        id="number"
-      /> */}
       <Route exact path={`${match.path}/:group`} component={GroupDetail} />
       <Route path={`${match.path}/:group/post/new`} component={PostNew} />
       <Route

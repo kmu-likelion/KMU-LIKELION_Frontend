@@ -68,7 +68,8 @@ class GroupNew extends Component {
         await api
           .addGroupUser({
             user_id: this.state.userId,
-            group_id: this.state.groupId
+            group_id: this.state.groupId,
+            is_captain: true
           })
           .then(res => {
             console.log("group_user 추가 성공! ", res.data);
@@ -124,7 +125,7 @@ class GroupNew extends Component {
               color="primary"
               className={classes.submit}
             >
-              작성한그룹 요청
+              그룹생성
             </Button>
           </form>
 
