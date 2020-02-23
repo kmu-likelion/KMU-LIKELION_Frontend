@@ -12,6 +12,7 @@ import Paper from "@material-ui/core/Paper";
 import { withStyles } from "@material-ui/core/styles";
 import Avatar from "@material-ui/core/Avatar";
 import Typography from "@material-ui/core/Typography";
+import Grid from "@material-ui/core/Grid";
 // import CreateIcon from "@material-ui/icons/Create";
 import EditIcon from "@material-ui/icons/Edit";
 
@@ -19,9 +20,10 @@ const useStyles = theme => ({
   paper: {
     marginTop: theme.spacing(5),
     display: "flex",
+    alignItems: "center",
     flexDirection: "column",
     height: "100%",
-    alignItems: "center"
+    width: "100%"
   },
   editIcon: {
     margin: theme.spacing(1),
@@ -59,8 +61,37 @@ class PostUpdateContainer extends Component {
   };
 
   renderConponent = (boardType, isEdit, editId) => {
-    const { classes } = this.props;
     let component = "";
+
+    switch (boardType) {
+      case "notice":
+        component = (
+          <>
+            <NoticeForm isEdit={isEdit} editId={editId} />
+          </>
+        );
+        break;
+
+      case "lecture":
+        component = (
+          <>
+            <LectureForm isEdit={isEdit} editId={editId} />
+          </>
+        );
+        break;
+      case "qna":
+        component = (
+          <>
+            <QnAForm isEdit={isEdit} editId={editId} />
+          </>
+        );
+        break;
+    }
+    return component;
+  };
+
+  renderHeader = isEdit => {
+    const { classes } = this.props;
     let header = "";
     if (isEdit) {
       header = (
@@ -85,35 +116,7 @@ class PostUpdateContainer extends Component {
         </>
       );
     }
-
-    switch (boardType) {
-      case "notice":
-        component = (
-          <>
-            {header}
-            <NoticeForm isEdit={isEdit} editId={editId} />
-          </>
-        );
-        break;
-
-      case "lecture":
-        component = (
-          <>
-            {header}
-            <LectureForm isEdit={isEdit} editId={editId} />
-          </>
-        );
-        break;
-      case "qna":
-        component = (
-          <>
-            {header}
-            <QnAForm isEdit={isEdit} editId={editId} />
-          </>
-        );
-        break;
-    }
-    return component;
+    return header;
   };
 
   render() {
@@ -122,11 +125,18 @@ class PostUpdateContainer extends Component {
     return (
       <Container maxWidth="lg">
         <Paper className={classes.paper} elevation={0}>
-          {this.renderConponent(
-            this.state.boardType,
-            this.state.isEdit,
-            this.state.editId
-          )}
+          {this.renderHeader(this.state.isEdit)}
+          <Grid container>
+            <Grid item xs={1} sm={1}></Grid>
+            <Grid item xs={10} sm={10}>
+              {this.renderConponent(
+                this.state.boardType,
+                this.state.isEdit,
+                this.state.editId
+              )}
+            </Grid>
+            <Grid item xs={1} sm={1}></Grid>
+          </Grid>
           <Link to={`/${this.state.boardType}`}>Cancel</Link>
         </Paper>
       </Container>

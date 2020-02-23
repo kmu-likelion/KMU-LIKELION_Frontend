@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import api from "../../../api/GroupAPI";
-import PostView from "../common/PostView";
+import PostView from "../container/PostView";
 
 import Container from "@material-ui/core/Container";
 import Paper from "@material-ui/core/Paper";

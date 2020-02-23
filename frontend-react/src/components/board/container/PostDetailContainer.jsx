@@ -1,40 +1,28 @@
 import React, { Component } from "react";
 import api from "../../../api/BoardAPI";
-import { Link } from "react-router-dom";
-import moment from "moment";
 
-import LikeView from "../LikeView";
 import CommentNew from "../comment/CommentNew";
 import CommentView from "../comment/CommentView";
-import Viewer from "../../Viewer";
 import AnswerView from "./AnswerView";
+import NoticeDetail from "./NoticeDetail";
 
 // @material-ui
-import Button from "@material-ui/core/Button";
 import Container from "@material-ui/core/Container";
 import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
-import Table from "@material-ui/core/Table";
-import TableRow from "@material-ui/core/TableRow";
-import TableCell from "@material-ui/core/TableCell";
 import Divider from "@material-ui/core/Divider";
-
-import Editor from "../../Editor";
 // import { isValid } from "date-fns/esm";
 
-class postDetail extends Component {
-  state = {
-    id: "",
-    title: "",
-    body: "",
-    author_name: "",
-    author_id: "",
-    pub_date: "",
-    notice_date: "",
-    board_name: "",
-    comments: []
-  };
+class PostDetailContainer extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      postInfo: {},
+      board_name: "",
+      comments: []
+    };
+  }
 
   componentDidMount() {
     // console.log("디테일페이지 component did mount!");
@@ -69,13 +57,7 @@ class postDetail extends Component {
         const data = res.data;
         console.log(data);
         this.setState({
-          title: data.title,
-          body: data.body,
-          id: data.id,
-          author_name: data.author_name,
-          author_id: data.user_id,
-          pub_date: moment(data.pub_date).format("YYYY-MM-DD hh:mm"),
-          notice_date: moment(data.notice_date).format("YYYY-MM-DD"),
+          postInfo: data,
           board_name: board_name
         });
       })
@@ -96,71 +78,36 @@ class postDetail extends Component {
     }
   };
 
+  renderDetailComponent = (boardName, postInfo) => {
+    let detailComponent = "";
+    switch (boardName) {
+      case "notice":
+        detailComponent = (
+          <NoticeDetail
+            postInfo={postInfo}
+            handlingDelete={this.handlingDelete}
+            post_id={this.props.match.params.id}
+            board_name={this.props.match.path.split("/")[1]}
+          />
+        );
+        break;
+
+      default:
+        detailComponent = "";
+    }
+    return detailComponent;
+  };
+
   render() {
     const board_name = this.props.match.path.split("/")[1];
+    const post_id = this.props.match.params.id;
     return (
       <Container maxWidth="lg" className="main-container">
         <Paper>
           <Grid container spacing={2} style={{ paddingTop: "1.5rem" }}>
             <Grid item xs={1} sm={1}></Grid>
             <Grid item xs={10} sm={10}>
-              <Table className={"post-table"}>
-                <TableRow>
-                  <TableCell>
-                    <Typography component="h1" variant="h5">
-                      {this.state.title}
-                    </Typography>
-                  </TableCell>
-                </TableRow>
-                <TableRow>
-                  <small>작성일 {this.state.pub_date}</small> /&nbsp;
-                  <small>작성자 {this.state.author_name}</small>
-                </TableRow>
-                <TableRow>
-                  <TableCell className="post-body">
-                    <Typography color="textSecondary" component="pre">
-                      <Viewer value={this.state.body} />
-                    </Typography>
-                  </TableCell>
-                </TableRow>
-
-                <TableRow>
-                  <TableCell>
-                    <LikeView
-                      board_id={this.props.match.params.id}
-                      board_name={board_name}
-                    />
-                    <Button
-                      color="primary"
-                      size="small"
-                      onClick={event =>
-                        this.handlingDelete(
-                          this.state.board_name,
-                          this.state.id
-                        )
-                      }
-                    >
-                      Delete
-                    </Button>
-                    <Button
-                      color="primary"
-                      size="small"
-                      component={Link}
-                      to={`/${this.state.board_name}/update/${this.state.id}`}
-                    >
-                      Update
-                    </Button>
-                    <Button
-                      color="primary"
-                      size="small"
-                      component={Link}
-                      to={`/${this.state.board_name}`}
-                    >
-                      Back
-                    </Button>
-                  </TableCell>
-                </TableRow>
-              </Table>
+              {this.renderDetailComponent(board_name, this.state.postInfo)}
               <Divider />
               <div style={{ padding: "1rem" }}>
                 {board_name === "qna" ? (
@@ -201,6 +148,7 @@ class postDetail extends Component {
 
                     {this.state.comments.map(comment => (
                       <CommentView
+                        key={comment.id}
                         user_id={comment.user_id}
                         author_name={comment.author_name}
                         body={comment.body}
@@ -214,7 +162,7 @@ class postDetail extends Component {
                     ))}
                     <CommentNew
                       url={`${this.state.board_name}_comment`}
-                      board_id={this.state.id}
+                      board_id={post_id}
                       getComments={this.callGetComments}
                     />
                   </>
@@ -229,4 +177,4 @@ class postDetail extends Component {
   }
 }
 
-export default postDetail;
+export default PostDetailContainer;

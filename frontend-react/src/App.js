@@ -70,8 +70,8 @@ class App extends React.Component {
         <Router>
           <Header />
           <Route exact path="/" component={Main} />
-          
-          <Route path="/career" component={CareerRouter} />
+
+          <Route path="/career" component={BoardRouter} />
           <Route path="/notice" component={BoardRouter} />
           <Route path="/qna" component={BoardRouter} />
           <Route path="/study" component={StudyRouter} />

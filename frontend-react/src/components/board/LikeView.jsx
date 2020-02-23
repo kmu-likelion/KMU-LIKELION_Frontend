@@ -4,19 +4,19 @@ import api from "../../api/BoardAPI";
 
 export default class LikeView extends Component {
   state = {
-    board_id: "",
+    post_id: "",
     board_name: "",
     is_liked: ""
   };
 
   componentDidMount() {
     console.log("LikeView ComponentDidMount");
-    const { board_id, board_name } = this.props;
+    const { post_id, board_name } = this.props;
     this.setState({
-      board_id: board_id,
+      post_id: post_id,
       board_name: board_name
     });
-    this.getLikeStatus(board_name, board_id);
+    this.getLikeStatus(board_name, post_id);
   }
 
   getLikeStatus = async (url, id) => {
@@ -56,29 +56,27 @@ export default class LikeView extends Component {
   };
 
   render() {
-    // const { board_id } = this.props;
-
     if (this.state.is_liked === "true") {
-      console.log("true값이며 id는 : ", this.state.board_id);
+      console.log("true값이며 id는 : ", this.state.post_id);
       return (
         <Button
           color="primary"
           size="small"
           onClick={event =>
-            this.handlingLike(this.state.board_name, this.state.board_id)
+            this.handlingLike(this.state.board_name, this.state.post_id)
           }
         >
           Liked
         </Button>
       );
     } else {
-      console.log("false값이며 id는 : ", this.state.board_id);
+      console.log("false값이며 id는 : ", this.state.post_id);
       return (
         <Button
           color="secondary"
           size="small"
           onClick={event =>
-            this.handlingLike(this.state.board_name, this.state.board_id)
+            this.handlingLike(this.state.board_name, this.state.post_id)
           }
         >
           Like

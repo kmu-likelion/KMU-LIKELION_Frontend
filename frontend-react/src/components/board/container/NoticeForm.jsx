@@ -26,24 +26,17 @@ const useStyles = theme => ({
     width: "100%",
     marginTop: theme.spacing(2)
   },
-  formContent: {
-    // alignItems: "center"
-  },
   textField: {
     width: "25%",
     paddingBottom: "1.5rem"
   },
   editor: {
     width: "100%",
-    height: "100%"
+    height: "100%",
+    overflow: "auto"
   },
   editorWrap: {
-    // overflow: "auto",
-    minHeight: "300px",
-    height: "auto",
-    overflow: "hidden"
-    // display: "flex",
-    // flexWrap: "wrap"
+    // minHeight: "300px"
   },
   submit: {
     margin: theme.spacing(3, 0, 2),
@@ -161,20 +154,18 @@ class NoticeForm extends Component {
       return <Redirect to="/notice" />;
     }
     return (
-      <Grid container alignItems="stretch">
-        <Grid item xs={12} sm={12} className={classes.formContent}>
-          <form onSubmit={this.handlingSubmit}>
-            <TextField
-              label="Title"
-              name="title"
-              value={this.state.title}
-              onChange={this.handlingChange}
-              margin="normal"
-              className={classes.textField}
-              required
-            />
-            <br />
-            {/* <TextareaAutosize
+      <form onSubmit={this.handlingSubmit}>
+        <TextField
+          label="Title"
+          name="title"
+          value={this.state.title}
+          onChange={this.handlingChange}
+          margin="normal"
+          className={classes.textField}
+          required
+        />
+        <br />
+        {/* <TextareaAutosize
               label="Body"
               name="body"
               rowsMin={3}
@@ -185,69 +176,67 @@ class NoticeForm extends Component {
               margin="normal"
               required
             /> */}
-            <div className={classes.editorWrap}>
-              <Editor
-                value={this.state.body}
-                handlingChange={this.handlingEditorChange}
-                className={classes.editor}
-              />
-            </div>
+        <div className={classes.editorWrap}>
+          <Editor
+            value={this.state.body}
+            handlingChange={this.handlingEditorChange}
+            className={classes.editor}
+          />
+        </div>
 
-            <hr />
-            <FormControlLabel
-              control={
-                <Checkbox
-                  checked={this.state.isRecorded}
-                  onChange={this.handleCheck}
-                  name="isRecorded"
-                  color="primary"
-                />
-              }
-              label="달력기록 여부"
+        <hr />
+        <FormControlLabel
+          control={
+            <Checkbox
+              checked={this.state.isRecorded}
+              onChange={this.handleCheck}
+              name="isRecorded"
+              color="primary"
             />
-            <br />
-            <TextField
-              label="Eventname"
-              name="eventName"
-              value={this.state.eventName}
-              onChange={this.handlingChange}
-              // required
-              disabled={!this.state.isRecorded}
-              required={this.state.isRecorded}
-            />
-            <br />
-            <small>*달력에 표시될 이벤트명</small>
-            <br />
-            <MuiPickersUtilsProvider utils={DateFnsUtils}>
-              <KeyboardDatePicker
-                label="Event Date"
-                margin="normal"
-                format="yyyy/MM/dd"
-                name="noticeDate"
-                value={this.state.noticeDate}
-                onChange={event => this.setState({ noticeDate: event })}
-                KeyboardButtonProps={{
-                  "aria-label": "change date"
-                }}
-                disabled={!this.state.isRecorded}
-                required={this.state.isRecorded}
-              />
-            </MuiPickersUtilsProvider>
-            <br />
-            <div className={classes.submitWrap}>
-              <Button
-                type="submit"
-                fullWidth
-                variant="contained"
-                color="primary"
-                className={classes.submit}
-              >
-                작성
-              </Button>
-            </div>
-          </form>
-        </Grid>
-      </Grid>
+          }
+          label="달력기록 여부"
+        />
+        <br />
+        <TextField
+          label="Eventname"
+          name="eventName"
+          value={this.state.eventName}
+          onChange={this.handlingChange}
+          // required
+          disabled={!this.state.isRecorded}
+          required={this.state.isRecorded}
+        />
+        <br />
+        <small>*달력에 표시될 이벤트명</small>
+        <br />
+        <MuiPickersUtilsProvider utils={DateFnsUtils}>
+          <KeyboardDatePicker
+            label="Event Date"
+            margin="normal"
+            format="yyyy/MM/dd"
+            name="noticeDate"
+            value={this.state.noticeDate}
+            onChange={event => this.setState({ noticeDate: event })}
+            KeyboardButtonProps={{
+              "aria-label": "change date"
+            }}
+            disabled={!this.state.isRecorded}
+            required={this.state.isRecorded}
+          />
+        </MuiPickersUtilsProvider>
+        <br />
+        <div className={classes.submitWrap}>
+          <Button
+            type="submit"
+            fullWidth
+            variant="contained"
+            color="primary"
+            className={classes.submit}
+          >
+            작성
+          </Button>
+        </div>
+      </form>
     );
   }
 }

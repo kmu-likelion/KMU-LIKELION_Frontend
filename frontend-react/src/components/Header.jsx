@@ -50,7 +50,7 @@ export default function Header(props) {
               QnA
             </Nav.Link>
             <Nav.Link as={Link} to="/career">
-              career
+              커리어
             </Nav.Link>
           </Nav>
           {store.logged ? (

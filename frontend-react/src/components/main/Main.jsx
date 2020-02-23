@@ -1,7 +1,7 @@
 import React from "react";
 import api from "../../api/BoardAPI";
 // import RecentPost from "./RecentPost";
-import RecentPost from "../board/common/PostView";
+import RecentPost from "../board/container/PostView";
 
 import logo from "./logo.png";
 import Container from "@material-ui/core/Container";
