@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import NoticeForm from "./NoticeForm";
 import LectureForm from "./LectureForm";
 import QnAForm from "./QnAForm";
+import CareerForm from "./CareerForm";
 
 // material-ui
 import Container from "@material-ui/core/Container";
@@ -68,6 +69,14 @@ class PostUpdateContainer extends Component {
         component = (
           <>
             <NoticeForm isEdit={isEdit} editId={editId} />
+          </>
+        );
+        break;
+
+      case "career":
+        component = (
+          <>
+            <CareerForm isEdit={isEdit} editId={editId} />
           </>
         );
         break;

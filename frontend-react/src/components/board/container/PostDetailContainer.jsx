@@ -5,7 +5,9 @@ import CommentNew from "../comment/CommentNew";
 import CommentView from "../comment/CommentView";
 import AnswerView from "./AnswerView";
 import NoticeDetail from "./NoticeDetail";
-
+import QnADetail from "./QnADetail";
+import CareerDetail from "./CareerDetail";
+import LectureDetail from "./LectureDetail";
 // @material-ui
 import Container from "@material-ui/core/Container";
 import Paper from "@material-ui/core/Paper";
@@ -91,6 +93,37 @@ class PostDetailContainer extends Component {
           />
         );
         break;
+      case "qna":
+        detailComponent = (
+          <QnADetail
+            postInfo={postInfo}
+            handlingDelete={this.handlingDelete}
+            post_id={this.props.match.params.id}
+            board_name={this.props.match.path.split("/")[1]}
+          />
+        );
+        break;
+      case "career":
+        detailComponent = (
+          <CareerDetail
+            postInfo={postInfo}
+            handlingDelete={this.handlingDelete}
+            post_id={this.props.match.params.id}
+            board_name={this.props.match.path.split("/")[1]}
+          />
+        );
+        break;
+
+      case "lecture":
+        detailComponent = (
+          <LectureDetail
+            postInfo={postInfo}
+            handlingDelete={this.handlingDelete}
+            post_id={this.props.match.params.id}
+            board_name={this.props.match.path.split("/")[1]}
+          />
+        );
+        break;
 
       default:
         detailComponent = "";
@@ -122,13 +155,14 @@ class PostDetailContainer extends Component {
 
                     {this.state.comments.map(comment => (
                       <AnswerView
+                        key={comment.id}
                         user_id={comment.user_id}
                         author_name={comment.author_name}
                         body={comment.body}
                         comment_id={comment.id}
                         recomments={comment.recomments}
                         getComments={this.callGetComments}
-                        board_id={comment.board}
+                        board_id={post_id}
                         user_img={comment.user_img}
                         pub_date={comment.pub_date}
                         url={`${this.state.board_name}_comment`}
@@ -136,7 +170,7 @@ class PostDetailContainer extends Component {
                     ))}
                     <CommentNew
                       url={`${this.state.board_name}_comment`}
-                      board_id={this.state.id}
+                      board_id={post_id}
                       getComments={this.callGetComments}
                     />
                   </>

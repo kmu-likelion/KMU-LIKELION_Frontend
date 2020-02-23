@@ -65,6 +65,7 @@ export default class CommentView extends Component {
                 value={this.state.body}
                 onChange={this.handlingChange}
                 margin="normal"
+                required
               />
               <Button type="submit" variant="contained" color="primary">
                 작성

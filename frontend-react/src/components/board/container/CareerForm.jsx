@@ -1,42 +1,42 @@
 import React, { Component } from "react";
 import api from "../../../api/BoardAPI";
 import { Redirect } from "react-router-dom";
+import Editor from "../../Editor";
 
 // material-ui
 import TextField from "@material-ui/core/TextField";
-import TextareaAutosize from "@material-ui/core/TextareaAutosize";
 import Button from "@material-ui/core/Button";
-import Editor from "../../Editor";
+
 import { withStyles } from "@material-ui/core/styles";
-import Grid from "@material-ui/core/Grid";
 
 const useStyles = theme => ({
   form: {
     width: "100%",
-    alignItems: "center",
-    marginTop: theme.spacing(5)
+    marginTop: theme.spacing(3)
+    // display: "flex",
+    // flexDirection: "column"
   },
   textField: {
-    width: "30%",
+    width: "25%",
     display: "flex",
     paddingBottom: "1rem"
   },
-  formContent: {
-    alignItems: "center"
+  editor: {
+    width: "100%",
+    height: "100%",
+    overflow: "auto"
   },
-  textarea: {
-    width: "100%"
+  submit: {
+    margin: theme.spacing(3, 0, 2),
+    maxWidth: "40%"
   },
   submitWrap: {
     textAlign: "center",
     alignItems: "center"
-  },
-  submit: {
-    margin: theme.spacing(3, 0, 2)
   }
 });
 
-class QnAForm extends Component {
+class CareerForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -44,7 +44,7 @@ class QnAForm extends Component {
       username: "",
       title: "",
       body: "",
-      subject: "",
+      link: "",
 
       endSubmit: false,
       isEdit: false,
@@ -69,35 +69,37 @@ class QnAForm extends Component {
     this.setState({ [event.target.name]: event.target.value });
   };
 
+  handleCheck = event => {
+    this.setState({ [event.target.name]: event.target.checked });
+  };
+
   handlingEditorChange = ({ html, text }) => {
     this.setState({ body: text });
   };
 
-  //update page 일 시 해당 post의 정보를 가져옴
   getPostInfo = async () => {
     let post_id = this.props.editId;
-    await api.getPost("qna", post_id).then(res => {
+    await api.getPost("career", post_id).then(res => {
       console.log(res.data);
       this.setState({
         title: res.data.title,
         body: res.data.body,
-        subject: res.data.subject
+        link: res.data.link
       });
     });
   };
 
-  //Submit 핸들링
   handlingSubmit = async event => {
     event.preventDefault();
 
     switch (this.props.isEdit) {
       case true: //edit function
         await api
-          .updatePost("qna", this.props.editId, {
+          .updatePost("career", this.props.editId, {
             title: this.state.title,
             body: this.state.body,
-            subject: this.state.subject,
-            user_id: this.state.id
+            user_id: this.state.id,
+            link: this.state.link
           })
           .then(res => {
             console.log("정상적으로 수정됨. ", res);
@@ -109,11 +111,11 @@ class QnAForm extends Component {
         break;
       case false: //create function
         await api
-          .createPost("qna", {
+          .createPost("career", {
             title: this.state.title,
             body: this.state.body,
-            subject: this.state.subject,
-            user_id: this.state.userId
+            user_id: this.state.userId,
+            link: this.state.link
           })
           .then(res => {
             console.log("정상적으로 생성됨. ", res);
@@ -129,33 +131,32 @@ class QnAForm extends Component {
   render() {
     const { classes } = this.props;
     if (this.state.endSubmit) {
-      return <Redirect to="/qna" />;
+      return <Redirect to="/career" />;
     }
     return (
       <form onSubmit={this.handlingSubmit} classes={classes.form}>
         <TextField
-          label="질문분야"
-          name="subject"
-          value={this.state.subject}
-          className={classes.textField}
-          onChange={this.handlingChange}
-          margin="normal"
-          required
-        />
-        <TextField
-          className={classes.textarea}
           label="Title"
           name="title"
           value={this.state.title}
-          className={classes.textField}
           onChange={this.handlingChange}
           margin="normal"
+          className={classes.textField}
           required
         />
         <Editor
           value={this.state.body}
           handlingChange={this.handlingEditorChange}
           className={classes.editor}
+        />
+        <TextField
+          label="관련된 URL"
+          name="link"
+          value={this.state.link}
+          onChange={this.handlingChange}
+          margin="normal"
+          className={classes.textField}
+          placeholder="https://github.com/example/project"
         />
 
         <br />
@@ -175,4 +176,4 @@ class QnAForm extends Component {
   }
 }
 
-export default withStyles(useStyles)(QnAForm);
+export default withStyles(useStyles)(CareerForm);

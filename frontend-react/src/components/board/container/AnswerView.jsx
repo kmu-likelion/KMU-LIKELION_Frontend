@@ -164,6 +164,7 @@ export default class AnswerView extends Component {
             <summary> {recomments.length}개의 댓글이 있습니다.</summary>
             {recomments.map(recmt => (
               <RecommentView
+                key={recmt.id}
                 user_id={recmt.user_id}
                 author_name={recmt.author_name}
                 body={recmt.body}
@@ -176,7 +177,6 @@ export default class AnswerView extends Component {
             ))}
             <Button
               color="primary"
-              size=""
               onClick={event =>
                 this.setState(prevState => ({
                   openRecomment: !prevState.openRecomment
