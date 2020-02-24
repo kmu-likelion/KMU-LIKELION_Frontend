@@ -88,22 +88,21 @@ body {
 .link:active {
   text-decoration: none;
 }
-.footerlogo{
+.footerlogo {
   width: 20%;
-  padding: 3px
+  padding: 3px;
 }
 
-
-@media ( max-width: 480px ) {
+@media (max-width: 480px) {
   .right-footer {
     font-size: 0.9em;
     color: #f38104;
     line-height: 0.6rem;
     text-align: center;
   }
-  .footerlogo{
+  .footerlogo {
     width: 15%;
-    padding: 3px
+    padding: 3px;
   }
   .footer {
     border-top: solid;
@@ -112,7 +111,6 @@ body {
     padding-top: 0.5rem;
     font-weight: bold;
   }
-
 }
 .nav-link,
 .nav-link:hover,
@@ -136,6 +134,11 @@ body {
   display: flex;
   flex-direction: column;
   width: 25rem;
+}
+.commentUpdateForm {
+  /* display: inline; */
+  vertical-align: middle;
+  /* width: 25rem; */
 }
 
 .RecentForm {
@@ -236,9 +239,9 @@ body {
   text-align: center;
 }
 
-.nav-item{
+.nav-item {
   color: black;
 }
-.Cancle{
+.Cancle {
   color: rgb(167, 167, 167);
 }

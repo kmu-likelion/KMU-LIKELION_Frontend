@@ -1,27 +1,32 @@
 import React, { Component } from "react";
 
-import Button from "@material-ui/core/Button";
-import Card from "@material-ui/core/Card";
-import CardContent from "@material-ui/core/CardContent";
-
 import api from "../../../api/BoardAPI";
+
+import Grid from "@material-ui/core/Grid";
+import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
+import List from "@material-ui/core/List";
+import ListItem from "@material-ui/core/ListItem";
+import ListItemText from "@material-ui/core/ListItemText";
+import ListItemAvatar from "@material-ui/core/ListItemAvatar";
+import Avatar from "@material-ui/core/Avatar";
 
 export default class CommentView extends Component {
   state = {
     userid: "",
     username: "",
+    userImg: "",
     body: "",
     board_id: ""
   };
 
   componentDidMount() {
-    let user_id = window.sessionStorage.getItem("id");
-    let username = window.sessionStorage.getItem("username");
     this.setState({
-      userid: user_id,
-      username: username
+      userid: window.sessionStorage.getItem("id"),
+      username: window.sessionStorage.getItem("username"),
+      userImg: window.sessionStorage.getItem("user_img")
     });
+    console.log(window.sessionStorage.getItem("user_img"));
   }
 
   handlingChange = event => {
@@ -51,28 +56,43 @@ export default class CommentView extends Component {
     const { board_id, url } = this.props;
     return (
       <>
-        <Card className={"card"}>
-          <CardContent>
-            <form
-              onSubmit={event => this.handlingSubmit(event, url, board_id)}
-              className="commentForm"
-            >
-              <span>{this.state.username}</span>
-              <TextField
-                id="outlined-name"
-                label="comment"
-                name="body"
-                value={this.state.body}
-                onChange={this.handlingChange}
-                margin="normal"
-                required
-              />
-              <Button type="submit" variant="contained" color="primary">
-                작성
-              </Button>
-            </form>
-          </CardContent>
-        </Card>
+        <Grid container spacing={2}>
+          <Grid item xs={10} sm={10}>
+            <List>
+              <form
+                onSubmit={event => this.handlingSubmit(event, url, board_id)}
+                className="commentForm"
+                style={{ width: "auto" }}
+              >
+                <ListItem
+                  alignItems="flex-start"
+                  style={{ verticalAlign: "middle" }}
+                >
+                  <ListItemAvatar>
+                    <Avatar alt="User image" src={this.state.userImg} />
+                  </ListItemAvatar>
+                  <ListItemText
+                    primary={
+                      <TextField
+                        label="comment"
+                        name="body"
+                        value={this.state.body}
+                        onChange={this.handlingChange}
+                        margin="normal"
+                        style={{ width: "100%" }}
+                        required
+                      />
+                    }
+                  />
+
+                  <Button type="submit" variant="contained" color="primary">
+                    작성
+                  </Button>
+                </ListItem>
+              </form>
+            </List>
+          </Grid>
+        </Grid>
       </>
     );
   }

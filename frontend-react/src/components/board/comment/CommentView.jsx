@@ -5,6 +5,15 @@ import api from "../../../api/BoardAPI";
 import TextField from "@material-ui/core/TextField";
 import { Link } from "react-router-dom";
 import Avatar from "@material-ui/core/Avatar";
+
+import List from "@material-ui/core/List";
+import ListItem from "@material-ui/core/ListItem";
+import ListItemText from "@material-ui/core/ListItemText";
+import ListItemAvatar from "@material-ui/core/ListItemAvatar";
+import IconButton from "@material-ui/core/IconButton";
+import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
+import Divider from "@material-ui/core/Divider";
+
 export default class CommentView extends Component {
   state = {
     is_update: false,
@@ -60,57 +69,82 @@ export default class CommentView extends Component {
     if (this.state.is_update) {
       return (
         <>
-          <form
-            onSubmit={event => {
-              this.handlingUpdate(event, url, board_id, user_id, comment_id);
-            }}
-            className="commentForm"
-          >
-            <TextField
-              id="outlined-name"
-              label="comment"
-              name="update_body"
-              value={this.state.update_body}
-              onChange={this.handlingChange}
-              margin="normal"
-            />
-            <Button type="submit" variant="contained" color="primary">
-              제출
-            </Button>
-          </form>
-          <hr />
+          <List>
+            <form
+              onSubmit={event => {
+                this.handlingUpdate(event, url, board_id, user_id, comment_id);
+              }}
+              className="commentForm"
+              style={{ width: "auto" }}
+            >
+              <ListItem
+                alignItems="flex-start"
+                style={{ verticalAlign: "middle" }}
+              >
+                <ListItemAvatar>
+                  <Avatar alt="comment-writer" src={user_img} />
+                </ListItemAvatar>
+                <ListItemText
+                  primary={
+                    <TextField
+                      id="outlined-name"
+                      label="comment"
+                      name="update_body"
+                      value={this.state.update_body}
+                      onChange={this.handlingChange}
+                      margin="normal"
+                      style={{ width: "70%" }}
+                      required
+                    />
+                  }
+                />
+
+                <Button
+                  color="secondary"
+                  size="small"
+                  type="submit"
+                  variant="contained"
+                >
+                  수정
+                </Button>
+              </ListItem>
+            </form>
+            <Divider variant="inset" />
+          </List>
         </>
       );
     } else {
       return (
-        <div>
-          <div className={"comment-info"}>
-            <Link to={`/Mypage/${user_id}`}>
-              <Avatar src={user_img} alt="User-Image" />
-              {author_name}
-            </Link>
-            <span>{body}</span>
-          </div>
-          <br />
-          <Button
-            color="primary"
-            size="small"
-            onClick={event =>
-              this.setState({ is_update: true, update_body: body })
-            }
-          >
-            Update
-          </Button>
-          <Button
-            color="secondary"
-            size="small"
-            onClick={event => this.handlingDelete(url, comment_id)}
-          >
-            Delete
-          </Button>
-
-          <hr />
-        </div>
+        <List component="nav" aria-label="contacts">
+          <ListItem>
+            <ListItemAvatar>
+              <IconButton component={Link} to={`/Mypage/${user_id}`}>
+                <Avatar alt="Recomment-writer" src={user_img} />
+              </IconButton>
+            </ListItemAvatar>
+            <ListItemText primary={body} secondary={author_name} />
+            <ListItemSecondaryAction>
+              <Button
+                color="primary"
+                size="small"
+                onClick={event =>
+                  this.setState({ is_update: true, update_body: body })
+                }
+              >
+                Update
+              </Button>
+              <Button
+                color="secondary"
+                size="small"
+                onClick={event => this.handlingDelete(url, comment_id)}
+              >
+                Delete
+              </Button>
+              {/* <small>{pubDate}</small> */}
+            </ListItemSecondaryAction>
+          </ListItem>
+          <Divider variant="inset" />
+        </List>
       );
     }
   }
