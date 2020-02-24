@@ -18,157 +18,43 @@ import TableRow from "@material-ui/core/TableRow";
 import MenuItem from "@material-ui/core/MenuItem";
 import Select from "@material-ui/core/Select";
 import Button from "@material-ui/core/Button";
+
+import MentorManage from "./MentorManage";
+import MenteeManage from "./MenteeManage";
+import MentoringAdd from "./MentoringAdd";
+
 class MentoringManage extends React.Component {
-  state = {
-    mentoring: [],
-    mentors: [],
-    mentees: [],
-    allUser: [],
-    selected_mentor: "",
-    selected_mentee: "",
-    mentorOpen: false,
-    menteeOpen: false
-  };
-
-  componentDidMount() {
-    this.getAllMentoring();
-    this.getAllUser();
-  }
-
-  handlingChange = event => {
-    this.setState({ [event.target.name]: event.target.value });
-  };
-
-  getAllUser = async () => {
-    await getAllUser().then(res => {
-      console.log("모든 유저 받아옴", res.data);
-      this.setState({
-        allUser: res.data.results
-      });
-    });
-  };
-
-  getAllMentoring = async () => {
-    await api
-      .getAllMentoring()
-      .then(res => {
-        console.log("멘토링데이터 받아옴", res.data);
-        this.setState({
-          mentoring: res.data.results
-        });
-      })
-      .catch(err => {
-        console.log(err);
-      });
-  };
-  createMentoring = async event => {
-    event.preventDefault();
-    await api
-      .createMentoring({
-        mentor: this.state.selected_mentor,
-        mentee: this.state.selected_mentee
-      })
-      .then(res => {
-        console.log("Add metoring:", res.data);
-        this.getAllMentoring();
-      })
-      .catch(err => {
-        console.log(err);
-      });
-  };
-
+  
   render() {
+    
+
+
     return (
       <>
-        <TableContainer>
-          <Table className={"mentoring-table"}>
-            <TableHead>
-              <TableRow>
-                <TableCell>Mentor</TableCell>
-                <TableCell>Mentee</TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              <TableRow>
-                <TableCell>
-                  <List subheader={<li />} className={"mentoring-list"}>
-                    {this.state.mentoring.map(row => (
-                      <li key={`li-${row.mentor}`}>
-                        <ul className={"mentoring-ul"}>
-                          <ListItem button key={row.id}>
-                            <ListItemText primary={row.mentor_name} />
-                          </ListItem>
-                        </ul>
-                      </li>
-                    ))}
-                  </List>
-                </TableCell>
-                <TableCell>
-                  <List subheader={<li />} className={"mentoring-list"}>
-                    {this.state.mentoring.map(row => (
-                      <li key={`li-${row.mentor}`}>
-                        <ul className={"mentoring-ul"}>
-                          <ListItem button key={row.id}>
-                            <ListItemText primary={row.mentee_name} />
-                          </ListItem>
-                        </ul>
-                      </li>
-                    ))}
-                  </List>
-                </TableCell>
-              </TableRow>
+        <ul class="nav nav-tabs" id="myTab" role="tablist">
+          <li class="nav-item">
+            <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Mentor</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Mentee</a>
+          </li>
+        </ul>
 
-              <TableRow>
-                <TableCell colSpan={2}>
-                  <form
-                    onSubmit={event => this.createMentoring(event)}
-                    className={"mentoring-form"}
-                  >
-                    <Select
-                      className={"mentoring-select"}
-                      open={this.state.mentorOpen}
-                      onClose={e => this.setState({ mentorOpen: false })}
-                      name="selected_mentor"
-                      onOpen={e => this.setState({ mentorOpen: true })}
-                      value={this.state.selected_mentor}
-                      onChange={e =>
-                        this.setState({ selected_mentor: e.target.value })
-                      }
-                      displayEmpty
-                    >
-                      <MenuItem value="">
-                        <small>Mentor</small>
-                      </MenuItem>
-                      {this.state.allUser.map(user => (
-                        <MenuItem value={user.id}>{user.username}</MenuItem>
-                      ))}
-                    </Select>
-                    <Select
-                      className={"mentoring-select"}
-                      open={this.state.menteeOpen}
-                      onClose={e => this.setState({ menteeOpen: false })}
-                      name="selected_mentee"
-                      onOpen={e => this.setState({ menteeOpen: true })}
-                      value={this.state.selected_mentee}
-                      onChange={e =>
-                        this.setState({ selected_mentee: e.target.value })
-                      }
-                      displayEmpty
-                    >
-                      <MenuItem value="">
-                        <small>Mentee</small>
-                      </MenuItem>
-                      {this.state.allUser.map(user => (
-                        <MenuItem value={user.id}>{user.username}</MenuItem>
-                      ))}
-                    </Select>
-                    <Button type="submit">ADD</Button>
-                  </form>
-                </TableCell>
-              </TableRow>
-            </TableBody>
-          </Table>
-        </TableContainer>
+
+        <div class="tab-content" id="myTabContent">
+          <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+            <MentorManage />
+          </div>
+          <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+            <MenteeManage/>
+          </div>
+        </div>
+        
+        <div>
+          <MentoringAdd/>
+        </div>
+      
+        
       </>
     );
   }

@@ -235,3 +235,10 @@ body {
   margin: 1rem;
   text-align: center;
 }
+
+.nav-item{
+  color: black;
+}
+.Cancle{
+  color: rgb(167, 167, 167);
+}
