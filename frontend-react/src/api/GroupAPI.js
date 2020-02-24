@@ -47,7 +47,8 @@ export default {
 
   getMemberWithGroupId(id) {
     console.log("get GroupMember with groupId API.");
-    return axios.get(`accounts/groupuser?group_id=${id}`, tokenConfig());
+    // return axios.get(`accounts/groupuser?group_id=${id}`, tokenConfig());
+    return axios.get(`accounts/studygroup/${id}/group_users/`, tokenConfig());
   },
 
   getCaptainWithGroupId(id) {

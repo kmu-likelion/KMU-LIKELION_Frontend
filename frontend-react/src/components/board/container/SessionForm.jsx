@@ -71,7 +71,7 @@ class LectureForm extends Component {
       checkedAssignment: false,
       taskTitle: "",
       taskBody: "",
-      taskDeadline: moment(new Date()).format("YYYY-MM-DDThh:mm"),
+      taskDeadline: moment(new Date()).format("YYYY-MM-DDThh:mm:ss"),
       taskScoreTypeList: [],
       taskScoreType: "",
       tasks: [],
@@ -156,6 +156,7 @@ class LectureForm extends Component {
             console.log("정상적으로 생성됨. ", res);
             //과제리스트 create api 통신.
             this.state.tasks.map(task => {
+              console.log(task);
               this.createAssignment(res.data.id, task);
             });
 
@@ -171,6 +172,7 @@ class LectureForm extends Component {
   };
 
   createAssignment = async (sessionId, assignment) => {
+    console.log("보낼 과제 데이터 : ", assignment);
     await sessionApi
       .addAssignment(sessionId, assignment)
       .then(res => {
@@ -186,18 +188,19 @@ class LectureForm extends Component {
       let score_type = this.state.taskScoreTypeList.join(",");
 
       addedTasks.push({
-        session_type: "A",
         title: this.state.taskTitle,
+        user_id: this.state.userId,
         body: this.state.taskBody,
-        deadline: this.state.taskDeadline,
-        score_types: score_type
+        score_types: score_type,
+        deadline: this.state.taskDeadline
+        // deadline: "2020-02-24T14:45:17.894165Z"
       });
       console.log("추가된 과제 :", addedTasks);
       this.setState({
         tasks: addedTasks,
         taskTitle: "",
         taskBody: "",
-        taskDeadline: moment(new Date()).format("YYYY-MM-DDTHH:MM"),
+        taskDeadline: moment(new Date()).format("YYYY-MM-DDThh:mm:ss"),
         taskScoreTypeList: [],
         score_type: []
       });
@@ -284,7 +287,7 @@ class LectureForm extends Component {
             onChange={event =>
               this.setState({
                 taskDeadline: moment(event.target.value).format(
-                  "YYYY-MM-DDThh:mm"
+                  "YYYY-MM-DDThh:mm:ss"
                 )
               })
             }
