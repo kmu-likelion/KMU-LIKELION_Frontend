@@ -40,8 +40,8 @@ export default function Header(props) {
             <Nav.Link as={Link} to="/notice">
               공지사항
             </Nav.Link>
-            <Nav.Link as={Link} to="/lecture">
-              강의
+            <Nav.Link as={Link} to="/session">
+              세션
             </Nav.Link>
             <Nav.Link as={Link} to="/study">
               스터디그룹
