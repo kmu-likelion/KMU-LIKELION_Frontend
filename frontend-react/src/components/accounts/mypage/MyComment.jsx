@@ -122,6 +122,7 @@ class MyComment extends Component {
       <Paper elevation={10} className="MyComment">
         <>
           <h1>My Comments</h1>
+          <hr/>
           <br />
           <List className={classes.root} subheader={<li />}>
             {["Notice Board", "QnA Board", "Study Board","Recruit Board"].map(sectionId => (

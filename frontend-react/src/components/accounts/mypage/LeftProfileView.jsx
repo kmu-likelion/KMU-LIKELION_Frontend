@@ -70,6 +70,27 @@ export default class LeftProfileView extends Component {
               My Comment
             </Typography>
           </MenuItem>
+
+          <MenuItem
+            onClick={event => this.props.handlingSubmit(event, "MyMentoring")}
+          >
+            <ListItemIcon>
+              <DraftsIcon fontSize="small" />
+            </ListItemIcon>
+            <Typography variant="inherit" noWrap>
+              My Mentoring
+            </Typography>
+          </MenuItem>
+          <MenuItem
+            onClick={event => this.props.handlingSubmit(event, "MyStudyGroup")}
+          >
+            <ListItemIcon>
+              <DraftsIcon fontSize="small" />
+            </ListItemIcon>
+            <Typography variant="inherit" noWrap>
+              My StudyGroup
+            </Typography>
+          </MenuItem>
         </MenuList>
       </Paper>
     );

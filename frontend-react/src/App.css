@@ -179,6 +179,18 @@ body {
   padding-inline-start: 2rem;
   height: 100%;
 }
+.MyStudyGroup{
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+  padding-inline-start: 2rem;
+  height: 100%;
+}
+.MyMentoring{
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+  padding-inline-start: 2rem;
+  height: 100%;
+}
 
 .MyPost {
   padding-top: 2rem;
