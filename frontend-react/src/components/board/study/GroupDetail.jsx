@@ -9,6 +9,11 @@ import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 
+import ListItem from "@material-ui/core/ListItem";
+import ListItemText from "@material-ui/core/ListItemText";
+// import { FixedSizeList } from "react-window";
+import List from "@material-ui/core/List";
+
 class GroupDetail extends React.Component {
   constructor(props) {
     super(props);
@@ -45,7 +50,7 @@ class GroupDetail extends React.Component {
         });
         this.getGroupPost();
         this.getGroupMember();
-        this.getGroupCaptain();
+        // this.getGroupCaptain();
       })
       .catch(err => {
         console.log(err);
@@ -83,23 +88,23 @@ class GroupDetail extends React.Component {
         console.log(res.data);
 
         this.setState({
-          group_members: res.data.results
+          group_members: res.data
         });
       })
       .catch(err => console.log(err));
   };
 
-  getGroupCaptain = async () => {
-    await api
-      .getCaptainWithGroupId(this.state.group_id)
-      .then(res => {
-        console.log("후 이즈 캡틴?", res.data.results);
-        this.setState({
-          group_captain: res.data.results[0]
-        });
-      })
-      .catch(err => console.log(err));
-  };
+  // getGroupCaptain = async () => {
+  //   await api
+  //     .getCaptainWithGroupId(this.state.group_id)
+  //     .then(res => {
+  //       console.log("후 이즈 캡틴?", res.data.results);
+  //       this.setState({
+  //         group_captain: res.data.results[0]
+  //       });
+  //     })
+  //     .catch(err => console.log(err));
+  // };
 
   //그룹 삭제
   groupDelete = async () => {
@@ -112,38 +117,74 @@ class GroupDetail extends React.Component {
     return (
       <Container maxWidth="lg" className="main-container">
         <Paper className="Paper">
-          <img src={this.state.group_img} alt="group_image" />
-
-          <Typography component="h4" variant="h4">
-            [{this.state.group_name}]
-          </Typography>
-          <Typography>스터디장:{this.state.group_captain.user_id}</Typography>
-
-          <Typography component="pre" className="preTag">
-            {this.state.group_body}
-          </Typography>
-          <div>
-            <Typography component="h5" variant="h5">
-              그룹멤버
-            </Typography>
-            <Typography component="pre" className="preTag">
-              {this.state.group_members.map(member => member.user_id)}
-            </Typography>
-          </div>
-
-          <Button
-            color="secondary"
-            size="small"
-            onClick={event => this.groupDelete()}
-          >
-            그룹삭제
-          </Button>
-          <Button color="primary" size="small" component={Link} to={"/study"}>
-            뒤로가기
-          </Button>
-          <Typography component="hr" />
-          <br />
           <Grid container spacing={2}>
+            <Grid
+              item
+              xs={12}
+              sm={7}
+              style={{ alignItems: "center", textAlign: "center" }}
+            >
+              <img src={this.state.group_img} alt="group_image" />
+
+              <Typography component="h4" variant="h4">
+                [{this.state.group_name}]
+              </Typography>
+
+              <Typography component="pre" className="preTag">
+                {this.state.group_body}
+              </Typography>
+            </Grid>
+            <Grid
+              item
+              xs={12}
+              sm={5}
+              style={{ alignItems: "center", textAlign: "center" }}
+            >
+              <Typography>
+                스터디장 {this.state.group_captain.user_id}
+              </Typography>
+              <Typography component="h5" variant="h5">
+                그룹멤버
+              </Typography>
+              <Typography component="pre" className="preTag">
+                <List subheader={<li />} className={"mentoring-list"}>
+                  {this.state.group_members.map(member => (
+                    <li key={`li-${member.id}`}>
+                      <ul className={"mentoring-ul"}>
+                        <ListItem button key={member.id}>
+                          <ListItemText primary={member.user.username} />
+                        </ListItem>
+                      </ul>
+                    </li>
+                  ))}
+                </List>
+              </Typography>
+            </Grid>
+            <Grid
+              item
+              xs={12}
+              sm={12}
+              style={{ alignItems: "center", textAlign: "right" }}
+            >
+              <Button
+                color="secondary"
+                size="small"
+                onClick={event => this.groupDelete()}
+              >
+                그룹삭제
+              </Button>
+              <Button
+                color="primary"
+                size="small"
+                component={Link}
+                to={"/study"}
+              >
+                뒤로가기
+              </Button>
+              <Typography component="hr" />
+              <br />
+            </Grid>
+
             <Grid item xs={12} sm={12}>
               <Link
                 to={{
