@@ -35,7 +35,7 @@ class CheckJoin extends Component {
     console.log("Submit.");
 
     await api
-      .getJoinInfo({
+      .getJoinData({
         email: this.state.email,
         password: this.state.password
       })

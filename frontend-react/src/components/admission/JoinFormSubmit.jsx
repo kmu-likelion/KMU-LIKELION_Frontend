@@ -22,10 +22,9 @@ class JoinFormSubmit extends React.Component {
   getQuestions = async () => {
     await api.getAllQuestions().then(res => {
       console.log("eee", res.data);
-      const results = res.data;
 
       this.setState({
-        questions: results
+        questions: res.data.results
       });
     });
   };
@@ -68,7 +67,7 @@ class JoinFormSubmit extends React.Component {
     await api
       .createAnswers({
         answers: answer_list,
-        joinform_id: join_id
+        application_id: join_id
       })
       .then(res => {
         console.log("생성된 답변 : ", res);

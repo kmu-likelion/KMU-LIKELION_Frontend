@@ -5,6 +5,7 @@ import Paper from "@material-ui/core/Paper";
 import api from "../../api/AdmissionAPI";
 
 import Grid from "@material-ui/core/Grid";
+import Typography from "@material-ui/core/Typography";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
 import TableCell from "@material-ui/core/TableCell";
@@ -15,7 +16,9 @@ import TableRow from "@material-ui/core/TableRow";
 class CheckJoinView extends Component {
   state = {
     joinform: {},
-    answers: []
+    answers: [],
+    basicUpdateFlag: false,
+    answerUpdateFlag: false
   };
 
   componentDidMount() {
@@ -37,7 +40,7 @@ class CheckJoinView extends Component {
 
   render() {
     const joinInfo = [
-      this.viewData("지원번호", this.state.joinform.status),
+      this.viewData("지원번호", this.state.joinform.id),
       this.viewData("성명", this.state.joinform.name),
       this.viewData("전화번호", this.state.joinform.phone_number),
       this.viewData("학번", this.state.joinform.student_id),
@@ -45,10 +48,17 @@ class CheckJoinView extends Component {
       this.viewData("성별", this.state.joinform.sex),
       this.viewData("생년월일", this.state.joinform.birth)
     ];
+    const status_type = {
+      R: "심사중",
+      F: "불합격",
+      P: "합격"
+    };
     return (
       <Container maxWidth="lg" className="PostingSection">
         <Paper className="PostingForm">
-          <h3>지원내역 확인</h3>
+          <Typography component="h1" variant="h5">
+            지원내역 확인
+          </Typography>
           <br />
           {/* User Info Section */}
           <Grid container spacing={1}>
@@ -59,7 +69,9 @@ class CheckJoinView extends Component {
                   <TableHead>
                     <TableRow>
                       <TableCell>지원상태</TableCell>
-                      <TableCell>{this.state.joinform.status}</TableCell>
+                      <TableCell>
+                        {status_type[this.state.joinform.status]}
+                      </TableCell>
                     </TableRow>
                   </TableHead>
                   <TableBody>
@@ -78,6 +90,10 @@ class CheckJoinView extends Component {
 
           {/* Answer Section */}
           <hr />
+          <Typography component="h1" variant="h5">
+            질의응답
+          </Typography>
+
           <TableContainer>
             <Table>
               {this.state.answers.map(ans => {
