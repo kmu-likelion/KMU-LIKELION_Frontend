@@ -100,11 +100,9 @@ class MentoringManage extends React.Component {
             linkedMentee : []
         });
         console.log("연결된 멘티데이터 받아옴", res.data);
-        console.log("멘티데이터 초기화", this.state.linkedMentee);
         this.setState({
             linkedMentee: res.data.results
         });
-        console.log("멘티데이터 업데이트", this.state.linkedMentee);
       })
       .catch(err => {
         console.log(err);
@@ -171,6 +169,8 @@ class MentoringManage extends React.Component {
             allUser={this.state.allUser}
             getAllMentor={this.getAllMentor}
             getAllMentee={this.getAllMentee}
+            getLinkedMentee={this.getLinkedMentee}
+            getLinkedMentor={this.getLinkedMentor}
           
           />
         </div>

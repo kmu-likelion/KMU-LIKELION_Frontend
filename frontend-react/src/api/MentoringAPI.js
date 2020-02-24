@@ -37,4 +37,13 @@ export default {
     console.log("getLinkedMentor api 실행");
     return axios.get(`accounts/mentoring/?mentee=${id}`,tokenConfig());
   },
+  getLinkedMentorInfo(id){
+    console.log("getLinkedMentorInfo api 실행");
+    return axios.get(`accounts/user/${id}/get_mymentors/`,tokenConfig());
+  },
+  getLinkedMenteeInfo(id){
+    console.log("getLinkedMenteeInfo api 실행");
+    return axios.get(`accounts/user/${id}/get_mymentees/`,tokenConfig());
+  }
+
 };

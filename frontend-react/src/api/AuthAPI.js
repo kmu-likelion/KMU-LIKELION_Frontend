@@ -43,6 +43,8 @@ export const getAllUser = () => {
   return axios.get("accounts/user/");
 };
 
+
+
 export const tokenConfig = () => {
   const token = window.sessionStorage.getItem("token");
   // Headers

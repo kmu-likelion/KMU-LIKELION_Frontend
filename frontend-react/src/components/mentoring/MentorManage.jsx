@@ -19,15 +19,16 @@ import MenuItem from "@material-ui/core/MenuItem";
 import Select from "@material-ui/core/Select";
 import Button from "@material-ui/core/Button";
 class MentorManage extends React.Component {
-
   state = {
     selectedIndex: ""
   }
+
   selectIndex = (id) => {
     this.setState({
       selectedIndex : id 
     })
   }
+  
   render() {
     const{allMentor,linkedMentee}= this.props;
     return (

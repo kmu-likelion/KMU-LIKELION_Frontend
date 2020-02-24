@@ -140,6 +140,7 @@ class MyLike extends React.Component {
       <Paper elevation={10} className="MyLike">
         <>
           <h1>Liked Post</h1>
+          <hr/>
           <br/>
           <List className={classes.root} subheader={<li />}>
             {["Notice Board", "QnA Board", "Study Board","Recruit Board"].map(sectionId => (

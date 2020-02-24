@@ -58,6 +58,11 @@ export default {
       tokenConfig()
     );
   },
+  getMyStudyGroup(id){
+    console.log("get MyStudy Group");
+    return axios.get(`accounts/user/${id}/get_mygroup/`, tokenConfig());
+  },
+  
 
   /* ------StudyPost api------ */
   getPostWithGroupId(id) {

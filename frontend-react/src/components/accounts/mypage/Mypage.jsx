@@ -2,18 +2,16 @@ import React, { Component } from "react";
 import { getUser } from "../../../api/AuthAPI";
 import Grid from "@material-ui/core/Grid";
 import Container from "@material-ui/core/Container";
-// import Paper from "@material-ui/core/Paper";
-// import api from "../../api/api_board";
-// import VirtualizedList from "./likedPostView";
-// import { Link } from "react-router-dom";
 
 import MyLike from "./MyLike";
 import LeftProfileView from "./LeftProfileView";
 import MyProfile from "./MyProfile";
 import MyPost from "./MyPost";
 import MyComment from "./MyComment";
+import MyMentoring from "./MyMentoring";
+import MyStudyGroup from "./MyStudyGroup";
 
-class Mypage extends Component {
+class MyPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -27,7 +25,7 @@ class Mypage extends Component {
       sns_id: "",
       email: "",
       token: "",
-      type: "Myprofile",
+      type: "",
       authname: ""
     };
   }
@@ -36,7 +34,7 @@ class Mypage extends Component {
     console.log("New ComponentDidMount");
     const _id = this.props.match.params.id;
     this.getUser(_id);
-    console.log(this.state.type);
+    this.setState({type:"Myprofile"});
   }
 
   async getUser(userId) {
@@ -142,10 +140,46 @@ class Mypage extends Component {
             </Grid>
           </Container>
         );
+      case "MyMentoring":
+        return (
+          <Container maxWidth="lg" className="PostingSection">
+            <Grid container spacing={2} className="firstbox">
+              <Grid item xs={12} sm={4}>
+                <LeftProfileView
+                  username={this.state.username}
+                  sns_id={this.state.sns_id}
+                  user_img={this.state.img}
+                  handlingSubmit={this.handlingSubmit}
+                />
+              </Grid>
+              <Grid item xs={12} sm={8}>
+                <MyMentoring id={this.state.id}/>
+              </Grid>
+            </Grid>
+          </Container>
+        );
+      case "MyStudyGroup":
+        return (
+          <Container maxWidth="lg" className="PostingSection">
+            <Grid container spacing={2} className="firstbox">
+              <Grid item xs={12} sm={4}>
+                <LeftProfileView
+                  username={this.state.username}
+                  sns_id={this.state.sns_id}
+                  user_img={this.state.img}
+                  handlingSubmit={this.handlingSubmit}
+                />
+              </Grid>
+              <Grid item xs={12} sm={8}>
+                <MyStudyGroup id={this.state.id}/>
+              </Grid>
+            </Grid>
+          </Container>
+        );
       default:
         return null;
     }
   }
 }
 
-export default Mypage;
+export default MyPage;
