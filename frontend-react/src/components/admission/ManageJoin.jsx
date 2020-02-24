@@ -38,7 +38,7 @@ class CheckJoin extends Component {
     await api.getAllJoinData().then(res => {
       console.log(res);
       this.setState({
-        joindata: res.data
+        joindata: res.data.results
       });
     });
   };
@@ -47,7 +47,7 @@ class CheckJoin extends Component {
     await api.getAllQuestions().then(res => {
       console.log(res);
       this.setState({
-        questions: res.data
+        questions: res.data.results
       });
     });
   };

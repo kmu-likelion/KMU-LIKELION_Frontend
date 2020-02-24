@@ -151,6 +151,7 @@ class JoinFormBasic extends React.Component {
           <TextField
             label="Password"
             name="password"
+            type="password"
             value={this.state.password}
             onChange={this.handlingChange}
             margin="normal"

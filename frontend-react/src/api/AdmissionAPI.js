@@ -7,17 +7,22 @@ export default {
   createJoinForm(data) {
     console.log("submitJoinForm 실행.");
     // console.log(data);
-    return axios.post("admission/joinform/", data);
+    return axios.post("admission/application/", data);
   },
 
-  getJoinData(id) {
-    console.log("getJoinInfo 실행.");
-    return axios.get(`admission/joinform/${id}/`);
+  getJoinData(data) {
+    console.log("getJoinData 실행.");
+    return axios.post(`admission/application/get_application/`, data);
+  },
+
+  getJoinDatawithId(id) {
+    console.log("getJoinDataWithId 실행.");
+    return axios.get(`admission/application/${id}/`);
   },
 
   getAllJoinData() {
     console.log("getAllJoinData 실행.");
-    return axios.get("admission/joinform/");
+    return axios.get("admission/application/");
   },
 
   getAllQuestions() {

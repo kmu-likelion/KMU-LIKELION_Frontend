@@ -24,7 +24,7 @@ export default class ManageJoinDetail extends Component {
   };
 
   getJoinData = async () => {
-    await api.getJoinData(this.props.match.params.id).then(res => {
+    await api.getJoinDatawithId(this.props.match.params.id).then(res => {
       console.log("유저지원데이터 가져오기 성공. ", res.data);
       this.setState({
         joindata: res.data
