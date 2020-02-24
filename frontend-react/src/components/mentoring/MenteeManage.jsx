@@ -20,104 +20,20 @@ import Select from "@material-ui/core/Select";
 import Button from "@material-ui/core/Button";
 class MenteeManage extends React.Component {
   state = {
-    mentoring: [],
-    mentors: [],
-    mentees: [],
-    allUser: [],
-    allMentee:[],
-    linkedMentor:[],
-    selected_mentor: "",
-    selected_mentee: "",
-    mentorOpen: false,
-    menteeOpen: false
-  };
-
-  componentDidMount() {
-    this.getAllMentoring();
-    this.getAllUser();
-    this.getAllMentee();
-    this.setState({linkedMentor:[]});
+    selectedIndex: ""
   }
 
-  handlingChange = event => {
-    this.setState({ [event.target.name]: event.target.value });
-  };
-
-  getAllUser = async () => {
-    await getAllUser().then(res => {
-      console.log("모든 유저 받아옴", res.data);
-      this.setState({
-        allUser: res.data.results
-      });
-    });
-  };
-  getAllMentee = async () => {
-    await api
-      .getAllMentee()
-      .then(res => {
-        console.log("멘티데이터 받아옴", res.data);
-        this.setState({
-          allMentee: res.data
-        });
-      })
-      .catch(err => {
-        console.log(err);
-      });
-  };
-
-  getLinkedMentor = async (event,id) => {
-    await api
-      .getLinkedMentor(id)
-      .then(res => {
-
-        this.setState({
-            linkedMentee : []
-        });
-        console.log("연결된 멘토데이터 받아옴", res.data);
-        this.setState({
-            linkedMentor: res.data.results
-        });
-      })
-      .catch(err => {
-        console.log(err);
-      });
-  };
-
-  getAllMentoring = async () => {
-    await api
-      .getAllMentoring()
-      .then(res => {
-        console.log("멘토링데이터 받아옴", res.data);
-        this.setState({
-          mentoring: res.data.results
-        });
-      })
-      .catch(err => {
-        console.log(err);
-      });
-  };
-  createMentoring = async event => {
-    event.preventDefault();
-    await api
-      .createMentoring({
-        mentor: this.state.selected_mentor,
-        mentee: this.state.selected_mentee
-      })
-      .then(res => {
-        console.log("Add metoring:", res.data);
-      })
-      .catch(err => {
-        console.log(err);
-      });
-  };
-
+  selectIndex = (id) => {
+    this.setState({
+      selectedIndex : id 
+    })
+  }
+  
   render() {
+    const {allMentee,linkedMentor} =this.props;
     
-
-
     return (
       <>
-        
           <TableContainer>
           <Table className={"mentoring-table"}>
             <TableHead>
@@ -130,11 +46,11 @@ class MenteeManage extends React.Component {
               <TableRow>
                 <TableCell>
                   <List subheader={<li />} className={"mentoring-list"}>
-                    {this.state.allMentee.map(row => (
+                    {allMentee.map(row => (
                       <li key={`li-${row.user.mentor}`}>
                         <ul className={"mentoring-ul"}>
-                          <ListItem button key={row.user.id} >
-                            <ListItemText primary={row.user.username} onClick={event => this.getLinkedMentor(event,row.user.id)}/>
+                          <ListItem button key={row.user.id} selected={this.state.selectedIndex === row.user.id}>
+                            <ListItemText primary={row.user.username} onClick={event => {this.props.getLinkedMentor(row.user.id); this.selectIndex(row.user.id)}}/>
                           </ListItem>
                         </ul>
                       </li>
@@ -143,12 +59,12 @@ class MenteeManage extends React.Component {
                 </TableCell>
                 <TableCell>
                   <List subheader={<li />} className={"mentoring-list"}>
-                    {this.state.linkedMentor.map(row => (
+                    {linkedMentor.map(row => (
                       <li key={`li-${row.mentor}`}>
                         <ul className={"mentoring-ul"}>
                           <ListItem button key={row.id}>
                             <ListItemText primary={row.mentor_name} />
-                            <CancelIcon className="Cancle" />
+                            <CancelIcon className="Cancle" onClick={event => this.props.deleteMentoring(row.mentor,row.mentee)} />
                           </ListItem>
                         </ul>
                       </li>
