@@ -59,7 +59,6 @@ class PostDetailContainer extends Component {
       .then(res => {
         const data = res.data;
         console.log("data: ", data);
-        console.log("과제 :", data.assignments.length);
         this.setState({
           postInfo: data,
           board_name: board_name
