@@ -63,23 +63,19 @@ body {
 }
 
 .left-footer {
+  float: right;
   text-align: center;
-  /* align-items: center; */
-  border-right: solid;
   border-color: #f38014;
-  border-width: 0.01rem;
+  border-width: 1px;
   /* height: 93px; */
   font-size: 15px;
   color: #f38104;
-  float: right;
 }
 
 .right-footer {
-  font-size: 0.9em;
-  width: auto;
+  font-size: 0.8em;
   color: #f38104;
   line-height: 0.6rem;
-  float: left;
 }
 .link {
   text-decoration: none;
@@ -89,7 +85,32 @@ body {
 .link:active {
   text-decoration: none;
 }
+.footerlogo{
+  width: 20%;
+  padding: 3px
+}
 
+
+@media ( max-width: 480px ) {
+  .right-footer {
+    font-size: 0.9em;
+    color: #f38104;
+    line-height: 0.6rem;
+    text-align: center;
+  }
+  .footerlogo{
+    width: 15%;
+    padding: 3px
+  }
+  .footer {
+    border-top: solid;
+    border-width: 3rem;
+    border-color: #fdd7ab;
+    padding-top: 0.5rem;
+    font-weight: bold;
+  }
+
+}
 .nav-link,
 .nav-link:hover,
 .nav-link:active {
