@@ -43,7 +43,7 @@ class MentoringManage extends React.Component {
     await getAllUser().then(res => {
       console.log("모든 유저 받아옴", res.data);
       this.setState({
-        allUser: res.data
+        allUser: res.data.results
       });
     });
   };
@@ -54,7 +54,7 @@ class MentoringManage extends React.Component {
       .then(res => {
         console.log("멘토링데이터 받아옴", res.data);
         this.setState({
-          mentoring: res.data
+          mentoring: res.data.results
         });
       })
       .catch(err => {
