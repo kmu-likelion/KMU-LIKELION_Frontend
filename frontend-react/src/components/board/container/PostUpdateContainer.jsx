@@ -95,6 +95,8 @@ class PostUpdateContainer extends Component {
           </>
         );
         break;
+      default:
+        break;
     }
     return component;
   };

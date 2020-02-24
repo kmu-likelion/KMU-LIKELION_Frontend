@@ -47,7 +47,7 @@ export default class CommentView extends Component {
   };
 
   handlingDelete = async (target, id) => {
-    if (window.confirm("대댓글을 삭제하시겠습니까?") == true) {
+    if (window.confirm("대댓글을 삭제하시겠습니까?") === true) {
       await api.deletePost(target, id);
       this.props.getComments();
     }

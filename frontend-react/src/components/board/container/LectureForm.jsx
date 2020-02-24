@@ -9,7 +9,7 @@ import Button from "@material-ui/core/Button";
 import MenuItem from "@material-ui/core/MenuItem";
 import Select from "@material-ui/core/Select";
 import { withStyles } from "@material-ui/core/styles";
-import Grid from "@material-ui/core/Grid";
+// import Grid from "@material-ui/core/Grid";
 
 const useStyles = theme => ({
   form: {
@@ -126,6 +126,8 @@ class LectureForm extends Component {
             });
           })
           .catch(err => console.log(err));
+        break;
+      default:
         break;
     }
   };

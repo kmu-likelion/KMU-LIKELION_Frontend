@@ -50,7 +50,7 @@ export default class AnswerView extends Component {
   };
 
   handlingDelete = async (target, id) => {
-    if (window.confirm("답변을 삭제하시겠습니까?") == true) {
+    if (window.confirm("답변을 삭제하시겠습니까?") === true) {
       await api.deletePost(target, id);
       this.props.getComments();
     }
@@ -185,7 +185,7 @@ export default class AnswerView extends Component {
             >
               {this.state.openRecomment === true ? "작성취소" : "댓글작성"}
             </Button>
-            {this.state.openRecomment == true ? (
+            {this.state.openRecomment === true ? (
               <RecommentNew
                 url={`qna_comment`}
                 board_id={board_id}

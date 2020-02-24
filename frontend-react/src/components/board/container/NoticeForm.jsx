@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import api from "../../../api/BoardAPI";
-import { Link, Redirect } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 import Editor from "../../Editor";
 
 // material-ui
@@ -13,7 +13,6 @@ import Checkbox from "@material-ui/core/Checkbox";
 import DateFnsUtils from "@date-io/date-fns";
 
 import { withStyles } from "@material-ui/core/styles";
-import Grid from "@material-ui/core/Grid";
 
 import {
   MuiPickersUtilsProvider,
@@ -144,6 +143,9 @@ class NoticeForm extends Component {
             });
           })
           .catch(err => console.log(err));
+        break;
+
+      default:
         break;
     }
   };

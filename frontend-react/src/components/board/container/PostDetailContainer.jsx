@@ -67,7 +67,7 @@ class PostDetailContainer extends Component {
   }
 
   handlingDelete = async (target, id) => {
-    if (window.confirm("게시물을 삭제하시겠습니까?") == true) {
+    if (window.confirm("게시물을 삭제하시겠습니까?") === true) {
       await api
         .deletePost(target, id)
         .then(res => {
