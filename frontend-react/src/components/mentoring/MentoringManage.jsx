@@ -24,7 +24,113 @@ import MenteeManage from "./MenteeManage";
 import MentoringAdd from "./MentoringAdd";
 
 class MentoringManage extends React.Component {
+  state={
+    allUser:[],
+    allMentor:[],
+    allMentee:[],
+    linkedMentor:[],
+    linkedMentee:[],
+  }
+  componentDidMount(){
+    this.getAllUser();
+    this.getAllMentor();
+    this.getAllMentee();
+    this.getLinkedMentee();
+  }
+  getAllUser = async () => {
+    await getAllUser().then(res => {
+      console.log("모든 유저 받아옴", res.data);
+      this.setState({
+        allUser: res.data.results
+      });
+    });
+  }
+
+  getAllMentor = async () => {
+    await api
+      .getAllMentor()
+      .then(res => {
+        console.log("멘토데이터 받아옴", res.data);
+        this.setState({
+          allMentor: res.data
+        });
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  };
+
+  getAllMentee = async () => {
+    await api
+      .getAllMentee()
+      .then(res => {
+        console.log("멘티데이터 받아옴", res.data);
+        this.setState({
+          allMentee: res.data
+        });
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  };
+
+  getLinkedMentor = async (id) => {
+    await api
+      .getLinkedMentor(id)
+      .then(res => {
+
+        this.setState({
+            linkedMentor : []
+        });
+        console.log("연결된 멘토데이터 받아옴", res.data);
+        this.setState({
+            linkedMentor: res.data.results
+        });
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  };
   
+  getLinkedMentee = async (id) => {
+    await api
+      .getLinkedMentee(id)
+      .then(res => {
+        this.setState({
+            linkedMentee : []
+        });
+        console.log("연결된 멘티데이터 받아옴", res.data);
+        console.log("멘티데이터 초기화", this.state.linkedMentee);
+        this.setState({
+            linkedMentee: res.data.results
+        });
+        console.log("멘티데이터 업데이트", this.state.linkedMentee);
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  };
+
+  deleteMentoring = async (mentorId ,menteeId) => {
+    await api
+      .deleteMentoring({
+        mentor_id:mentorId,
+        mentee_id:menteeId
+      })
+      .then(res => {
+        console.log("정상적으로 삭제됨");
+        this.getLinkedMentee(mentorId);
+        this.getAllMentor();
+        this.getAllMentee();
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  };
+
+
+
+
   render() {
     
 
@@ -43,15 +149,30 @@ class MentoringManage extends React.Component {
 
         <div class="tab-content" id="myTabContent">
           <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-            <MentorManage />
+            <MentorManage
+              allMentor={this.state.allMentor}
+              linkedMentee={this.state.linkedMentee}
+              deleteMentoring={this.deleteMentoring}
+              getLinkedMentee={this.getLinkedMentee}
+            />
           </div>
           <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-            <MenteeManage/>
+            <MenteeManage 
+              allMentee={this.state.allMentee}
+              linkedMentor={this.state.linkedMentor}
+              deleteMentoring={this.deleteMentoring}
+              getLinkedMentor={this.getLinkedMentor}
+            />
           </div>
         </div>
         
         <div>
-          <MentoringAdd/>
+          <MentoringAdd 
+            allUser={this.state.allUser}
+            getAllMentor={this.getAllMentor}
+            getAllMentee={this.getAllMentee}
+          
+          />
         </div>
       
         

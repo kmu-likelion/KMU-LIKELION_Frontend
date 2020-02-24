@@ -12,10 +12,12 @@ export default {
     console.log("createMentoring api 실행");
     return axios.post(`accounts/mentoring/`, data, tokenConfig());
   },
-  deleteMentoring(id) {
+  deleteMentoring(data) {
     console.log("delete Mentoring api 실행.");
-    return axios.delete(`accounts/mentoring/${id}`, tokenConfig());
+    console.log("data보여줘 ",data);
+    return axios.post("accounts/user/delete_mentoring/",data, tokenConfig());
   },
+
   getAllMentor(){
     console.log("getAllMentor api 실행");
     return axios.get("accounts/mentoring/get_mentors/", tokenConfig());
@@ -34,5 +36,5 @@ export default {
   getLinkedMentor(id){
     console.log("getLinkedMentor api 실행");
     return axios.get(`accounts/mentoring/?mentee=${id}`,tokenConfig());
-  } 
+  },
 };

@@ -20,47 +20,16 @@ import Select from "@material-ui/core/Select";
 import Button from "@material-ui/core/Button";
 class MentoringAdd extends React.Component {
   state = {
-    mentoring: [],
-    mentors: [],
-    mentees: [],
-    allUser: [],
     selected_mentor: "",
     selected_mentee: "",
     mentorOpen: false,
     menteeOpen: false
   };
 
-  componentDidMount() {
-    this.getAllMentoring();
-    this.getAllUser();
-  }
-
   handlingChange = event => {
     this.setState({ [event.target.name]: event.target.value });
   };
 
-  getAllUser = async () => {
-    await getAllUser().then(res => {
-      console.log("모든 유저 받아옴", res.data);
-      this.setState({
-        allUser: res.data.results
-      });
-    });
-  };
-
-  getAllMentoring = async () => {
-    await api
-      .getAllMentoring()
-      .then(res => {
-        console.log("멘토링데이터 받아옴", res.data);
-        this.setState({
-          mentoring: res.data.results
-        });
-      })
-      .catch(err => {
-        console.log(err);
-      });
-  };
   createMentoring = async event => {
     event.preventDefault();
     await api
@@ -70,7 +39,8 @@ class MentoringAdd extends React.Component {
       })
       .then(res => {
         console.log("Add metoring:", res.data);
-        this.getAllMentoring();
+        this.props.getAllMentor();
+        this.props.getAllMentee();
       })
       .catch(err => {
         console.log(err);
@@ -78,6 +48,7 @@ class MentoringAdd extends React.Component {
   };
 
   render() {
+    const {allUser}=this.props;
     
 
 
@@ -106,7 +77,7 @@ class MentoringAdd extends React.Component {
                       <MenuItem value="">
                         <small>Mentor</small>
                       </MenuItem>
-                      {this.state.allUser.map(user => (
+                      {allUser.map(user => (
                         <MenuItem value={user.id}>{user.username}</MenuItem>
                       ))}
                     </Select>
@@ -125,7 +96,7 @@ class MentoringAdd extends React.Component {
                       <MenuItem value="">
                         <small>Mentee</small>
                       </MenuItem>
-                      {this.state.allUser.map(user => (
+                      {allUser.map(user => (
                         <MenuItem value={user.id}>{user.username}</MenuItem>
                       ))}
                     </Select>
