@@ -25,7 +25,7 @@ class PostView extends Component {
     const { postInfo, board_name } = this.props;
     const pubDate = moment(postInfo.pub_date).format("MM-DD HH:MM");
     let linkUrl = "";
-    if (board_name != "study") {
+    if (board_name !== "study") {
       linkUrl = `/${board_name}/detail/${postInfo.id}`;
     } else {
       linkUrl = `/${board_name}/${postInfo.group_name}/detail/${postInfo.id}`;

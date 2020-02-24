@@ -53,7 +53,7 @@ class BoardContainer extends React.Component {
                 {this.state.postList.map(post => (
                   <>
                     <PostView
-                      key={post.id}
+                      key={`postview-${post.id}`}
                       postInfo={post}
                       board_name={this.state.boardType}
                     />

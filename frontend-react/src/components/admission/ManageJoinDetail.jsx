@@ -5,9 +5,9 @@ import TableBody from "@material-ui/core/TableBody";
 import TableCell from "@material-ui/core/TableCell";
 import TableRow from "@material-ui/core/TableRow";
 import Grid from "@material-ui/core/Grid";
-import Button from "@material-ui/core/Button";
+// import Button from "@material-ui/core/Button";
 import api from "../../api/AdmissionAPI";
-import Input from "@material-ui/core/Input";
+// import Input from "@material-ui/core/Input";
 import { Link } from "react-router-dom";
 
 export default class ManageJoinDetail extends Component {

@@ -4,11 +4,9 @@ import { Redirect } from "react-router-dom";
 
 // material-ui
 import TextField from "@material-ui/core/TextField";
-import TextareaAutosize from "@material-ui/core/TextareaAutosize";
 import Button from "@material-ui/core/Button";
 import Editor from "../../Editor";
 import { withStyles } from "@material-ui/core/styles";
-import Grid from "@material-ui/core/Grid";
 
 const useStyles = theme => ({
   form: {
@@ -122,6 +120,9 @@ class QnAForm extends Component {
             });
           })
           .catch(err => console.log(err));
+        break;
+
+      default:
         break;
     }
   };

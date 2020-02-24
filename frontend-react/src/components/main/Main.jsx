@@ -6,7 +6,7 @@ import RecentPost from "../board/container/PostView";
 import logo from "./logo.png";
 import Container from "@material-ui/core/Container";
 import Grid from "@material-ui/core/Grid";
-import Paper from "@material-ui/core/Paper";
+//  import Paper from "@material-ui/core/Paper";
 
 import Carousel from "react-bootstrap/Carousel";
 import { ClubCalendar } from "../calendar/ClubCalendar";

@@ -7,7 +7,8 @@ import AnswerView from "./AnswerView";
 import NoticeDetail from "./NoticeDetail";
 import QnADetail from "./QnADetail";
 import CareerDetail from "./CareerDetail";
-import LectureDetail from "./LectureDetail";
+import SessionDetail from "./SessionDetail";
+
 // @material-ui
 import Container from "@material-ui/core/Container";
 import Paper from "@material-ui/core/Paper";
@@ -67,7 +68,7 @@ class PostDetailContainer extends Component {
   }
 
   handlingDelete = async (target, id) => {
-    if (window.confirm("게시물을 삭제하시겠습니까?") == true) {
+    if (window.confirm("게시물을 삭제하시겠습니까?") === true) {
       await api
         .deletePost(target, id)
         .then(res => {
@@ -114,9 +115,9 @@ class PostDetailContainer extends Component {
         );
         break;
 
-      case "lecture":
+      case "session":
         detailComponent = (
-          <LectureDetail
+          <SessionDetail
             postInfo={postInfo}
             handlingDelete={this.handlingDelete}
             post_id={this.props.match.params.id}

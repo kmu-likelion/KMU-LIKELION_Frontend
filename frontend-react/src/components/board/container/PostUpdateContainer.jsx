@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 //component
 import NoticeForm from "./NoticeForm";
-import LectureForm from "./LectureForm";
+import SessionFrom from "./SessionForm";
 import QnAForm from "./QnAForm";
 import CareerForm from "./CareerForm";
 
@@ -81,10 +81,10 @@ class PostUpdateContainer extends Component {
         );
         break;
 
-      case "lecture":
+      case "session":
         component = (
           <>
-            <LectureForm isEdit={isEdit} editId={editId} />
+            <SessionFrom isEdit={isEdit} editId={editId} />
           </>
         );
         break;
@@ -94,6 +94,8 @@ class PostUpdateContainer extends Component {
             <QnAForm isEdit={isEdit} editId={editId} />
           </>
         );
+        break;
+      default:
         break;
     }
     return component;

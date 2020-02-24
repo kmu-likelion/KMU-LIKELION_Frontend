@@ -7,7 +7,7 @@ import Viewer from "../Viewer";
 class EventModal extends React.Component {
   deleteEvent = async (event, id) => {
     event.preventDefault();
-    if (window.confirm("이벤트를 삭제하시겠습니까?") == true) {
+    if (window.confirm("이벤트를 삭제하시겠습니까?") === true) {
       await api
         .deletePost("notice", id)
         .then(res => {

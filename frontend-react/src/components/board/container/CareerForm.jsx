@@ -125,6 +125,8 @@ class CareerForm extends Component {
           })
           .catch(err => console.log(err));
         break;
+      default:
+        break;
     }
   };
 

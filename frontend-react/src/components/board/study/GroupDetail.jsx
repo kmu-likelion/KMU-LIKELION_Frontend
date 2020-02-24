@@ -62,7 +62,7 @@ class GroupDetail extends React.Component {
         let notice = [];
         let study = [];
         res.data.results.map(post => {
-          if (post.study_type == 0) {
+          if (post.study_type === 0) {
             notice.push(post);
           } else {
             study.push(post);
