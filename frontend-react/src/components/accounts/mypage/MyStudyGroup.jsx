@@ -4,7 +4,10 @@ import TextField from '@material-ui/core/TextField';
 import SaveIcon from '@material-ui/icons/Save';
 import Button from "@material-ui/core/Button";
 import api from "../../../api/GroupAPI";
-
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemText from '@material-ui/core/ListItemText';
+import ListSubheader from '@material-ui/core/ListSubheader';
 
 
 export default class MyStudyGroup extends Component {
@@ -12,7 +15,7 @@ export default class MyStudyGroup extends Component {
         MyStudyGroup:[]
 
     }
-    
+
     componentDidMount(){
         this.getMyStudyGroup(this.props.id);
     }
@@ -21,13 +24,8 @@ export default class MyStudyGroup extends Component {
         await api
           .getMyStudyGroup(id)
           .then(res => {
-    
             this.setState({
-                MyStudyGroup : []
-            });
-            console.log("연결된 멘토데이터 받아옴", res.data);
-            this.setState({
-                MyStudyGroup: res.data
+                MyStudyGroup: res.data.results
             });
             
           })
@@ -42,6 +40,13 @@ export default class MyStudyGroup extends Component {
             <Paper elevation={10} className="MyStudyGroup">
               <h1>My StudyGroup</h1>
               <hr/>
+              {this.state.MyStudyGroup.map(item => (
+                <ListItem>
+                
+                <ListItemText primary={`${item.name}`} />
+          
+                </ListItem>
+            ))}
               
             </Paper>
                 

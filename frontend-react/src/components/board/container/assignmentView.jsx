@@ -15,7 +15,7 @@ export default class AssignmentView extends Component {
   //     this.setState({ [event.target.name]: event.target.value });
   //   };
 
-  handlingDelete = taskId => {
+  handlingDelete = (event, taskId) => {
     console.log("과제삭제 실행.");
   };
 
@@ -42,7 +42,10 @@ export default class AssignmentView extends Component {
                     {task.body}
                     <br />
                     <Button color="primary">과제제출</Button>
-                    <Button color="secondary" onClick={this.handlingDelete}>
+                    <Button
+                      color="secondary"
+                      onClick={e => this.handlingDelete(e, task.id)}
+                    >
                       과제삭제
                     </Button>
                   </Tab.Pane>

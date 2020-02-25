@@ -36,7 +36,8 @@ class MyPost extends Component {
     studyboard: [],
     noticeboard: [],
     qnaboard: [],
-    recruitboard: [],
+    assignments: [],
+    submission:[],
   };
   componentDidMount() {
     const id = this.props.id;
@@ -51,19 +52,20 @@ class MyPost extends Component {
         var mystudy = myPosts.data.studyboard;
         var mynotice = myPosts.data.noticeboard;
         var myqna = myPosts.data.qnaboard;
-        var myrecruit = myPosts.data.recruitboard;
+        var myassign = myPosts.data.assignments;
+        var mysub = myPosts.data.submission;
         
         this.setState({studyboard:mystudy});
         this.setState({noticeboard:mynotice});
         this.setState({qnaboard:myqna});
-        this.setState({recruitboard:myrecruit});
+        this.setState({assignments:myassign});
+        this.setState({submission:mysub});
 
       })
       .catch(err => console.log(err));
   }
 
   show(type){
-    console.log("dsfsdf", type)
     let postlist = [];
     let board_type = "";
     switch(type){
@@ -79,16 +81,20 @@ class MyPost extends Component {
         postlist = this.state.studyboard;
         board_type = "study";
         break;
-      case "Recruit Board":
-        postlist = this.state.recruitboard;
-        board_type ="recruit";
+      case "Assignments":
+        postlist = this.state.assignments;
+        board_type ="assignments";
+        break;
+      case "Submission":
+        postlist = this.state.submission;
+        board_type ="submission";
         break;
       default:
         postlist=[];
         board_type ="";
         break;
     }
-    console.log("list? : ",board_type)
+    
     if(board_type === "study"){
       return(
         postlist.map(item => (
@@ -130,7 +136,7 @@ class MyPost extends Component {
           <hr/>
           <br />
           <List className={classes.root} subheader={<li />}>
-            {["Notice Board", "QnA Board", "Study Board","Recruit Board"].map(sectionId => (
+            {["Notice Board", "QnA Board", "Study Board","Assignments","Submission"].map(sectionId => (
               <li key={`section-${sectionId}`} className={classes.listSection}>
                 <ul className={classes.ul}>
                   <ListSubheader><h3>{`${sectionId}`}</h3></ListSubheader>
