@@ -23,7 +23,9 @@ class MentoringAdd extends React.Component {
     selected_mentor: "",
     selected_mentee: "",
     mentorOpen: false,
-    menteeOpen: false
+    menteeOpen: false,
+    mentorId:"",
+    menteeId:"",
   };
 
   handlingChange = event => {
@@ -41,6 +43,12 @@ class MentoringAdd extends React.Component {
         console.log("Add metoring:", res.data);
         this.props.getAllMentor();
         this.props.getAllMentee();
+        console.log("id값",this.state.mentorId);
+        console.log("id값",this.state.menteeId);
+
+        this.props.getLinkedMentor(this.state.menteeId);
+        this.props.getLinkedMentee(this.state.mentorId);
+        
       })
       .catch(err => {
         console.log(err);
@@ -72,15 +80,19 @@ class MentoringAdd extends React.Component {
                       onChange={e =>
                         this.setState({ selected_mentor: e.target.value })
                       }
+                      
                       displayEmpty
                     >
                       <MenuItem value="">
                         <small>Mentor</small>
                       </MenuItem>
                       {allUser.map(user => (
-                        <MenuItem value={user.id}>{user.username}</MenuItem>
+                        <MenuItem value={user.id} onclick={e => this.setState({mentorId:user.id})}>{user.username}</MenuItem>
                       ))}
+
                     </Select>
+
+
                     <Select
                       className={"mentoring-select"}
                       open={this.state.menteeOpen}
@@ -91,15 +103,18 @@ class MentoringAdd extends React.Component {
                       onChange={e =>
                         this.setState({ selected_mentee: e.target.value })
                       }
+                     
                       displayEmpty
                     >
                       <MenuItem value="">
                         <small>Mentee</small>
                       </MenuItem>
                       {allUser.map(user => (
-                        <MenuItem value={user.id}>{user.username}</MenuItem>
+                        <MenuItem value={user.id} onclick={e => this.setState({menteeId:user.id})}>{user.username}</MenuItem>
                       ))}
+
                     </Select>
+
                     <Button type="submit">ADD</Button>
                   </form>
                 </TableCell>
