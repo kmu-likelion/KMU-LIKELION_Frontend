@@ -4,13 +4,8 @@ import Container from "@material-ui/core/Container";
 import Paper from "@material-ui/core/Paper";
 import api from "../../api/AdmissionAPI";
 import CheckJoinView from "./CheckJoinView";
-
-// import FormControl from "@material-ui/core/FormControl";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
-// import Input from "@material-ui/core/Input";
-// import InputLabel from "@material-ui/core/InputLabel";
-
 class CheckJoin extends Component {
   state = {
     join_info: {},
