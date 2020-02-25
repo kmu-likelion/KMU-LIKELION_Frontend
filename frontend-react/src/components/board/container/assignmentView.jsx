@@ -3,6 +3,8 @@ import React, { Component } from "react";
 //@material-ui
 // import Paper from "@material-ui/core/Paper";
 import Button from "@material-ui/core/Button";
+// import Tabs from "@material-ui/core/Tabs";
+// import Tab from "@material-ui/core/Tab";
 
 //bootstrap
 import Tab from "react-bootstrap/Tab";
@@ -11,9 +13,13 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 
 export default class AssignmentView extends Component {
-  //   handlingChange = event => {
-  //     this.setState({ [event.target.name]: event.target.value });
-  //   };
+  state = {
+    tab: ""
+  };
+
+  handlingChange = event => {
+    this.setState({ [event.target.name]: event.target.value });
+  };
 
   handlingDelete = (event, taskId) => {
     console.log("과제삭제 실행.");

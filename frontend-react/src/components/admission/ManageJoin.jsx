@@ -7,6 +7,7 @@ import { Link } from "react-router-dom";
 
 import Input from "@material-ui/core/Input";
 
+import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import { makeStyles } from "@material-ui/core/styles";
 import Table from "@material-ui/core/Table";
@@ -80,17 +81,17 @@ class CheckJoin extends Component {
     console.log(qus_num);
     const useStyles = makeStyles({
       table: {
-        minWidth: 650
+        // minWidth: 650
       }
     });
     return (
       <Container maxWidth="lg" className="PostingSection">
-        <Paper className="PostingPaper">
-          <h2>지원자 관리 페이지</h2>
+        <Paper className="PostingPaper" elevation={0}>
+          <Typography variant="h4">지원자 관리 페이지</Typography>
           <hr />
           <br />
           <TableContainer>
-            <Table className={useStyles.table} aria-label="simple table">
+            <Table className={useStyles.table}>
               <TableHead>
                 <TableRow>
                   <TableCell colSpan={4}>모집정보</TableCell>
@@ -139,19 +140,16 @@ class CheckJoin extends Component {
             </Table>
           </TableContainer>
           <br />
-          <br />
 
-          <br />
-          <h4>지원 현황</h4>
-          <TableContainer component={Paper}>
-            <Table className={useStyles.table} aria-label="simple table">
+          <Typography variant="h5">지원 현황</Typography>
+
+          <TableContainer>
+            <Table className={useStyles.table}>
               <TableHead>
                 <TableRow>
                   <TableCell>지원번호</TableCell>
                   <TableCell>이름</TableCell>
                   <TableCell>학과</TableCell>
-                  <TableCell>생년월일</TableCell>
-                  <TableCell>성별</TableCell>
                   <TableCell>점수</TableCell>
                   <TableCell colSpan={2}>현황</TableCell>
                 </TableRow>
@@ -164,8 +162,6 @@ class CheckJoin extends Component {
                     </TableCell>
                     <TableCell>{row.name}</TableCell>
                     <TableCell>{row.major}</TableCell>
-                    <TableCell>{row.birth}</TableCell>
-                    <TableCell>{row.sex}</TableCell>
                     <TableCell>0.0</TableCell>
                     <TableCell>{row.status}</TableCell>
                     <TableCell>
