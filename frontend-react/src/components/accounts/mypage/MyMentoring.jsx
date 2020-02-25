@@ -15,10 +15,11 @@ import StarBorderIcon from '@material-ui/icons/StarBorder';
 
 const useStyles = theme => ({
   root: {
+    
     display: 'flex',
     flexWrap: 'wrap',
     justifyContent: 'space-around',
-    overflow: 'hidden',
+    overflow: 'auto',
   },
   gridList: {
     flexWrap: 'nowrap',

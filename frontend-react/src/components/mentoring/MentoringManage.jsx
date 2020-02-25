@@ -35,7 +35,6 @@ class MentoringManage extends React.Component {
     this.getAllUser();
     this.getAllMentor();
     this.getAllMentee();
-    this.getLinkedMentee();
   }
   getAllUser = async () => {
     await getAllUser().then(res => {
@@ -52,7 +51,10 @@ class MentoringManage extends React.Component {
       .then(res => {
         console.log("멘토데이터 받아옴", res.data);
         this.setState({
-          allMentor: res.data
+          allMentor: res.data,
+          linkedMentor: [],
+          linkedMentee:[],
+
         });
       })
       .catch(err => {
@@ -66,7 +68,9 @@ class MentoringManage extends React.Component {
       .then(res => {
         console.log("멘티데이터 받아옴", res.data);
         this.setState({
-          allMentee: res.data
+          allMentee: res.data,
+          linkedMentor: [],
+          linkedMentee:[],
         });
       })
       .catch(err => {
@@ -118,6 +122,7 @@ class MentoringManage extends React.Component {
       .then(res => {
         console.log("정상적으로 삭제됨");
         this.getLinkedMentee(mentorId);
+        this.getLinkedMentor(menteeId);
         this.getAllMentor();
         this.getAllMentee();
       })
