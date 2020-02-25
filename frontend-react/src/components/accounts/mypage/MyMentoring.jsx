@@ -11,7 +11,7 @@ import GridListTile from '@material-ui/core/GridListTile';
 import GridListTileBar from '@material-ui/core/GridListTileBar';
 import IconButton from '@material-ui/core/IconButton';
 import StarBorderIcon from '@material-ui/icons/StarBorder';
-
+import { Link } from "react-router-dom";
 
 const useStyles = theme => ({
   root: {
@@ -19,13 +19,15 @@ const useStyles = theme => ({
     display: 'flex',
     flexWrap: 'wrap',
     justifyContent: 'space-around',
-    overflow: 'auto',
+    overflow: 'hidden',
+    backgroundColor: theme.palette.background.paper,
   },
   gridList: {
     flexWrap: 'nowrap',
     // Promote the list into his own layer on Chrome. This cost memory but helps keeping high FPS.
     transform: 'translateZ(0)',
   },
+  
   titleBar: {
     background:
       'linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.3) 70%, rgba(0,0,0,0) 100%)',
@@ -83,18 +85,22 @@ class MyMentoring extends Component {
       };
 
     render() {
-        const classes = useStyles();
+        const {classes} =this.props;
         return (
             <Paper elevation={10} className="MyMentoring">
+              <>
               <h1>My Mentoring</h1>
               <hr/>
               <br/>
               <h3>My Mentor</h3>
               <div className={classes.root}>
+
                 <GridList className={classes.gridList} cols={2.5}>
                     {this.state.linkedMentor.map(tile => (
+                    
                     <GridListTile key={tile.user.img}>
                         <img src={tile.user.img} alt={tile.user.id} />
+                        <Link to={`/Mypage/${tile.user.id}`} >
                         <GridListTileBar
                         title={tile.user.username}
                         classes={{
@@ -102,12 +108,16 @@ class MyMentoring extends Component {
                             title: classes.title,
                         }}
                         actionIcon={
+                          
                             <IconButton aria-label={`star ${tile.user.username}`}>
                             <StarBorderIcon className={classes.title} />
                             </IconButton>
+                          
                         }
                         />
+                        </Link>
                     </GridListTile>
+                    
                     ))}
                 </GridList>
                 </div>
@@ -117,8 +127,10 @@ class MyMentoring extends Component {
               <div className={classes.root}>
                 <GridList className={classes.gridList} cols={2.5}>
                     {this.state.linkedMentee.map(tile => (
+                    
                     <GridListTile key={tile.user.img}>
                         <img src={tile.user.img} alt={tile.user.id} />
+                        <Link to={`/Mypage/${tile.user.id}`} >
                         <GridListTileBar
                         title={tile.user.username}
                         classes={{
@@ -126,18 +138,22 @@ class MyMentoring extends Component {
                             title: classes.title,
                         }}
                         actionIcon={
+                          
                             <IconButton aria-label={`star ${tile.user.username}`}>
                             <StarBorderIcon className={classes.title} />
                             </IconButton>
+                          
                         }
                         />
+                        </Link>
                     </GridListTile>
+                    
                     ))}
                 </GridList>
                 </div>
 
               
-              
+              </>
             </Paper>
                 
         );

@@ -35,13 +35,11 @@ class MyLike extends React.Component {
     likeNotice: [],
     likeQnA: [],
     likeStudy: [],
-    likeRecruit: []
   };
   componentDidMount() {
     this.getLikePosts("notice");
     this.getLikePosts("qna");
     this.getLikePosts("study");
-    this.getLikePosts("recruit");
   }
 
   async getLikePosts(target) {
@@ -59,9 +57,6 @@ class MyLike extends React.Component {
             break;
           case "study":
             this.setState({ likeStudy: posts });
-            break;
-          case "recruit":
-            this.setState({ likeRecruit: posts });
             break;
           default:
             break;
@@ -86,10 +81,6 @@ class MyLike extends React.Component {
       case "Study Board":
         LikeList = this.state.likeStudy;
         board_type = "study";
-        break;
-      case "Recruit Board":
-        LikeList = this.state.likeRecruit;
-        board_type = "recruit";
         break;
       default:
         LikeList=[];
@@ -143,7 +134,7 @@ class MyLike extends React.Component {
           <hr/>
           <br/>
           <List className={classes.root} subheader={<li />}>
-            {["Notice Board", "QnA Board", "Study Board","Recruit Board"].map(sectionId => (
+            {["Notice Board", "QnA Board", "Study Board"].map(sectionId => (
               <li key={`section-${sectionId}`} className={classes.listSection}>
                 <ul className={classes.ul}>
                   <ListSubheader><h3>{`${sectionId}`}</h3></ListSubheader>
