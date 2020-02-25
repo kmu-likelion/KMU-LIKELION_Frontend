@@ -48,19 +48,17 @@ class BoardContainer extends React.Component {
             <Link to={`/${this.state.boardType}/new`}>새 글 작성</Link>
             <hr />
             <Grid container spacing={2}>
-              <Grid item xs={0} sm={1}></Grid>
+              <Grid item sm={1}></Grid>
               <Grid item xs={12} sm={10}>
-                {this.state.postList.map(post => (
-                  <>
-                    <PostView
-                      key={`postview-${post.id}`}
-                      postInfo={post}
-                      board_name={this.state.boardType}
-                    />
-                  </>
+                {this.state.postList.map((post, index) => (
+                  <PostView
+                    key={index}
+                    postInfo={post}
+                    board_name={this.state.boardType}
+                  />
                 ))}
               </Grid>
-              <Grid item xs={0} sm={1}></Grid>
+              <Grid item sm={1}></Grid>
             </Grid>
           </Paper>
         </Container>

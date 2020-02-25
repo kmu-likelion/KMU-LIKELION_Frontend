@@ -6,27 +6,23 @@ import api from "../../../api/BoardAPI";
 
 import LikeView from "../LikeView";
 import Viewer from "../../Viewer";
-
+import AssignmentView from "./AssignmentView";
+import AssignmentForm from "./AssignmentForm";
 // @material-ui
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
-import Paper from "@material-ui/core/Paper";
 import Table from "@material-ui/core/Table";
 import TableRow from "@material-ui/core/TableRow";
 import TableCell from "@material-ui/core/TableCell";
 
-//bootstrap
-import Tab from "react-bootstrap/Tab";
-import Nav from "react-bootstrap/Nav";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
 class SessionDetail extends Component {
   state = {
     title: "",
     body: "",
     pub_date: "",
     author_name: "",
-    assignments: []
+    assignments: [],
+    modalFlag: false
   };
 
   componentDidMount() {
@@ -46,6 +42,23 @@ class SessionDetail extends Component {
         assignments: res.data.assignments
       });
     });
+  };
+
+  modalOpen = () => {
+    this.setState({
+      modalFlag: true
+    });
+  };
+
+  modalClose = () => {
+    this.setState({
+      modalFlag: false
+    });
+  };
+
+  addAssignment = event => {
+    event.preventDefault();
+    this.modalOpen();
   };
 
   render() {
@@ -70,50 +83,24 @@ class SessionDetail extends Component {
             <Typography color="textSecondary" component="pre">
               <Viewer value={String(this.state.body)} />
             </Typography>
-            {this.state.assignments.length > 0 ? (
-              <>
-                <Typography color="textSecondary" variant="h5">
-                  과제
-                  <hr />
-                </Typography>
-                <Paper
-                  style={{
-                    padding: 10,
-                    margin: 10
-                  }}
-                >
-                  <Tab.Container defaultActiveKey={0}>
-                    <Row>
-                      <Col sm={3}>
-                        <Nav variant="pills" className="flex-column">
-                          {this.state.assignments.map((task, index) => (
-                            <Nav.Item>
-                              <Nav.Link eventKey={index}>{task.title}</Nav.Link>
-                            </Nav.Item>
-                          ))}
-                        </Nav>
-                      </Col>
-                      <Col sm={9}>
-                        <Tab.Content>
-                          {this.state.assignments.map((task, index) => (
-                            <Tab.Pane eventKey={index}>
-                              {task.body}
-                              <br />
-                              <Button color="primary">과제제출</Button>
-                            </Tab.Pane>
-                          ))}
-                        </Tab.Content>
-                      </Col>
-                    </Row>
-                  </Tab.Container>
-                </Paper>
-              </>
-            ) : (
-              <Typography color="textSecondary" variant="h5">
-                과제 없음.
-                <hr />
-              </Typography>
-            )}
+
+            <Button
+              color="secondary"
+              size="small"
+              variant="contained"
+              onClick={event => this.addAssignment(event)}
+            >
+              과제추가
+            </Button>
+            <hr />
+            <AssignmentForm
+              open={this.state.modalFlag}
+              handlingOpen={this.modalOpen}
+              handlingClose={this.modalClose}
+              getAssignments={this.getAssignments}
+              sessionId={this.props.post_id}
+            />
+            <AssignmentView assignments={this.state.assignments} />
           </TableCell>
         </TableRow>
 

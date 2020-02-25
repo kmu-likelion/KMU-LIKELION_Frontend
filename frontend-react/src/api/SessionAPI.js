@@ -23,6 +23,15 @@ export default {
     );
   }
 
+  // deleteAssignment(id) {
+  //   console.log("delete assignment 실행.");
+  //   return axios.delete(
+  //     `board/session/${id}/add_assignment/`,
+  //     data,
+  //     tokenConfig()
+  //   );
+  // }
+
   //   //글 수정
   //   updatePost(url, id, data) {
   //     console.log("updatePost 실행.");
