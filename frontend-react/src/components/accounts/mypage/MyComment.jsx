@@ -29,10 +29,11 @@ const useStyles = theme => ({
 
 class MyComment extends Component {
   state = {
-    studycomments: [],
-    noticecomments: [],
-    qnacomments: [],
-    recruitcomments: [],
+    studyboard_comments: [],
+    noticeboard_comments: [],
+    qnaboard_comments: [],
+    sessionboard_comments: [],
+    submissionboard_comments:[],
   };
   componentDidMount() {
     const id = this.props.id;
@@ -44,15 +45,18 @@ class MyComment extends Component {
       .getMyPost(id)
       .then(myPosts => {
         console.log(myPosts);
-        var mystudy = myPosts.data.studycomments;
-        var mynotice = myPosts.data.noticecomments;
-        var myqna = myPosts.data.qnacomments;
-        var myrecruit = myPosts.data.recruitcomments;
-        
-        this.setState({studycomments:mystudy});
-        this.setState({noticecomments:mynotice});
-        this.setState({qnacomments:myqna});
-        this.setState({recruitcomments:myrecruit});
+        var mystudy = myPosts.data.studyboard_comments;
+        var mynotice = myPosts.data.noticeboard_comments;
+        var myqna = myPosts.data.qnaboard_comments;
+        var mysession = myPosts.data.sessionboard_comments;
+        var mysub = myPosts.data.submissionboard_comments;
+
+
+        this.setState({studyboard_comments:mystudy});
+        this.setState({noticeboard_comments:mynotice});
+        this.setState({qnaboard_comments:myqna});
+        this.setState({sessionboard_comments:mysession});
+        this.setState({submissionboard_comments:mysub});
 
       })
       .catch(err => console.log(err));
@@ -63,20 +67,24 @@ class MyComment extends Component {
     let board_type = "";
     switch(type){
       case "Notice Board":
-        commentlist = this.state.noticecomments;
+        commentlist = this.state.noticeboard_comments;
         board_type = "notice";
         break;
       case "QnA Board":
-        commentlist = this.state.qnacomments;
+        commentlist = this.state.qnaboard_comments;
         board_type = "qna";
         break;
       case "Study Board":
-        commentlist = this.state.studycomments;
+        commentlist = this.state.studyboard_comments;
         board_type = "study";
         break;
-      case "Recruit Board":
-        commentlist = this.state.recruitcomments;
-        board_type = "recruit";
+      case "Session Board":
+        commentlist = this.state.sessionboard_comments;
+        board_type = "session";
+        break;
+      case "Submission Board":
+        commentlist = this.state.submissionboard_comments;
+        board_type = "submission";
         break;
       default:
         commentlist=[];
@@ -90,7 +98,7 @@ class MyComment extends Component {
                   to={`/${board_type}/${item.group_name}/detail/${item.board}`}
                   className={"main-postTitle"}
                 >
-                  <ListItemText primary={`${item.title}`} />
+                  <ListItemText primary={`${item.body}`} />
                 </Link>
             
           </ListItem>
@@ -125,7 +133,7 @@ class MyComment extends Component {
           <hr/>
           <br />
           <List className={classes.root} subheader={<li />}>
-            {["Notice Board", "QnA Board", "Study Board","Recruit Board"].map(sectionId => (
+            {["Notice Board", "QnA Board", "Study Board","Session Board","Submission Board"].map(sectionId => (
               <li key={`section-${sectionId}`} className={classes.listSection}>
                 <ul className={classes.ul}>
                   <ListSubheader><h3>{`${sectionId}`}</h3></ListSubheader>
