@@ -41,7 +41,7 @@ class PostDetailContainer extends Component {
         const _data = res.data;
         console.log("가져온 댓글 : ", _data.results);
         this.setState({
-          comments: _data.results,
+          comments: _data,
           board_name: board_name
         });
       })

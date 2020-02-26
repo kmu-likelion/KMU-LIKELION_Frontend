@@ -91,7 +91,7 @@ export default class CommentView extends Component {
     } else {
       return (
         <List component="nav" aria-label="contacts">
-          <ListItem button component={Link} to={`/Mypage/${user_id}`}>
+          <ListItem button component={Link} to={`/Mypage/${author_name}`}>
             <ListItemAvatar>
               <Avatar alt="Recomment-writer" src={user_img} />
             </ListItemAvatar>

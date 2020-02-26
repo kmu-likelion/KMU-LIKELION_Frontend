@@ -90,7 +90,7 @@ export default class AnswerView extends Component {
             <Card className="answer-card">
               <CardHeader
                 avatar={
-                  <Link to={`/Mypage/${user_id}`}>
+                  <Link to={`/Mypage/${author_name}`}>
                     <Avatar
                       src={user_img}
                       alt="User-Image"
@@ -129,7 +129,7 @@ export default class AnswerView extends Component {
           <Card className="answer-card">
             <CardHeader
               avatar={
-                <Link to={`/Mypage/${user_id}`}>
+                <Link to={`/Mypage/${author_name}`}>
                   <Avatar src={user_img} alt="User-Image" aria-label="recipe" />
                 </Link>
               }
