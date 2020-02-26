@@ -32,13 +32,13 @@ class MyPage extends Component {
 
   componentDidMount() {
     console.log("New ComponentDidMount");
-    const _id = this.props.match.params.id;
-    this.getUser(_id);
+    const _username = this.props.match.params.username;
+    this.getUser(_username);
     this.setState({type:"Myprofile"});
   }
 
-  async getUser(userId) {
-    await getUser(userId)
+  async getUser(username) {
+    await getUser(username)
       .then(res => {
         const userData = res.data;
         console.log(userData);
