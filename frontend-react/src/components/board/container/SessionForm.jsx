@@ -68,15 +68,7 @@ class LectureForm extends Component {
       username: "",
       title: "",
       body: "",
-      // checkedAssignment: false,
-      // taskTitle: "",
-      // taskBody: "",
-      // taskDeadline: moment(new Date()).format("YYYY-MM-DDThh:mm:ss"),
-      // taskScoreTypeList: [],
-      // taskScoreType: "",
-      // tasks: [],
 
-      // open: false,
       endSubmit: false,
       isEdit: false,
       postId: ""
@@ -156,66 +148,6 @@ class LectureForm extends Component {
         break;
     }
   };
-
-  // createAssignment = async (sessionId, assignment) => {
-  //   console.log("보낼 과제 데이터 : ", assignment);
-  //   await sessionApi
-  //     .addAssignment(sessionId, assignment)
-  //     .then(res => {
-  //       console.log("성공적으로 과제 생성됨", res);
-  //     })
-  //     .catch(err => console.log(err));
-  // };
-
-  // //tasks 상태 리스트에 과제를 추가함.
-  // addAssignment = () => {
-  //   if (this.state.checkedAssignment === true) {
-  //     let addedTasks = this.state.tasks;
-  //     let score_type = this.state.taskScoreTypeList.join(",");
-
-  //     addedTasks.push({
-  //       title: this.state.taskTitle,
-  //       user_id: this.state.userId,
-  //       body: this.state.taskBody,
-  //       score_types: score_type,
-  //       deadline: this.state.taskDeadline
-  //       // deadline: "2020-02-24T14:45:17.894165Z"
-  //     });
-  //     console.log("추가된 과제 :", addedTasks);
-  //     this.setState({
-  //       tasks: addedTasks,
-  //       taskTitle: "",
-  //       taskBody: "",
-  //       taskDeadline: moment(new Date()).format("YYYY-MM-DDThh:mm:ss"),
-  //       taskScoreTypeList: [],
-  //       score_type: []
-  //     });
-  //   }
-  // };
-
-  // addScoreType = () => {
-  //   if (this.state.taskScoreType !== "") {
-  //     let types = this.state.taskScoreTypeList;
-  //     types.push(this.state.taskScoreType);
-  //     this.setState({
-  //       taskScoreTypeList: types,
-  //       taskScoreType: ""
-  //     });
-  //   }
-  // };
-
-  // deleteScoreType = name => {
-  //   console.info(`You clicked the delete '${name}'`);
-  //   let type_list = this.state.taskScoreTypeList;
-  //   let index = type_list.indexOf(name);
-  //   if (index > -1) {
-  //     type_list.splice(index, 1);
-  //     // console.log(type_list);
-  //     this.setState({
-  //       taskScoreTypeList: type_list
-  //     });
-  //   }
-  // };
 
   render() {
     const { classes } = this.props;

@@ -36,18 +36,22 @@ export default {
   },
 
   updateQuestion(id, data) {
-    console.log("createQuestion 실행.");
+    console.log("updateQuestion 실행.");
     return axios.put(`admission/question/${id}/`, data);
   },
 
   deleteQuestion(id) {
-    console.log("createQuestion 실행.");
+    console.log("deleteQuestion 실행.");
     return axios.delete(`admission/question/${id}/`);
   },
 
   createAnswer(data) {
     console.log("createAnswer 실행.");
     return axios.post("admission/answer/", data);
+  },
+  updateAnswer(id, data) {
+    console.log("updateAnswer 실행.", data);
+    return axios.put(`admission/answer/${id}/`, data);
   },
   createAnswers(data) {
     console.log("createAnswers 실행.");
