@@ -19,7 +19,7 @@ const useStyles = theme => ({
   }
 });
 
-class CheckAnswerForm extends Component {
+class ConfirmAnswerForm extends Component {
   state = {
     id: "",
     body: "",
@@ -117,4 +117,4 @@ class CheckAnswerForm extends Component {
   }
 }
 
-export default withStyles(useStyles)(CheckAnswerForm);
+export default withStyles(useStyles)(ConfirmAnswerForm);

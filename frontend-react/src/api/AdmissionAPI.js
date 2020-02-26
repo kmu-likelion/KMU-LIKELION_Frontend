@@ -5,7 +5,7 @@ export default {
   /* Admission api */
 
   createJoinForm(data) {
-    console.log("submitJoinForm 실행.");
+    console.log("submitJoinForm 실행.", data);
     // console.log(data);
     return axios.post("admission/application/", data);
   },
@@ -24,6 +24,11 @@ export default {
   getAllJoinData() {
     console.log("getAllJoinData 실행.");
     return axios.get("admission/application/");
+  },
+
+  updateJoinData(id, data) {
+    console.log("update JoinData 실행.", data);
+    return axios.put(`admission/application/${id}/`, data);
   },
 
   getAllQuestions() {

@@ -95,10 +95,10 @@ export default function Header(props) {
           ) : (
             <Nav>
               <NavDropdown title="지원하기" id="collasible-nav-dropdown">
-                <NavDropdown.Item as={Link} to="/admission/join">
+                <NavDropdown.Item as={Link} to="/admission/apply">
                   입부신청
                 </NavDropdown.Item>
-                <NavDropdown.Item as={Link} to="/admission/checkjoin">
+                <NavDropdown.Item as={Link} to="/admission/confirmApply">
                   지원내역
                 </NavDropdown.Item>
               </NavDropdown>
