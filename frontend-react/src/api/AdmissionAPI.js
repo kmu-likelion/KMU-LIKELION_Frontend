@@ -10,6 +10,7 @@ export default {
     return axios.post("admission/application/", data);
   },
 
+  //parameter : email, password
   getJoinData(data) {
     console.log("getJoinData 실행.");
     return axios.post(`admission/application/get_application/`, data);

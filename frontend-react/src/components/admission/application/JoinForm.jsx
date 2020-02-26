@@ -2,7 +2,7 @@ import React, { Component } from "react";
 
 import JoinBasicInfo from "./JoinFormBasic";
 import JoinSubmit from "./JoinFormSubmit";
-import JoinStore from "./joinStore";
+import JoinStore from "../joinStore";
 import Container from "@material-ui/core/Container";
 import Paper from "@material-ui/core/Paper";
 

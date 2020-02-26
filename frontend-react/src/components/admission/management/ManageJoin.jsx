@@ -2,7 +2,7 @@ import React, { Component } from "react";
 
 import Container from "@material-ui/core/Container";
 import Paper from "@material-ui/core/Paper";
-import api from "../../api/AdmissionAPI";
+import api from "../../../api/AdmissionAPI";
 import { Link } from "react-router-dom";
 
 import Input from "@material-ui/core/Input";

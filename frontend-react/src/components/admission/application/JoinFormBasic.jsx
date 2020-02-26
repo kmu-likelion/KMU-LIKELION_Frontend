@@ -1,6 +1,6 @@
 import "date-fns";
 import React from "react";
-import JoinStore from "./joinStore";
+import JoinStore from "../joinStore";
 
 import Radio from "@material-ui/core/Radio";
 import RadioGroup from "@material-ui/core/RadioGroup";

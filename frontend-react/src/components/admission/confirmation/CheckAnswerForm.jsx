@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import api from "../../api/AdmissionAPI";
+import api from "../../../api/AdmissionAPI";
 //@material-ui
 import TextField from "@material-ui/core/TextField";
 import { withStyles } from "@material-ui/core/styles";
