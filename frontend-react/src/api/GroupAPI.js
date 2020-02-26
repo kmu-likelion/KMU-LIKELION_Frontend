@@ -47,7 +47,7 @@ export default {
 
   deleteGroupUser(id){
     console.log("deleteGroupUser API");
-    return axios.delete(`account/groupuser/${id}`,tokenConfig());
+    return axios.delete(`accounts/groupuser/${id}/`,tokenConfig());
   },
 
   getMemberWithGroupId(id) {

@@ -8,7 +8,7 @@ import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
-
+import CancelIcon from '@material-ui/icons/Cancel';
 import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
 // import { FixedSizeList } from "react-window";
@@ -53,7 +53,7 @@ class GroupDetail extends React.Component {
     await getAllUser().then(res => {
       console.log("모든 유저 받아옴", res.data);
       this.setState({
-        allUser: res.data.results
+        allUser: res.data
       });
     });
   }
@@ -65,13 +65,13 @@ class GroupDetail extends React.Component {
       .getGroupWithName(group_name)
       .then(res => {
         // console.log("결과 : ", res.data);
-        const group_info = res.data.results[0];
+        const group_info = res.data;
         console.log("결과 : ", group_info);
         this.setState({
-          group_name: group_info.name,
-          group_id: group_info.id,
-          group_body: group_info.introduction,
-          group_img: group_info.img
+          group_name: group_info[0].name,
+          group_id: group_info[0].id,
+          group_body: group_info[0].introduction,
+          group_img: group_info[0].img
         });
         this.getGroupPost();
         this.getGroupMember();
@@ -84,10 +84,11 @@ class GroupDetail extends React.Component {
   };
   addGroupUser = async event => {
     event.preventDefault();
+    console.log("유저아이디",this.state.selected_user);
     await api
       .addGroupUser({
         "is_captain": false,
-        "user_id": this.state.userId,
+        "user_id": this.state.selected_user,
         "group_id": this.state.group_id
     })
       .then(res => {
@@ -98,10 +99,13 @@ class GroupDetail extends React.Component {
         console.log(err);
       });
   };
-  deleteGroupUser = async event => {
+  deleteGroupUser = async (event,id) => {
     event.preventDefault();
     await api
-      .deleteGroupUser()
+      .deleteGroupUser(id)
+      .then(res=>{
+        this.getGroupMember();
+      })
       .catch(err=>{
         console.log(err);
       });
@@ -138,7 +142,7 @@ class GroupDetail extends React.Component {
     await api
       .getMemberWithGroupId(this.state.group_id)
       .then(res => {
-        console.log(res.data);
+        console.log("그룹멤버",res.data);
 
         this.setState({
           group_members: res.data
@@ -151,9 +155,9 @@ class GroupDetail extends React.Component {
     await api
       .getCaptainWithGroupId(this.state.group_id)
       .then(res => {
-        console.log("후 이즈 캡틴?", res.data.results[0]);
+        console.log("후 이즈 캡틴?", res.data);
         this.setState({
-          group_captain: res.data.results[0]
+          group_captain: res.data[0]
         });
         
       })
@@ -166,6 +170,8 @@ class GroupDetail extends React.Component {
     console.log("delete post 성공.");
     document.location.href = "/study";
   };
+
+  
  
 
   render() {
@@ -207,7 +213,7 @@ class GroupDetail extends React.Component {
                     <li key={`li-${member.id}`}>
                       <ul className={"mentoring-ul"}>
                         <ListItem button key={member.id}>
-                        <ListItemText primary={member.user.username} />
+                          <ListItemText primary={member.user.username} /><CancelIcon className="Cancle" onClick={event => this.deleteGroupUser(event,member.id)}/>
                         </ListItem>
                       </ul>
                     </li>
@@ -225,7 +231,42 @@ class GroupDetail extends React.Component {
                 {
                   String(this.state.group_captain.user_id) === window.sessionStorage.getItem("id") 
                     ? (
-                      <>그룹원 추가</>
+                      <Table>
+                        <TableBody>
+                        <TableRow className="alluser">
+                              <TableCell colSpan={2}>
+                                <form
+                                  onSubmit={event => this.addGroupUser(event)}
+                                  className={"mentoring-form"}
+                                >
+                                  <Select
+                                    className={"mentoring-select"}
+                                    open={this.state.userOpen}
+                                    onClose={e => this.setState({ userOpen: false })}
+                                    name="selected_user"
+                                    onOpen={e => this.setState({ userOpen: true })}
+                                    value={this.state.selected_user}
+                                    onChange={e =>
+                                      this.setState({ selected_user: e.target.value })
+                                    }
+                                    
+                                    displayEmpty
+                                  >
+                                    <MenuItem value="">
+                                      <small>All User</small>
+                                    </MenuItem>
+                                    {this.state.allUser.map(user => (
+                                      <MenuItem value={user.id}>{user.username}</MenuItem>
+                                    ))}
+
+                                  </Select>
+
+                                  <Button type="submit">ADD</Button>
+                                </form>
+                              </TableCell>
+                            </TableRow>
+                        </TableBody>
+                      </Table>
                     )
                     : (
                       <></>

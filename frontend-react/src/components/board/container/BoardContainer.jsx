@@ -30,7 +30,7 @@ class BoardContainer extends React.Component {
       .getAllPosts(boardType.toLowerCase())
       .then(res => {
         console.log("posts 가져오기 성공! ", res.data);
-        this.setState({ postList: res.data.results });
+        this.setState({ postList: res.data });
       })
       .catch(err => {
         console.log(err);

@@ -100,7 +100,7 @@ class MyMentoring extends Component {
                     
                     <GridListTile key={tile.user.img}>
                         <img src={tile.user.img} alt={tile.user.id} />
-                        <Link to={`/Mypage/${tile.user.id}`} >
+                        <Link to={`/Mypage/${tile.user.username}`} >
                         <GridListTileBar
                         title={tile.user.username}
                         classes={{
@@ -130,7 +130,7 @@ class MyMentoring extends Component {
                     
                     <GridListTile key={tile.user.img}>
                         <img src={tile.user.img} alt={tile.user.id} />
-                        <Link to={`/Mypage/${tile.user.id}`} >
+                        <Link to={`/Mypage/${tile.user.username}`} >
                         <GridListTileBar
                         title={tile.user.username}
                         classes={{

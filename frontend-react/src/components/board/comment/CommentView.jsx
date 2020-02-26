@@ -118,7 +118,7 @@ export default class CommentView extends Component {
         <List component="nav" aria-label="contacts">
           <ListItem>
             <ListItemAvatar>
-              <IconButton component={Link} to={`/Mypage/${user_id}`}>
+              <IconButton component={Link} to={`/Mypage/${author_name}`}>
                 <Avatar alt="Recomment-writer" src={user_img} />
               </IconButton>
             </ListItemAvatar>
