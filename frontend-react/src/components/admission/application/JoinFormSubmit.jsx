@@ -24,7 +24,7 @@ class JoinFormSubmit extends React.Component {
       console.log("eee", res.data);
 
       this.setState({
-        questions: res.data.results
+        questions: res.data
       });
     });
   };

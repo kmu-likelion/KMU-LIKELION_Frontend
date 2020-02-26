@@ -19,7 +19,6 @@ class ConfirmContainer extends Component {
   }
 
   render() {
-    console.log("최상위 렌더~~");
     return (
       <Container maxWidth="lg" className="PostingSection">
         <Paper className="PostingPaper">

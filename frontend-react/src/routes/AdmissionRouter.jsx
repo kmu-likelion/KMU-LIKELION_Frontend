@@ -28,8 +28,7 @@ class AdmissionRouter extends React.Component {
     isAccessed: false,
     applicationId: "",
     ACCESS_DENIED: false,
-    ERROR_MSG: "",
-    testMSG: "초기값"
+    ERROR_MSG: ""
   };
 
   updateValue = (key, val) => {
@@ -41,9 +40,9 @@ class AdmissionRouter extends React.Component {
       <AdmissionStore.Provider
         value={{ state: this.state, updateValue: this.updateValue }}
       >
-        <Route path={`${this.props.match.path}/join`} component={JoinForm} />
+        <Route path={`${this.props.match.path}/apply`} component={JoinForm} />
         <Route
-          path={`${this.props.match.path}/checkjoin`}
+          path={`${this.props.match.path}/confirmApply`}
           component={ConfirmContainer}
         />
         <Route

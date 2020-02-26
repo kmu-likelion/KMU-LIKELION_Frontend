@@ -3,8 +3,8 @@ import React, { Component } from "react";
 import Container from "@material-ui/core/Container";
 import Paper from "@material-ui/core/Paper";
 import api from "../../../api/AdmissionAPI";
-import CheckAnswerForm from "./CheckAnswerForm";
-import CheckBasicForm from "./CheckBasicForm";
+import ConfirmAnswerForm from "./ConfirmAnswerForm";
+import ConfirmBasicView from "./ConfirmBasicView";
 import AdmissionStore from "../../../store/AdmissionStore";
 
 import Grid from "@material-ui/core/Grid";
@@ -34,12 +34,6 @@ class ConfirmApplication extends Component {
   };
 
   componentDidMount() {
-    console.log("New ComponentDidMount");
-    // const { join_info, answers } = this.props;
-    // this.setState({
-    //   joinInfo: join_info,
-    //   answers: answers
-    // });
     this.getAllQuestions();
     this.getJoinDataWithId(this.context.state.applicationId);
   }
@@ -49,19 +43,23 @@ class ConfirmApplication extends Component {
   };
 
   getAllQuestions = async () => {
-    await api.getAllQuestions().then(res => {
-      console.log(res);
-      this.setState({
-        questions: res.data.results
-      });
-    });
+    await api
+      .getAllQuestions()
+      .then(res => {
+        console.log("모든 질문사항 가져옴", res);
+        this.setState({
+          questions: res.data
+        });
+      })
+      .catch(err => console.log(err));
   };
 
   getJoinDataWithId = async join_id => {
     await api.getJoinDatawithId(join_id).then(res => {
       console.log("id로 지원내역 가져오기 !", res.data);
       this.setState({
-        joinInfo: res.data.join_forms
+        joinInfo: res.data,
+        answers: res.data.answer
       });
     });
   };
@@ -76,6 +74,7 @@ class ConfirmApplication extends Component {
     this.setState({
       modalFlag: false
     });
+    this.getJoinDataWithId(this.context.state.applicationId);
   };
 
   showAnswer = (event, question_id) => {
@@ -83,7 +82,6 @@ class ConfirmApplication extends Component {
     let answers = this.state.answers;
     let ans_index = answers.findIndex(ans => ans.question_id === question_id);
     this.setState({ showAnswerInfo: answers[ans_index] });
-    // showAnswerInfo
     this.modalOpen();
   };
 
@@ -100,7 +98,7 @@ class ConfirmApplication extends Component {
             <Grid item xs={1} sm={2}></Grid>
             <Grid item xs={10} sm={8}>
               <Grid item xs={12} sm={12}>
-                <CheckBasicForm joinInfo={this.state.joinInfo} />
+                <ConfirmBasicView joinInfo={this.state.joinInfo} />
               </Grid>
               <Grid item xs={12} sm={12}>
                 <br />
@@ -132,7 +130,7 @@ class ConfirmApplication extends Component {
                     );
                   })}
                 </List>
-                <CheckAnswerForm
+                <ConfirmAnswerForm
                   open={this.state.modalFlag}
                   handlingClose={this.modalClose}
                   answerInfo={this.state.showAnswerInfo}
