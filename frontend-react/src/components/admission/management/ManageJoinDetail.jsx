@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import api from "../../../api/AdmissionAPI";
+import EvaluationView from "./EvaluationView";
+import EvaluationNew from "./EvaluationNew";
 
 //@material-ui
 import Container from "@material-ui/core/Container";
@@ -9,6 +11,7 @@ import TableBody from "@material-ui/core/TableBody";
 import TableCell from "@material-ui/core/TableCell";
 import TableRow from "@material-ui/core/TableRow";
 import Grid from "@material-ui/core/Grid";
+import Typography from "@material-ui/core/Typography";
 
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
@@ -26,6 +29,7 @@ export default class ManageJoinDetail extends Component {
     joindata: {},
     questions: [],
     answers: [],
+    evaluations: [],
     showAnswerInfo: {},
     modalFlag: false
   };
@@ -33,6 +37,7 @@ export default class ManageJoinDetail extends Component {
   componentDidMount() {
     this.getJoinData();
     this.getAllQuestions();
+    this.getEvaluations();
   }
 
   handlingChange = event => {
@@ -59,6 +64,17 @@ export default class ManageJoinDetail extends Component {
         answers: res.data.answer
       });
     });
+  };
+
+  getEvaluations = async () => {
+    await api
+      .getEvaluationsWithApplyId(this.props.match.params.id)
+      .then(res => {
+        console.log("성공적으로 평가데이터 가져옴", res.data);
+        this.setState({
+          evaluations: res.data
+        });
+      });
   };
 
   createRow = (key, value) => {
@@ -100,10 +116,11 @@ export default class ManageJoinDetail extends Component {
     };
     return (
       <Container maxWidth="lg" className="PostingSection">
-        <h2>상세 지원내역</h2>
         <Grid container spacing={2}>
-          <Grid item xs={1} sm={2}></Grid>
-          <Grid item xs={10} sm={8}>
+          <Grid item sm={2}></Grid>
+          <Grid item xs={12} sm={8}>
+            <Typography variant="h4">지원자 상세정보</Typography>
+            <br />
             <Table>
               <TableBody>
                 {this.createRow("지원번호", this.state.joindata.id)}
@@ -163,11 +180,35 @@ export default class ManageJoinDetail extends Component {
             </Modal>
             <br />
             <Link to={"/admission/management/"}>Back</Link>
+            <hr />
           </Grid>
-          <Grid item xs={1} sm={2}></Grid>
+          <Grid item sm={2}></Grid>
+
+          {/* Evaluation */}
+          <Grid item sm={1}></Grid>
+          <Grid item xs={12} sm={10}>
+            <Typography variant="h5">Evaluation</Typography>
+            <hr />
+            {this.state.evaluations.map(elem => (
+              <EvaluationView
+                user_id={elem.user_id}
+                author_name={elem.user_name}
+                body={elem.body}
+                score={elem.score}
+                comment_id={elem.id}
+                application_id={elem.application_id}
+                user_img={elem.id}
+                getEvaluations={this.getEvaluations}
+              />
+            ))}
+
+            <EvaluationNew
+              applicationId={this.state.joindata.id}
+              getEvaluations={this.getEvaluations}
+            />
+          </Grid>
+          <Grid item sm={1}></Grid>
         </Grid>
-        <hr />
-        평가
       </Container>
     );
   }
