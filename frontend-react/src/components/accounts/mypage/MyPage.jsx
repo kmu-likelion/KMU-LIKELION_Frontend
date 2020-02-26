@@ -41,16 +41,16 @@ class MyPage extends Component {
     await getUser(username)
       .then(res => {
         const userData = res.data;
-        console.log(userData);
+        console.log("User Data",userData);
         this.setState({
-          id: userData.id,
-          img: userData.img,
-          username: userData.username,
-          major: userData.major,
-          student_id: userData.student_id,
-          start_num: userData.start_number,
-          sns_id: userData.sns_id,
-          email: userData.email
+          id: userData[0].id,
+          img: userData[0].img,
+          username: userData[0].username,
+          major: userData[0].major,
+          student_id: userData[0].student_id,
+          start_num: userData[0].start_number,
+          sns_id: userData[0].sns_id,
+          email: userData[0].email
         });
       })
       .catch(err => console.log(err));

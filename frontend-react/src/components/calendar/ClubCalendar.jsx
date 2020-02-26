@@ -50,7 +50,7 @@ class ClubCalendar extends React.Component {
   getAllEvent = async () => {
     await api.getAllPosts("notice").then(res => {
       console.log("가져오기 성공!", res);
-      res.data.results.map(event => {
+      res.data.map(event => {
         if (event.is_recorded) {
           this.addEvent(
             event.id,

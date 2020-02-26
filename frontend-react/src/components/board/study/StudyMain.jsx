@@ -28,7 +28,7 @@ class StudyMain extends React.Component {
       .then(res => {
         console.log("getAllGroups 메서드 실행.");
         console.log(res);
-        this.setState({ groupList: res.data.results });
+        this.setState({ groupList: res.data });
       })
       .catch(err => console.log(err));
   }
