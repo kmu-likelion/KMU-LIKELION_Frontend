@@ -4,6 +4,7 @@ import { Route } from "react-router-dom";
 import StudyMain from "../components/board/study/StudyMain";
 import GroupDetail from "../components/board/study/GroupDetail";
 import GroupNew from "../components/board/study/GroupNew";
+import GroupUpdate from "../components/board/study/GroupUpdate";
 import PostNew from "../components/board/study/PostNew";
 import PostDetail from "../components/board/study/PostDetail";
 import PostUpdate from "../components/board/study/PostUpdate";
@@ -13,6 +14,7 @@ function StudyRouter({ match }) {
     <>
       <Route exact path={match.path} component={StudyMain} />
       <Route exact path={`${match.path}/group/new`} component={GroupNew} />
+      <Route exact path={`${match.path}/:group/update`} component={GroupUpdate} />
       <Route exact path={`${match.path}/:group`} component={GroupDetail} />
       <Route path={`${match.path}/:group/post/new`} component={PostNew} />
       <Route

@@ -81,7 +81,7 @@ class App extends React.Component {
 
           <Route path="/login" component={Login} />
           <Route path="/register" component={Register} />
-          <Route path="/mypage/:id" component={Mypage} id="number" />
+          <Route path="/mypage/:username" component={Mypage} />
           <Footer />
         </Router>
       </Store.Provider>

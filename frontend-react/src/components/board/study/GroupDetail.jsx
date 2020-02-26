@@ -25,12 +25,15 @@ class GroupDetail extends React.Component {
       group_captain: {},
       group_members: [],
       noticePosts: [],
-      studyPosts: []
+      studyPosts: [],
+      visit_id:"",
+
     };
   }
 
   componentDidMount() {
     this.getGroup();
+    console.log(window.sessionStorage.getItem("id"))
   }
 
   //그룹데이터 가져옴
@@ -50,6 +53,7 @@ class GroupDetail extends React.Component {
         });
         this.getGroupPost();
         this.getGroupMember();
+        this.getGroupCaptain();
         // this.getGroupCaptain();
       })
       .catch(err => {
@@ -94,17 +98,18 @@ class GroupDetail extends React.Component {
       .catch(err => console.log(err));
   };
 
-  // getGroupCaptain = async () => {
-  //   await api
-  //     .getCaptainWithGroupId(this.state.group_id)
-  //     .then(res => {
-  //       console.log("후 이즈 캡틴?", res.data.results);
-  //       this.setState({
-  //         group_captain: res.data.results[0]
-  //       });
-  //     })
-  //     .catch(err => console.log(err));
-  // };
+  getGroupCaptain = async () => {
+    await api
+      .getCaptainWithGroupId(this.state.group_id)
+      .then(res => {
+        console.log("후 이즈 캡틴?", res.data.results[0]);
+        this.setState({
+          group_captain: res.data.results[0]
+        });
+        
+      })
+      .catch(err => console.log(err));
+  };
 
   //그룹 삭제
   groupDelete = async () => {
@@ -112,8 +117,12 @@ class GroupDetail extends React.Component {
     console.log("delete post 성공.");
     document.location.href = "/study";
   };
+ 
 
   render() {
+
+    console.log("cap id", this.state.group_captain.user_id)
+    console.log("session id", window.sessionStorage.getItem("id"))
     return (
       <Container maxWidth="lg" className="main-container">
         <Paper className="Paper">
@@ -166,6 +175,34 @@ class GroupDetail extends React.Component {
               sm={12}
               style={{ alignItems: "center", textAlign: "right" }}
             >
+              <div>
+                {
+                  String(this.state.group_captain.user_id) === window.sessionStorage.getItem("id") 
+                    ? (
+                      <Link to={`/study/${this.state.group_name}/update`}>
+                        <Button
+                          color="secondary"
+                          size="small"
+                        >
+                          그룹원 관리
+                        </Button>
+                        </Link>
+                    )
+                    : (
+                      <>fffff</>
+                    )
+                }
+                </div>
+
+              <Link to={`/study/${this.state.group_name}/update`}>
+              <Button
+                color="secondary"
+                size="small"
+              >
+                그룹수정
+              </Button>
+              </Link>
+
               <Button
                 color="secondary"
                 size="small"
