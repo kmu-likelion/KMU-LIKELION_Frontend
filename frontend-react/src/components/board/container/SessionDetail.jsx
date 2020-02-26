@@ -83,7 +83,7 @@ class SessionDetail extends Component {
             <Typography color="textSecondary" component="pre">
               <Viewer value={String(this.state.body)} />
             </Typography>
-
+            <hr />
             <Button
               color="secondary"
               size="small"
@@ -92,7 +92,9 @@ class SessionDetail extends Component {
             >
               과제추가
             </Button>
-            <hr />
+            <br />
+            <br />
+
             <AssignmentForm
               open={this.state.modalFlag}
               handlingOpen={this.modalOpen}
@@ -100,7 +102,11 @@ class SessionDetail extends Component {
               getAssignments={this.getAssignments}
               sessionId={this.props.post_id}
             />
-            <AssignmentView assignments={this.state.assignments} />
+            <AssignmentView
+              assignments={this.state.assignments}
+              getAssignments={this.getAssignments}
+              sessionId={this.props.post_id}
+            />
           </TableCell>
         </TableRow>
 

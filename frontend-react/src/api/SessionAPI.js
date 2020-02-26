@@ -21,16 +21,12 @@ export default {
       data,
       tokenConfig()
     );
-  }
+  },
 
-  // deleteAssignment(id) {
-  //   console.log("delete assignment 실행.");
-  //   return axios.delete(
-  //     `board/session/${id}/add_assignment/`,
-  //     data,
-  //     tokenConfig()
-  //   );
-  // }
+  deleteAssignment(id) {
+    console.log("delete assignment 실행.");
+    return axios.delete(`board/session/${id}/`, tokenConfig());
+  }
 
   //   //글 수정
   //   updatePost(url, id, data) {

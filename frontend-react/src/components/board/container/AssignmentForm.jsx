@@ -6,8 +6,8 @@ import moment from "moment";
 
 //@material-ui
 import TextField from "@material-ui/core/TextField";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import Typography from "@material-ui/core/Typography";
+// import FormControlLabel from "@material-ui/core/FormControlLabel";
+// import Typography from "@material-ui/core/Typography";
 import Chip from "@material-ui/core/Chip";
 import Paper from "@material-ui/core/Paper";
 import AddCircleIcon from "@material-ui/icons/AddCircle";
@@ -107,6 +107,7 @@ class AssignmentForm extends Component {
             scoreType: ""
           });
           this.props.getAssignments(sessionId);
+          this.props.handlingClose();
         })
         .catch(err => console.log(err));
     } else {

@@ -10,6 +10,9 @@ import ListItemAvatar from "@material-ui/core/ListItemAvatar";
 import Avatar from "@material-ui/core/Avatar";
 import Divider from "@material-ui/core/Divider";
 import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
+import Badge from "@material-ui/core/Badge";
+import AssignmentIcon from "@material-ui/icons/Assignment";
+import IconButton from "@material-ui/core/IconButton";
 
 const useStyles = theme => ({
   root: {
@@ -21,9 +24,8 @@ const useStyles = theme => ({
 class PostView extends Component {
   render() {
     const { classes } = this.props;
-    // const { id, title, body, noticeDate, authorName } = this.props;
     const { postInfo, board_name } = this.props;
-    const pubDate = moment(postInfo.pub_date).format("MM-DD HH:MM");
+    const pubDate = moment(postInfo.pub_date).format("YYYY-MM-DD HH:MM");
     let linkUrl = "";
     if (board_name !== "study") {
       linkUrl = `/${board_name}/detail/${postInfo.id}`;
@@ -32,23 +34,49 @@ class PostView extends Component {
     }
 
     //나중에 리스트 최상위 태그 컨테이너로 뺄 것.
-    return (
-      <List component="nav" className={classes.root} aria-label="contacts">
-        <ListItem button component={Link} to={linkUrl}>
-          <ListItemAvatar>
-            <Avatar alt="Author Name" src="" />
-          </ListItemAvatar>
-          <ListItemText
-            primary={postInfo.title}
-            secondary={postInfo.author_name}
-          />
-          <ListItemSecondaryAction>
-            <small>{pubDate}</small>
-          </ListItemSecondaryAction>
-        </ListItem>
-        <Divider variant="inset" />
-      </List>
-    );
+    if (board_name === "session") {
+      return (
+        <List component="nav" className={classes.root} aria-label="contacts">
+          <ListItem button component={Link} to={linkUrl}>
+            <ListItemAvatar>
+              <Avatar alt="Author Name" src="" />
+            </ListItemAvatar>
+            <ListItemText primary={postInfo.title} secondary={pubDate} />
+            <ListItemSecondaryAction>
+              <IconButton aria-label="cart">
+                <Badge
+                  color="secondary"
+                  badgeContent={postInfo.assignments.length}
+                  showZero
+                >
+                  <AssignmentIcon />
+                </Badge>
+              </IconButton>
+            </ListItemSecondaryAction>
+          </ListItem>
+
+          <Divider variant="inset" />
+        </List>
+      );
+    } else {
+      return (
+        <List component="nav" className={classes.root} aria-label="contacts">
+          <ListItem button component={Link} to={linkUrl}>
+            <ListItemAvatar>
+              <Avatar alt="Author Name" src="" />
+            </ListItemAvatar>
+            <ListItemText
+              primary={postInfo.title}
+              secondary={postInfo.author_name}
+            />
+            <ListItemSecondaryAction>
+              <small>{pubDate}</small>
+            </ListItemSecondaryAction>
+          </ListItem>
+          <Divider variant="inset" />
+        </List>
+      );
+    }
   }
 }
 
