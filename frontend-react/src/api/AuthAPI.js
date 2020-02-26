@@ -33,9 +33,9 @@ export const authlogout = () => {
   return axios.post("accounts/auth/logout/", null, tokenConfig());
 };
 
-export const getUser = userId => {
+export const getUser = username => {
   console.log("getUser api 실행.");
-  return axios.get("accounts/user/" + String(userId));
+  return axios.get(`accounts/user/?username=${username}`);
 };
 
 export const getAllUser = () => {

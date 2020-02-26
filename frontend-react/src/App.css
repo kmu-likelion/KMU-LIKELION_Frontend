@@ -222,7 +222,9 @@ body {
   float: right;
   margin-bottom: 2rem;
 }
-
+.alluser{
+  float: right;
+}
 .avatar {
   display: flex;
   justify-content: space-between;

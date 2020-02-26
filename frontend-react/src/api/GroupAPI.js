@@ -45,6 +45,11 @@ export default {
     return axios.post("accounts/groupuser/", data, tokenConfig());
   },
 
+  deleteGroupUser(id){
+    console.log("deleteGroupUser API");
+    return axios.delete(`account/groupuser/${id}`,tokenConfig());
+  },
+
   getMemberWithGroupId(id) {
     console.log("get GroupMember with groupId API.");
     // return axios.get(`accounts/groupuser?group_id=${id}`, tokenConfig());
