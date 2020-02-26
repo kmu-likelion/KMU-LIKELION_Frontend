@@ -80,7 +80,7 @@ class PostUpdate extends Component {
               onChange={e => this.setState({ study_type: e.target.value })}
             >
               <MenuItem value={0}>공식모임</MenuItem>
-              <MenuItem value={1}>정보공유</MenuItem>
+              <MenuItem value={1}>스터디</MenuItem>
               <MenuItem value={2}>기타</MenuItem>
             </Select>
             <br />

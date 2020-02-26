@@ -19,9 +19,11 @@ import TableCell from "@material-ui/core/TableCell";
 import TableContainer from "@material-ui/core/TableContainer";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
-
+import ListItemAvatar from "@material-ui/core/ListItemAvatar";
+import IconButton from "@material-ui/core/IconButton";
 import MenuItem from "@material-ui/core/MenuItem";
 import Select from "@material-ui/core/Select";
+import Avatar from "@material-ui/core/Avatar";
 
 class GroupDetail extends React.Component {
   constructor(props) {
@@ -123,7 +125,7 @@ class GroupDetail extends React.Component {
         console.log("그룹의 posts 가져오기 성공.", res.data);
         let notice = [];
         let study = [];
-        res.data.results.map(post => {
+        res.data.map(post => {
           if (post.study_type === 0) {
             notice.push(post);
           } else {
@@ -213,6 +215,11 @@ class GroupDetail extends React.Component {
                     <li key={`li-${member.id}`}>
                       <ul className={"mentoring-ul"}>
                         <ListItem button key={member.id}>
+                          <ListItemAvatar>
+                            <IconButton component={Link} to={`/Mypage/${member.user.username}`}>
+                              <Avatar alt="Recomment-writer" src={member.user.img} />
+                            </IconButton>
+                          </ListItemAvatar>
                           <ListItemText primary={member.user.username} /><CancelIcon className="Cancle" onClick={event => this.deleteGroupUser(event,member.id)}/>
                         </ListItem>
                       </ul>
