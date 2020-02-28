@@ -12,8 +12,23 @@ export default class MyProfile extends Component {
         email:"",
         user_type:"",
         full_name:"",
-
+        username:"",
+        img:"",
+        sns_id:"",
     };
+    componentDidMount(){
+        this.setState({
+            username: this.props.username,
+            full_name: this.props.full_name,
+            img: this.props.img,
+            email: this.props.email,
+            major: this.props.major,
+            student_id: this.props.student_id,
+            user_type: this.props.user_type,
+            start_num: this.props.start_num,
+            sns_id: this.props.sns_id,
+        })
+    }
     handlingChange = event => {
         this.setState({ [event.target.name]: event.target.value });
       };
@@ -174,19 +189,16 @@ export default class MyProfile extends Component {
                             startIcon={<SaveIcon />}
                             onClick={e => {(this.setState({is_update:false}));
                             this.props.updateUser(id,{
-                                "username": "admin",
-                                "first_name": "",
-                                "last_name": "",
-                                "full_name": "",
-                                "img": "http://127.0.0.1:8000/static/images/default_profile_img.png",
+                                "username": this.state.username,
+                                "first_name": this.state.full_name,
+                                "img": this.state.img,
                                 "id": 1,
-                                "email": "qkr@naver.com",
-                                "date_joined": "2020-02-28T08:03:24",
-                                "major": null,
-                                "student_id": null,
-                                "user_type": null,
-                                "start_number": null,
-                                "sns_id": null
+                                "email": this.state.email,
+                                "major": this.state.major,
+                                "student_id": this.state.student_id,
+                                "user_type": this.state.user_type,
+                                "start_number": this.state.start_num,
+                                "sns_id": this.state.sns_id
                             }
                             )
                             }}
