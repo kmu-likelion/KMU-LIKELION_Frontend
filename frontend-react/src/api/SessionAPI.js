@@ -31,6 +31,19 @@ export default {
   createSubmission(data) {
     console.log("create submission api 실행", data);
     return axios.post(`board/submission/`, data, tokenConfig());
+  },
+
+  updateSubmission(id, data) {
+    console.log("update submission api 실행", data);
+    return axios.put(`board/submission/${id}/`, data, tokenConfig());
+  },
+
+  //data : user-id, assignment-id
+  getSubmission(user_id, assignment_id) {
+    console.log("get submission api 실행.");
+    return axios.get(
+      `board/submission/?user_id=${user_id}&lecture=${assignment_id}`
+    );
   }
 
   //   //글 수정

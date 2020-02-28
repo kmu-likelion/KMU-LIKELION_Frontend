@@ -44,6 +44,10 @@ class SessionDetail extends Component {
     });
   };
 
+  callGetAssignments = () => {
+    this.getAssignments(this.props.post_id);
+  };
+
   modalOpen = () => {
     this.setState({
       modalFlag: true
@@ -102,11 +106,15 @@ class SessionDetail extends Component {
               getAssignments={this.getAssignments}
               sessionId={this.props.post_id}
             />
-            <AssignmentView
-              assignments={this.state.assignments}
-              getAssignments={this.getAssignments}
-              sessionId={this.props.post_id}
-            />
+            {this.state.assignments.map((task, index) => (
+              <AssignmentView
+                key={index}
+                index={index}
+                assignment={task}
+                getAssignments={this.callGetAssignments}
+                sessionId={this.props.post_id}
+              />
+            ))}
           </TableCell>
         </TableRow>
 
