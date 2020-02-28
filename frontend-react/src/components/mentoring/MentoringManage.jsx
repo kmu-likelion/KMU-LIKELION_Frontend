@@ -7,14 +7,22 @@ import MenteeManage from "./MenteeManage";
 import MentoringAdd from "./MentoringAdd";
 
 class MentoringManage extends React.Component {
-  state = {
-    allUser: [],
-    allMentor: [],
-    allMentee: [],
-    linkedMentor: [],
-    linkedMentee: []
-  };
-  componentDidMount() {
+
+  state={
+    allUser:[],
+    allMentor:[],
+    allMentee:[],
+    linkedMentor:[],
+    linkedMentee:[],
+    selected_mentor: "",
+    selected_mentee: "",
+    mentorOpen: false,
+    menteeOpen: false,
+    mentorId:"",
+    menteeId:"",
+  }
+  componentDidMount(){
+
     this.getAllUser();
     this.getAllMentor();
     this.getAllMentee();
@@ -36,7 +44,7 @@ class MentoringManage extends React.Component {
         this.setState({
           allMentor: res.data,
           linkedMentor: [],
-          linkedMentee: []
+          linkedMentee: [],
         });
       })
       .catch(err => {
@@ -52,15 +60,16 @@ class MentoringManage extends React.Component {
         this.setState({
           allMentee: res.data,
           linkedMentor: [],
-          linkedMentee: []
+          linkedMentee: [],
         });
       })
       .catch(err => {
         console.log(err);
       });
   };
+  
 
-  getLinkedMentor = async id => {
+  getLinkedMentor = async (id) => {
     await api
       .getLinkedMentor(id)
       .then(res => {
@@ -77,7 +86,7 @@ class MentoringManage extends React.Component {
       });
   };
 
-  getLinkedMentee = async id => {
+  getLinkedMentee = async (id) => {
     await api
       .getLinkedMentee(id)
       .then(res => {
@@ -88,6 +97,28 @@ class MentoringManage extends React.Component {
         this.setState({
           linkedMentee: res.data
         });
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  };
+  createMentoring = async event => {
+    event.preventDefault();
+    await api
+      .createMentoring({
+        mentor: this.state.selected_mentor,
+        mentee: this.state.selected_mentee
+      })
+      .then(res => {
+        console.log("Add metoring:", res.data);
+        this.getAllMentor();
+        this.getAllMentee();
+        this.setState({
+          linkedMentor: [],
+          linkedMentee:[],
+        })
+        console.log("링크드멘토값",this.state.linkedMentor);
+        console.log("링크드맨티값",this.state.linkedMentee);
       })
       .catch(err => {
         console.log(err);
@@ -112,7 +143,35 @@ class MentoringManage extends React.Component {
       });
   };
 
+  onCloseMentor = () =>{
+    this.setState({mentorOpen: false})
+  }
+
+  onOpenMentor = () =>{
+    this.setState({mentorOpen: true })
+  }
+
+  onCloseMentee = () =>{
+    this.setState({menteeOpen: false})
+  }
+
+  onOpenMentee = () =>{
+    this.setState({menteeOpen: true })
+  }
+
+  onChangeMentor = e =>{
+    this.setState({ selected_mentor: e.target.value })
+  }
+
+  onChangeMentee = e =>{
+    this.setState({ selected_mentee: e.target.value })
+  }
+
+
+
+
   render() {
+
     return (
       <>
         <ul class="nav nav-tabs" id="myTab" role="tablist">
@@ -158,12 +217,8 @@ class MentoringManage extends React.Component {
               getLinkedMentee={this.getLinkedMentee}
             />
           </div>
-          <div
-            class="tab-pane fade"
-            id="profile"
-            role="tabpanel"
-            aria-labelledby="profile-tab"
-          >
+
+          <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
             <MenteeManage
               allMentee={this.state.allMentee}
               linkedMentor={this.state.linkedMentor}
@@ -180,6 +235,21 @@ class MentoringManage extends React.Component {
             getAllMentee={this.getAllMentee}
             getLinkedMentee={this.getLinkedMentee}
             getLinkedMentor={this.getLinkedMentor}
+            resetList={this.resetList}
+            selected_mentor={this.state.selected_mentor}
+            selected_mentee={this.state.selected_mentee}
+            mentorOpen={this.state.mentorOpen}
+            menteeOpen={this.state.menteeOpen}
+            mentorId={this.state.mentorId}
+            menteeId={this.state.menteeId}
+            createMentoring={this.createMentoring}
+            onCloseMentor={this.onCloseMentor}
+            onOpenMentor={this.onOpenMentor}
+            onCloseMentee={this.onCloseMentee}
+            onOpenMentee={this.onOpenMentee}
+            onChangeMentor={this.onChangeMentor}
+            onChangeMentee={this.onChangeMentee}
+
           />
         </div>
       </>

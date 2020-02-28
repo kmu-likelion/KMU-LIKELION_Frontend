@@ -11,11 +11,11 @@ import ListSubheader from '@material-ui/core/ListSubheader';
 const useStyles = theme => ({
   root: {
     width: '100%',
-    maxWidth: 360,
+    maxWidth: 750,
     backgroundColor: theme.palette.background.paper,
     position: 'relative',
     overflow: 'auto',
-    maxHeight: 300,
+    maxHeight: 500,
 
   },
   listSection: {
@@ -33,7 +33,6 @@ class MyComment extends Component {
     noticeboard_comments: [],
     qnaboard_comments: [],
     sessionboard_comments: [],
-    submissionboard_comments:[],
   };
   componentDidMount() {
     const id = this.props.id;
@@ -49,15 +48,12 @@ class MyComment extends Component {
         var mynotice = myPosts.data.noticeboard_comments;
         var myqna = myPosts.data.qnaboard_comments;
         var mysession = myPosts.data.sessionboard_comments;
-        var mysub = myPosts.data.submissionboard_comments;
 
 
         this.setState({studyboard_comments:mystudy});
         this.setState({noticeboard_comments:mynotice});
         this.setState({qnaboard_comments:myqna});
         this.setState({sessionboard_comments:mysession});
-        this.setState({submissionboard_comments:mysub});
-
       })
       .catch(err => console.log(err));
   }
@@ -100,7 +96,6 @@ class MyComment extends Component {
                 >
                   <ListItemText primary={`${item.body}`} />
                 </Link>
-            
           </ListItem>
         ))
       )
@@ -116,11 +111,9 @@ class MyComment extends Component {
               >
                 <ListItemText primary={`${item.body}`} />
               </Link>
-          
         </ListItem>
       ))
     )
-    
   }
 
   render() {
@@ -133,7 +126,7 @@ class MyComment extends Component {
           <hr/>
           <br />
           <List className={classes.root} subheader={<li />}>
-            {["Notice Board", "QnA Board", "Study Board","Session Board","Submission Board"].map(sectionId => (
+            {["Notice Board", "QnA Board", "Study Board","Session Board"].map(sectionId => (
               <li key={`section-${sectionId}`} className={classes.listSection}>
                 <ul className={classes.ul}>
                   <ListSubheader><h3>{`${sectionId}`}</h3></ListSubheader>

@@ -16,12 +16,14 @@ class Main extends React.Component {
     super(props);
     this.state = {
       recentNotices: [],
-      recentQnA: []
+      recentQnA: [],
+      recentCareer: [],
     };
   }
   componentDidMount() {
     this.getRecentPosts("notice");
     this.getRecentPosts("qna");
+    this.getRecentPosts("career");
   }
 
   async getRecentPosts(target) {
@@ -29,7 +31,7 @@ class Main extends React.Component {
       .getAllPosts(target)
       .then(recentPosts => {
         console.log(recentPosts);
-        var posts = recentPosts.data.results;
+        var posts = recentPosts.data;
         var slicePosts = posts.slice(0, 4);
         switch (target) {
           case "notice":
@@ -37,6 +39,9 @@ class Main extends React.Component {
             break;
           case "qna":
             this.setState({ recentQnA: slicePosts });
+            break;
+          case "career":
+            this.setState({ recentCareer: slicePosts });
             break;
           default:
             break;
@@ -104,7 +109,14 @@ class Main extends React.Component {
           <div>
             <Grid container spacing={3}>
               <Grid item xs={12} sm={12}>
-                What We Made!
+                <h4 className={"main-recentTitle"}>What We Made!</h4>
+                  {this.state.recentCareer.map(career_post => (
+                    <RecentPost
+                      key={career_post.id}
+                      postInfo={career_post}
+                      board_name="career"
+                    />
+                  ))}
               </Grid>
             </Grid>
           </div>

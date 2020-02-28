@@ -13,11 +13,11 @@ import ListSubheader from '@material-ui/core/ListSubheader';
 const useStyles = theme => ({
   root: {
     width: '100%',
-    maxWidth: 360,
+    maxWidth: 750,
     backgroundColor: theme.palette.background.paper,
     position: 'relative',
     overflow: 'auto',
-    maxHeight: 300,
+    maxHeight: 500,
 
   },
   listSection: {
@@ -36,7 +36,6 @@ class MyPost extends Component {
     studyboard: [],
     noticeboard: [],
     qnaboard: [],
-    career: [],
   };
   componentDidMount() {
     const id = this.props.id;
@@ -51,14 +50,9 @@ class MyPost extends Component {
         var mystudy = myPosts.data.studyboard;
         var mynotice = myPosts.data.noticeboard;
         var myqna = myPosts.data.qnaboard;
-        var myassign = myPosts.data.assignments;
-        var mysub = myPosts.data.submission;
-        
         this.setState({studyboard:mystudy});
         this.setState({noticeboard:mynotice});
         this.setState({qnaboard:myqna});
-        this.setState({assignments:myassign});
-        this.setState({submission:mysub});
 
       })
       .catch(err => console.log(err));
@@ -80,20 +74,11 @@ class MyPost extends Component {
         postlist = this.state.studyboard;
         board_type = "study";
         break;
-      case "Assignments":
-        postlist = this.state.assignments;
-        board_type ="assignments";
-        break;
-      case "Submission":
-        postlist = this.state.submission;
-        board_type ="submission";
-        break;
       default:
         postlist=[];
         board_type ="";
         break;
     }
-    
     if(board_type === "study"){
       return(
         postlist.map(item => (
@@ -104,7 +89,6 @@ class MyPost extends Component {
                 >
                   <ListItemText primary={`${item.title}`} />
                 </Link>
-            
           </ListItem>
         ))
       )
@@ -118,11 +102,9 @@ class MyPost extends Component {
               >
                 <ListItemText primary={`${item.title}`} />
               </Link>
-          
         </ListItem>
       ))
     )
-    
   }
 
   render() {
@@ -135,7 +117,7 @@ class MyPost extends Component {
           <hr/>
           <br />
           <List className={classes.root} subheader={<li />}>
-            {["Notice Board", "QnA Board", "Study Board","Assignments","Submission"].map(sectionId => (
+            {["Notice Board", "QnA Board", "Study Board"].map(sectionId => (
               <li key={`section-${sectionId}`} className={classes.listSection}>
                 <ul className={classes.ul}>
                   <ListSubheader><h3>{`${sectionId}`}</h3></ListSubheader>

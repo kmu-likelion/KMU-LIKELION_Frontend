@@ -12,11 +12,11 @@ import ListSubheader from '@material-ui/core/ListSubheader';
 const useStyles = theme => ({
   root: {
     width: '100%',
-    maxWidth: 360,
+    maxWidth: 750,
     backgroundColor: theme.palette.background.paper,
     position: 'relative',
     overflow: 'auto',
-    maxHeight: 300,
+    maxHeight: 500,
 
   },
   listSection: {
@@ -116,12 +116,10 @@ class MyLike extends React.Component {
                 >
                   <ListItemText primary={`${item.title}`} />
                 </Link>
-            
           </ListItem>
         ))
       )
     }
-    
     return(
       LikeList.map(item => (
         <ListItem>
@@ -131,14 +129,10 @@ class MyLike extends React.Component {
               >
                 <ListItemText primary={`${item.title}`} />
               </Link>
-          
         </ListItem>
       ))
     )
-    
   }
-
-  
 
   render() {
     const { classes } = this.props;

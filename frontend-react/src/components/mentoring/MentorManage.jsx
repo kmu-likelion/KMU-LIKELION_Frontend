@@ -25,10 +25,9 @@ class MentorManage extends React.Component {
 
   selectIndex = (id) => {
     this.setState({
-      selectedIndex : id 
+      selectedIndex : id
     })
   }
-  
   render() {
     const{allMentor,linkedMentee}= this.props;
     return (
@@ -71,12 +70,9 @@ class MentorManage extends React.Component {
                   </List>
                 </TableCell>
               </TableRow>
-
-              
             </TableBody>
           </Table>
         </TableContainer>
-        
       </>
     );
   }

@@ -183,6 +183,10 @@ body {
 .standard-read-only-input {
   width: 100%;
 }
+.standard-required {
+  width: 100%;
+}
+
 
 .MyLike {
   padding-top: 2rem;

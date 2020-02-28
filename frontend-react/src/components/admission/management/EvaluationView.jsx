@@ -145,7 +145,7 @@ export default class CommentView extends Component {
             >
               <IconButton
                 component={Link}
-                to={`/Mypage/${user_id}`}
+                to={`/Mypage/${author_name}`}
                 style={{ marginRight: 10 }}
               >
                 <Avatar alt="comment-writer" src={user_img} />
