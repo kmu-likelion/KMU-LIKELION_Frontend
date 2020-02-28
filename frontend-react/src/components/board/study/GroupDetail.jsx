@@ -170,6 +170,7 @@ class GroupDetail extends React.Component {
     console.log("delete post 성공.");
     document.location.href = "/study";
   };
+ 
 
 
   render() {

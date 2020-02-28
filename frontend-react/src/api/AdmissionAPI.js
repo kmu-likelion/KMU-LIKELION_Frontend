@@ -55,7 +55,6 @@ export default {
     console.log("createAnswer 실행.");
     return axios.post("admission/answer/", data);
   },
-
   createAnswers(data) {
     console.log("createAnswers 실행.");
     return axios.post("admission/answer/post_answers/", data);

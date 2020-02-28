@@ -11,7 +11,7 @@ const Viewer = memo(({ value }) => {
   return (
     <div
       dangerouslySetInnerHTML={renderHTML(value)}
-      className="html-wrap"
+      className="html-wrap image-fixer"
     ></div>
   );
 });

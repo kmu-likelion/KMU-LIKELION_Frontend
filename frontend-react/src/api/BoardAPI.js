@@ -24,6 +24,12 @@ export default {
     return axios.post(`board/${url}/`, data, tokenConfig());
   },
 
+  uploadImage(data){
+    console.log("uploadImage 실행.");
+    console.log(data); // data = {"image":"base64", "Content object": "/board/session/1/ - detail_url"}
+    return axios.post(`board/images/`, data, tokenConfig());
+  },
+
   //글 수정
   updatePost(url, id, data) {
     console.log("updatePost 실행.");
