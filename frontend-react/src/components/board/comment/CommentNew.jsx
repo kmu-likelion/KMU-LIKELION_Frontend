@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-import api from "../../../api/BoardAPI";
+import api from "../../../api/CommentAPI";
 
 import Grid from "@material-ui/core/Grid";
 import Button from "@material-ui/core/Button";
@@ -37,7 +37,7 @@ export default class CommentView extends Component {
     event.preventDefault();
 
     await api
-      .createPost(url, {
+      .createComment(url, {
         body: this.state.body,
         board: board_id,
         user_id: this.state.userid,

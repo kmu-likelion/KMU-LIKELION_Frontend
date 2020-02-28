@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import api from "../../../api/BoardAPI";
+import comment_api from "../../../api/CommentAPI";
 
 import CommentNew from "../comment/CommentNew";
 import CommentView from "../comment/CommentView";
@@ -35,7 +36,7 @@ class PostDetailContainer extends Component {
   }
 
   async getComments(board_name) {
-    await api
+    await comment_api
       .getComments(`${board_name}_comment`, this.props.match.params.id)
       .then(res => {
         const _data = res.data;

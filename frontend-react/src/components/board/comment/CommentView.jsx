@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import Button from "@material-ui/core/Button";
-// import CardActions from '@material-ui/core/CardActions';
-import api from "../../../api/BoardAPI";
+
+import api from "../../../api/CommentAPI";
 import TextField from "@material-ui/core/TextField";
 import { Link } from "react-router-dom";
 import Avatar from "@material-ui/core/Avatar";
@@ -36,7 +36,7 @@ export default class CommentView extends Component {
   handlingUpdate = async (event, url, board_id, user_id, comment_id) => {
     event.preventDefault();
     await api
-      .updatePost(url, comment_id, {
+      .updateComment(url, comment_id, {
         body: this.state.update_body,
         user_id: user_id,
         board: board_id
@@ -50,7 +50,7 @@ export default class CommentView extends Component {
 
   handlingDelete = async (target, id) => {
     if (window.confirm("댓글을 삭제하시겠습니까?") === true) {
-      await api.deletePost(target, id);
+      await api.deleteComment(target, id);
       this.props.getComments();
     }
   };

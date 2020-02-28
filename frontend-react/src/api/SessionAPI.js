@@ -26,6 +26,11 @@ export default {
   deleteAssignment(id) {
     console.log("delete assignment 실행.");
     return axios.delete(`board/session/${id}/`, tokenConfig());
+  },
+
+  createSubmission(data) {
+    console.log("create submission api 실행", data);
+    return axios.post(`board/submission/`, data, tokenConfig());
   }
 
   //   //글 수정

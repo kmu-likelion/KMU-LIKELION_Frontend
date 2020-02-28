@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import api from "../../../api/AdmissionAPI";
+import api from "../../../api/SessionAPI";
 //@material-ui
 import TextField from "@material-ui/core/TextField";
 import { withStyles } from "@material-ui/core/styles";
@@ -21,28 +21,38 @@ const useStyles = theme => ({
 
 class SubmissionForm extends Component {
   state = {
+    userId: "",
     id: "",
     body: "",
+    url: "",
     editFlag: true
   };
 
-  componentDidMount() {}
+  componentDidMount() {
+    let user_id = window.sessionStorage.getItem("id");
+    this.setState({
+      userId: user_id
+    });
+  }
 
   handlingSubmit = async event => {
     event.preventDefault();
-    // await api
-    //   .updateAnswer(this.props.answerInfo.id, {
-    //     body: this.state.body,
-    //     application_id: this.props.answerInfo.application_id,
-    //     question_id: this.props.answerInfo.question_id
-    //   })
-    //   .then(res => {
-    //     console.log("성공적으로 수정됨.", res.data);
-    //     this.closeModal();
-    //   })
-    //   .catch(err => {
-    //     console.log(err);
-    //   });
+    let default_title = `Submission-${this.props.sessionId}`;
+    await api
+      .createSubmission({
+        title: default_title,
+        user_id: this.state.userId,
+        body: this.state.body,
+        url: this.state.url,
+        lecture: this.props.sessionId
+      })
+      .then(res => {
+        console.log("성공적으로 과제 제출됨.", res.data);
+        this.closeModal();
+      })
+      .catch(err => {
+        console.log(err);
+      });
   };
 
   handlingChange = event => {
@@ -51,7 +61,7 @@ class SubmissionForm extends Component {
 
   render() {
     const { classes } = this.props;
-    const { open, handlingClose, submissionData } = this.props;
+    const { open, handlingClose, sessionId } = this.props;
     if (!this.state.editFlag) {
       return (
         <>
