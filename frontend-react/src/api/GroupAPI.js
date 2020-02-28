@@ -59,7 +59,7 @@ export default {
   getCaptainWithGroupId(id) {
     console.log("get Captain with groupId API.");
     return axios.get(
-      `accounts/groupuser?group_id=${id}&is_captain=true`,
+      `accounts/studygroup/${id}/get_captain/`,
       tokenConfig()
     );
   },
@@ -67,7 +67,6 @@ export default {
     console.log("get MyStudy Group");
     return axios.get(`accounts/user/${id}/get_mygroup/`, tokenConfig());
   },
-  
 
   /* ------StudyPost api------ */
   getPostWithGroupId(id) {

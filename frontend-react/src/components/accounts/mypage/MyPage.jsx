@@ -26,7 +26,8 @@ class MyPage extends Component {
       email: "",
       token: "",
       type: "",
-      authname: ""
+      authname: "",
+      last_login:"",
     };
   }
 
@@ -34,7 +35,6 @@ class MyPage extends Component {
     console.log("New ComponentDidMount");
     const _username = this.props.match.params.username;
     this.getUser(_username);
-    this.setState({type:"Myprofile"});
   }
 
   async getUser(username) {
@@ -50,7 +50,9 @@ class MyPage extends Component {
           student_id: userData[0].student_id,
           start_num: userData[0].start_number,
           sns_id: userData[0].sns_id,
-          email: userData[0].email
+          email: userData[0].email,
+          last_login: userData[0].last_login,
+          type:"Myprofile",
         });
       })
       .catch(err => console.log(err));
@@ -81,6 +83,7 @@ class MyPage extends Component {
                   start_num={this.state.start_num}
                   student_id={this.state.student_id}
                   email={this.state.email}
+                  sns_id={this.state.sns_id}
                 />
               </Grid>
             </Grid>

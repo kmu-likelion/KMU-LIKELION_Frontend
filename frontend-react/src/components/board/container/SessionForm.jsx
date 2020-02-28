@@ -100,7 +100,7 @@ class LectureForm extends Component {
   getPostInfo = async () => {
     let post_id = this.props.editId;
     await api.getPost("session", post_id).then(res => {
-      console.log(res.data);
+      console.log("세션데이터",res.data);
       this.setState({
         title: res.data.title,
         body: res.data.body,
