@@ -1,5 +1,8 @@
 import React, { Component } from "react";
 import Button from "@material-ui/core/Button";
+import IconButton from "@material-ui/core/IconButton";
+import FavoriteIcon from "@material-ui/icons/Favorite";
+import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
 import api from "../../api/BoardAPI";
 
 export default class LikeView extends Component {
@@ -12,6 +15,7 @@ export default class LikeView extends Component {
   componentDidMount() {
     console.log("LikeView ComponentDidMount");
     const { post_id, board_name } = this.props;
+    console.log("조항요!!", post_id);
     this.setState({
       post_id: post_id,
       board_name: board_name
@@ -59,28 +63,37 @@ export default class LikeView extends Component {
     if (this.state.is_liked === "true") {
       console.log("true값이며 id는 : ", this.state.post_id);
       return (
-        <Button
-          color="primary"
-          size="small"
+        // <Button
+        //   color="primary"
+        //   size="small"
+        //   onClick={event =>
+        //     this.handlingLike(this.state.board_name, this.state.post_id)
+        //   }
+        // >
+
+        // </Button>
+        <IconButton
+          color="secondary"
+          size="medium"
           onClick={event =>
             this.handlingLike(this.state.board_name, this.state.post_id)
           }
         >
-          Liked
-        </Button>
+          <FavoriteIcon />
+        </IconButton>
       );
     } else {
       console.log("false값이며 id는 : ", this.state.post_id);
       return (
-        <Button
+        <IconButton
           color="secondary"
-          size="small"
+          size="medium"
           onClick={event =>
             this.handlingLike(this.state.board_name, this.state.post_id)
           }
         >
-          Like
-        </Button>
+          <FavoriteBorderIcon />
+        </IconButton>
       );
     }
   }

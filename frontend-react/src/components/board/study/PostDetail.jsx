@@ -106,10 +106,7 @@ class PostDetail extends Component {
 
             <TableRow>
               <TableCell>
-                <LikeView
-                  board_id={this.props.match.params.id}
-                  board_name="study"
-                />
+                <LikeView post_id={post_id} board_name="study" />
                 <Button
                   color="primary"
                   size="small"
