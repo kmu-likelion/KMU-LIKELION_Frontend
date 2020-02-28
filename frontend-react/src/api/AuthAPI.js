@@ -38,6 +38,12 @@ export const getUser = username => {
   return axios.get(`accounts/user/?username=${username}`);
 };
 
+export const getUserWithId = id => {
+  console.log("getUserWithId api 실행.");
+  return axios.get(`accounts/user/${id}`);
+};
+
+
 export const getAllUser = () => {
   console.log("get all user api 실행.");
   return axios.get("accounts/user/");
