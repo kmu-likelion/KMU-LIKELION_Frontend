@@ -1,24 +1,25 @@
 import React, { Component } from "react";
 import api from "../../../api/BoardAPI";
-import sessionApi from "../../../api/SessionAPI";
+// import sessionApi from "../../../api/SessionAPI";
 import { Redirect } from "react-router-dom";
 import Editor from "../../Editor";
-import moment from "moment";
+// import moment from "moment";
 
 // material-ui
-import Box from "@material-ui/core/Box";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import Switch from "@material-ui/core/Switch";
-import Typography from "@material-ui/core/Typography";
-
-import Chip from "@material-ui/core/Chip";
-import Paper from "@material-ui/core/Paper";
-import AddCircleIcon from "@material-ui/icons/AddCircle";
-import InputBase from "@material-ui/core/InputBase";
-import IconButton from "@material-ui/core/IconButton";
 import { withStyles } from "@material-ui/core/styles";
+// import FormControlLabel from "@material-ui/core/FormControlLabel";
+// import Box from "@material-ui/core/Box";
+// import Switch from "@material-ui/core/Switch";
+// import Typography from "@material-ui/core/Typography";
+
+// import Chip from "@material-ui/core/Chip";
+// import Paper from "@material-ui/core/Paper";
+// import AddCircleIcon from "@material-ui/icons/AddCircle";
+// import InputBase from "@material-ui/core/InputBase";
+// import IconButton from "@material-ui/core/IconButton";
+
 // import Grid from "@material-ui/core/Grid";
 
 const useStyles = theme => ({
@@ -100,7 +101,7 @@ class LectureForm extends Component {
   getPostInfo = async () => {
     let post_id = this.props.editId;
     await api.getPost("session", post_id).then(res => {
-      console.log("세션데이터",res.data);
+      console.log("세션데이터", res.data);
       this.setState({
         title: res.data.title,
         body: res.data.body,

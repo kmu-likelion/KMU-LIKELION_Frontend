@@ -63,6 +63,9 @@ export default function Header(props) {
                   <NavDropdown.Item as={Link} to="/admission/management">
                     입부관리
                   </NavDropdown.Item>
+                  <NavDropdown.Item as={Link} to="/assignment">
+                    과제관리
+                  </NavDropdown.Item>
                 </NavDropdown>
               </Nav>
               <Nav>
@@ -84,7 +87,9 @@ export default function Header(props) {
                           </DropItem>
                         </MenuItem>
                         <MenuItem onClick={popupState.close}>
-                          <DropItem to={`/Mypage/${username}`}>마이페이지</DropItem>
+                          <DropItem to={`/Mypage/${username}`}>
+                            마이페이지
+                          </DropItem>
                         </MenuItem>
                       </Menu>
                     </>

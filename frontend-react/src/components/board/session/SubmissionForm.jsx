@@ -37,8 +37,8 @@ class SubmissionForm extends Component {
     this.getSubmissionInfo();
   }
 
-  getSubmissionInfo = () => {
-    api
+  getSubmissionInfo = async () => {
+    await api
       .getSubmission(this.state.userId, this.props.assignmentId)
       .then(res => {
         console.log("request user의 과제제출정보 가져옴.", res.data);

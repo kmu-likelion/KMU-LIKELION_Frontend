@@ -23,6 +23,11 @@ export default {
     );
   },
 
+  getAssignment(id) {
+    console.log("get assignment api 실행.", id);
+    return axios.get(`board/session/${id}/`, tokenConfig());
+  },
+
   deleteAssignment(id) {
     console.log("delete assignment 실행.");
     return axios.delete(`board/session/${id}/`, tokenConfig());
