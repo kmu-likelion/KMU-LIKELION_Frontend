@@ -86,12 +86,12 @@ class JoinFormSubmit extends React.Component {
         <br />
         <br />
         <form onSubmit={event => this.handlingSubmit(event)}>
-          {this.state.questions.map(elem => {
+          {this.state.questions.map((elem, index) => {
             const elemId = elem.id;
             return (
               <>
                 <div key={elem.id}>
-                  {elem.id}. {elem.body}
+                  Q{index + 1}. {elem.body}
                 </div>
 
                 <InputLabel>A</InputLabel>
