@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { getUser } from "../../../api/AuthAPI";
 import Grid from "@material-ui/core/Grid";
 import Container from "@material-ui/core/Container";
-
+import api from "../../../api/GroupAPI";
 import MyLike from "./MyLike";
 import LeftProfileView from "./LeftProfileView";
 import MyProfile from "./MyProfile";
@@ -28,6 +28,8 @@ class MyPage extends Component {
       type: "",
       authname: "",
       last_login:"",
+      user_type:"",
+      full_name:"",
     };
   }
 
@@ -46,17 +48,44 @@ class MyPage extends Component {
           id: userData[0].id,
           img: userData[0].img,
           username: userData[0].username,
+          full_name: userData[0].full_name,
           major: userData[0].major,
           student_id: userData[0].student_id,
           start_num: userData[0].start_number,
           sns_id: userData[0].sns_id,
           email: userData[0].email,
           last_login: userData[0].last_login,
+          user_type:userData[0].user_type,
           type:"Myprofile",
         });
       })
       .catch(err => console.log(err));
   }
+
+  async updateUser(id,data) {
+    await api
+      .updateUser(id,data)
+      .then(res => {
+        const userData = res.data;
+        console.log("UpdateUser Data",userData);
+        this.setState({
+          id: userData[0].id,
+          img: userData[0].img,
+          username: userData[0].username,
+          full_name: userData[0].full_name,
+          major: userData[0].major,
+          student_id: userData[0].student_id,
+          start_num: userData[0].start_number,
+          sns_id: userData[0].sns_id,
+          email: userData[0].email,
+          last_login: userData[0].last_login,
+          user_type:userData[0].user_type,
+          type:"Myprofile",
+        });
+      })
+      .catch(err => console.log(err));
+  }
+
   handlingSubmit = async (event, typename) => {
     event.preventDefault(); //event의 디폴트 기능(새로고침 되는 것 등..) -> 막는다.
     this.setState({ type: typename });
@@ -78,12 +107,15 @@ class MyPage extends Component {
               </Grid>
               <Grid item xs={12} sm={8}>
                 <MyProfile
+                  user_type={this.state.user_type}
                   id={this.state.id}
                   major={this.state.major}
                   start_num={this.state.start_num}
                   student_id={this.state.student_id}
                   email={this.state.email}
                   sns_id={this.state.sns_id}
+                  full_name={this.state.full_name}
+                  updateUser={this.updateUser}
                 />
               </Grid>
             </Grid>

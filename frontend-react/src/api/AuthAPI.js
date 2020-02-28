@@ -43,6 +43,11 @@ export const getUserWithId = id => {
   return axios.get(`accounts/user/${id}`);
 };
 
+export const updateUser = (id,data) => {
+  console.log("updateUser api 실행.");
+  return axios.put(`accounts/user/${id}`,data);
+};
+
 
 export const getAllUser = () => {
   console.log("get all user api 실행.");
