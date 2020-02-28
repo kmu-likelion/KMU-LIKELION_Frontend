@@ -2,10 +2,10 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 
 //component
-import NoticeForm from "./NoticeForm";
-import SessionFrom from "./SessionForm";
-import QnAForm from "./QnAForm";
-import CareerForm from "./CareerForm";
+import NoticeForm from "../notice/NoticeForm";
+import SessionFrom from "../session/SessionForm";
+import QnAForm from "../qna/QnAForm";
+import CareerForm from "../career/CareerForm";
 
 // material-ui
 import Container from "@material-ui/core/Container";

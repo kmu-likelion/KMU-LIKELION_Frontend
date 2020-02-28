@@ -4,11 +4,11 @@ import comment_api from "../../../api/CommentAPI";
 
 import CommentNew from "../comment/CommentNew";
 import CommentView from "../comment/CommentView";
-import AnswerView from "./AnswerView";
-import NoticeDetail from "./NoticeDetail";
-import QnADetail from "./QnADetail";
-import CareerDetail from "./CareerDetail";
-import SessionDetail from "./SessionDetail";
+import AnswerView from "../qna/AnswerView";
+import NoticeDetail from "../notice/NoticeDetail";
+import QnADetail from "../qna/QnADetail";
+import CareerDetail from "../career/CareerDetail";
+import SessionDetail from "../session/SessionDetail";
 
 // @material-ui
 import Container from "@material-ui/core/Container";
