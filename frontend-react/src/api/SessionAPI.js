@@ -49,13 +49,13 @@ export default {
     return axios.get(
       `board/submission/?user_id=${user_id}&lecture=${assignment_id}`
     );
-  }
+  },
 
-  //   //글 수정
-  //   updatePost(url, id, data) {
-  //     console.log("updatePost 실행.");
-  //     return axios.put(`board/${url}/` + String(id) + "/", data, tokenConfig());
-  //   },
+  //글 수정
+  updatePost(url, id, data) {
+    console.log("updatePost 실행.");
+    return axios.put(`board/${url}/` + String(id) + "/", data, tokenConfig());
+  },
 
   //   //글 삭제
   //   deletePost(url, id) {

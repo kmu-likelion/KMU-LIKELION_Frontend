@@ -86,7 +86,7 @@ class LectureForm extends Component {
     // let date = moment(new Date()).format("YYYY-MM-DDTHH:MM");
     // console.log(date);
     if (this.props.isEdit) {
-      // this.getPostInfo();
+      this.getPostInfo();
     }
   }
 
@@ -119,7 +119,8 @@ class LectureForm extends Component {
           .updatePost("session", this.props.editId, {
             title: this.state.title,
             body: this.state.body,
-            user_id: this.state.userId
+            user_id: this.state.userId,
+            session_type: "L"
           })
           .then(res => {
             console.log("정상적으로 수정됨. ", res);

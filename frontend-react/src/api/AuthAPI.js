@@ -40,12 +40,12 @@ export const getUser = username => {
 
 export const getUserWithId = id => {
   console.log("getUserWithId api 실행.");
-  return axios.get(`accounts/user/${id}`);
+  return axios.get(`accounts/user/${id}/`);
 };
 
 export const updateUser = (id,data) => {
-  console.log("updateUser api 실행.");
-  return axios.put(`accounts/user/${id}`,data);
+  console.log("updateUser api 실행.", data);
+  return axios.put(`accounts/user/${id}/`,data);
 };
 
 
