@@ -60,6 +60,7 @@ class AssignmentDetail extends React.Component {
                 </Typography>
                 <Tabs
                   style={{ width: "100%" }}
+                  variant="fullWidth"
                   value={this.state.tabValue}
                   indicatorColor="primary"
                   textColor="primary"
@@ -68,6 +69,8 @@ class AssignmentDetail extends React.Component {
                   <Tab label="Detail" />
                   <Tab label="Submission" />
                 </Tabs>
+                <br />
+
                 <div>
                   {this.state.tabValue === 0 ? (
                     <Card variant="outlined">

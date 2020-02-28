@@ -59,14 +59,14 @@ class GradingContainer extends React.Component {
     return (
       <>
         <Grid container spacing={3}>
-          <Grid item sm={5}>
+          <Grid item sm={5} style={{ textAlign: "center" }}>
             <Typography>MEMBER LIST</Typography>
             <MemberList
               selectMember={this.selectMember}
               memberList={this.state.memberList}
             />
           </Grid>
-          <Grid item sm={7}>
+          <Grid item sm={7} style={{ textAlign: "center" }}>
             <Typography>제출물 채점</Typography>
             {/* 디테일 평가 */}
 
