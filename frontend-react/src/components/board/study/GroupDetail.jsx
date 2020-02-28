@@ -95,7 +95,6 @@ class GroupDetail extends React.Component {
     })
       .then(res => {
         this.getGroupMember();
-        
       })
       .catch(err => {
         console.log(err);
@@ -159,9 +158,8 @@ class GroupDetail extends React.Component {
       .then(res => {
         console.log("후 이즈 캡틴?", res.data);
         this.setState({
-          group_captain: res.data[0]
+          group_captain: res.data
         });
-        
       })
       .catch(err => console.log(err));
   };
@@ -173,8 +171,6 @@ class GroupDetail extends React.Component {
     document.location.href = "/study";
   };
 
-  
- 
 
   render() {
     return (
@@ -203,27 +199,42 @@ class GroupDetail extends React.Component {
               sm={5}
               style={{ alignItems: "center", textAlign: "center" }}
             >
-              <Typography>
-                스터디장 {this.state.group_captain.user_id}
-              </Typography>
               <Typography component="h5" variant="h5">
+                스터디장<br/>
+               </Typography>
+                <IconButton component={Link} to={`/Mypage/${this.state.group_captain.captain_username}`}>
+                              <Avatar alt="Recomment-writer" src={this.state.group_captain.user_img} />
+                            </IconButton>
+                            {this.state.group_captain.captain_username}
+              <Typography component="h6" variant="h6">
                 그룹멤버
               </Typography>
               <Typography component="pre" className="preTag">
                 <List subheader={<li />} className={"mentoring-list"}>
                   {this.state.group_members.map(member => (
-                    <li key={`li-${member.id}`}>
-                      <ul className={"mentoring-ul"}>
-                        <ListItem button key={member.id}>
-                          <ListItemAvatar>
-                            <IconButton component={Link} to={`/Mypage/${member.user.username}`}>
-                              <Avatar alt="Recomment-writer" src={member.user.img} />
-                            </IconButton>
-                          </ListItemAvatar>
-                          <ListItemText primary={member.user.username} /><CancelIcon className="Cancle" onClick={event => this.deleteGroupUser(event,member.id)}/>
-                        </ListItem>
-                      </ul>
-                    </li>
+                    <div>
+                    {
+                      (this.state.group_captain.captain_username) === member.user.username
+                        ? (
+                          <>
+                          </>
+                        )
+                        : (
+                          <li key={`li-${member.id}`}>
+                            <ul className={"mentoring-ul"}>
+                              <ListItem button key={member.id}>
+                                <ListItemAvatar>
+                                  <IconButton component={Link} to={`/Mypage/${member.user.username}`}>
+                                    <Avatar alt="Recomment-writer" src={member.user.img} />
+                                  </IconButton>
+                                </ListItemAvatar>
+                                <ListItemText primary={member.user.username} /><CancelIcon className="Cancle" onClick={event => this.deleteGroupUser(event,member.id)}/>
+                              </ListItem>
+                            </ul>
+                          </li>
+                        )
+                    }
+                    </div>
                   ))}
                 </List>
               </Typography>
@@ -289,14 +300,7 @@ class GroupDetail extends React.Component {
                 그룹수정
               </Button>
               </Link>
-
-              <Button
-                color="secondary"
-                size="small"
-                onClick={event => this.groupDelete()}
-              >
-                그룹삭제
-              </Button>
+              
               <Button
                 color="primary"
                 size="small"
