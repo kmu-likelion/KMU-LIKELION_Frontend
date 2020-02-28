@@ -20,45 +20,14 @@ import Select from "@material-ui/core/Select";
 import Button from "@material-ui/core/Button";
 class MentoringAdd extends React.Component {
   state = {
-    selected_mentor: "",
-    selected_mentee: "",
-    mentorOpen: false,
-    menteeOpen: false,
-    mentorId:"",
-    menteeId:"",
   };
 
   handlingChange = event => {
     this.setState({ [event.target.name]: event.target.value });
   };
 
-  createMentoring = async event => {
-    event.preventDefault();
-    await api
-      .createMentoring({
-        mentor: this.state.selected_mentor,
-        mentee: this.state.selected_mentee
-      })
-      .then(res => {
-        console.log("Add metoring:", res.data);
-        this.props.getAllMentor();
-        this.props.getAllMentee();
-        console.log("id값",this.state.mentorId);
-        console.log("id값",this.state.menteeId);
-
-        this.props.getLinkedMentor(this.state.menteeId);
-        this.props.getLinkedMentee(this.state.mentorId);
-        
-      })
-      .catch(err => {
-        console.log(err);
-      });
-  };
-
   render() {
-    const {allUser}=this.props;
-    
-
+    const {allUser,selected_mentee,selected_mentor,mentorOpen,menteeOpen,mentorId,menteeId}=this.props;
 
     return (
       <>
@@ -67,27 +36,26 @@ class MentoringAdd extends React.Component {
           <TableRow>
                 <TableCell colSpan={2}>
                   <form
-                    onSubmit={event => this.createMentoring(event)}
+                    onSubmit= {event=>this.props.createMentoring(event)}
                     className={"mentoring-form"}
                   >
                     <Select
                       className={"mentoring-select"}
-                      open={this.state.mentorOpen}
-                      onClose={e => this.setState({ mentorOpen: false })}
+                      open={mentorOpen}
+                      onClose={e => this.props.onCloseMentor()}
                       name="selected_mentor"
-                      onOpen={e => this.setState({ mentorOpen: true })}
-                      value={this.state.selected_mentor}
+                      onOpen={e => this.props.onOpenMentor()}
+                      value={selected_mentor}
                       onChange={e =>
-                        this.setState({ selected_mentor: e.target.value })
+                        this.props.onChangeMentor(e)
                       }
-                      
                       displayEmpty
                     >
                       <MenuItem value="">
                         <small>Mentor</small>
                       </MenuItem>
                       {allUser.map(user => (
-                        <MenuItem value={user.id} onclick={e => this.setState({mentorId:user.id})}>{user.username}</MenuItem>
+                        <MenuItem value={user.id}>{user.username}</MenuItem>
                       ))}
 
                     </Select>
@@ -95,22 +63,21 @@ class MentoringAdd extends React.Component {
 
                     <Select
                       className={"mentoring-select"}
-                      open={this.state.menteeOpen}
-                      onClose={e => this.setState({ menteeOpen: false })}
+                      open={menteeOpen}
+                      onClose={e => this.props.onCloseMentee()}
                       name="selected_mentee"
-                      onOpen={e => this.setState({ menteeOpen: true })}
-                      value={this.state.selected_mentee}
+                      onOpen={e => this.props.onOpenMentee()}
+                      value={selected_mentee}
                       onChange={e =>
-                        this.setState({ selected_mentee: e.target.value })
+                        this.props.onChangeMentee(e)
                       }
-                     
                       displayEmpty
                     >
                       <MenuItem value="">
                         <small>Mentee</small>
                       </MenuItem>
                       {allUser.map(user => (
-                        <MenuItem value={user.id} onclick={e => this.setState({menteeId:user.id})}>{user.username}</MenuItem>
+                        <MenuItem value={user.id}>{user.username}</MenuItem>
                       ))}
 
                     </Select>
