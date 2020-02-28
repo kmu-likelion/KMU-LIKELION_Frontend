@@ -83,6 +83,8 @@ class CheckAnswerForm extends Component {
       })
       .then(res => {
         console.log("정상적으로 업데이트 됨", res.data);
+        this.props.handlingClose();
+        this.props.getJoinData(this.context.state.applicationId);
       })
       .catch(err => {
         console.log(err);

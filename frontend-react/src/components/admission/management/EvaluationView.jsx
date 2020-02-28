@@ -14,6 +14,7 @@ import ListItemText from "@material-ui/core/ListItemText";
 import ListItemAvatar from "@material-ui/core/ListItemAvatar";
 import IconButton from "@material-ui/core/IconButton";
 import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
+import TextareaAutosize from "@material-ui/core/TextareaAutosize";
 import Divider from "@material-ui/core/Divider";
 import Rating from "@material-ui/lab/Rating";
 
@@ -91,16 +92,27 @@ export default class CommentView extends Component {
                 <ListItemAvatar>
                   <Avatar alt="comment-writer" src={user_img} />
                 </ListItemAvatar>
+                <ListItemSecondaryAction>
+                  <Rating
+                    name="update_score"
+                    defaultValue={score}
+                    value={this.state.update_score}
+                    onChange={this.handlingChange}
+                    size="large"
+                  />
+                </ListItemSecondaryAction>
+              </ListItem>
+              <ListItem alignItems="middle" style={{ verticalAlign: "middle" }}>
                 <ListItemText
                   primary={
-                    <TextField
-                      id="outlined-name"
-                      label="comment"
+                    <TextareaAutosize
                       name="update_body"
+                      rowsMin={3}
+                      rowsMax={7}
+                      placeholder="comment"
                       value={this.state.update_body}
                       onChange={this.handlingChange}
-                      margin="normal"
-                      style={{ width: "70%" }}
+                      style={{ width: "100%" }}
                       required
                     />
                   }
@@ -142,24 +154,8 @@ export default class CommentView extends Component {
                 {author_name}
               </Typography>
             </ListItemAvatar>
+
             <Rating name="read-only" value={score} readOnly />
-          </ListItem>
-
-          <ListItem
-            alignItems="middle"
-            style={{ verticalAlign: "middle", alignItems: "center" }}
-          >
-            <Paper
-              elevation={0}
-              style={{
-                padding: 30,
-                textAlign: "center",
-                width: "80%"
-              }}
-            >
-              <ListItemText primary={body} />
-            </Paper>
-
             <ListItemSecondaryAction>
               <Button
                 color="primary"
@@ -183,6 +179,24 @@ export default class CommentView extends Component {
               </Button>
               {/* <small>{pubDate}</small> */}
             </ListItemSecondaryAction>
+          </ListItem>
+
+          <ListItem
+            alignItems="middle"
+            style={{ verticalAlign: "middle", alignItems: "center" }}
+          >
+            <Paper
+              elevation={0}
+              style={{
+                padding: 30,
+                textAlign: "center",
+                width: "80%"
+              }}
+            >
+              <ListItemText
+                primary={<Typography component="pre">{body}</Typography>}
+              />
+            </Paper>
           </ListItem>
           <br />
           <Divider />

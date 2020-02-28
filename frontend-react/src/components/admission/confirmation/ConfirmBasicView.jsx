@@ -59,7 +59,7 @@ class CheckBasicForm extends Component {
 
   render() {
     const { classes } = this.props;
-    const { joinInfo } = this.props;
+    const { joinInfo, getJoinData } = this.props;
     const joinData = [
       this.viewData("지원번호", joinInfo.id),
       this.viewData("성명", joinInfo.name),
@@ -105,6 +105,7 @@ class CheckBasicForm extends Component {
         <ConfirmBasicForm
           open={this.state.modalFlag}
           handlingClose={this.modalClose}
+          getJoinData={getJoinData}
         />
       </>
     );

@@ -98,7 +98,10 @@ class ConfirmApplication extends Component {
             <Grid item xs={1} sm={2}></Grid>
             <Grid item xs={10} sm={8}>
               <Grid item xs={12} sm={12}>
-                <ConfirmBasicView joinInfo={this.state.joinInfo} />
+                <ConfirmBasicView
+                  joinInfo={this.state.joinInfo}
+                  getJoinData={this.getJoinDataWithId}
+                />
               </Grid>
               <Grid item xs={12} sm={12}>
                 <br />

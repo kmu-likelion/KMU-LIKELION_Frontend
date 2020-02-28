@@ -191,6 +191,7 @@ export default class ManageJoinDetail extends Component {
             <hr />
             {this.state.evaluations.map(elem => (
               <EvaluationView
+                key={elem.id}
                 user_id={elem.user_id}
                 author_name={elem.user_name}
                 body={elem.body}

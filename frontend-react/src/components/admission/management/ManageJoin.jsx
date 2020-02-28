@@ -18,7 +18,7 @@ import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import ManageQuestionForm from "./ManageQuestionForm";
 
-class CheckJoin extends Component {
+class ManageJoin extends Component {
   state = {
     joindata: [],
     questions: [],
@@ -182,4 +182,4 @@ class CheckJoin extends Component {
   }
 }
 
-export default CheckJoin;
+export default ManageJoin;
