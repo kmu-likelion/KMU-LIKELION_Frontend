@@ -48,7 +48,7 @@ class GroupUpdate extends Component {
         userName: window.sessionStorage.getItem("username")
       });
     }
-    console.log(this.props.match.params.group)
+    console.log("group Id" ,this.props.match.params.group)
     this.getGroup();
   }
 
@@ -58,10 +58,11 @@ class GroupUpdate extends Component {
       .then(res => {
         const data = res.data;
         console.log(data)
-        console.log(data.name)
-        console.log(data.introduction)
-        
-           
+        console.log(data[0].name)
+        console.log(data[0].introduction)
+        this.setState({groupId:data[0].id})
+        this.setState({title:data[0].name})
+        this.setState({introduction:data[0].introduction})
       })
       .catch(err => console.log(err));
   }
@@ -74,13 +75,12 @@ class GroupUpdate extends Component {
     event.preventDefault();
     // console.log("user-id: ", this.state.id);
     await api
-      .updateGroup(this.props.match.params.group_id,{
+      .updateGroup(this.state.groupId,{
         name: this.state.title,
         introduction: this.state.introduction
       })
-      .then(async result => {
-        console.log("정상적으로 수정됨.", result);
-        this.setState({ groupId: result.data.id });
+      .then(async data => {
+        console.log("정상적으로 수정됨.");
       })
       .catch(err => console.log(err));
 

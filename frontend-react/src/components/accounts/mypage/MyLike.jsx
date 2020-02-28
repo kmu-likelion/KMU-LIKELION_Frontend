@@ -35,18 +35,22 @@ class MyLike extends React.Component {
     likeNotice: [],
     likeQnA: [],
     likeStudy: [],
+    likeSession:[],
+    likeCareer:[],
   };
   componentDidMount() {
     this.getLikePosts("notice");
     this.getLikePosts("qna");
     this.getLikePosts("study");
+    this.getLikePosts("session");
+    this.getLikePosts("career");
   }
 
   async getLikePosts(target) {
     await api
       .getUserLikePost(target)
       .then(likePosts => {
-        console.log(likePosts);
+        console.log("음",likePosts);
         var posts = likePosts.data.board_contents;
         switch (target) {
           case "notice":
@@ -57,6 +61,12 @@ class MyLike extends React.Component {
             break;
           case "study":
             this.setState({ likeStudy: posts });
+            break;
+          case "session":
+            this.setState({ likeSession: posts });
+            break;
+          case "career":
+            this.setState({ likeCareer: posts });
             break;
           default:
             break;
@@ -81,6 +91,14 @@ class MyLike extends React.Component {
       case "Study Board":
         LikeList = this.state.likeStudy;
         board_type = "study";
+        break;
+      case "Session Board":
+        LikeList = this.state.likeSession;
+        board_type = "session";
+        break;
+      case "Career Board":
+        LikeList = this.state.likeCareer;
+        board_type = "career";
         break;
       default:
         LikeList=[];
@@ -134,7 +152,7 @@ class MyLike extends React.Component {
           <hr/>
           <br/>
           <List className={classes.root} subheader={<li />}>
-            {["Notice Board", "QnA Board", "Study Board"].map(sectionId => (
+            {["Notice Board", "QnA Board", "Study Board", "Session Board", "Career Board"].map(sectionId => (
               <li key={`section-${sectionId}`} className={classes.listSection}>
                 <ul className={classes.ul}>
                   <ListSubheader><h3>{`${sectionId}`}</h3></ListSubheader>

@@ -36,8 +36,7 @@ class MyPost extends Component {
     studyboard: [],
     noticeboard: [],
     qnaboard: [],
-    assignments: [],
-    submission:[],
+    career: [],
   };
   componentDidMount() {
     const id = this.props.id;
