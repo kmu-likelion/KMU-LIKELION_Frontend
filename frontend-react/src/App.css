@@ -5,17 +5,26 @@
   font-weight: normal;
   font-style: normal;
 }
+
+@font-face {
+  font-family: "NIXGONM-Vb";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/NIXGONM-Vb.woff")
+    format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
 #root {
-  font-family: "Eoe_Zno_L";
+  font-family: "NIXGONM-Vb";
 }
 html,
 body {
-  font-family: "Eoe_Zno_L";
+  font-family: "NIXGONM-Vb";
   /* height: 100%; */
   /* overflow: hidden; */
 }
 .preTag {
-  font-family: "Eoe_Zno_L";
+  font-family: "NIXGONM-Vb";
 }
 .card {
   align-items: center;
@@ -179,6 +188,7 @@ body {
   padding-inline-end: 8rem;
   height: 100%;
   width: 100%;
+  line-height: 4.5rem;
 }
 .standard-read-only-input {
   width: 100%;
@@ -186,7 +196,6 @@ body {
 .standard-required {
   width: 100%;
 }
-
 
 .MyLike {
   padding-top: 2rem;

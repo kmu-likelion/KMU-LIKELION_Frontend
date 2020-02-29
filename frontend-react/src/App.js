@@ -1,5 +1,6 @@
 import React from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
+import { Switch } from "react-router-dom";
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 
@@ -22,6 +23,8 @@ import AssignmentDetail from "./components/assignment/AssignmentDetail";
 
 import MentoringContainer from "./components/mentoring/MentoringContainer";
 import Register from "./components/accounts/Register";
+
+import NotFoundPage from "./components/NotFoundPage";
 
 class App extends React.Component {
   constructor(props) {
@@ -70,26 +73,29 @@ class App extends React.Component {
       <Store.Provider value={this.state}>
         <Router>
           <Header />
-          <Route exact path="/" component={Main} />
+          <Switch>
+            <Route exact path="/" component={Main} />
 
-          <Route path="/career" component={BoardRouter} />
-          <Route path="/notice" component={BoardRouter} />
-          <Route path="/qna" component={BoardRouter} />
-          <Route path="/session" component={BoardRouter} />
-          <Route path="/study" component={StudyRouter} />
+            <Route path="/career" component={BoardRouter} />
+            <Route path="/notice" component={BoardRouter} />
+            <Route path="/qna" component={BoardRouter} />
+            <Route path="/session" component={BoardRouter} />
+            <Route path="/study" component={StudyRouter} />
 
-          <Route path="/admission" component={AdmissionRouter} />
-          <Route path="/mentoring" component={MentoringContainer} />
-          <Route exact path="/assignment" component={AssignmentList} />
-          <Route
-            path="/assignment/detail/:id"
-            component={AssignmentDetail}
-            id="number"
-          />
+            <Route path="/admission" component={AdmissionRouter} />
+            <Route path="/mentoring" component={MentoringContainer} />
+            <Route exact path="/assignment" component={AssignmentList} />
+            <Route
+              path="/assignment/detail/:id"
+              component={AssignmentDetail}
+              id="number"
+            />
 
-          <Route path="/login" component={Login} />
-          <Route path="/register" component={Register} />
-          <Route path="/mypage/:username" component={Mypage} />
+            <Route path="/login" component={Login} />
+            <Route path="/register" component={Register} />
+            <Route path="/mypage/:username" component={Mypage} />
+            <Route path="" component={NotFoundPage} />
+          </Switch>
           <Footer />
         </Router>
       </Store.Provider>
