@@ -51,11 +51,17 @@ export default {
     );
   },
 
-  //글 수정
-  updatePost(url, id, data) {
-    console.log("updatePost 실행.");
-    return axios.put(`board/${url}/` + String(id) + "/", data, tokenConfig());
-  },
+  //유저의 제출상태를 받아옴
+  getSubmitStatusWithUser(user_id, assignment_id) {
+    console.log("get submit status with user");
+    return axios.post(
+      `accounts/user/${user_id}/get_submit_status/`,
+      {
+        session_id: assignment_id
+      },
+      tokenConfig()
+    );
+  }
 
   //   //글 삭제
   //   deletePost(url, id) {
