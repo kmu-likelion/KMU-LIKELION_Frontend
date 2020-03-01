@@ -14,10 +14,7 @@ import Typography from "@material-ui/core/Typography";
 
 
 export default class GroupMemberManage extends Component {
-  
-  
   render() {
-    
     return (
       <Container maxWidth="lg" className="main-container">
         <Paper className="Paper">

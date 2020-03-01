@@ -192,7 +192,7 @@ export default class MyProfile extends Component {
                                 "username": this.state.username,
                                 "first_name": this.state.full_name,
                                 "img": this.state.img,
-                                "id": 1,
+                                "id": id,
                                 "email": this.state.email,
                                 "major": this.state.major,
                                 "student_id": this.state.student_id,
