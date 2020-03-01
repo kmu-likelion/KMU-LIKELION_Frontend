@@ -68,6 +68,7 @@ class App extends React.Component {
   }
 
   render() {
+    // console.log("url path : ", this.props);
     return (
       <Store.Provider value={this.state}>
         <Router>
@@ -88,7 +89,8 @@ class App extends React.Component {
           <Route path="/register" component={Register} />
           <Route path="/mypage/:username" component={Mypage} />
           <Route path="/404" component={NotFoundPage} />
-          <Redirect from="*" to="/404" />
+          {window.location.pathname !== "/" ? <Redirect to="/404" /> : <></>}
+
           <Footer />
         </Router>
       </Store.Provider>
