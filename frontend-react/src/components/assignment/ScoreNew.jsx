@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-import api from "../../../api/AdmissionAPI";
+import api from "../../api/SessionAPI";
 
 import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
@@ -21,7 +21,7 @@ export default class CommentView extends Component {
     userImg: "",
     body: "",
     score: "3",
-    board_id: ""
+    submissionId: ""
   };
 
   componentDidMount() {
@@ -42,11 +42,8 @@ export default class CommentView extends Component {
     event.preventDefault();
 
     await api
-      .createEvaluation({
-        user_id: this.state.userId,
-        application_id: this.props.applicationId,
-        body: this.state.body,
-        score: this.state.score
+      .createScore({
+        score_dict_list: []
       })
       .then(res => {
         console.log("성공적으로 평가생성됨.", res.data);
@@ -54,11 +51,11 @@ export default class CommentView extends Component {
           body: "",
           score: "3"
         });
-        this.props.getEvaluations();
       });
   };
 
   render() {
+    const { submissionId } = this.props;
     return (
       <>
         <Grid container spacing={2}>

@@ -31,7 +31,8 @@ class App extends React.Component {
     this.state = {
       logged: false,
       onLogin: this.onLogin,
-      onLogout: this.onLogout
+      onLogout: this.onLogout,
+      pageNotFound: false
     };
   }
 
@@ -89,7 +90,12 @@ class App extends React.Component {
           <Route path="/register" component={Register} />
           <Route path="/mypage/:username" component={Mypage} />
           <Route path="/404" component={NotFoundPage} />
-          {window.location.pathname !== "/" ? <Redirect to="/404" /> : <></>}
+          {window.location.pathname !== "/" ? (
+            // <Route path="*" component={NotFoundPage} />
+            <Redirect to="/404" />
+          ) : (
+            <></>
+          )}
 
           <Footer />
         </Router>

@@ -22,7 +22,7 @@ export default class MyProfile extends Component {
     student_id: "",
     email: "",
     user_type: "",
-    full_name: "",
+    first_name: "",
     username: "",
     img: "",
     sns_id: ""
@@ -62,7 +62,7 @@ export default class MyProfile extends Component {
     this.props.updateUser(id, {
       username: this.state.username,
       first_name: this.state.first_name,
-      img: this.state.img,
+      // img: this.state.img,
       id: this.state.userId,
       email: this.state.email,
       major: this.state.major,
@@ -79,7 +79,7 @@ export default class MyProfile extends Component {
 
   render() {
     const userData = [
-      this.viewData("성명", this.state.full_name),
+      this.viewData("성명", this.state.first_name),
       this.viewData("E-mail", this.state.email),
       this.viewData("기수", this.state.start_number),
       this.viewData("학과", this.state.major),
@@ -158,8 +158,8 @@ export default class MyProfile extends Component {
             />
             <TextField
               className="standard-required"
-              label="Start_Num"
-              name="start_num"
+              label="기수"
+              name="start_number"
               value={this.state.start_number}
               onChange={this.handlingChange}
             />
