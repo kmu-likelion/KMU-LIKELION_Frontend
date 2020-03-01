@@ -21,6 +21,7 @@ export default class AssignmentView extends Component {
     seletedAssignmentId: "",
     submissionInfo: "",
     editFlag: false,
+    submitInfo: {},
     modalFlag: false
   };
 
@@ -44,8 +45,7 @@ export default class AssignmentView extends Component {
           submitted = true;
         }
         this.setState({
-          submissionInfo: res.data,
-          editFlag: submitted
+          submissionInfo: res.data
         });
       })
       .catch(err => {
@@ -120,7 +120,7 @@ export default class AssignmentView extends Component {
             </div>
           </ExpansionPanelDetails>
           <ExpansionPanelActions>
-            {this.state.editFlag ? (
+            {/* {this.assignment ? (
               <>
                 과제를 이미 제출하셨습니다!
                 <Button
@@ -137,7 +137,7 @@ export default class AssignmentView extends Component {
               >
                 과제제출
               </Button>
-            )}
+            )} */}
 
             <Button
               color="secondary"

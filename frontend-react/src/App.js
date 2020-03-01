@@ -1,5 +1,6 @@
 import React from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
+import { Switch, Redirect } from "react-router-dom";
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 
@@ -17,11 +18,12 @@ import { authlogout, tokenConfig } from "./api/AuthAPI";
 import BoardRouter from "./routes/BoardRouter";
 import StudyRouter from "./routes/StudyRouter";
 import AdmissionRouter from "./routes/AdmissionRouter";
-import AssignmentList from "./components/assignment/AssignmentList";
-import AssignmentDetail from "./components/assignment/AssignmentDetail";
+import AssignmentRouter from "./routes/AssignmentRouter";
 
 import MentoringContainer from "./components/mentoring/MentoringContainer";
 import Register from "./components/accounts/Register";
+
+import NotFoundPage from "./components/NotFoundPage";
 
 class App extends React.Component {
   constructor(props) {
@@ -29,7 +31,8 @@ class App extends React.Component {
     this.state = {
       logged: false,
       onLogin: this.onLogin,
-      onLogout: this.onLogout
+      onLogout: this.onLogout,
+      pageNotFound: false
     };
   }
 
@@ -66,6 +69,7 @@ class App extends React.Component {
   }
 
   render() {
+    // console.log("url path : ", this.props);
     return (
       <Store.Provider value={this.state}>
         <Router>
@@ -80,16 +84,19 @@ class App extends React.Component {
 
           <Route path="/admission" component={AdmissionRouter} />
           <Route path="/mentoring" component={MentoringContainer} />
-          <Route exact path="/assignment" component={AssignmentList} />
-          <Route
-            path="/assignment/detail/:id"
-            component={AssignmentDetail}
-            id="number"
-          />
+          <Route path="/assignment" component={AssignmentRouter} />
 
           <Route path="/login" component={Login} />
           <Route path="/register" component={Register} />
           <Route path="/mypage/:username" component={Mypage} />
+          <Route path="/404" component={NotFoundPage} />
+          {window.location.pathname !== "/" ? (
+            // <Route path="*" component={NotFoundPage} />
+            <Redirect to="/404" />
+          ) : (
+            <></>
+          )}
+
           <Footer />
         </Router>
       </Store.Provider>

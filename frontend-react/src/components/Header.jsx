@@ -87,7 +87,7 @@ export default function Header(props) {
                           </DropItem>
                         </MenuItem>
                         <MenuItem onClick={popupState.close}>
-                          <DropItem to={`/Mypage/${username}`}>
+                          <DropItem to={`/mypage/${username}`}>
                             마이페이지
                           </DropItem>
                         </MenuItem>

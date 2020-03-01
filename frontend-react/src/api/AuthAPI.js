@@ -43,18 +43,15 @@ export const getUserWithId = id => {
   return axios.get(`accounts/user/${id}/`);
 };
 
-export const updateUser = (id,data) => {
+export const updateUser = (id, data) => {
   console.log("updateUser api 실행.", data);
-  return axios.put(`accounts/user/${id}/`,data);
+  return axios.patch(`accounts/user/${String(id)}/`, data, tokenConfig());
 };
-
 
 export const getAllUser = () => {
   console.log("get all user api 실행.");
   return axios.get("accounts/user/");
 };
-
-
 
 export const tokenConfig = () => {
   const token = window.sessionStorage.getItem("token");

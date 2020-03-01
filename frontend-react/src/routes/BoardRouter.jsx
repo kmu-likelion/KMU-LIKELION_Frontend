@@ -3,7 +3,6 @@ import PostDetailContainer from "../components/board/container/PostDetailContain
 import PostUpdateContainer from "../components/board/container/PostUpdateContainer";
 import React from "react";
 import { Route } from "react-router-dom";
-
 function BoardRouter({ match }) {
   return (
     <>

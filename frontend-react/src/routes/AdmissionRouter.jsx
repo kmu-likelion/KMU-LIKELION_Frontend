@@ -6,23 +6,6 @@ import ManageJoin from "../components/admission/management/ManageJoin";
 import ManageJoinDetail from "../components/admission/management/ManageJoinDetail";
 import AdmissionStore from "../store/AdmissionStore";
 
-// function AdmissionRouter({ match }) {
-
-//   return (
-//     <AdmissionStore.Provider value={globalState}>
-//       <Route path={`${match.path}/join`} component={JoinForm} />
-//       <Route path={`${match.path}/checkjoin`} component={ConfirmContainer} />
-//       <Route exact path={`${match.path}/management`} component={ManageJoin} />
-//       <Route
-//         path={`${match.path}/management/:id`}
-//         component={ManageJoinDetail}
-//       />
-//     </AdmissionStore.Provider>
-//   );
-// }
-
-// export default AdmissionRouter;
-
 class AdmissionRouter extends React.Component {
   state = {
     isAccessed: false,

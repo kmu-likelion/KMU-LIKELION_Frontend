@@ -24,7 +24,7 @@ export default {
     return axios.post(`board/${url}/`, data, tokenConfig());
   },
 
-  uploadImage(data){
+  uploadImage(data) {
     console.log("uploadImage 실행.");
     console.log(data); // data = {"image":"base64", "Content object": "/board/session/1/ - detail_url"}
     return axios.post(`board/images/`, data, tokenConfig());
@@ -62,8 +62,8 @@ export default {
     console.log("change like status api 실행.");
     return axios.post(`board/${url}/${id}/like/`, null, tokenConfig());
   },
-  getMyPost(id){
+  getMyPost(id) {
     console.log("get MyPost api 실행");
-    return axios.get(`accounts/user/${id}/activity/`,tokenConfig());
+    return axios.get(`accounts/user/${id}/activity/`, tokenConfig());
   }
 };

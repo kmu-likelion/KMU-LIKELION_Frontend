@@ -1,6 +1,5 @@
 import React from "react";
 import ReactDOM from "react-dom";
-
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
 
@@ -8,7 +7,7 @@ import { MuiThemeProvider, createMuiTheme } from "@material-ui/core/styles";
 
 const theme = createMuiTheme({
   typography: {
-    fontFamily: "Eoe_Zno_L"
+    fontFamily: "NIXGONM-Vb"
   }
 });
 
