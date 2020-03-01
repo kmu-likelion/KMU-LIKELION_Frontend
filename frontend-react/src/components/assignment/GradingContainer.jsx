@@ -76,7 +76,7 @@ class GradingContainer extends React.Component {
             </List>
           </Grid>
           <Grid item sm={7} style={{ textAlign: "center" }}>
-            <Typography>제출물 채점</Typography>
+            <Typography>제출물 정보</Typography>
             {/* 디테일 평가 */}
 
             <GradingView
