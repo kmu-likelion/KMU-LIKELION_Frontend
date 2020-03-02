@@ -24,10 +24,14 @@ class PostDetail extends Component {
     body: "",
     study_type: "",
     pub_date: "",
-    comments: []
+    comments: [],
+    userId:"",
   };
 
   componentDidMount() {
+    this.setState({
+      userId: window.sessionStorage.getItem("id"),
+    });
     const post_id = this.props.match.params.id;
     this.getPost(post_id);
   }
@@ -133,29 +137,39 @@ class PostDetail extends Component {
               </TableCell>
             </TableRow>
           </Table>
-          <Typography component="h1" variant="h6">
-            Comments
-          </Typography>
+          {this.state.userId > 0
+                ? (
+                  <>
+                  <Typography component="h1" variant="h6">
+                    Comments
+                  </Typography>
+                  {this.state.comments.map(comment => (
+                    <CommentView
+                      key={comment.id}
+                      user_id={comment.user_id}
+                      author_name={comment.author_name}
+                      body={comment.body}
+                      comment_id={comment.id}
+                      recomments={comment.recomments}
+                      getComments={this.callGetComments}
+                      board_id={comment.board}
+                      user_img={comment.user_img}
+                      url={`study_comment`}
+                    />
+                  ))}
+                  <CommentNew
+                    url="study_comment"
+                    board_id={post_id}
+                    getComments={this.callGetComments}
+                  />
+                  </>
+                )
+                : (
+                  <>
+                  </>
+                )}
 
-          {this.state.comments.map(comment => (
-            <CommentView
-              key={comment.id}
-              user_id={comment.user_id}
-              author_name={comment.author_name}
-              body={comment.body}
-              comment_id={comment.id}
-              recomments={comment.recomments}
-              getComments={this.callGetComments}
-              board_id={comment.board}
-              user_img={comment.user_img}
-              url={`study_comment`}
-            />
-          ))}
-          <CommentNew
-            url="study_comment"
-            board_id={post_id}
-            getComments={this.callGetComments}
-          />
+
         </Paper>
       </Container>
     );

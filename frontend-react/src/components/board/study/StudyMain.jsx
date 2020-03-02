@@ -14,12 +14,14 @@ class StudyMain extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      groupList: []
+      groupList: [],
+      userId:"",
     };
   }
 
   componentDidMount() {
     this.getAllGroup();
+    this.setState({userId:window.sessionStorage.getItem("id")});
   }
 
   async getAllGroup() {
@@ -48,7 +50,14 @@ class StudyMain extends React.Component {
             <Typography component="h1" variant="h4">
               스터디그룹
             </Typography>
-            <Link to={"/study/group/new"}>새로운 그룹 생성하기</Link>
+            {this.state.userId >0
+            ?(
+              <Link to={"/study/group/new"}>새로운 그룹 생성하기</Link>
+            )
+            :(
+              <></>
+            )
+            }
             <hr />
             <Grid container spacing={2}>
               {this.state.groupList.map(group => (

@@ -30,7 +30,6 @@ const Footer = () => (
 
 
           </div>
-          
         </Grid>
         <Grid item sm={3} xs ={12} className="right-footer">
           <p>20707 서울특별시 성북구 정릉로 77 국민대학교</p>

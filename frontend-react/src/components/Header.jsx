@@ -1,8 +1,8 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect,useState  } from "react";
 import { Link } from "react-router-dom";
 // import { makeStyles } from "@material-ui/core/styles";
 import Store from "../store/Store";
-
+import { getUser} from "../api/AuthAPI";
 // @material-ui
 import Button from "@material-ui/core/Button";
 import Menu from "@material-ui/core/Menu";
@@ -12,16 +12,29 @@ import Avatar from "@material-ui/core/Avatar";
 // bootstrap
 import { Nav, Navbar, NavDropdown } from "react-bootstrap";
 
+
 export default function Header(props) {
   const store = useContext(Store);
   const username = window.sessionStorage.getItem("username");
+  let [user_type, setUser_type] = useState(0);
   // const user_img = window.sessionStorage.getItem("user_img");
-
   const DropItem = ({ children, to }) => (
     <Link to={to} className="link drop-link">
       {children}
     </Link>
   );
+
+  useEffect(() => {
+    console.log('USERDATa 받아오자');
+    getUser(username)
+      .then(res => {
+        console.log("User Data", res.data);
+        setUser_type(user_type = res.data[0].user_type)
+        console.log("UserTYPE ",user_type);
+      })
+      .catch(err => console.log(err));
+  });
+
 
   return (
     <div>
@@ -55,7 +68,9 @@ export default function Header(props) {
           </Nav>
           {store.logged ? (
             <>
-              <Nav>
+              {user_type < 3
+                ?(
+                  <Nav>
                 <NavDropdown title="동아리관리" id="collasible-nav-dropdown">
                   <NavDropdown.Item as={Link} to="/mentoring">
                     멘토링관리
@@ -68,6 +83,13 @@ export default function Header(props) {
                   </NavDropdown.Item>
                 </NavDropdown>
               </Nav>
+                )
+                :(
+                  <>
+                  </>
+
+                )
+              }
               <Nav>
                 <PopupState variant="popover" popupId="popup-menu">
                   {popupState => (
@@ -99,7 +121,7 @@ export default function Header(props) {
             </>
           ) : (
             <Nav>
-              <NavDropdown title="지원하기" id="collasible-nav-dropdown">
+                <NavDropdown title="지원하기" id="collasible-nav-dropdown">
                 <NavDropdown.Item as={Link} to="/admission/apply">
                   입부신청
                 </NavDropdown.Item>
@@ -107,6 +129,7 @@ export default function Header(props) {
                   지원내역
                 </NavDropdown.Item>
               </NavDropdown>
+
               <Nav.Link as={Link} to="/login">
                 로그인
               </Nav.Link>

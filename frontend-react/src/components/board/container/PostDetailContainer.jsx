@@ -24,7 +24,8 @@ class PostDetailContainer extends Component {
     this.state = {
       postInfo: {},
       board_name: "",
-      comments: []
+      comments: [],
+      userId:"",
     };
   }
 
@@ -33,6 +34,9 @@ class PostDetailContainer extends Component {
     let board_name = this.props.match.path.split("/")[1];
     this.getPost(board_name);
     this.getComments(board_name);
+    this.setState({
+      userId: window.sessionStorage.getItem("id"),
+    });
   }
 
   async getComments(board_name) {
@@ -147,6 +151,8 @@ class PostDetailContainer extends Component {
               <div style={{ padding: "1rem" }}>
                 {board_name === "qna" ? (
                   <>
+                  {this.state.userId > 0 ? (
+                  <>
                     <Typography
                       component="h1"
                       variant="h5"
@@ -178,6 +184,13 @@ class PostDetailContainer extends Component {
                   </>
                 ) : (
                   <>
+                  </>
+                )}
+                    </>
+                ) : (
+                  <>
+                  {this.state.userId > 0 ? (
+                  <>
                     <Typography component="h1" variant="h6">
                       Comments
                     </Typography>
@@ -202,6 +215,11 @@ class PostDetailContainer extends Component {
                       getComments={this.callGetComments}
                     />
                   </>
+                )
+                :(
+                  <></>
+                )}
+                </>
                 )}
               </div>
             </Grid>

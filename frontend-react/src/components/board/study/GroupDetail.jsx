@@ -42,11 +42,16 @@ class GroupDetail extends React.Component {
       selected_user: "",
       userOpen: false,
       userId:"",
+      userNow:"",
 
     };
   }
 
   componentDidMount() {
+    this.setState({
+      userNow:window.sessionStorage.getItem("username"),
+      userId:window.sessionStorage.getItem("id"),
+    });
     this.getGroup();
     this.getAllUser();
   }
@@ -228,7 +233,16 @@ class GroupDetail extends React.Component {
                                     <Avatar alt="Recomment-writer" src={member.user.img} />
                                   </IconButton>
                                 </ListItemAvatar>
-                                <ListItemText primary={member.user.username} /><CancelIcon className="Cancle" onClick={event => this.deleteGroupUser(event,member.id)}/>
+                                <ListItemText primary={member.user.username} />
+                                {this.state.userNow === this.state.group_captain.captain_username
+                                ?(
+                                  <CancelIcon className="Cancle" onClick={event => this.deleteGroupUser(event,member.id)}/>
+                                )
+                                :(
+                                  <></>
+                                )
+
+                                }
                               </ListItem>
                             </ul>
                           </li>
@@ -267,7 +281,6 @@ class GroupDetail extends React.Component {
                                     onChange={e =>
                                       this.setState({ selected_user: e.target.value })
                                     }
-                                    
                                     displayEmpty
                                   >
                                     <MenuItem value="">
@@ -291,16 +304,22 @@ class GroupDetail extends React.Component {
                     )
                 }
                 </div>
+              {this.state.userNow === this.state.group_captain.captain_username
+                ?(
+                  <Link to={`/study/${this.state.group_name}/update`}>
+                  <Button
+                    color="secondary"
+                    size="small"
+                  >
+                    그룹수정
+                  </Button>
+                  </Link>
+                )
+                :(
+                  <></>
+                )
 
-              <Link to={`/study/${this.state.group_name}/update`}>
-              <Button
-                color="secondary"
-                size="small"
-              >
-                그룹수정
-              </Button>
-              </Link>
-              
+              }
               <Button
                 color="primary"
                 size="small"
@@ -314,17 +333,26 @@ class GroupDetail extends React.Component {
             </Grid>
 
             <Grid item xs={12} sm={12}>
-              <Link
-                to={{
-                  pathname: `/study/${this.state.group_name}/post/new`,
-                  state: {
-                    group_name: this.state.group_name,
-                    group_id: this.state.group_id
-                  }
-                }}
-              >
-                새 글 작성
-              </Link>
+              {
+                this.state.userId>0
+                ?(
+                  <Link
+                    to={{
+                      pathname: `/study/${this.state.group_name}/post/new`,
+                      state: {
+                        group_name: this.state.group_name,
+                        group_id: this.state.group_id
+                      }
+                    }}
+                  >
+                    새 글 작성
+                  </Link>
+                )
+                :(
+                  <></>
+                )
+              }
+
             </Grid>
 
             <Grid item xs={12} sm={6}>

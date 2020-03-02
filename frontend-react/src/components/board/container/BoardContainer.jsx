@@ -12,7 +12,8 @@ class BoardContainer extends React.Component {
     super(props);
     this.state = {
       boardType: "",
-      postList: []
+      postList: [],
+      userId:"",
     };
   }
 
@@ -20,7 +21,8 @@ class BoardContainer extends React.Component {
     console.log("해당 보드는? ", this.props.match.path);
     let board_name = this.props.match.path;
     this.setState({
-      boardType: board_name.split("/")[1]
+      boardType: board_name.split("/")[1],
+      userId: window.sessionStorage.getItem("id")
     });
     this.getPosts(board_name.split("/")[1]);
   }
@@ -45,7 +47,14 @@ class BoardContainer extends React.Component {
             <Typography component="h1" variant="h4">
               {this.state.boardType.toUpperCase()}
             </Typography>
-            <Link to={`/${this.state.boardType}/new`}>새 글 작성</Link>
+            {this.state.userId >0
+            ?(
+              <Link to={`/${this.state.boardType}/new`}>새 글 작성</Link>
+            )
+            :(
+              <></>
+            )
+            }
             <hr />
             <Grid container spacing={2}>
               <Grid item sm={1}></Grid>
