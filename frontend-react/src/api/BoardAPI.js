@@ -17,6 +17,19 @@ export default {
     return axios.get(`board/${url}/` + String(id), tokenConfig());
   },
 
+  getPage(url, id) {
+    console.log("getPage 실행");
+    return axios.get(`board/${url}/?page=${id}`, tokenConfig());
+  },
+  getNPage(url, id) {
+    console.log("getPage 실행");
+    return axios.get(`board/${url}/?page=${id}&study_type=0`, tokenConfig());
+  },
+  getSPage(url, id) {
+    console.log("getPage 실행");
+    return axios.get(`board/${url}/?page=${id}&study_type=1`, tokenConfig());
+  },
+
   //글 생성
   createPost(url, data) {
     console.log("createPost 실행.");

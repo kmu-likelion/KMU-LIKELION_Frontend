@@ -306,3 +306,6 @@ body {
   margin: 0 auto;
   max-width: 95%;
 }
+.paginator{
+  justify-items: center;
+}

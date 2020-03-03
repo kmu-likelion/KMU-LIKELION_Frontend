@@ -48,7 +48,6 @@ export default class MyProfile extends Component {
           user_type: userInfo.user_type,
           start_number: userInfo.start_number,
           sns_id: userInfo.sns_id,
-          password: userInfo.sns_id,
         });
       })
       .catch(err => console.log(err));
@@ -72,7 +71,6 @@ export default class MyProfile extends Component {
       user_type: this.state.user_type,
       start_number: this.state.start_number,
       sns_id: this.state.sns_id,
-      password: this.state.password,
     });
   };
   handlingpasswordSubmit = (event, id) => {
