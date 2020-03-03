@@ -86,7 +86,7 @@ export default class AssignmentView extends Component {
   };
 
   render() {
-    const { assignment, sessionId, index ,user_type} = this.props;
+    const { assignment, sessionId, index, user_type } = this.props;
 
     console.log(assignment);
     return (
@@ -120,10 +120,15 @@ export default class AssignmentView extends Component {
             </div>
           </ExpansionPanelDetails>
           <ExpansionPanelActions>
-            {user_type<3
-            ?(
+            <Button
+              color="primary"
+              onClick={event => this.modalOpen(assignment.id)}
+            >
+              과제제출
+            </Button>
+            {user_type < 3 ? (
               <>
-              {/* {this.assignment ? (
+                {/* {this.assignment ? (
               <>
                 과제를 이미 제출하셨습니다!
                 <Button
@@ -142,18 +147,18 @@ export default class AssignmentView extends Component {
               </Button>
             )} */}
 
-            <Button
-              color="secondary"
-              onClick={e => this.handlingDelete(e, assignment.id, sessionId)}
-            >
-              과제삭제
-            </Button>
-            </>
-            ):(
+                <Button
+                  color="secondary"
+                  onClick={e =>
+                    this.handlingDelete(e, assignment.id, sessionId)
+                  }
+                >
+                  과제삭제
+                </Button>
+              </>
+            ) : (
               <></>
-            )
-
-            }
+            )}
           </ExpansionPanelActions>
         </ExpansionPanel>
 

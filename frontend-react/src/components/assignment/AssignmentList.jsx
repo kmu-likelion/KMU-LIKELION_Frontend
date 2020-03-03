@@ -27,7 +27,7 @@ class AssignmentContainer extends React.Component {
   getAssignmentList = async () => {
     await api.getAllPosts("session").then(res => {
       console.log("모든 과제정보 가져옴.", res.data);
-      this.setState({ sessionList: res.data });
+      this.setState({ sessionList: res.data.results });
     });
   };
 

@@ -23,13 +23,13 @@ class SessionDetail extends Component {
     author_name: "",
     assignments: [],
     modalFlag: false,
-    user_type:"",
+    user_type: ""
   };
 
   componentDidMount() {
     this.getAssignments(this.props.post_id);
     //this.setState({userId:window.sessionStorage.getItem("username")});
-    this.getUser(window.sessionStorage.getItem("username"))
+    this.getUser(window.sessionStorage.getItem("username"));
   }
 
   getUser = async username => {
@@ -37,7 +37,7 @@ class SessionDetail extends Component {
       .then(res => {
         console.log("SeSSion User Data", res.data);
         this.setState({
-          user_type: res.data[0].user_type,
+          user_type: res.data[0].user_type
         });
       })
       .catch(err => console.log(err));
@@ -102,10 +102,8 @@ class SessionDetail extends Component {
               <Viewer value={String(this.state.body)} />
             </Typography>
             <hr />
-            {
-              this.state.user_type < 3 && this.state.user_type === !null
-              ?(
-                <Button
+
+            <Button
               color="secondary"
               size="small"
               variant="contained"
@@ -113,12 +111,6 @@ class SessionDetail extends Component {
             >
               과제추가
             </Button>
-              )
-            :(
-              <></>
-            )
-            }
-            <br />
             <br />
 
             <AssignmentForm
