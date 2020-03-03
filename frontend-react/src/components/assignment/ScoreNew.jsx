@@ -28,10 +28,9 @@ export default class CommentView extends Component {
     console.log("현재 유저아이디", window.sessionStorage.getItem("id"));
     this.setState({
       userId: window.sessionStorage.getItem("id"),
-      username: window.sessionStorage.getItem("username"),
-      userImg: window.sessionStorage.getItem("user_img")
+      username: window.sessionStorage.getItem("username")
+      // userImg: window.sessionStorage.getItem("user_img")
     });
-    console.log(window.sessionStorage.getItem("user_img"));
 
     const { scoreTypes } = this.props;
     this.setScoreDict(scoreTypes);
@@ -78,6 +77,10 @@ export default class CommentView extends Component {
           body: "",
           score_list: []
         });
+
+        this.props.getSubmission(this.props.memberId, this.props.assignmentId);
+        console.log("memberid :", this.props.memberId);
+        console.log("submissionId :", this.props.assignmentId);
       });
   };
 

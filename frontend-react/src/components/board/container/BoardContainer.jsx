@@ -13,7 +13,7 @@ class BoardContainer extends React.Component {
     this.state = {
       boardType: "",
       postList: [],
-      userId:"",
+      userId: ""
     };
   }
 
@@ -32,7 +32,7 @@ class BoardContainer extends React.Component {
       .getAllPosts(boardType.toLowerCase())
       .then(res => {
         console.log("posts 가져오기 성공! ", res.data);
-        this.setState({ postList: res.data });
+        this.setState({ postList: res.data.results });
       })
       .catch(err => {
         console.log(err);
@@ -47,14 +47,11 @@ class BoardContainer extends React.Component {
             <Typography component="h1" variant="h4">
               {this.state.boardType.toUpperCase()}
             </Typography>
-            {this.state.userId >0
-            ?(
+            {this.state.userId > 0 ? (
               <Link to={`/${this.state.boardType}/new`}>새 글 작성</Link>
-            )
-            :(
+            ) : (
               <></>
-            )
-            }
+            )}
             <hr />
             <Grid container spacing={2}>
               <Grid item sm={1}></Grid>

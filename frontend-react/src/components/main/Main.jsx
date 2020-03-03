@@ -17,7 +17,7 @@ class Main extends React.Component {
     this.state = {
       recentNotices: [],
       recentQnA: [],
-      recentCareer: [],
+      recentCareer: []
     };
   }
   componentDidMount() {
@@ -31,7 +31,7 @@ class Main extends React.Component {
       .getAllPosts(target)
       .then(recentPosts => {
         console.log(recentPosts);
-        var posts = recentPosts.data;
+        var posts = recentPosts.data.results;
         var slicePosts = posts.slice(0, 4);
         switch (target) {
           case "notice":
@@ -110,13 +110,13 @@ class Main extends React.Component {
             <Grid container spacing={3}>
               <Grid item xs={12} sm={12}>
                 <h4 className={"main-recentTitle"}>What We Made!</h4>
-                  {this.state.recentCareer.map(career_post => (
-                    <RecentPost
-                      key={career_post.id}
-                      postInfo={career_post}
-                      board_name="career"
-                    />
-                  ))}
+                {this.state.recentCareer.map(career_post => (
+                  <RecentPost
+                    key={career_post.id}
+                    postInfo={career_post}
+                    board_name="career"
+                  />
+                ))}
               </Grid>
             </Grid>
           </div>

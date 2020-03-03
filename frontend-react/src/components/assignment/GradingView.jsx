@@ -21,8 +21,13 @@ class GradingView extends React.Component {
   };
 
   render() {
-    console.log("그레이딩 뷰 딲!", this.props.submissionInfo);
-    const { memberId, member, submissionInfo } = this.props;
+    const {
+      memberId,
+      member,
+      submissionInfo,
+      assignmentId,
+      getSubmission
+    } = this.props;
     if (memberId === "") {
       return <>...</>;
     } else {
@@ -77,7 +82,10 @@ class GradingView extends React.Component {
               <br />
               <ScoreNew
                 submissionId={submissionInfo[0].id}
+                assignmentId={assignmentId}
                 scoreTypes={submissionInfo[0].scores}
+                getSubmission={getSubmission}
+                memberId={memberId}
               />
             </>
           )}
