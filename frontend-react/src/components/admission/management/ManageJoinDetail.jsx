@@ -4,6 +4,8 @@ import api from "../../../api/AdmissionAPI";
 import EvaluationView from "./EvaluationView";
 import EvaluationNew from "./EvaluationNew";
 
+import AccountGrantForm from "./AccountGrantForm";
+
 //@material-ui
 import Container from "@material-ui/core/Container";
 import Table from "@material-ui/core/Table";
@@ -31,7 +33,8 @@ export default class ManageJoinDetail extends Component {
     answers: [],
     evaluations: [],
     showAnswerInfo: {},
-    modalFlag: false
+    answerModal: false,
+    accountModal: false
   };
 
   componentDidMount() {
@@ -57,13 +60,16 @@ export default class ManageJoinDetail extends Component {
   };
 
   getJoinData = async () => {
-    await api.getJoinDatawithId(this.props.match.params.id).then(res => {
-      console.log("유저지원데이터 가져오기 성공. ", res.data);
-      this.setState({
-        joindata: res.data,
-        answers: res.data.answer
-      });
-    });
+    await api
+      .getJoinDatawithId(this.props.match.params.id)
+      .then(res => {
+        console.log("입부자 정보 가져오기 성공. ", res.data);
+        this.setState({
+          joindata: res.data,
+          answers: res.data.answer
+        });
+      })
+      .catch(err => console.log(err));
   };
 
   getEvaluations = async () => {
@@ -86,15 +92,15 @@ export default class ManageJoinDetail extends Component {
     );
   };
 
-  modalOpen = () => {
+  modalOpen = modalName => {
     this.setState({
-      modalFlag: true
+      [modalName]: true
     });
   };
 
-  modalClose = () => {
+  modalClose = modalName => {
     this.setState({
-      modalFlag: false
+      [modalName]: false
     });
   };
 
@@ -104,7 +110,7 @@ export default class ManageJoinDetail extends Component {
     let ans_index = answers.findIndex(ans => ans.question_id === question_id);
     console.log(answers[ans_index]);
     this.setState({ showAnswerInfo: answers[ans_index] });
-    this.modalOpen();
+    this.modalOpen("answerModal");
   };
 
   render() {
@@ -114,13 +120,34 @@ export default class ManageJoinDetail extends Component {
       F: "불합격",
       P: "합격"
     };
+
     return (
       <Container maxWidth="lg" className="PostingSection">
-        <h2>상세 지원내역</h2>
+        <Typography
+          variant="h4"
+          style={{ alignItems: "flex-start", float: "left" }}
+        >
+          지원자 상세정보
+        </Typography>
+
         <Grid container spacing={2}>
           <Grid item sm={2}></Grid>
           <Grid item xs={12} sm={8}>
-            <Typography variant="h4">지원자 상세정보</Typography>
+            <Button
+              color="secondary"
+              size="large"
+              style={{ alignItems: "flex-end", float: "right" }}
+              onClick={e => this.modalOpen("accountModal")}
+            >
+              계정부여
+            </Button>
+            <AccountGrantForm
+              getJoinData={this.getJoinData}
+              joinId={this.props.match.params.id}
+              open={this.state.accountModal}
+              handlingClose={this.modalClose}
+            />
+
             <Table>
               <TableBody>
                 {this.createRow("지원번호", this.state.joindata.id)}
@@ -137,7 +164,6 @@ export default class ManageJoinDetail extends Component {
                 )}
               </TableBody>
               <br />
-              <Link to={"/admission/management/"}>Back</Link>
             </Table>
             <List component="nav" aria-label="contacts">
               {this.state.questions.map(qus => {
@@ -168,15 +194,17 @@ export default class ManageJoinDetail extends Component {
             </List>
             <Modal
               size="lg"
-              show={this.state.modalFlag}
-              onHide={this.modalClose}
+              show={this.state.answerModal}
+              onHide={e => this.modalClose("answerModal")}
             >
               <Modal.Header closeButton>
                 <Modal.Title>Answer</Modal.Title>
               </Modal.Header>
               <Modal.Body>{this.state.showAnswerInfo.body}</Modal.Body>
               <Modal.Footer>
-                <Button onClick={this.modalClose}>Close</Button>
+                <Button onClick={e => this.modalClose("answerModal")}>
+                  Close
+                </Button>
               </Modal.Footer>
             </Modal>
             <br />
