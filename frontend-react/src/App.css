@@ -286,6 +286,16 @@ body {
 .nav-item {
   color: black;
 }
+#home-tab{
+  color:black;
+}
+.nav-link{
+  color:black;
+}
+.imgU{
+  float: right;
+  margin-right: 4rem;
+}
 
 .Cancle {
   color: rgb(167, 167, 167);
