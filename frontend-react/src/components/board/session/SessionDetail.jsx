@@ -103,7 +103,7 @@ class SessionDetail extends Component {
             </Typography>
             <hr />
             {
-              this.state.user_type < 3
+              this.state.user_type < 3 && this.state.user_type === !null
               ?(
                 <Button
               color="secondary"
