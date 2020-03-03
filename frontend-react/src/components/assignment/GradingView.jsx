@@ -9,6 +9,7 @@ import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
 import Button from "@material-ui/core/Button";
 import ScoreNew from "./ScoreNew";
+import ScoreView from "./ScoreView";
 
 class GradingView extends React.Component {
   state = { isLoading: true };
@@ -62,13 +63,22 @@ class GradingView extends React.Component {
                     {submissionInfo[0].body}
                   </Typography>
                   <Typography variant="body2" component="p">
-                    URL ::{" "}
+                    URL ::
                     <a href={submissionInfo[0].url}>{submissionInfo[0].url}</a>
                   </Typography>
                 </CardContent>
                 <CardActions></CardActions>
               </Card>
-              <ScoreNew submissionId={submissionInfo[0].id} />
+
+              <ScoreView
+                submissionId={submissionInfo[0].id}
+                scores={submissionInfo[0].scores}
+              />
+              <br />
+              <ScoreNew
+                submissionId={submissionInfo[0].id}
+                scoreTypes={submissionInfo[0].scores}
+              />
             </>
           )}
         </>

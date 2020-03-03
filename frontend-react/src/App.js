@@ -89,13 +89,12 @@ class App extends React.Component {
           <Route path="/login" component={Login} />
           <Route path="/register" component={Register} />
           <Route path="/mypage/:username" component={Mypage} />
-          <Route path="/404" component={NotFoundPage} />
+          {/* <Route path="/404" component={NotFoundPage} />
           {window.location.pathname !== "/" ? (
-            // <Route path="*" component={NotFoundPage} />
             <Redirect to="/404" />
           ) : (
             <></>
-          )}
+          )} */}
 
           <Footer />
         </Router>
