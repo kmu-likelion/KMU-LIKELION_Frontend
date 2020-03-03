@@ -20,13 +20,12 @@ export default class CommentView extends Component {
     board_id: ""
   };
 
-  componentDidMount() {
+  componentWillMount() {
     this.setState({
       userid: window.sessionStorage.getItem("id"),
       username: window.sessionStorage.getItem("username"),
       userImg: window.sessionStorage.getItem("user_img")
     });
-    console.log(window.sessionStorage.getItem("user_img"));
   }
 
   handlingChange = event => {

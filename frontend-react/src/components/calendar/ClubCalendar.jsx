@@ -30,7 +30,7 @@ class ClubCalendar extends React.Component {
     this.getAllEvent();
   }
 
-  addEvent = (postId, title, date, body) => {
+  addEvent = (postId, title, date, body, user_id) => {
     var list = this.state.eventList;
     list.push({
       id: postId,
@@ -40,6 +40,7 @@ class ClubCalendar extends React.Component {
       start: date,
       end: date,
       notice_id: postId,
+      user_id: user_id,
       modalFlag: false
     });
     this.setState({
@@ -56,7 +57,8 @@ class ClubCalendar extends React.Component {
             event.id,
             event.event_name,
             event.notice_date,
-            event.body
+            event.body,
+            event.user_id
           );
         }
       });

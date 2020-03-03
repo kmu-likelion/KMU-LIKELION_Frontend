@@ -4,6 +4,7 @@ import Button from "@material-ui/core/Button";
 import { Link } from "react-router-dom";
 import api from "../../api/BoardAPI";
 import Viewer from "../Viewer";
+import AuthButton from "../common/AuthButton";
 class EventModal extends React.Component {
   deleteEvent = async (event, id) => {
     event.preventDefault();
@@ -35,15 +36,30 @@ class EventModal extends React.Component {
             <Viewer value={String(eventInfo.body)} />
           </Modal.Body>
           <Modal.Footer>
-            <Button onClick={handlingClose}>Close</Button>
+            <Button onClick={handlingClose}>닫기</Button>
+            <AuthButton
+              authType="isWriter"
+              info={eventInfo.notice_id}
+              boardName={"notice"}
+              button={
+                <>
+                  <Button
+                    onClick={event => {
+                      this.deleteEvent(event, eventInfo.id);
+                    }}
+                  >
+                    삭제
+                  </Button>
+                </>
+              }
+            />
+
             <Button
-              onClick={event => {
-                this.deleteEvent(event, eventInfo.id);
-              }}
+              component={Link}
+              to={`/notice/detail/${eventInfo.notice_id}`}
             >
-              Delete
+              보러가기
             </Button>
-            <Link to={`/notice/detail/${eventInfo.notice_id}`}>보러가기</Link>
           </Modal.Footer>
         </Modal>
       </div>

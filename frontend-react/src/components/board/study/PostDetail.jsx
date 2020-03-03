@@ -5,6 +5,7 @@ import moment from "moment";
 
 import LikeView from "../LikeView";
 import Viewer from "../../Viewer";
+import AuthButton from "../../common/AuthButton";
 import CommentNew from "../comment/CommentNew";
 import CommentView from "../comment/CommentView";
 
@@ -25,12 +26,12 @@ class PostDetail extends Component {
     study_type: "",
     pub_date: "",
     comments: [],
-    userId:"",
+    userId: ""
   };
 
   componentDidMount() {
     this.setState({
-      userId: window.sessionStorage.getItem("id"),
+      userId: window.sessionStorage.getItem("id")
     });
     const post_id = this.props.match.params.id;
     this.getPost(post_id);
@@ -111,21 +112,31 @@ class PostDetail extends Component {
             <TableRow>
               <TableCell>
                 <LikeView post_id={post_id} board_name="study" />
-                <Button
-                  color="primary"
-                  size="small"
-                  onClick={event => this.handlingDelete(this.state.id)}
-                >
-                  Delete
-                </Button>
-                <Button
-                  color="primary"
-                  size="small"
-                  component={Link}
-                  to={`/study/${this.props.match.params.group}/update/${this.state.id}`}
-                >
-                  Update
-                </Button>
+                <AuthButton
+                  authType="isWriter"
+                  info={post_id}
+                  boardName="study"
+                  button={
+                    <>
+                      <Button
+                        color="primary"
+                        size="small"
+                        onClick={event => this.handlingDelete(this.state.id)}
+                      >
+                        Delete
+                      </Button>
+                      <Button
+                        color="primary"
+                        size="small"
+                        component={Link}
+                        to={`/study/${this.props.match.params.group}/update/${this.state.id}`}
+                      >
+                        Update
+                      </Button>
+                    </>
+                  }
+                />
+
                 <Button
                   color="primary"
                   size="small"
@@ -137,39 +148,34 @@ class PostDetail extends Component {
               </TableCell>
             </TableRow>
           </Table>
-          {this.state.userId > 0
-                ? (
-                  <>
-                  <Typography component="h1" variant="h6">
-                    Comments
-                  </Typography>
-                  {this.state.comments.map(comment => (
-                    <CommentView
-                      key={comment.id}
-                      user_id={comment.user_id}
-                      author_name={comment.author_name}
-                      body={comment.body}
-                      comment_id={comment.id}
-                      recomments={comment.recomments}
-                      getComments={this.callGetComments}
-                      board_id={comment.board}
-                      user_img={comment.user_img}
-                      url={`study_comment`}
-                    />
-                  ))}
-                  <CommentNew
-                    url="study_comment"
-                    board_id={post_id}
-                    getComments={this.callGetComments}
-                  />
-                  </>
-                )
-                : (
-                  <>
-                  </>
-                )}
-
-
+          {this.state.userId > 0 ? (
+            <>
+              <Typography component="h1" variant="h6">
+                Comments
+              </Typography>
+              {this.state.comments.map(comment => (
+                <CommentView
+                  key={comment.id}
+                  user_id={comment.user_id}
+                  author_name={comment.author_name}
+                  body={comment.body}
+                  comment_id={comment.id}
+                  recomments={comment.recomments}
+                  getComments={this.callGetComments}
+                  board_id={comment.board}
+                  user_img={comment.user_img}
+                  url={`study_comment`}
+                />
+              ))}
+              <CommentNew
+                url="study_comment"
+                board_id={post_id}
+                getComments={this.callGetComments}
+              />
+            </>
+          ) : (
+            <></>
+          )}
         </Paper>
       </Container>
     );

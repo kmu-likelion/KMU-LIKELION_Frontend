@@ -69,28 +69,34 @@ class Login extends Component {
         this.doSignup(
           result.data.user.id,
           result.data.user.username,
-          result.data.img,
+          result.data.user.img,
+          result.data.user.user_type,
           result.data.token
         );
         this.context.onLogin();
       })
-      .catch(err => console.log(err));
+      .catch(err => {
+        console.log(err);
+        alert("잘못된 아이디 혹은 비밀번호입니다!");
+      });
 
     this.setState({ username: "", password: "" });
   };
 
-  doSignup = (id, name, img, token) => {
+  doSignup = (id, name, img, user_type, token) => {
     window.sessionStorage.setItem("id", id);
     window.sessionStorage.setItem("username", name);
     window.sessionStorage.setItem("user_img", img);
+    window.sessionStorage.setItem("user_type", user_type);
     window.sessionStorage.setItem("token", token);
-    console.log("token in session : ", window.sessionStorage.getItem("token"));
+    // console.log("token in session : ", window.sessionStorage.getItem("token"));
   };
 
   render() {
     const { classes } = this.props;
 
     if (this.context.logged) {
+      alert("환영합니다!");
       return <Redirect to="/" />; //logged 상태가 true일 시, main page로 리다이렉트.
     }
     return (
@@ -100,7 +106,7 @@ class Login extends Component {
             <PersonOutlineOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
-            Sign In
+            Login
           </Typography>
           <form onSubmit={this.handlingSubmit} className={classes.form}>
             <Grid container spacing={2}>
@@ -136,7 +142,7 @@ class Login extends Component {
               color="primary"
               className={classes.submit}
             >
-              Sign in
+              Login
             </Button>
             <Button
               type="submit"
@@ -144,46 +150,17 @@ class Login extends Component {
               variant="contained"
               color="secondary"
               className={classes.button}
-              href="/register"
+              component={Link}
+              to={`admission/apply/`}
             >
-              Sign Up
+              Join us
             </Button>
           </form>
 
-          <Link to="/">Cancel</Link>
+          <Link to="/">Home</Link>
+          <br />
         </Paper>
       </Container>
-
-      // <Container maxWidth="lg" className="PostingSection">
-      //   <Paper className="PostingPaper">
-      //     <h2>Login</h2>
-      //     <form onSubmit={this.handlingSubmit} className="PostingForm">
-      //       <input
-      //         type="text"
-      //         id="email"
-      //         name="email"
-      //         value={this.state.email}
-      //         onChange={this.handlingChange}
-      //         required="required"
-      //         placeholder="E-mail"
-      //       />
-      //       <br />
-      //       <input
-      //         type="password"
-      //         id="password"
-      //         name="password"
-      //         value={this.state.password}
-      //         onChange={this.handlingChange}
-      //         required="required"
-      //         placeholder="PW"
-      //       />
-      //       <br />
-      //       <button type="submit">Login</button>
-      //     </form>
-
-      //     <Link to="/">Cancel</Link>
-      //   </Paper>
-      // </Container>
     );
   }
 }

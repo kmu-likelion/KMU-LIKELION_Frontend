@@ -9,6 +9,9 @@ import PostView from "./PostView";
 //import Pagination from "../Pagination";
 import _ from 'lodash';
 
+import Select from "@material-ui/core/Select";
+import MenuItem from "@material-ui/core/MenuItem";
+
 class BoardContainer extends React.Component {
   constructor(props) {
     super(props);
@@ -16,6 +19,8 @@ class BoardContainer extends React.Component {
       boardType: "",
       postList: [],
       userId: "",
+      selectOpen: false,
+      startNumber: "8th",
       postCount:{},
       currentPage:1,
       Plength:"2",
@@ -28,11 +33,14 @@ class BoardContainer extends React.Component {
       boardType: board_name,
       userId: window.sessionStorage.getItem("id")
     });
-    this.getPosts(board_name);
+    if (board_name === "session") {
+      this.getSessions(board_name, "8th");
+    } else {
+      this.getPosts(board_name);
+    }
   }
-  componentDidMount() {
-  }
-
+      
+ 
   getPosts = async (boardType) => {
   await api
     .getAllPosts(boardType)
@@ -65,13 +73,28 @@ class BoardContainer extends React.Component {
       .catch(err => {
         console.log(err);
       });
-  }
+  };
+
+  getSessions = async (boardType, start_number) => {
+    await api
+      .getMyAlumPosts(boardType, start_number)
+      .then(res => {
+        console.log("session posts 가져오기 성공! ", res.data);
+        this.setState({ postList: res.data.results });
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  };
 
   render() {
+
     console.log("시발", this.state.postCount, "시발", this.state.Plength)
     const pageCount = Math.ceil(this.state.postCount/ this.state.Plength);
     console.log("페이지 몇페이지?!!",pageCount);
     const pages = _.range(1, pageCount+1);
+    const board_name = this.props.match.path.split("/")[1];
+
     return (
       <div>
         <Container maxWidth="lg" className="main-container">
@@ -88,6 +111,41 @@ class BoardContainer extends React.Component {
             <Grid container spacing={2}>
               <Grid item sm={1}></Grid>
               <Grid item xs={12} sm={10}>
+                {board_name === "session" ? (
+                  <>
+                    <div
+                      style={{
+                        display: "flex",
+                        flexDirection: "column",
+                        alignItems: "flex-start",
+                        justifyContent: "center",
+                        marginLeft: 20
+                      }}
+                    >
+                      <Typography variant="caption">기수</Typography>
+                      <Select
+                        style={{ minWidth: 50 }}
+                        labelId="startnum-select-label"
+                        id="startnum-controlled-open-select"
+                        open={this.state.selectOpen}
+                        onClose={e => this.setState({ selectOpen: false })}
+                        name="userType"
+                        onOpen={e => this.setState({ selectOpen: true })}
+                        value={this.state.startNumber}
+                        onChange={e => {
+                          this.setState({ startNumber: e.target.value });
+                          this.getSessions("session", e.target.value);
+                        }}
+                      >
+                        <MenuItem value="8th">8기</MenuItem>
+                        <MenuItem value="7.5th">7.5기</MenuItem>
+                        <MenuItem value="7th">7기</MenuItem>
+                      </Select>
+                    </div>
+                  </>
+                ) : (
+                  <></>
+                )}
                 {this.state.postList.map((post, index) => (
                   <PostView
                     key={index}

@@ -4,6 +4,7 @@ import moment from "moment";
 
 import LikeView from "../LikeView";
 import Viewer from "../../Viewer";
+import AuthButton from "../../common/AuthButton";
 
 // @material-ui
 import Button from "@material-ui/core/Button";
@@ -41,21 +42,31 @@ class CareerDetail extends Component {
         <TableRow>
           <TableCell>
             <LikeView post_id={post_id} board_name={board_name} />
-            <Button
-              color="primary"
-              size="small"
-              onClick={event => handlingDelete(board_name, post_id)}
-            >
-              Delete
-            </Button>
-            <Button
-              color="primary"
-              size="small"
-              component={Link}
-              to={`/${board_name}/update/${post_id}`}
-            >
-              Update
-            </Button>
+            <AuthButton
+              authType="isWriter"
+              info={post_id}
+              boardName="study"
+              button={
+                <>
+                  <Button
+                    color="primary"
+                    size="small"
+                    onClick={event => handlingDelete(board_name, post_id)}
+                  >
+                    Delete
+                  </Button>
+                  <Button
+                    color="primary"
+                    size="small"
+                    component={Link}
+                    to={`/${board_name}/update/${post_id}`}
+                  >
+                    Update
+                  </Button>
+                </>
+              }
+            />
+
             <Button
               color="primary"
               size="small"

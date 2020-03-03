@@ -7,6 +7,7 @@ import RadioGroup from "@material-ui/core/RadioGroup";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import FormLabel from "@material-ui/core/FormLabel";
 import Button from "@material-ui/core/Button";
+import Typography from "@material-ui/core/Typography";
 
 import TextField from "@material-ui/core/TextField";
 import DateFnsUtils from "@date-io/date-fns";
@@ -59,7 +60,7 @@ class JoinFormBasic extends React.Component {
           }}
           className="PostingForm"
         >
-          <h2>Join Form</h2>
+          <Typography variant="h4">입부 지원</Typography>
           <TextField
             label="Name"
             name="name"
