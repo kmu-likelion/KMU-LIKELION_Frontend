@@ -4,7 +4,6 @@ import Button from "@material-ui/core/Button";
 import api from "../../../api/AdmissionAPI";
 import { registerUser } from "../../../api/AuthAPI";
 
-import FormControl from "@material-ui/core/FormControl";
 import TextField from "@material-ui/core/TextField";
 import Select from "@material-ui/core/Select";
 import InputLabel from "@material-ui/core/InputLabel";
