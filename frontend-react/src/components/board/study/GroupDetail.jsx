@@ -37,20 +37,20 @@ class GroupDetail extends React.Component {
       group_members: [],
       noticePosts: [],
       studyPosts: [],
-      visit_id:"",
-      allUser:[],
+      visit_id: "",
+      allUser: [],
       selected_user: "",
       userOpen: false,
-      userId:"",
-      userNow:"",
+      userId: "",
+      userNow: "",
 
     };
   }
 
   componentDidMount() {
     this.setState({
-      userNow:window.sessionStorage.getItem("username"),
-      userId:window.sessionStorage.getItem("id"),
+      userNow: window.sessionStorage.getItem("username"),
+      userId: window.sessionStorage.getItem("id"),
     });
     this.getGroup();
     this.getAllUser();
@@ -80,7 +80,8 @@ class GroupDetail extends React.Component {
           group_body: group_info[0].introduction,
           group_img: group_info[0].img
         });
-        this.getGroupPost();
+        this.getGroupPostNotice();
+        this.getGroupPostStudy();
         this.getGroupMember();
         this.getGroupCaptain();
         // this.getGroupCaptain();
@@ -91,13 +92,13 @@ class GroupDetail extends React.Component {
   };
   addGroupUser = async event => {
     event.preventDefault();
-    console.log("유저아이디",this.state.selected_user);
+    console.log("유저아이디", this.state.selected_user);
     await api
       .addGroupUser({
         "is_captain": false,
         "user_id": this.state.selected_user,
         "group_id": this.state.group_id
-    })
+      })
       .then(res => {
         this.getGroupMember();
       })
@@ -105,14 +106,14 @@ class GroupDetail extends React.Component {
         console.log(err);
       });
   };
-  deleteGroupUser = async (event,id) => {
+  deleteGroupUser = async (event, id) => {
     event.preventDefault();
     await api
       .deleteGroupUser(id)
-      .then(res=>{
+      .then(res => {
         this.getGroupMember();
       })
-      .catch(err=>{
+      .catch(err => {
         console.log(err);
       });
   }
@@ -121,24 +122,26 @@ class GroupDetail extends React.Component {
   };
 
   //해당 그룹의 게시물들을 가져옴
-  getGroupPost = async () => {
+  getGroupPostNotice = async () => {
     // console.log("그룹 ID : ", this.state.group_id);
     await api
-      .getPostWithGroupId(this.state.group_id)
+      .getPostWithGroupIdNotice(this.state.group_id)
       .then(res => {
-        console.log("그룹의 posts 가져오기 성공.", res.data);
-        let notice = [];
-        let study = [];
-        res.data.map(post => {
-          if (post.study_type === 0) {
-            notice.push(post);
-          } else {
-            study.push(post);
-          }
-        });
+        console.log("그룹의 NOTICEposts 가져오기 성공.", res.data.results);
+          this.setState({
+            noticePosts: res.data.results,
+          })
+      })
+      .catch(err => console.log(err));
+  };
+  getGroupPostStudy = async () => {
+    // console.log("그룹 ID : ", this.state.group_id);
+    await api
+      .getPostWithGroupIdStudy(this.state.group_id)
+      .then(res => {
+        console.log("그룹의 STUDYposts 가져오기 성공.", res.data.results);
         this.setState({
-          noticePosts: notice,
-          studyPosts: study
+          studyPosts: res.data.results,
         });
       })
       .catch(err => console.log(err));
@@ -148,7 +151,7 @@ class GroupDetail extends React.Component {
     await api
       .getMemberWithGroupId(this.state.group_id)
       .then(res => {
-        console.log("그룹멤버",res.data);
+        console.log("그룹멤버", res.data);
 
         this.setState({
           group_members: res.data
@@ -205,12 +208,12 @@ class GroupDetail extends React.Component {
               style={{ alignItems: "center", textAlign: "center" }}
             >
               <Typography component="h5" variant="h5">
-                스터디장<br/>
-               </Typography>
-                <IconButton component={Link} to={`/Mypage/${this.state.group_captain.captain_username}`}>
-                              <Avatar alt="Recomment-writer" src={this.state.group_captain.user_img} />
-                            </IconButton>
-                            {this.state.group_captain.captain_username}
+                스터디장<br />
+              </Typography>
+              <IconButton component={Link} to={`/Mypage/${this.state.group_captain.captain_username}`}>
+                <Avatar alt="Recomment-writer" src={this.state.group_captain.user_img} />
+              </IconButton>
+              {this.state.group_captain.captain_username}
               <Typography component="h6" variant="h6">
                 그룹멤버
               </Typography>
@@ -218,36 +221,36 @@ class GroupDetail extends React.Component {
                 <List subheader={<li />} className={"mentoring-list"}>
                   {this.state.group_members.map(member => (
                     <div>
-                    {
-                      (this.state.group_captain.captain_username) === member.user.username
-                        ? (
-                          <>
-                          </>
-                        )
-                        : (
-                          <li key={`li-${member.id}`}>
-                            <ul className={"mentoring-ul"}>
-                              <ListItem button key={member.id}>
-                                <ListItemAvatar>
-                                  <IconButton component={Link} to={`/Mypage/${member.user.username}`}>
-                                    <Avatar alt="Recomment-writer" src={member.user.img} />
-                                  </IconButton>
-                                </ListItemAvatar>
-                                <ListItemText primary={member.user.username} />
-                                {this.state.userNow === this.state.group_captain.captain_username
-                                ?(
-                                  <CancelIcon className="Cancle" onClick={event => this.deleteGroupUser(event,member.id)}/>
-                                )
-                                :(
-                                  <></>
-                                )
+                      {
+                        (this.state.group_captain.captain_username) === member.user.username
+                          ? (
+                            <>
+                            </>
+                          )
+                          : (
+                            <li key={`li-${member.id}`}>
+                              <ul className={"mentoring-ul"}>
+                                <ListItem button key={member.id}>
+                                  <ListItemAvatar>
+                                    <IconButton component={Link} to={`/Mypage/${member.user.username}`}>
+                                      <Avatar alt="Recomment-writer" src={member.user.img} />
+                                    </IconButton>
+                                  </ListItemAvatar>
+                                  <ListItemText primary={member.user.username} />
+                                  {this.state.userNow === this.state.group_captain.captain_username
+                                    ? (
+                                      <CancelIcon className="Cancle" onClick={event => this.deleteGroupUser(event, member.id)} />
+                                    )
+                                    : (
+                                      <></>
+                                    )
 
-                                }
-                              </ListItem>
-                            </ul>
-                          </li>
-                        )
-                    }
+                                  }
+                                </ListItem>
+                              </ul>
+                            </li>
+                          )
+                      }
                     </div>
                   ))}
                 </List>
@@ -261,41 +264,41 @@ class GroupDetail extends React.Component {
             >
               <div>
                 {
-                  String(this.state.group_captain.user_id) === window.sessionStorage.getItem("id") 
+                  String(this.state.group_captain.user_id) === window.sessionStorage.getItem("id")
                     ? (
                       <Table>
                         <TableBody>
-                        <TableRow className="alluser">
-                              <TableCell colSpan={2}>
-                                <form
-                                  onSubmit={event => this.addGroupUser(event)}
-                                  className={"mentoring-form"}
+                          <TableRow className="alluser">
+                            <TableCell colSpan={2}>
+                              <form
+                                onSubmit={event => this.addGroupUser(event)}
+                                className={"mentoring-form"}
+                              >
+                                <Select
+                                  className={"mentoring-select"}
+                                  open={this.state.userOpen}
+                                  onClose={e => this.setState({ userOpen: false })}
+                                  name="selected_user"
+                                  onOpen={e => this.setState({ userOpen: true })}
+                                  value={this.state.selected_user}
+                                  onChange={e =>
+                                    this.setState({ selected_user: e.target.value })
+                                  }
+                                  displayEmpty
                                 >
-                                  <Select
-                                    className={"mentoring-select"}
-                                    open={this.state.userOpen}
-                                    onClose={e => this.setState({ userOpen: false })}
-                                    name="selected_user"
-                                    onOpen={e => this.setState({ userOpen: true })}
-                                    value={this.state.selected_user}
-                                    onChange={e =>
-                                      this.setState({ selected_user: e.target.value })
-                                    }
-                                    displayEmpty
-                                  >
-                                    <MenuItem value="">
-                                      <small>All User</small>
-                                    </MenuItem>
-                                    {this.state.allUser.map(user => (
-                                      <MenuItem value={user.id}>{user.username}</MenuItem>
-                                    ))}
+                                  <MenuItem value="">
+                                    <small>All User</small>
+                                  </MenuItem>
+                                  {this.state.allUser.map(user => (
+                                    <MenuItem value={user.id}>{user.username}</MenuItem>
+                                  ))}
 
-                                  </Select>
+                                </Select>
 
-                                  <Button type="submit">ADD</Button>
-                                </form>
-                              </TableCell>
-                            </TableRow>
+                                <Button type="submit">ADD</Button>
+                              </form>
+                            </TableCell>
+                          </TableRow>
                         </TableBody>
                       </Table>
                     )
@@ -303,19 +306,19 @@ class GroupDetail extends React.Component {
                       <></>
                     )
                 }
-                </div>
+              </div>
               {this.state.userNow === this.state.group_captain.captain_username
-                ?(
+                ? (
                   <Link to={`/study/${this.state.group_name}/update`}>
-                  <Button
-                    color="secondary"
-                    size="small"
-                  >
-                    그룹수정
+                    <Button
+                      color="secondary"
+                      size="small"
+                    >
+                      그룹수정
                   </Button>
                   </Link>
                 )
-                :(
+                : (
                   <></>
                 )
 
@@ -334,43 +337,77 @@ class GroupDetail extends React.Component {
 
             <Grid item xs={12} sm={12}>
               {
-                this.state.userId>0
-                ?(
-                  <Link
-                    to={{
-                      pathname: `/study/${this.state.group_name}/post/new`,
-                      state: {
-                        group_name: this.state.group_name,
-                        group_id: this.state.group_id
-                      }
-                    }}
-                  >
-                    새 글 작성
+                this.state.userId > 0
+                  ? (
+                    <Link
+                      to={{
+                        pathname: `/study/${this.state.group_name}/post/new`,
+                        state: {
+                          group_name: this.state.group_name,
+                          group_id: this.state.group_id
+                        }
+                      }}
+                    >
+                      새 글 작성
                   </Link>
-                )
-                :(
-                  <></>
-                )
+                  )
+                  : (
+                    <></>
+                  )
               }
 
             </Grid>
-
-            <Grid item xs={12} sm={6}>
-              <Typography component="h6" variant="h6">
-                * 공지사항
-              </Typography>
-              {this.state.noticePosts.map(post => (
-                <PostView key={post.id} postInfo={post} board_name="study" />
-              ))}
-            </Grid>
-            <Grid item xs={12} sm={6}>
-              <Typography component="h6" variant="h6">
-                * 스터디
-              </Typography>
-              {this.state.studyPosts.map(post => (
-                <PostView key={post.id} postInfo={post} board_name="study" />
-              ))}
-            </Grid>
+            <>
+              <Grid item xs={12} sm={12}>
+                <ul class="nav nav-tabs" id="myTab" role="tablist">
+                  <li class="nav-item">
+                    <a
+                      class="nav-link active"
+                      id="home-tab"
+                      data-toggle="tab"
+                      href="#home"
+                      role="tab"
+                      aria-controls="home"
+                      aria-selected="true"
+                    >
+                      공지사항
+                  </a>
+                  </li>
+                  <li class="nav-item">
+                    <a
+                      class="nav-link"
+                      id="profile-tab"
+                      data-toggle="tab"
+                      href="#profile"
+                      role="tab"
+                      aria-controls="profile"
+                      aria-selected="false"
+                    >
+                      스터디
+                  </a>
+                  </li>
+                </ul>
+              </Grid>
+              <Grid item xs={12} sm={12}>
+                <div class="tab-content" id="myTabContent">
+                    <div
+                      class="tab-pane fade show active"
+                      id="home"
+                      role="tabpanel"
+                      aria-labelledby="home-tab"
+                    >
+                      {this.state.noticePosts.map(post => (
+                        <PostView key={post.id} postInfo={post} board_name="study" />
+                      ))}
+                    </div>
+                    <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                      {this.state.studyPosts.map(post => (
+                        <PostView key={post.id} postInfo={post} board_name="study" />
+                      ))}
+                    </div>
+                </div>
+              </Grid>
+            </>
           </Grid>
         </Paper>
       </Container>
