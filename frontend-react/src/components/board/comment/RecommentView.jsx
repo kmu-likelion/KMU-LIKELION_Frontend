@@ -97,22 +97,29 @@ export default class CommentView extends Component {
             </ListItemAvatar>
             <ListItemText primary={body} secondary={author_name} />
             <ListItemSecondaryAction>
-              <Button
-                color="primary"
-                size="small"
-                onClick={event =>
-                  this.setState({ is_update: true, update_body: body })
-                }
-              >
-                Update
-              </Button>
-              <Button
-                color="secondary"
-                size="small"
-                onClick={event => this.handlingDelete(url, comment_id)}
-              >
-                Delete
-              </Button>
+              {user_id === Number(window.sessionStorage.getItem("id")) ? (
+                <>
+                  <Button
+                    color="primary"
+                    size="small"
+                    onClick={event =>
+                      this.setState({ is_update: true, update_body: body })
+                    }
+                  >
+                    Update
+                  </Button>
+                  <Button
+                    color="secondary"
+                    size="small"
+                    onClick={event => this.handlingDelete(url, comment_id)}
+                  >
+                    Delete
+                  </Button>
+                </>
+              ) : (
+                <></>
+              )}
+
               {/* <small>{pubDate}</small> */}
             </ListItemSecondaryAction>
           </ListItem>

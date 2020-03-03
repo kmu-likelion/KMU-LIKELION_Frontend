@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Button from "@material-ui/core/Button";
 
+import AuthButton from "../../common/AuthButton";
 import api from "../../../api/CommentAPI";
 import TextField from "@material-ui/core/TextField";
 import { Link } from "react-router-dom";
@@ -122,22 +123,29 @@ export default class CommentView extends Component {
             </ListItemAvatar>
             <ListItemText primary={body} secondary={author_name} />
             <ListItemSecondaryAction>
-              <Button
-                color="primary"
-                size="small"
-                onClick={event =>
-                  this.setState({ is_update: true, update_body: body })
-                }
-              >
-                Update
-              </Button>
-              <Button
-                color="secondary"
-                size="small"
-                onClick={event => this.handlingDelete(url, comment_id)}
-              >
-                Delete
-              </Button>
+              {user_id === Number(window.sessionStorage.getItem("id")) ? (
+                <>
+                  <Button
+                    color="primary"
+                    size="small"
+                    onClick={event =>
+                      this.setState({ is_update: true, update_body: body })
+                    }
+                  >
+                    Update
+                  </Button>
+                  <Button
+                    color="secondary"
+                    size="small"
+                    onClick={event => this.handlingDelete(url, comment_id)}
+                  >
+                    Delete
+                  </Button>
+                </>
+              ) : (
+                <></>
+              )}
+
               {/* <small>{pubDate}</small> */}
             </ListItemSecondaryAction>
           </ListItem>
