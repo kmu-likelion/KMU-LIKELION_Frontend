@@ -11,6 +11,13 @@ export default {
     console.log("getAllPosts 실행.");
     return axios.get(`board/${url}/`, tokenConfig());
   },
+
+  //alum : 동문, 동기 -> 해당 기수의 게시물들을 불러옴.
+  getMyAlumPosts(url, alum) {
+    console.log("get my alum posts API 실행.");
+    return axios.get(`board/${url}/?start_number=${alum}`, tokenConfig());
+  },
+
   //단일 글 불러오기 및 단일댓글 불러오기?
   getPost(url, id) {
     console.log("getPost 실행");

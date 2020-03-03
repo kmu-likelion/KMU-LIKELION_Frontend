@@ -9,18 +9,9 @@ import Editor from "../../Editor";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import { withStyles } from "@material-ui/core/styles";
-// import FormControlLabel from "@material-ui/core/FormControlLabel";
-// import Box from "@material-ui/core/Box";
-// import Switch from "@material-ui/core/Switch";
-// import Typography from "@material-ui/core/Typography";
-
-// import Chip from "@material-ui/core/Chip";
-// import Paper from "@material-ui/core/Paper";
-// import AddCircleIcon from "@material-ui/icons/AddCircle";
-// import InputBase from "@material-ui/core/InputBase";
-// import IconButton from "@material-ui/core/IconButton";
-
-// import Grid from "@material-ui/core/Grid";
+import Select from "@material-ui/core/Select";
+import MenuItem from "@material-ui/core/MenuItem";
+import InputLabel from "@material-ui/core/InputLabel";
 
 const useStyles = theme => ({
   form: {
@@ -69,6 +60,8 @@ class LectureForm extends Component {
       username: "",
       title: "",
       body: "",
+      startNumber: "",
+      selectOpen: false,
 
       endSubmit: false,
       isEdit: false,
@@ -83,8 +76,6 @@ class LectureForm extends Component {
         username: window.sessionStorage.getItem("username")
       });
     }
-    // let date = moment(new Date()).format("YYYY-MM-DDTHH:MM");
-    // console.log(date);
     if (this.props.isEdit) {
       this.getPostInfo();
     }
@@ -105,7 +96,8 @@ class LectureForm extends Component {
       this.setState({
         title: res.data.title,
         body: res.data.body,
-        session_type: res.data.session_type
+        session_type: res.data.session_type,
+        start_number: res.data.start_number
       });
     });
   };
@@ -120,6 +112,7 @@ class LectureForm extends Component {
             title: this.state.title,
             body: this.state.body,
             user_id: this.state.userId,
+            start_number: this.state.startNumber,
             session_type: "L"
           })
           .then(res => {
@@ -136,6 +129,7 @@ class LectureForm extends Component {
             title: this.state.title,
             body: this.state.body,
             user_id: this.state.userId,
+            start_number: this.state.startNumber,
             session_type: "L"
           })
           .then(res => {
@@ -158,6 +152,23 @@ class LectureForm extends Component {
     }
     return (
       <form onSubmit={this.handlingSubmit} className={classes.form}>
+        <InputLabel id="startnum-select-label">기수</InputLabel>
+        <Select
+          style={{ minWidth: 50 }}
+          labelId="startnum-select-label"
+          id="startnum-controlled-open-select"
+          open={this.state.selectOpen}
+          onClose={e => this.setState({ selectOpen: false })}
+          name="userType"
+          onOpen={e => this.setState({ selectOpen: true })}
+          value={this.state.startNumber}
+          onChange={e => this.setState({ startNumber: e.target.value })}
+        >
+          <MenuItem value="8th">8기</MenuItem>
+          <MenuItem value="7.5th">7.5기</MenuItem>
+          <MenuItem value="7th">7기</MenuItem>
+        </Select>
+
         <TextField
           // fullWidth
           label="Title"
