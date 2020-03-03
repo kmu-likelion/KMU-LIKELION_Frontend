@@ -86,7 +86,7 @@ export default class AssignmentView extends Component {
   };
 
   render() {
-    const { assignment, sessionId, index } = this.props;
+    const { assignment, sessionId, index ,user_type} = this.props;
 
     console.log(assignment);
     return (
@@ -120,7 +120,10 @@ export default class AssignmentView extends Component {
             </div>
           </ExpansionPanelDetails>
           <ExpansionPanelActions>
-            {/* {this.assignment ? (
+            {user_type<3
+            ?(
+              <>
+              {/* {this.assignment ? (
               <>
                 과제를 이미 제출하셨습니다!
                 <Button
@@ -145,6 +148,12 @@ export default class AssignmentView extends Component {
             >
               과제삭제
             </Button>
+            </>
+            ):(
+              <></>
+            )
+
+            }
           </ExpansionPanelActions>
         </ExpansionPanel>
 

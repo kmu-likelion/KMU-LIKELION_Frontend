@@ -40,6 +40,7 @@ export const getUser = username => {
 
 export const getUserWithId = id => {
   console.log("getUserWithId api 실행.");
+  console.log("아이디 뭐왔는데!",id);
   return axios.get(`accounts/user/${id}/`);
 };
 
