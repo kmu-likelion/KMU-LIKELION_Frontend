@@ -260,6 +260,7 @@ class GroupDetail extends React.Component {
               style={{ alignItems: "center", textAlign: "right" }}
             >
               <div>
+              
                 {
                   String(this.state.group_captain.user_id) === window.sessionStorage.getItem("id") 
                     ? (
@@ -298,6 +299,7 @@ class GroupDetail extends React.Component {
                             </TableRow>
                         </TableBody>
                       </Table>
+                      
                     )
                     : (
                       <></>
