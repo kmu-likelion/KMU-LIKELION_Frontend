@@ -75,7 +75,10 @@ class Login extends Component {
         );
         this.context.onLogin();
       })
-      .catch(err => console.log(err));
+      .catch(err => {
+        console.log(err);
+        alert("잘못된 아이디 혹은 비밀번호입니다!");
+      });
 
     this.setState({ username: "", password: "" });
   };
@@ -103,7 +106,7 @@ class Login extends Component {
             <PersonOutlineOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
-            Sign In
+            Login
           </Typography>
           <form onSubmit={this.handlingSubmit} className={classes.form}>
             <Grid container spacing={2}>
@@ -139,7 +142,7 @@ class Login extends Component {
               color="primary"
               className={classes.submit}
             >
-              Sign in
+              Login
             </Button>
             <Button
               type="submit"
@@ -147,46 +150,17 @@ class Login extends Component {
               variant="contained"
               color="secondary"
               className={classes.button}
-              href="/register"
+              component={Link}
+              to={`admission/apply/`}
             >
-              Sign Up
+              Join us
             </Button>
           </form>
 
-          <Link to="/">Cancel</Link>
+          <Link to="/">Home</Link>
+          <br />
         </Paper>
       </Container>
-
-      // <Container maxWidth="lg" className="PostingSection">
-      //   <Paper className="PostingPaper">
-      //     <h2>Login</h2>
-      //     <form onSubmit={this.handlingSubmit} className="PostingForm">
-      //       <input
-      //         type="text"
-      //         id="email"
-      //         name="email"
-      //         value={this.state.email}
-      //         onChange={this.handlingChange}
-      //         required="required"
-      //         placeholder="E-mail"
-      //       />
-      //       <br />
-      //       <input
-      //         type="password"
-      //         id="password"
-      //         name="password"
-      //         value={this.state.password}
-      //         onChange={this.handlingChange}
-      //         required="required"
-      //         placeholder="PW"
-      //       />
-      //       <br />
-      //       <button type="submit">Login</button>
-      //     </form>
-
-      //     <Link to="/">Cancel</Link>
-      //   </Paper>
-      // </Container>
     );
   }
 }

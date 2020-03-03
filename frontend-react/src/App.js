@@ -21,7 +21,7 @@ import AdmissionRouter from "./routes/AdmissionRouter";
 import AssignmentRouter from "./routes/AssignmentRouter";
 
 import MentoringContainer from "./components/mentoring/MentoringContainer";
-import Register from "./components/accounts/Register";
+// import Register from "./components/accounts/Register";
 
 import NotFoundPage from "./components/NotFoundPage";
 
@@ -87,7 +87,7 @@ class App extends React.Component {
           <Route path="/assignment" component={AssignmentRouter} />
 
           <Route path="/login" component={Login} />
-          <Route path="/register" component={Register} />
+
           <Route path="/mypage/:username" component={Mypage} />
           {/* <Route path="/404" component={NotFoundPage} />
           {window.location.pathname !== "/" ? (
