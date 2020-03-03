@@ -21,11 +21,9 @@ export default class CommentView extends Component {
     request_user: ""
   };
 
-  componentDidMount() {
-    const user_id = window.sessionStorage.getItem("id");
-    console.log("현재 유저 아이디 : ", user_id);
+  componentWillMount() {
     this.setState({
-      request_user: user_id
+      request_user: window.sessionStorage.getItem("id")
     });
   }
 

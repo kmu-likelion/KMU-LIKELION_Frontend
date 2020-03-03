@@ -69,7 +69,8 @@ class Login extends Component {
         this.doSignup(
           result.data.user.id,
           result.data.user.username,
-          result.data.img,
+          result.data.user.img,
+          result.data.user.user_type,
           result.data.token
         );
         this.context.onLogin();
@@ -79,18 +80,20 @@ class Login extends Component {
     this.setState({ username: "", password: "" });
   };
 
-  doSignup = (id, name, img, token) => {
+  doSignup = (id, name, img, user_type, token) => {
     window.sessionStorage.setItem("id", id);
     window.sessionStorage.setItem("username", name);
     window.sessionStorage.setItem("user_img", img);
+    window.sessionStorage.setItem("user_type", user_type);
     window.sessionStorage.setItem("token", token);
-    console.log("token in session : ", window.sessionStorage.getItem("token"));
+    // console.log("token in session : ", window.sessionStorage.getItem("token"));
   };
 
   render() {
     const { classes } = this.props;
 
     if (this.context.logged) {
+      alert("환영합니다!");
       return <Redirect to="/" />; //logged 상태가 true일 시, main page로 리다이렉트.
     }
     return (

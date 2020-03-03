@@ -5,6 +5,7 @@ import EvaluationView from "./EvaluationView";
 import EvaluationNew from "./EvaluationNew";
 
 import AccountGrantForm from "./AccountGrantForm";
+import AuthButton from "../../common/AuthButton";
 
 //@material-ui
 import Container from "@material-ui/core/Container";
@@ -133,14 +134,24 @@ export default class ManageJoinDetail extends Component {
         <Grid container spacing={2}>
           <Grid item sm={2}></Grid>
           <Grid item xs={12} sm={8}>
-            <Button
-              color="secondary"
-              size="large"
-              style={{ alignItems: "flex-end", float: "right" }}
-              onClick={e => this.modalOpen("accountModal")}
-            >
-              계정부여
-            </Button>
+            <AuthButton
+              authType="permission"
+              info={1}
+              boardName=""
+              button={
+                <>
+                  <Button
+                    color="secondary"
+                    size="large"
+                    style={{ alignItems: "flex-end", float: "right" }}
+                    onClick={e => this.modalOpen("accountModal")}
+                  >
+                    계정부여
+                  </Button>
+                </>
+              }
+            />
+
             <AccountGrantForm
               getJoinData={this.getJoinData}
               joinId={this.props.match.params.id}

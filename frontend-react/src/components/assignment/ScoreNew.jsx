@@ -42,7 +42,6 @@ export default class CommentView extends Component {
     scoreTypes.map(score => {
       score_list.push("");
     });
-    // console.log("딕셔너리 세팅 ", score_list);
     this.setState({ score_list: score_list });
   };
 
@@ -86,8 +85,7 @@ export default class CommentView extends Component {
 
   render() {
     const { scoreTypes } = this.props;
-    // console.log("score 값:", this.state.score_list);
-    // console.log(this.props.scoreTypes);
+
     return (
       <>
         <Grid container spacing={2}>
@@ -130,7 +128,7 @@ export default class CommentView extends Component {
                     />
                   </ListItem>
                 ))}
-                {/* <ListItem
+                <ListItem
                   alignItems="middle"
                   style={{ verticalAlign: "middle" }}
                 >
@@ -148,7 +146,7 @@ export default class CommentView extends Component {
                       />
                     }
                   />
-                </ListItem> */}
+                </ListItem>
                 <ListItem
                   alignItems="middle"
                   style={{ verticalAlign: "middle" }}
