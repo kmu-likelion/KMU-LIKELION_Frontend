@@ -25,7 +25,8 @@ export default class MyProfile extends Component {
     first_name: "",
     username: "",
     img: "",
-    sns_id: ""
+    sns_id: "",
+    password:""
   };
   componentDidMount() {
     this.getUserData(this.props.username);
@@ -46,7 +47,8 @@ export default class MyProfile extends Component {
           student_id: userInfo.student_id,
           user_type: userInfo.user_type,
           start_number: userInfo.start_number,
-          sns_id: userInfo.sns_id
+          sns_id: userInfo.sns_id,
+          password: userInfo.sns_id,
         });
       })
       .catch(err => console.log(err));
@@ -69,7 +71,25 @@ export default class MyProfile extends Component {
       student_id: this.state.student_id,
       user_type: this.state.user_type,
       start_number: this.state.start_number,
-      sns_id: this.state.sns_id
+      sns_id: this.state.sns_id,
+      password: this.state.password,
+    });
+  };
+  handlingpasswordSubmit = (event, id) => {
+    event.preventDefault();
+    this.setState({ is_update: false });
+    this.props.updateUser(id, {
+      username: this.state.username,
+      first_name: this.state.first_name,
+      // img: this.state.img,
+      id: this.state.userId,
+      email: this.state.email,
+      major: this.state.major,
+      student_id: this.state.student_id,
+      user_type: this.state.user_type,
+      start_number: this.state.start_number,
+      sns_id: this.state.sns_id,
+      password:this.state.password
     });
   };
 
@@ -87,7 +107,7 @@ export default class MyProfile extends Component {
       this.viewData("SNS", this.state.sns_id)
     ];
 
-    if (this.state.is_update === false) {
+    if (this.state.is_update === false ){
       return (
         <Paper
           elevation={10}
@@ -136,7 +156,7 @@ export default class MyProfile extends Component {
           </TableContainer>
         </Paper>
       );
-    } else {
+    } else{
       return (
         <Paper elevation={10} className="MyProfile">
           <Typography variant="h4">Update Profile</Typography>
@@ -185,6 +205,46 @@ export default class MyProfile extends Component {
               onChange={this.handlingChange}
             />
             <br />
+            <Button
+              className="faked"
+              variant="contained"
+              color="primary"
+              size="large"
+              startIcon={<SaveIcon />}
+              onClick={null}
+              type="button" data-toggle="modal" data-target="#exampleModal2"
+            >
+              password수정
+            </Button>
+
+            <div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">패스워드 수정</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                <form onSubmit={e => this.handlingpasswordSubmit(e, this.state.userId)}>
+                <TextField
+                  className="standard-required"
+                  label="password"
+                  name="password"
+                  value={this.state.password}
+                  onChange={this.handlingChange}
+                />
+                </form>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                  <button type="button" class="btn btn-primary" type="submit" onClick={this.refreshPage}>Save changes</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
             <Button
               className="faked"
               variant="contained"
