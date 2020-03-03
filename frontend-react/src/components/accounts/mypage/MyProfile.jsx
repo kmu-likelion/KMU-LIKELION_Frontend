@@ -185,7 +185,6 @@ export default class MyProfile extends Component {
               onChange={this.handlingChange}
             />
             <br />
-            
             <Button
               className="faked"
               variant="contained"

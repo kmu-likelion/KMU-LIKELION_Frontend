@@ -91,6 +91,7 @@ class MyPage extends Component {
               sns_id={this.state.userInfo.sns_id}
               user_img={this.state.userInfo.img}
               handlingSubmit={this.handlingSubmit}
+              userId={this.state.userId}
             />
           </Grid>
           <Grid item xs={12} sm={8}>
