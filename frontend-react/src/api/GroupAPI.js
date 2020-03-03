@@ -69,8 +69,12 @@ export default {
   },
 
   /* ------StudyPost api------ */
-  getPostWithGroupId(id) {
-    console.log("get Post with groupid API.");
-    return axios.get(`board/study?group_id=${id}`, tokenConfig());
+  getPostWithGroupIdNotice(id) {
+    console.log("get NOTICEPost with groupid API.");
+    return axios.get(`board/study?study_type=0&group_id=${id}`, tokenConfig());
+  },
+  getPostWithGroupIdStudy(id) {
+    console.log("get STUDYPost with groupid API.");
+    return axios.get(`board/study?study_type=1&group_id=${id}`, tokenConfig());
   }
 };

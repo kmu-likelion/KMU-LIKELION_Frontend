@@ -25,6 +25,7 @@ class PostView extends Component {
   render() {
     const { classes } = this.props;
     const { postInfo, board_name } = this.props;
+    console.log("포스트 인포 ",postInfo)
     const pubDate = moment(postInfo.pub_date).format("YYYY-MM-DD HH:MM");
     let linkUrl = "";
     if (board_name !== "study") {
