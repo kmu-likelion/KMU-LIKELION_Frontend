@@ -34,19 +34,20 @@ const useStyles = theme => ({
 
 class ScoreView extends Component {
   render() {
-    const { classes } = this.props;
+    const { classes, submissionId, scores } = this.props;
     return (
       <List component="nav" aria-label="contacts">
-        <ListItem
-          button
-          component={Link}
-          to={`/assignment/detail/${assign.id}`}
-          className={classes.list}
-        >
+        <ListItem className={classes.list}>
           <ListItemAvatar>
             <AssignmentIcon />
           </ListItemAvatar>
-          <ListItemText primary={assign.title} secondary={assign.body} />
+          {scores.map(score => (
+            <ListItemText
+              primary={score.score_type}
+              secondary={`${score.score} / 100`}
+            />
+          ))}
+          {/* <ListItemText primary={assign.title} secondary={assign.body} /> */}
           <ListItemSecondaryAction>
             <IconButton aria-label="cart"></IconButton>
           </ListItemSecondaryAction>

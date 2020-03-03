@@ -5,23 +5,23 @@ import api from "../../api/SessionAPI";
 import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
 import Button from "@material-ui/core/Button";
-
-import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
+import TextField from "@material-ui/core/TextField";
+// import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
 import TextareaAutosize from "@material-ui/core/TextareaAutosize";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
 import ListItemAvatar from "@material-ui/core/ListItemAvatar";
 import Avatar from "@material-ui/core/Avatar";
-import Rating from "@material-ui/lab/Rating";
+// import Rating from "@material-ui/lab/Rating";
 export default class CommentView extends Component {
   state = {
     userId: "",
     username: "",
     userImg: "",
     body: "",
-    score: "3",
-    submissionId: ""
+    submissionId: "",
+    score_list: []
   };
 
   componentDidMount() {
@@ -32,35 +32,67 @@ export default class CommentView extends Component {
       userImg: window.sessionStorage.getItem("user_img")
     });
     console.log(window.sessionStorage.getItem("user_img"));
+
+    const { scoreTypes } = this.props;
+    this.setScoreDict(scoreTypes);
   }
+
+  //score type을 위한 state 값 세팅.
+  setScoreDict = scoreTypes => {
+    let score_list = [];
+    scoreTypes.map(score => {
+      score_list.push("");
+    });
+    // console.log("딕셔너리 세팅 ", score_list);
+    this.setState({ score_list: score_list });
+  };
 
   handlingChange = event => {
     this.setState({ [event.target.name]: event.target.value });
   };
 
+  handlingChangeScore = (event, idx) => {
+    var scoreInfo = this.state.score_list.slice();
+    scoreInfo[idx] = event.target.value;
+    this.setState({ score_list: scoreInfo });
+  };
+
   handlingSubmit = async event => {
     event.preventDefault();
+    const { scoreTypes } = this.props;
+    let score_array = [];
+    scoreTypes.map((score, index) => {
+      score_array.push({
+        score_type: score.score_type,
+        score: this.state.score_list[index]
+      });
+    });
 
     await api
-      .createScore({
-        score_dict_list: []
+      .createScore(this.props.submissionId, {
+        score_dict_list: score_array
       })
       .then(res => {
         console.log("성공적으로 평가생성됨.", res.data);
         this.setState({
           body: "",
-          score: "3"
+          score_list: []
         });
       });
   };
 
   render() {
-    const { submissionId } = this.props;
+    const { scoreTypes } = this.props;
+    // console.log("score 값:", this.state.score_list);
+    // console.log(this.props.scoreTypes);
     return (
       <>
         <Grid container spacing={2}>
-          <Grid item sm={3}></Grid>
-          <Grid item xs={12} sm={6}>
+          <Grid item sm={1}></Grid>
+          <Grid item xs={12} sm={10}>
+            <Typography color="body1" style={{ textAlign: "left" }}>
+              과제 채점
+            </Typography>
             <List>
               <form
                 onSubmit={event => this.handlingSubmit(event)}
@@ -69,27 +101,33 @@ export default class CommentView extends Component {
                 <ListItem
                   alignItems="flex-start"
                   style={{ verticalAlign: "middle" }}
-                >
-                  <ListItemAvatar style={{ display: "flex", marginRight: 15 }}>
-                    <Avatar
-                      alt="comment-writer"
-                      src={this.state.userImg}
-                      style={{ marginRight: 10 }}
+                ></ListItem>
+                {scoreTypes.map((score, index) => (
+                  <ListItem
+                    alignItems="middle"
+                    style={{ verticalAlign: "middle" }}
+                  >
+                    <ListItemText
+                      primary={
+                        <TextField
+                          label={`${score.score_type} 점수`}
+                          type="number"
+                          value={this.state.value}
+                          InputLabelProps={{
+                            shrink: true
+                          }}
+                          onChange={event =>
+                            this.handlingChangeScore(event, index)
+                          }
+                          placeholder="0 ~ 100"
+                          inputProps={{ min: "0", max: "100", step: "1" }}
+                          style={{ width: "100%" }}
+                        />
+                      }
                     />
-                    <Typography variant="h6">{this.state.username}</Typography>
-                  </ListItemAvatar>
-                  <ListItemSecondaryAction>
-                    <Rating
-                      name="score"
-                      //   defaultValue={2}
-                      value={this.state.score}
-                      onChange={this.handlingChange}
-                      size="large"
-                    />
-                  </ListItemSecondaryAction>
-                </ListItem>
-
-                <ListItem
+                  </ListItem>
+                ))}
+                {/* <ListItem
                   alignItems="middle"
                   style={{ verticalAlign: "middle" }}
                 >
@@ -107,7 +145,7 @@ export default class CommentView extends Component {
                       />
                     }
                   />
-                </ListItem>
+                </ListItem> */}
                 <ListItem
                   alignItems="middle"
                   style={{ verticalAlign: "middle" }}
@@ -118,13 +156,13 @@ export default class CommentView extends Component {
                     color="primary"
                     fullWidth
                   >
-                    평가하기
+                    채점하기
                   </Button>
                 </ListItem>
               </form>
             </List>
           </Grid>
-          <Grid item sm={3}></Grid>
+          <Grid item sm={1}></Grid>
         </Grid>
       </>
     );
