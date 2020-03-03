@@ -9,7 +9,7 @@ import EditIcon from '@material-ui/icons/Edit';
 import DraftsIcon from "@material-ui/icons/Drafts";
 import SendIcon from "@material-ui/icons/Send";
 import PriorityHighIcon from "@material-ui/icons/PriorityHigh";
-
+import {updateUser} from "../../../api/AuthAPI";
 export default class LeftProfileView extends Component {
   state={
     img:null,
@@ -19,6 +19,19 @@ export default class LeftProfileView extends Component {
       img : e.target.files[0],
     })
   }
+  updateUserImage = async (id)  => {
+    await updateUser(id,{
+      img:this.state.img
+    })
+      .then(res => {
+        console.log("이미지업데이트됬는지?", res.data[0]);
+        const userImg = res.data[0];
+        this.setState({
+          img: userImg.img,
+        });
+      })
+      .catch(err => console.log(err));
+  };
   render() {
     const { username, sns_id, user_img } = this.props;
 
@@ -47,7 +60,7 @@ export default class LeftProfileView extends Component {
                 </div>
                 <div class="modal-footer">
                   <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                  <button type="button" class="btn btn-primary" onClick={null}>Save changes</button>
+                  <button type="button" class="btn btn-primary" onClick={this.updateUserImage}>Save changes</button>
                 </div>
               </div>
             </div>
