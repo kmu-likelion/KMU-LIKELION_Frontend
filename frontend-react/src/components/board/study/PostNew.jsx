@@ -82,7 +82,6 @@ class StudyNew extends Component {
       group_name: this.props.location.state.group_name,
       group_id: this.props.location.state.group_id
     });
-    // this._getPost(this.props.match.params.id);
   }
 
   handlingChange = event => {
@@ -105,8 +104,6 @@ class StudyNew extends Component {
     });
     console.log("정상적으로 생성됨.", result);
     this.setState({ title: "", body: "" });
-    // this.getPosts()
-    //document.location.href = "/QnA";
     this.props.history.push(`/study/${this.props.match.params.group}`);
   };
 

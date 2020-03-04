@@ -25,16 +25,17 @@ class SubmissionForm extends Component {
     id: "",
     body: "",
     url: "",
-    submittedDate: "",
-    editFlag: true
+    submittedDate: ""
+    // editFlag: false
   };
 
   componentDidMount() {
-    let user_id = window.sessionStorage.getItem("id");
     this.setState({
-      userId: user_id
+      userId: window.sessionStorage.getItem("id")
     });
-    this.getSubmissionInfo();
+    if (this.props.editFlag) {
+      this.getSubmissionInfo();
+    }
   }
 
   getSubmissionInfo = async () => {
@@ -97,10 +98,12 @@ class SubmissionForm extends Component {
         this.props.handlingClose();
         this.props.getUserSubmission();
         this.getSubmissionInfo();
+
         this.setState({
           body: "",
           url: ""
         });
+        alert("과제제출 성공!");
       })
       .catch(err => {
         console.log(err);

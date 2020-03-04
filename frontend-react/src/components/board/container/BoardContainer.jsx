@@ -40,7 +40,6 @@ class BoardContainer extends React.Component {
     }
   }
 
-
   getPosts = async boardType => {
     await api
       .getAllPosts(boardType)
@@ -87,10 +86,36 @@ class BoardContainer extends React.Component {
       });
   };
 
+  //user권한 검사
+  confirmCreateAuth = tag => {
+    if (window.sessionStorage.getItem("user_type") < 3) {
+      return tag;
+    } else {
+      return <></>;
+    }
+  };
+
+  //board 검사
+  checkCreateAuth = (board_name, tag) => {
+    switch (board_name) {
+      case "notice":
+        return this.confirmCreateAuth(tag);
+        break;
+      case "session":
+        return this.confirmCreateAuth(tag);
+        break;
+      case "career":
+        return this.confirmCreateAuth(tag);
+        break;
+      default:
+        return tag;
+        break;
+    }
+  };
+
   render() {
-    // console.log("시발", this.state.postCount, "시발", this.state.Plength)
     const pageCount = Math.ceil(this.state.postCount / this.state.Plength);
-    // console.log("페이지 몇페이지?!!",pageCount);
+
     const pages = _.range(1, pageCount + 1);
     const board_name = this.props.match.path.split("/")[1];
 
@@ -102,7 +127,10 @@ class BoardContainer extends React.Component {
               {this.state.boardType.toUpperCase()}
             </Typography>
             {this.state.userId > 0 ? (
-              <Link to={`/${this.state.boardType}/new`}>새 글 작성</Link>
+              this.checkCreateAuth(
+                board_name,
+                <Link to={`/${this.state.boardType}/new`}>새 글 작성</Link>
+              )
             ) : (
               <></>
             )}

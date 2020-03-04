@@ -20,9 +20,12 @@
 html,
 body {
   font-family: "NIXGONM-Vb";
-  /* height: 100%; */
-  /* overflow: hidden; */
 }
+
+input[type="password"] {
+  font-family: sans-serif;
+}
+
 .preTag {
   font-family: "NIXGONM-Vb";
 }
@@ -286,13 +289,13 @@ body {
 .nav-item {
   color: black;
 }
-#home-tab{
-  color:black;
+#home-tab {
+  color: black;
 }
-.nav-link{
-  color:black;
+.nav-link {
+  color: black;
 }
-.imgU{
+.imgU {
   float: right;
   margin-right: 4rem;
 }
@@ -306,6 +309,6 @@ body {
   margin: 0 auto;
   max-width: 95%;
 }
-.paginator{
+.paginator {
   justify-items: center;
 }
