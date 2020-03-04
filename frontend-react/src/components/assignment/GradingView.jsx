@@ -82,12 +82,18 @@ class GradingView extends React.Component {
                 scores={submissionInfo[0].scores}
                 totalScore={submissionInfo[0].total_score.score__sum}
               />
-              <EvaluationView
-                evaluator={submissionInfo[0].evaluator}
-                evaluator_name={submissionInfo[0].evaluator_name}
-                evaluation={submissionInfo[0].evaluation}
-                evaluation_pub_date={submissionInfo[0].evaluation_pub_date}
-              />
+              {submissionInfo[0].evaluator ? (
+                <>
+                  <EvaluationView
+                    evaluator={submissionInfo[0].evaluator}
+                    evaluator_name={submissionInfo[0].evaluator_name}
+                    evaluation={submissionInfo[0].evaluation}
+                    evaluation_pub_date={submissionInfo[0].evaluation_pub_date}
+                  />
+                </>
+              ) : (
+                <></>
+              )}
               <br />
               <ScoreNew
                 submissionId={submissionInfo[0].id}

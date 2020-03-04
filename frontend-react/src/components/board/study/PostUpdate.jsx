@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import api from "../../../api/BoardAPI";
+import Editor from "../../Editor";
 
 import { Link } from "react-router-dom";
 
@@ -44,6 +45,10 @@ class PostUpdate extends Component {
     this.setState({ [event.target.name]: event.target.value });
   };
 
+  handlingEditorChange = ({ html, text }) => {
+    this.setState({ body: text });
+  };
+
   handlingSubmit = async event => {
     event.preventDefault();
     await api
@@ -81,8 +86,8 @@ class PostUpdate extends Component {
             >
               <MenuItem value={0}>공식모임</MenuItem>
               <MenuItem value={1}>스터디</MenuItem>
-              <MenuItem value={2}>기타</MenuItem>
             </Select>
+            <br />
             <br />
             <TextField
               id="standard-basic"
@@ -93,7 +98,8 @@ class PostUpdate extends Component {
               required
             />
             <br />
-            <TextField
+            <br />
+            {/* <TextField
               id="standard-basic"
               label="body"
               name="body"
@@ -102,6 +108,11 @@ class PostUpdate extends Component {
               multiline
               rows="4"
               required
+            /> */}
+            <Editor
+              value={this.state.body}
+              name="body"
+              handlingChange={this.handlingEditorChange}
             />
             <br />
             <br />
