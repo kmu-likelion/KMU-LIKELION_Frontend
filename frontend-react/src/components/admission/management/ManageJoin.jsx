@@ -78,12 +78,16 @@ class ManageJoin extends Component {
 
   render() {
     const qus_num = this.state.questions.length + 2;
-    console.log(qus_num);
     const useStyles = makeStyles({
-      table: {
-        // minWidth: 650
-      }
+      table: {}
     });
+
+    const status_type = {
+      R: "심사중",
+      F: "불합격",
+      P: "합격"
+    };
+
     return (
       <Container maxWidth="lg" className="PostingSection">
         <Paper className="PostingPaper" elevation={0}>
@@ -114,6 +118,7 @@ class ManageJoin extends Component {
                 {this.state.questions.map((qus, index) => {
                   return (
                     <ManageQuestionForm
+                      key={index}
                       index={index}
                       id={qus.id}
                       body={qus.body}
@@ -155,15 +160,15 @@ class ManageJoin extends Component {
                 </TableRow>
               </TableHead>
               <TableBody>
-                {this.state.joindata.map(row => (
-                  <TableRow key={row.id}>
+                {this.state.joindata.map((row, index) => (
+                  <TableRow key={index}>
                     <TableCell component="th" scope="row">
                       {row.id}
                     </TableCell>
                     <TableCell>{row.name}</TableCell>
                     <TableCell>{row.major}</TableCell>
                     <TableCell>0.0</TableCell>
-                    <TableCell>{row.status}</TableCell>
+                    <TableCell>{status_type[row.status]}</TableCell>
                     <TableCell>
                       <Link to={`/admission/management/${row.id}`}>
                         보러가기

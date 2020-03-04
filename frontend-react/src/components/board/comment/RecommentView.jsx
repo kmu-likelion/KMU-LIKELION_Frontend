@@ -57,6 +57,7 @@ export default class CommentView extends Component {
     const {
       user_id,
       author_name,
+      full_name,
       body,
       comment_id,
       board_id,
@@ -95,7 +96,10 @@ export default class CommentView extends Component {
             <ListItemAvatar>
               <Avatar alt="Recomment-writer" src={user_img} />
             </ListItemAvatar>
-            <ListItemText primary={body} secondary={author_name} />
+            <ListItemText
+              primary={body}
+              secondary={`${full_name}(${author_name})`}
+            />
             <ListItemSecondaryAction>
               {user_id === Number(window.sessionStorage.getItem("id")) ? (
                 <>

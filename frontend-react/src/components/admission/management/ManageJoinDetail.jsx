@@ -3,9 +3,10 @@ import { Link } from "react-router-dom";
 import api from "../../../api/AdmissionAPI";
 import EvaluationView from "./EvaluationView";
 import EvaluationNew from "./EvaluationNew";
-
 import AccountGrantForm from "./AccountGrantForm";
 import AuthButton from "../../common/AuthButton";
+
+import moment from "moment";
 
 //@material-ui
 import Container from "@material-ui/core/Container";
@@ -162,10 +163,19 @@ export default class ManageJoinDetail extends Component {
             <Table>
               <TableBody>
                 {this.createRow("지원번호", this.state.joindata.id)}
+                {this.createRow(
+                  "지원일자(최종제출일)",
+                  moment(this.state.joindata.update_date).format(
+                    "YYYY/MM/DD hh:mm"
+                  )
+                )}
                 {this.createRow("성명", this.state.joindata.name)}
                 {this.createRow("전화번호", this.state.joindata.phone_number)}
                 {this.createRow("학번", this.state.joindata.student_id)}
-                {this.createRow("생년월일", this.state.joindata.birth)}
+                {this.createRow(
+                  "생년월일",
+                  moment(this.state.joindata.birth).format("YYYY/MM/DD")
+                )}
                 {this.createRow("성별", this.state.joindata.sex)}
                 {this.createRow("전공", this.state.joindata.major)}
                 {this.createRow("E-Mail", this.state.joindata.email)}
@@ -238,7 +248,7 @@ export default class ManageJoinDetail extends Component {
                 score={elem.score}
                 comment_id={elem.id}
                 application_id={elem.application_id}
-                user_img={elem.id}
+                user_img={elem.user_img}
                 getEvaluations={this.getEvaluations}
               />
             ))}
