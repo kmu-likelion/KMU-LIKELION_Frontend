@@ -7,7 +7,9 @@ import Typography from "@material-ui/core/Typography";
 import Card from "@material-ui/core/Card";
 import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
-import Button from "@material-ui/core/Button";
+// import Button from "@material-ui/core/Button";
+
+import EvaluationView from "./EvaluationView";
 import ScoreNew from "./ScoreNew";
 import ScoreView from "./ScoreView";
 
@@ -78,6 +80,13 @@ class GradingView extends React.Component {
               <ScoreView
                 submissionId={submissionInfo[0].id}
                 scores={submissionInfo[0].scores}
+                totalScore={submissionInfo[0].total_score.score__sum}
+              />
+              <EvaluationView
+                evaluator={submissionInfo[0].evaluator}
+                evaluator_name={submissionInfo[0].evaluator_name}
+                evaluation={submissionInfo[0].evaluation}
+                evaluation_pub_date={submissionInfo[0].evaluation_pub_date}
               />
               <br />
               <ScoreNew

@@ -58,28 +58,31 @@ export default class CommentView extends Component {
   handlingSubmit = async event => {
     event.preventDefault();
     const { scoreTypes } = this.props;
-    let score_array = [];
+
+    var score_info = {};
     scoreTypes.map((score, index) => {
-      score_array.push({
-        score_type: score.score_type,
-        score: this.state.score_list[index]
-      });
+      score_info[score.score_type] = Number(this.state.score_list[index]);
     });
 
     await api
       .createScore(this.props.submissionId, {
-        score_dict_list: score_array
+        score_info: score_info,
+        evaluation_info: {
+          evaluator: Number(this.state.userId),
+          evaluation: this.state.body
+        }
       })
       .then(res => {
         console.log("성공적으로 평가생성됨.", res.data);
+
         this.setState({
           body: "",
           score_list: []
         });
 
         this.props.getSubmission(this.props.memberId, this.props.assignmentId);
-        console.log("memberid :", this.props.memberId);
-        console.log("submissionId :", this.props.assignmentId);
+        // console.log("memberid :", this.props.memberId);
+        // console.log("submissionId :", this.props.assignmentId);
       });
   };
 

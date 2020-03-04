@@ -57,7 +57,7 @@ export default {
   createScore(submission_id, data) {
     console.log("create Score api 실행.", data);
     return axios.post(
-      `board/submission/${submission_id}/scores/`,
+      `board/submission/${submission_id}/evaluation/`,
       data,
       tokenConfig()
     );
