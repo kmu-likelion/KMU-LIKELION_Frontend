@@ -1,12 +1,13 @@
 import React, { Component } from "react";
 import Button from "@material-ui/core/Button";
 
-import AuthButton from "../../common/AuthButton";
+import moment from "moment";
 import api from "../../../api/CommentAPI";
 import TextField from "@material-ui/core/TextField";
 import { Link } from "react-router-dom";
 import Avatar from "@material-ui/core/Avatar";
 
+import Typography from "@material-ui/core/Typography";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
@@ -58,13 +59,15 @@ export default class CommentView extends Component {
     const {
       user_id,
       author_name,
+      full_name,
+      update_date,
       body,
       comment_id,
       board_id,
       url,
       user_img
     } = this.props;
-
+    var updateDate = moment(update_date).format("MM/DD hh:mm");
     if (this.state.is_update) {
       return (
         <>
@@ -121,7 +124,15 @@ export default class CommentView extends Component {
                 <Avatar alt="Recomment-writer" src={user_img} />
               </IconButton>
             </ListItemAvatar>
-            <ListItemText primary={body} secondary={author_name} />
+            <ListItemText
+              primary={body}
+              secondary={
+                <>
+                  {`${full_name}(${author_name})`}
+                  <Typography variant="caption"> {updateDate}</Typography>
+                </>
+              }
+            />
             <ListItemSecondaryAction>
               {user_id === Number(window.sessionStorage.getItem("id")) ? (
                 <>
@@ -145,8 +156,6 @@ export default class CommentView extends Component {
               ) : (
                 <></>
               )}
-
-              {/* <small>{pubDate}</small> */}
             </ListItemSecondaryAction>
           </ListItem>
           <Divider variant="inset" />

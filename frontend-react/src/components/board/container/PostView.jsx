@@ -25,7 +25,8 @@ class PostView extends Component {
   render() {
     const { classes } = this.props;
     const { postInfo, board_name } = this.props;
-    const pubDate = moment(postInfo.pub_date).format("YYYY-MM-DD HH:MM");
+    const pubDate = moment(postInfo.update_date).format("YY/MM/DD hh:mm");
+
     let linkUrl = "";
     if (board_name !== "study") {
       linkUrl = `/${board_name}/detail/${postInfo.id}`;
@@ -33,14 +34,11 @@ class PostView extends Component {
       linkUrl = `/${board_name}/${postInfo.group_name}/detail/${postInfo.id}`;
     }
 
-    //나중에 리스트 최상위 태그 컨테이너로 뺄 것.
-    if (board_name === "session") {
-      return (
-        <List component="nav" className={classes.root} aria-label="contacts">
-          <ListItem button component={Link} to={linkUrl}>
-            <ListItemAvatar>
-              <Avatar alt="Author Name" src="" />
-            </ListItemAvatar>
+    let renderItem = "";
+    switch (board_name) {
+      case "session":
+        renderItem = (
+          <>
             <ListItemText primary={postInfo.title} secondary={pubDate} />
             <ListItemSecondaryAction>
               <IconButton aria-label="cart">
@@ -53,30 +51,44 @@ class PostView extends Component {
                 </Badge>
               </IconButton>
             </ListItemSecondaryAction>
-          </ListItem>
+          </>
+        );
+        break;
 
-          <Divider variant="inset" />
-        </List>
-      );
-    } else {
-      return (
-        <List component="nav" className={classes.root} aria-label="contacts">
-          <ListItem button component={Link} to={linkUrl}>
-            <ListItemAvatar>
-              <Avatar alt="Author Name" src="" />
-            </ListItemAvatar>
+      case "career":
+        renderItem = (
+          <>
+            <ListItemText primary={postInfo.title} secondary={pubDate} />
+          </>
+        );
+        break;
+
+      default:
+        renderItem = (
+          <>
             <ListItemText
               primary={postInfo.title}
-              secondary={postInfo.author_name}
+              secondary={`${postInfo.full_name}(${postInfo.author_name})`}
             />
             <ListItemSecondaryAction>
               <small>{pubDate}</small>
             </ListItemSecondaryAction>
-          </ListItem>
-          <Divider variant="inset" />
-        </List>
-      );
+          </>
+        );
+        break;
     }
+
+    return (
+      <List component="nav" className={classes.root} aria-label="contacts">
+        <ListItem button component={Link} to={linkUrl}>
+          <ListItemAvatar>
+            <Avatar alt="Author Name" src="" />
+          </ListItemAvatar>
+          {renderItem}
+        </ListItem>
+        <Divider variant="inset" />
+      </List>
+    );
   }
 }
 

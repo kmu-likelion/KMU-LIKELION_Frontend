@@ -1,18 +1,19 @@
 import React, { Component } from "react";
-import Button from "@material-ui/core/Button";
-import api from "../../../api/BoardAPI";
-import TextareaAutosize from "@material-ui/core/TextareaAutosize";
 import { Link } from "react-router-dom";
-import Avatar from "@material-ui/core/Avatar";
+import api from "../../../api/BoardAPI";
+import moment from "moment";
+
 import RecommentNew from "../comment/RecommentNew";
-// import CommentView from "../comment/CommentView";
 import RecommentView from "../comment/RecommentView";
+
+import Button from "@material-ui/core/Button";
+import TextareaAutosize from "@material-ui/core/TextareaAutosize";
+import Avatar from "@material-ui/core/Avatar";
 import Typography from "@material-ui/core/Typography";
 import Card from "@material-ui/core/Card";
 import CardHeader from "@material-ui/core/CardHeader";
 import CardContent from "@material-ui/core/CardContent";
 import CardActions from "@material-ui/core/CardActions";
-import moment from "moment";
 
 export default class AnswerView extends Component {
   state = {
@@ -66,6 +67,7 @@ export default class AnswerView extends Component {
     const {
       user_id,
       author_name,
+      full_name,
       body,
       comment_id,
       board_id,
@@ -76,7 +78,7 @@ export default class AnswerView extends Component {
       getComments
     } = this.props;
 
-    const pubDate = moment(pub_date).format("YY-MM-DD HH:MM");
+    const pubDate = moment(pub_date).format("MM/DD HH:MM");
 
     if (this.state.is_update) {
       return (
@@ -98,8 +100,8 @@ export default class AnswerView extends Component {
                     />
                   </Link>
                 }
-                title={author_name}
-                subheader="September 14, 2016"
+                title={`${full_name}(${author_name})`}
+                // subheader="September 14, 2016"
               />
               <CardContent>
                 <TextareaAutosize
@@ -133,7 +135,7 @@ export default class AnswerView extends Component {
                   <Avatar src={user_img} alt="User-Image" aria-label="recipe" />
                 </Link>
               }
-              title={author_name}
+              title={`${full_name}(${author_name})`}
               subheader={pubDate}
             />
             <CardContent style={{ paddingLeft: "1.5rem" }}>
@@ -173,6 +175,7 @@ export default class AnswerView extends Component {
                 key={recmt.id}
                 user_id={recmt.user_id}
                 author_name={recmt.author_name}
+                full_name={recmt.full_name}
                 body={recmt.body}
                 comment_id={recmt.id}
                 getComments={getComments}

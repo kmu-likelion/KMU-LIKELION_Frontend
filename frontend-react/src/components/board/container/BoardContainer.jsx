@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 import api from "../../../api/BoardAPI";
 import PostView from "./PostView";
 //import Pagination from "../Pagination";
-import _ from 'lodash';
+import _ from "lodash";
 
 import Select from "@material-ui/core/Select";
 import MenuItem from "@material-ui/core/MenuItem";
@@ -21,9 +21,9 @@ class BoardContainer extends React.Component {
       userId: "",
       selectOpen: false,
       startNumber: "8th",
-      postCount:{},
-      currentPage:1,
-      Plength:"2",
+      postCount: {},
+      currentPage: 1,
+      Plength: "2"
     };
   }
   componentWillMount() {
@@ -40,34 +40,35 @@ class BoardContainer extends React.Component {
     }
   }
 
-  getPosts = async (boardType) => {
-  await api
-    .getAllPosts(boardType)
-    .then(res => {
-      console.log("posts 가져오기 성공! ", res.data);
-      this.setState({
-        postCount : res.data.count,
-        postList: res.data.results,
-        });
-    })
-    .catch(err => {
-      console.log(err);
-    });
-  }
 
-  handlePageChange = (page) => {
+  getPosts = async boardType => {
+    await api
+      .getAllPosts(boardType)
+      .then(res => {
+        console.log("posts 가져오기 성공! ", res.data);
+        this.setState({
+          postCount: res.data.count,
+          postList: res.data.results
+        });
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  };
+
+  handlePageChange = page => {
     this.setState({ currentPage: page });
     this.getPage(this.state.boardType, page);
-  }
+  };
 
-  getPage = async (boardType,currentPage) => {
+  getPage = async (boardType, currentPage) => {
     await api
       .getPage(boardType, currentPage)
       .then(res => {
         console.log("page 가져오기 성공! ", res.data);
         this.setState({
-          postList: res.data.results,
-         });
+          postList: res.data.results
+        });
       })
       .catch(err => {
         console.log(err);
@@ -87,11 +88,10 @@ class BoardContainer extends React.Component {
   };
 
   render() {
-
-    console.log("시발", this.state.postCount, "시발", this.state.Plength)
-    const pageCount = Math.ceil(this.state.postCount/ this.state.Plength);
-    console.log("페이지 몇페이지?!!",pageCount);
-    const pages = _.range(1, pageCount+1);
+    // console.log("시발", this.state.postCount, "시발", this.state.Plength)
+    const pageCount = Math.ceil(this.state.postCount / this.state.Plength);
+    // console.log("페이지 몇페이지?!!",pageCount);
+    const pages = _.range(1, pageCount + 1);
     const board_name = this.props.match.path.split("/")[1];
 
     return (
@@ -166,13 +166,22 @@ class BoardContainer extends React.Component {
                   <ul className="pagination">
                     {pages.map(page => (
                       <li
-                      key={page}
-                      className= {page === this.state.currentPage ? "page-item active" : "page-item"} // Bootstrap을 이용하여 현재 페이지를 시각적으로 표시
-                      style={{ cursor: "pointer" }}
-                    >
-                      <a className="page-link" onClick={e => this.handlePageChange(page)}>{page}</a> {/* 페이지 번호 클릭 이벤트 처리기 지정 */}
-                    </li>
-
+                        key={page}
+                        className={
+                          page === this.state.currentPage
+                            ? "page-item active"
+                            : "page-item"
+                        } // Bootstrap을 이용하여 현재 페이지를 시각적으로 표시
+                        style={{ cursor: "pointer" }}
+                      >
+                        <a
+                          className="page-link"
+                          onClick={e => this.handlePageChange(page)}
+                        >
+                          {page}
+                        </a>{" "}
+                        {/* 페이지 번호 클릭 이벤트 처리기 지정 */}
+                      </li>
                     ))}
                   </ul>
                 </nav>
