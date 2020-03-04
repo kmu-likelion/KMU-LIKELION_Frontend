@@ -215,7 +215,7 @@ export default class MyProfile extends Component {
               onChange={this.handlingChange}
             />
             <br />
-            <Button
+            {/* <Button
               className="faked"
               variant="contained"
               color="primary"
@@ -225,7 +225,7 @@ export default class MyProfile extends Component {
               type="button" data-toggle="modal" data-target="#exampleModal2"
             >
               password수정
-            </Button>
+            </Button> */}
 
             <div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
@@ -262,6 +262,7 @@ export default class MyProfile extends Component {
               size="large"
               startIcon={<SaveIcon />}
               type="submit"
+              onClick={this.refreshPage}
             >
               수정
             </Button>

@@ -142,7 +142,7 @@ export default class LeftProfileView extends Component {
             <ListItemIcon>
               <SendIcon fontSize="small" />
             </ListItemIcon>
-            <Typography variant="inherit">My Profile</Typography>
+            <Typography variant="inherit">내 프로필</Typography>
           </MenuItem>
 
           <MenuItem
@@ -151,7 +151,7 @@ export default class LeftProfileView extends Component {
             <ListItemIcon>
               <PriorityHighIcon fontSize="small" />
             </ListItemIcon>
-            <Typography variant="inherit">My Liked Post</Typography>
+            <Typography variant="inherit">내가 좋아요 한 글</Typography>
           </MenuItem>
 
           <MenuItem
@@ -161,7 +161,7 @@ export default class LeftProfileView extends Component {
               <DraftsIcon fontSize="small" />
             </ListItemIcon>
             <Typography variant="inherit" noWrap>
-              My Post
+              내가 쓴 글
             </Typography>
           </MenuItem>
 
@@ -172,7 +172,7 @@ export default class LeftProfileView extends Component {
               <DraftsIcon fontSize="small" />
             </ListItemIcon>
             <Typography variant="inherit" noWrap>
-              My Comment
+              내가 쓴 댓글
             </Typography>
           </MenuItem>
 
@@ -183,7 +183,7 @@ export default class LeftProfileView extends Component {
               <DraftsIcon fontSize="small" />
             </ListItemIcon>
             <Typography variant="inherit" noWrap>
-              My Mentoring
+              나의 멘토멘티
             </Typography>
           </MenuItem>
           <MenuItem
@@ -193,7 +193,7 @@ export default class LeftProfileView extends Component {
               <DraftsIcon fontSize="small" />
             </ListItemIcon>
             <Typography variant="inherit" noWrap>
-              My StudyGroup
+              내 스터디 그룹
             </Typography>
           </MenuItem>
         </MenuList>

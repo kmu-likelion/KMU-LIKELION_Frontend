@@ -95,7 +95,7 @@ class MyMentoring extends Component {
                         <img src={tile.user.img} alt={tile.user.id} />
                         <a href={'/Mypage/'+ tile.user.username}>
                         <GridListTileBar
-                        title={tile.user.username}
+                        title={tile.user.first_name}
                         classes={{
                             root: classes.titleBar,
                             title: classes.title,
@@ -120,7 +120,7 @@ class MyMentoring extends Component {
                         <img src={tile.user.img} alt={tile.user.id} />
                         <a href={'/Mypage/'+ tile.user.username}>
                         <GridListTileBar
-                        title={tile.user.username}
+                        title={tile.user.first_name}
                         classes={{
                             root: classes.titleBar,
                             title: classes.title,
