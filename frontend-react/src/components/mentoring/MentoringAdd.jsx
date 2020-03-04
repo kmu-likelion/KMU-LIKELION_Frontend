@@ -55,7 +55,7 @@ class MentoringAdd extends React.Component {
                         <small>Mentor</small>
                       </MenuItem>
                       {allUser.map(user => (
-                        <MenuItem value={user.id}>{user.username}</MenuItem>
+                        <MenuItem value={user.id}>{user.first_name}</MenuItem>
                       ))}
 
                     </Select>
@@ -77,7 +77,7 @@ class MentoringAdd extends React.Component {
                         <small>Mentee</small>
                       </MenuItem>
                       {allUser.map(user => (
-                        <MenuItem value={user.id}>{user.username}</MenuItem>
+                        <MenuItem value={user.id}>{user.first_name}</MenuItem>
                       ))}
 
                     </Select>

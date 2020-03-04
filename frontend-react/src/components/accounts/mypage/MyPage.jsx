@@ -17,10 +17,10 @@ class MyPage extends Component {
     this.state = {
       type: "Myprofile",
       userId: "",
-      userInfo: {}
+      userInfo: {},
+      
     };
   }
-
   componentDidMount() {
     console.log("New ComponentDidMount");
     this.getUser(this.props.match.params.username);
@@ -59,6 +59,7 @@ class MyPage extends Component {
           <MyProfile
             username={this.props.match.params.username}
             updateUser={this.updateUser}
+            id={this.state.userId}
           />
         );
         break;

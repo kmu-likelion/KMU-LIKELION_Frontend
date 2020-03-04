@@ -50,7 +50,7 @@ class MenteeManage extends React.Component {
                       <li key={`li-${row.user.mentor}`}>
                         <ul className={"mentoring-ul"}>
                           <ListItem button key={row.user.id} selected={this.state.selectedIndex === row.user.id}>
-                            <ListItemText primary={row.user.username} onClick={event => {this.props.getLinkedMentor(row.user.id); this.selectIndex(row.user.id)}}/>
+                            <ListItemText primary={row.user.first_name} onClick={event => {this.props.getLinkedMentor(row.user.id); this.selectIndex(row.user.id)}}/>
                           </ListItem>
                         </ul>
                       </li>

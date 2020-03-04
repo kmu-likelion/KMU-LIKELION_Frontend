@@ -235,6 +235,7 @@ class GroupDetail extends React.Component {
     console.log("페이지 몇페이지?!!", SpageCount);
     const Spages = _.range(1, SpageCount + 1);
 
+    console.log("그룹캡틴 유저아이디",this.state.group_captain)
     return (
       <Container maxWidth="lg" className="main-container">
         <Paper className="Paper">
@@ -290,7 +291,7 @@ class GroupDetail extends React.Component {
                                       <Avatar alt="Recomment-writer" src={member.user.img} />
                                     </IconButton>
                                   </ListItemAvatar>
-                                  <ListItemText primary={member.user.username} />
+                                  <ListItemText primary={member.user.first_name} />
                                   {this.state.userNow === this.state.group_captain.captain_username
                                     ? (
                                       <CancelIcon className="Cancle" onClick={event => this.deleteGroupUser(event, member.id)} />
@@ -317,7 +318,6 @@ class GroupDetail extends React.Component {
               style={{ alignItems: "center", textAlign: "right" }}
             >
               <div>
-              
                 {
                   String(this.state.group_captain.user_id) === window.sessionStorage.getItem("id")
                     ? (
@@ -345,7 +345,7 @@ class GroupDetail extends React.Component {
                                     <small>All User</small>
                                   </MenuItem>
                                   {this.state.allUser.map(user => (
-                                    <MenuItem value={user.id}>{user.username}</MenuItem>
+                                    <MenuItem value={user.id}>{user.first_name}</MenuItem>
                                   ))}
 
                                 </Select>
@@ -356,7 +356,6 @@ class GroupDetail extends React.Component {
                           </TableRow>
                         </TableBody>
                       </Table>
-                      
                     )
                     : (
                       <></>

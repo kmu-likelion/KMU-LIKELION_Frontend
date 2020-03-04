@@ -39,8 +39,7 @@ class BoardContainer extends React.Component {
       this.getPosts(board_name);
     }
   }
-      
- 
+
   getPosts = async (boardType) => {
   await api
     .getAllPosts(boardType)

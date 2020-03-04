@@ -26,9 +26,11 @@ export default class MyProfile extends Component {
     username: "",
     img: "",
     sns_id: "",
-    password:""
+    password:"",
   };
+
   componentDidMount() {
+    this.setState({userNow:window.sessionStorage.getItem("id")});
     this.getUserData(this.props.username);
   }
 
@@ -104,6 +106,11 @@ export default class MyProfile extends Component {
       this.viewData("학번", this.state.student_id),
       this.viewData("SNS", this.state.sns_id)
     ];
+    console.log("프롭스씨발년", this.props)
+    const username= this.props.username;
+    const usernow = window.sessionStorage.getItem("username")
+    console.log("username",username)
+    console.log("usernow", usernow)
 
     if (this.state.is_update === false ){
       return (
@@ -140,17 +147,22 @@ export default class MyProfile extends Component {
                 ))}
               </TableBody>
             </Table>
-
-            <Button
-              className="faked"
-              variant="contained"
-              color="primary"
-              size="large"
-              startIcon={<SaveIcon />}
-              onClick={e => this.setState({ is_update: true })}
-            >
-              Update
-            </Button>
+            {username === window.sessionStorage.getItem("username")
+              ? (
+                <Button
+                  className="faked"
+                  variant="contained"
+                  color="primary"
+                  size="large"
+                  startIcon={<SaveIcon />}
+                  onClick={e => this.setState({ is_update: true })}
+                >
+                  Update
+                </Button>
+              ) : (
+                <></>
+              )
+            }
           </TableContainer>
         </Paper>
       );
@@ -243,7 +255,7 @@ export default class MyProfile extends Component {
             </div>
           </div>
 
-            <Button
+          <Button
               className="faked"
               variant="contained"
               color="primary"

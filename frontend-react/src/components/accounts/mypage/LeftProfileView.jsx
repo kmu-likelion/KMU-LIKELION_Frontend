@@ -101,8 +101,13 @@ export default class LeftProfileView extends Component {
             style={{ width: "70%", padding: "5px" }}
           />
           <br />
-          <EditIcon type="button" data-toggle="modal" data-target="#exampleModal">
-          </EditIcon>
+          {username === window.sessionStorage.getItem("username")
+          ?(<EditIcon type="button" data-toggle="modal" data-target="#exampleModal">
+          </EditIcon>)
+          :(
+            <></>
+          )
+          }
           <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
               <div class="modal-content">
