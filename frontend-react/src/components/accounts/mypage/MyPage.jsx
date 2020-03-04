@@ -18,7 +18,6 @@ class MyPage extends Component {
       type: "Myprofile",
       userId: "",
       userInfo: {},
-      
     };
   }
   componentDidMount() {

@@ -144,8 +144,9 @@ export default class LeftProfileView extends Component {
             </ListItemIcon>
             <Typography variant="inherit">내 프로필</Typography>
           </MenuItem>
-
-          <MenuItem
+          {username === window.sessionStorage.getItem("username")
+          ?(
+            <MenuItem
             onClick={event => this.props.handlingSubmit(event, "MyLike")}
           >
             <ListItemIcon>
@@ -154,6 +155,12 @@ export default class LeftProfileView extends Component {
             <Typography variant="inherit">내가 좋아요 한 글</Typography>
           </MenuItem>
 
+
+          )
+          :(
+            <></>
+          )
+          }
           <MenuItem
             onClick={event => this.props.handlingSubmit(event, "MyPost")}
           >
