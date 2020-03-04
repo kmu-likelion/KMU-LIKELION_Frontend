@@ -82,7 +82,6 @@ class MyStudyGroup extends Component {
                           </Typography>
                         </ExpansionPanelDetails>
                       </ExpansionPanel>
-                        
                     )
                     : (
                       <ExpansionPanel>
@@ -91,7 +90,9 @@ class MyStudyGroup extends Component {
                             aria-controls="panel1a-content"
                             id="panel1a-header"
                           >
+                            <Link to={`/study/${item.studygroup.name}`}>
                             <Typography className={classes.heading}>{item.studygroup.name}</Typography>
+                            </Link>
                           </ExpansionPanelSummary>
                           <ExpansionPanelDetails>
                             <Typography>
