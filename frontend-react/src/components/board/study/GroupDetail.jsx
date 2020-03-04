@@ -268,7 +268,7 @@ class GroupDetail extends React.Component {
               <IconButton component={Link} to={`/Mypage/${this.state.group_captain.captain_username}`}>
                 <Avatar alt="Recomment-writer" src={this.state.group_captain.user_img} />
               </IconButton>
-              {this.state.group_captain.captain_username}
+              {this.state.group_captain.full_name}
               <Typography component="h6" variant="h6">
                 그룹멤버
               </Typography>
