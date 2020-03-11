@@ -26,12 +26,7 @@ export default class EvaluationView extends Component {
   }
 
   render() {
-    const {
-      evaluator,
-      evaluator_name,
-      evaluation,
-      evaluation_pub_date
-    } = this.props;
+    const { evaluator_name, evaluation, evaluation_pub_date } = this.props;
 
     return (
       <List component="nav" aria-label="contacts">

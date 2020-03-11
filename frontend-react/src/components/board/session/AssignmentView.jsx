@@ -12,7 +12,6 @@ import ExpansionPanelDetails from "@material-ui/core/ExpansionPanelDetails";
 import ExpansionPanelActions from "@material-ui/core/ExpansionPanelActions";
 import Typography from "@material-ui/core/Typography";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
-// import Divider from "@material-ui/core/Divider";
 
 export default class AssignmentView extends Component {
   state = {
@@ -36,8 +35,6 @@ export default class AssignmentView extends Component {
     api
       .getSubmission(this.state.userId, this.props.assignment.id)
       .then(res => {
-        console.log("request user의 과제제출정보 가져옴.", res.data);
-        console.log(res.data.length);
         let submitted;
         if (res.data.length === 0) {
           submitted = false;
@@ -62,7 +59,6 @@ export default class AssignmentView extends Component {
       await api
         .deleteAssignment(taskId)
         .then(res => {
-          console.log("과제삭제 실행.", res.data);
           this.props.getAssignments();
         })
         .catch(err => console.log(err));
@@ -128,25 +124,6 @@ export default class AssignmentView extends Component {
             </Button>
             {user_type < 3 ? (
               <>
-                {/* {this.assignment ? (
-              <>
-                과제를 이미 제출하셨습니다!
-                <Button
-                  color="primary"
-                  onClick={event => this.modalOpen(assignment.id)}
-                >
-                  과제 수정제출
-                </Button>
-              </>
-            ) : (
-              <Button
-                color="primary"
-                onClick={event => this.modalOpen(assignment.id)}
-              >
-                과제제출
-              </Button>
-            )} */}
-
                 <Button
                   color="secondary"
                   onClick={e =>

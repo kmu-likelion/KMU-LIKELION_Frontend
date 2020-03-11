@@ -14,10 +14,6 @@ class CheckJoin extends Component {
     password: ""
   };
 
-  componentDidMount() {
-    console.log("New ComponentDidMount");
-  }
-
   handlingChange = event => {
     this.setState({ [event.target.name]: event.target.value });
   };
@@ -68,7 +64,6 @@ class CheckJoin extends Component {
               placeholder="E-Mail"
               // variant="outlined"
               required
-              autoFocus
             />
             <br />
             <TextField

@@ -1,9 +1,7 @@
 import React, { Component } from "react";
 import api from "../../../api/BoardAPI";
-// import sessionApi from "../../../api/SessionAPI";
 import { Redirect } from "react-router-dom";
 import Editor from "../../Editor";
-// import moment from "moment";
 
 // material-ui
 import TextField from "@material-ui/core/TextField";
@@ -17,8 +15,6 @@ const useStyles = theme => ({
   form: {
     width: "100%",
     marginTop: theme.spacing(3)
-    // display: "flex",
-    // flexDirection: "column"
   },
   textField: {
     width: "25%",
@@ -33,7 +29,6 @@ const useStyles = theme => ({
   scoreTypeForm: {
     display: "flex",
     padding: "2px 4px",
-    // paddingLeft: "2px",
     alignItems: "center"
   },
   addButton: {
@@ -92,7 +87,6 @@ class LectureForm extends Component {
   getPostInfo = async () => {
     let post_id = this.props.editId;
     await api.getPost("session", post_id).then(res => {
-      console.log("세션데이터", res.data);
       this.setState({
         title: res.data.title,
         body: res.data.body,
@@ -116,7 +110,6 @@ class LectureForm extends Component {
             session_type: "L"
           })
           .then(res => {
-            console.log("정상적으로 수정됨. ", res);
             this.setState({
               endSubmit: true
             });
@@ -133,7 +126,6 @@ class LectureForm extends Component {
             session_type: "L"
           })
           .then(res => {
-            console.log("정상적으로 생성됨. ", res);
             this.setState({
               endSubmit: true
             });
