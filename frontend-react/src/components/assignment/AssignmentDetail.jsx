@@ -1,5 +1,4 @@
 import React from "react";
-// import api from "../../api/SessionAPI";
 import api from "../../api/SessionAPI";
 import GradingContainer from "./GradingContainer";
 
@@ -23,15 +22,13 @@ class AssignmentDetail extends React.Component {
       assignmentId: this.props.match.params.id
     });
     this.getAssignmentData(this.props.match.params.id);
-
-    // console.log(this.props.match.params.id);
   }
 
   getAssignmentData = async id => {
     await api
       .getAssignment(id)
       .then(res => {
-        console.log("과제 가져오기 성공", res.data);
+        // console.log("과제 가져오기 성공", res.data);
         this.setState({ assignmentInfo: res.data });
       })
       .catch(err => {

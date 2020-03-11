@@ -53,7 +53,6 @@ export default class ManageJoinDetail extends Component {
     await api
       .getAllQuestions()
       .then(res => {
-        console.log("모든 질문사항 가져옴", res);
         this.setState({
           questions: res.data
         });
@@ -65,7 +64,6 @@ export default class ManageJoinDetail extends Component {
     await api
       .getJoinDatawithId(this.props.match.params.id)
       .then(res => {
-        console.log("입부자 정보 가져오기 성공. ", res.data);
         this.setState({
           joindata: res.data,
           answers: res.data.answer
@@ -78,7 +76,6 @@ export default class ManageJoinDetail extends Component {
     await api
       .getEvaluationsWithApplyId(this.props.match.params.id)
       .then(res => {
-        console.log("성공적으로 평가데이터 가져옴", res.data);
         this.setState({
           evaluations: res.data
         });
@@ -116,7 +113,6 @@ export default class ManageJoinDetail extends Component {
   };
 
   render() {
-    // const { index, id, body, deleteQuestion } = this.props;
     const status_type = {
       R: "심사중",
       F: "불합격",

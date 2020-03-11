@@ -26,7 +26,7 @@ class ManageJoin extends Component {
   };
 
   componentDidMount() {
-    console.log("New ComponentDidMount");
+    // console.log("New ComponentDidMount");
     this.getAllJoinDatas();
     this.getAllQuestions();
   }
@@ -60,7 +60,6 @@ class ManageJoin extends Component {
         body: this.state.question_input
       })
       .then(res => {
-        console.log("질문생성 성공!", res);
         this.getAllQuestions();
         this.setState({
           question_input: ""
@@ -69,9 +68,7 @@ class ManageJoin extends Component {
   };
 
   deleteQuestion = async id => {
-    // console.log("지우려는 질문 id :", id);
     await api.deleteQuestion(id).then(res => {
-      console.log("질문삭제 성공!", res);
       this.getAllQuestions();
     });
   };

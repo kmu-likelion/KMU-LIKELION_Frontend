@@ -24,7 +24,7 @@ export default class ManageQuestionForm extends Component {
         body: this.state.update_input
       })
       .then(res => {
-        console.log("질문 update 성공! ", res.data);
+        // console.log("질문 update 성공! ", res.data);
         this.setState({
           update_flag: false,
           update_input: ""

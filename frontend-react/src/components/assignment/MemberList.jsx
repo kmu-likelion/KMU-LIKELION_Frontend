@@ -2,8 +2,8 @@ import React from "react";
 
 // import api from "../../api/SessionAPI";
 import { Link } from "react-router-dom";
-import { getAllUser } from "../../api/AuthAPI";
-import Typography from "@material-ui/core/Typography";
+// import { getAllUser } from "../../api/AuthAPI";
+// import Typography from "@material-ui/core/Typography";
 import api from "../../api/SessionAPI";
 
 import ListItem from "@material-ui/core/ListItem";
@@ -23,7 +23,6 @@ class MemberList extends React.Component {
   }
   getSubmitStatus = async (user_id, assignment_id) => {
     await api.getSubmitStatusWithUser(user_id, assignment_id).then(res => {
-      console.log("제출정보 가져옴!", res.data);
       this.setState({
         submitStatus: res.data.status
       });

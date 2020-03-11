@@ -1,12 +1,9 @@
 import React from "react";
 import api from "../../api/BoardAPI";
-// import RecentPost from "./RecentPost";
 import RecentPost from "../board/container/PostView";
-
 import logo from "./logo.png";
 import Container from "@material-ui/core/Container";
 import Grid from "@material-ui/core/Grid";
-//  import Paper from "@material-ui/core/Paper";
 
 import Carousel from "react-bootstrap/Carousel";
 import { ClubCalendar } from "../calendar/ClubCalendar";
@@ -30,7 +27,7 @@ class Main extends React.Component {
     await api
       .getAllPosts(target)
       .then(recentPosts => {
-        console.log(recentPosts);
+        // console.log(recentPosts);
         var posts = recentPosts.data.results;
         var slicePosts = posts.slice(0, 4);
         switch (target) {
@@ -69,9 +66,6 @@ class Main extends React.Component {
                 </Carousel.Item>
                 <Carousel.Item>
                   <img className="d-block w-100" src={logo} alt="Third slide" />
-                  {/* <Carousel.Caption>
-                    <h3>Third slide label</h3>
-                  </Carousel.Caption> */}
                 </Carousel.Item>
               </Carousel>
             </Grid>

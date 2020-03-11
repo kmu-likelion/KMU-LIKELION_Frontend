@@ -50,7 +50,7 @@ class ClubCalendar extends React.Component {
 
   getAllEvent = async () => {
     await api.getAllPosts("notice").then(res => {
-      console.log("가져오기 성공!", res);
+      // console.log("가져오기 성공!", res);
       res.data.results.map(event => {
         if (event.is_recorded) {
           this.addEvent(
@@ -83,7 +83,7 @@ class ClubCalendar extends React.Component {
       modalEvent: event
     });
     this.modalOpen();
-    console.log("모달 이벤트 상태저장! ", this.state.modalEvent);
+    // console.log("모달 이벤트 상태저장! ", this.state.modalEvent);
   };
 
   render() {
@@ -97,7 +97,6 @@ class ClubCalendar extends React.Component {
           style={{ height: 500 }}
           views={["month"]}
           onSelectEvent={(event, e) => {
-            // alert(event.body);
             this.modalEvent(event);
           }}
         />

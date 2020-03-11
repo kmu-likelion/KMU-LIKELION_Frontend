@@ -33,10 +33,7 @@ class GradingContainer extends React.Component {
   };
 
   getSubmission = async (userId, assignmentId) => {
-    console.log("유저 ID :", userId);
-    console.log("과제 ID :", assignmentId);
     await api.getSubmission(userId, assignmentId).then(res => {
-      console.log("멤버의 과제제출물 가져옴 ", res.data);
       this.setState({
         submissionInfo: res.data
       });
@@ -45,7 +42,6 @@ class GradingContainer extends React.Component {
 
   getMemberList = async () => {
     await getAllUser().then(res => {
-      console.log("기수 가져옴 ", res.data);
       this.setState({
         memberList: res.data
       });

@@ -6,7 +6,6 @@ import Grid from "@material-ui/core/Grid";
 import { Link } from "react-router-dom";
 import api from "../../../api/BoardAPI";
 import PostView from "./PostView";
-//import Pagination from "../Pagination";
 import _ from "lodash";
 
 import Select from "@material-ui/core/Select";
@@ -27,7 +26,7 @@ class BoardContainer extends React.Component {
     };
   }
   componentWillMount() {
-    console.log("해당 보드는? ", this.props.match.path);
+    // console.log("해당 보드는? ", this.props.match.path);
     let board_name = this.props.match.path.split("/")[1];
     this.setState({
       boardType: board_name,
@@ -44,7 +43,7 @@ class BoardContainer extends React.Component {
     await api
       .getAllPosts(boardType)
       .then(res => {
-        console.log("posts 가져오기 성공! ", res.data);
+        // console.log("posts 가져오기 성공! ", res.data);
         this.setState({
           postCount: res.data.count,
           postList: res.data.results
@@ -64,7 +63,7 @@ class BoardContainer extends React.Component {
     await api
       .getPage(boardType, currentPage)
       .then(res => {
-        console.log("page 가져오기 성공! ", res.data);
+        // console.log("page 가져오기 성공! ", res.data);
         this.setState({
           postList: res.data.results
         });
@@ -78,7 +77,7 @@ class BoardContainer extends React.Component {
     await api
       .getMyAlumPosts(boardType, start_number)
       .then(res => {
-        console.log("session posts 가져오기 성공! ", res.data);
+        // console.log("session posts 가져오기 성공! ", res.data);
         this.setState({ postList: res.data.results });
       })
       .catch(err => {
@@ -86,7 +85,7 @@ class BoardContainer extends React.Component {
       });
   };
 
-  //user권한 검사
+  //user permission check
   confirmCreateAuth = tag => {
     if (window.sessionStorage.getItem("user_type") < 3) {
       return tag;
@@ -95,21 +94,17 @@ class BoardContainer extends React.Component {
     }
   };
 
-  //board 검사
+  //board check
   checkCreateAuth = (board_name, tag) => {
     switch (board_name) {
       case "notice":
         return this.confirmCreateAuth(tag);
-        break;
       case "session":
         return this.confirmCreateAuth(tag);
-        break;
       case "career":
         return this.confirmCreateAuth(tag);
-        break;
       default:
         return tag;
-        break;
     }
   };
 
@@ -207,7 +202,7 @@ class BoardContainer extends React.Component {
                           onClick={e => this.handlePageChange(page)}
                         >
                           {page}
-                        </a>{" "}
+                        </a>
                         {/* 페이지 번호 클릭 이벤트 처리기 지정 */}
                       </li>
                     ))}

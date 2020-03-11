@@ -21,8 +21,6 @@ class JoinFormSubmit extends React.Component {
 
   getQuestions = async () => {
     await api.getAllQuestions().then(res => {
-      console.log("eee", res.data);
-
       this.setState({
         questions: res.data
       });
@@ -34,12 +32,10 @@ class JoinFormSubmit extends React.Component {
     this.setState(prevState => {
       return { answers: { ...prevState.answers, [id]: value } };
     });
-    // console.log(this.state.answers);
   };
 
   handlingSubmit = event => {
     event.preventDefault();
-    // console.log("handlingSubmit 실행.");
     this.createJoinData();
   };
 

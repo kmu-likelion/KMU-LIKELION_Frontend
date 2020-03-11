@@ -37,7 +37,7 @@ class ConfirmAnswerForm extends Component {
         question_id: this.props.answerInfo.question_id
       })
       .then(res => {
-        console.log("성공적으로 수정됨.", res.data);
+        // console.log("성공적으로 수정됨.", res.data);
         this.closeModal();
       })
       .catch(err => {
@@ -62,7 +62,7 @@ class ConfirmAnswerForm extends Component {
 
   render() {
     const { classes } = this.props;
-    const { open, handlingClose, answerInfo } = this.props;
+    const { open, answerInfo } = this.props;
     if (!this.state.editFlag) {
       return (
         <>

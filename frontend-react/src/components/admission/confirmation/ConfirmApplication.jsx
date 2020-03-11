@@ -9,7 +9,6 @@ import AdmissionStore from "../../../store/AdmissionStore";
 
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
-
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
@@ -18,7 +17,6 @@ import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
 import Divider from "@material-ui/core/Divider";
 import Button from "@material-ui/core/Button";
 import QuestionAnswerIcon from "@material-ui/icons/QuestionAnswer";
-// import Avatar from "@material-ui/core/Avatar";
 
 class ConfirmApplication extends Component {
   static contextType = AdmissionStore;
@@ -46,7 +44,7 @@ class ConfirmApplication extends Component {
     await api
       .getAllQuestions()
       .then(res => {
-        console.log("모든 질문사항 가져옴", res);
+        // console.log("모든 질문사항 가져옴", res);
         this.setState({
           questions: res.data
         });
@@ -56,7 +54,7 @@ class ConfirmApplication extends Component {
 
   getJoinDataWithId = async join_id => {
     await api.getJoinDatawithId(join_id).then(res => {
-      console.log("id로 지원내역 가져오기 !", res.data);
+      // console.log("id로 지원내역 가져오기 !", res.data);
       this.setState({
         joinInfo: res.data,
         answers: res.data.answer

@@ -1,7 +1,4 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
-// import moment from "moment";
-
 import { withStyles } from "@material-ui/core/styles";
 
 import List from "@material-ui/core/List";

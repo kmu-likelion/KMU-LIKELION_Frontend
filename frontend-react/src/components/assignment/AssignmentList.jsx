@@ -1,7 +1,5 @@
 import React from "react";
-// import api from "../../api/SessionAPI";
 import api from "../../api/BoardAPI";
-
 import Container from "@material-ui/core/Container";
 import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
@@ -26,7 +24,6 @@ class AssignmentContainer extends React.Component {
 
   getAssignmentList = async () => {
     await api.getAllPosts("session").then(res => {
-      console.log("모든 과제정보 가져옴.", res.data);
       this.setState({ sessionList: res.data.results });
     });
   };

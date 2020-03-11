@@ -58,7 +58,7 @@ class CheckBasicForm extends Component {
   };
 
   render() {
-    const { classes } = this.props;
+    // const { classes } = this.props;
     const { joinInfo, getJoinData } = this.props;
     const joinData = [
       this.viewData("지원번호", joinInfo.id),

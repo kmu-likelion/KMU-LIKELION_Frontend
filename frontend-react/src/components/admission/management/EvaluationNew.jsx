@@ -25,7 +25,7 @@ export default class CommentView extends Component {
   };
 
   componentDidMount() {
-    console.log("현재 유저아이디", window.sessionStorage.getItem("id"));
+    // console.log("현재 유저아이디", window.sessionStorage.getItem("id"));
     this.setState({
       userId: window.sessionStorage.getItem("id"),
       username: window.sessionStorage.getItem("username"),
@@ -49,7 +49,7 @@ export default class CommentView extends Component {
         score: this.state.score
       })
       .then(res => {
-        console.log("성공적으로 평가생성됨.", res.data);
+        // console.log("성공적으로 평가생성됨.", res.data);
         this.setState({
           body: "",
           score: "3"
@@ -84,7 +84,6 @@ export default class CommentView extends Component {
                   <ListItemSecondaryAction>
                     <Rating
                       name="score"
-                      //   defaultValue={2}
                       value={this.state.score}
                       onChange={this.handlingChange}
                       size="large"
