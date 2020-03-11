@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import Paper from "@material-ui/core/Paper";
 import api from "../../../api/BoardAPI";
@@ -50,7 +50,6 @@ class MyLike extends React.Component {
     await api
       .getUserLikePost(target)
       .then(likePosts => {
-        console.log("음",likePosts);
         var posts = likePosts.data.board_contents;
         switch (target) {
           case "notice":
@@ -76,7 +75,6 @@ class MyLike extends React.Component {
   }
 
   show(type){
-    console.log("dsfsdf", type)
     let LikeList = [];
     let board_type = "";
     switch(type){
@@ -136,9 +134,6 @@ class MyLike extends React.Component {
 
   render() {
     const { classes } = this.props;
-
-
-
     return (
       <Paper elevation={10} className="MyLike">
         <>

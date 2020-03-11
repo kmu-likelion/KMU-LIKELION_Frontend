@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-// import { Link } from "react-router-dom";
 import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
 import MenuList from "@material-ui/core/MenuList";
@@ -36,7 +35,6 @@ export default class LeftProfileView extends Component {
   getUserWithId = async () => {
     await getUserWithId(window.sessionStorage.getItem("id"))
       .then(res => {
-        console.log("레프트프로필업데이트 컴포넌트 용 유저데이터", res.data);
         const userInfo = res.data;
         this.setState({
           userId: userInfo.id,
@@ -74,7 +72,7 @@ export default class LeftProfileView extends Component {
 
     await updateUser(window.sessionStorage.getItem("id"),formData,config)
       .then(res => {
-        console.log("이미지업데이트됬는지?", res.data);
+
         const userImg = res.data;
         this.setState({
           img: userImg.img,

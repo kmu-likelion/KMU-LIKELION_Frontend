@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { getUser, updateUser } from "../../../api/AuthAPI";
 import Grid from "@material-ui/core/Grid";
 import Container from "@material-ui/core/Container";
-// import api from "../../../api/GroupAPI";
 import MyLike from "./MyLike";
 import LeftProfileView from "./LeftProfileView";
 import MyProfile from "./MyProfile";
@@ -21,7 +20,6 @@ class MyPage extends Component {
     };
   }
   componentDidMount() {
-    console.log("New ComponentDidMount");
     this.getUser(this.props.match.params.username);
   }
 

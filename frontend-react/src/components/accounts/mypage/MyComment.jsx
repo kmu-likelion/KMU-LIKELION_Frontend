@@ -43,7 +43,6 @@ class MyComment extends Component {
     await api
       .getMyPost(id)
       .then(myPosts => {
-        console.log(myPosts);
         var mystudy = myPosts.data.studyboard_comments;
         var mynotice = myPosts.data.noticeboard_comments;
         var myqna = myPosts.data.qnaboard_comments;

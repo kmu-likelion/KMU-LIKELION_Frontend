@@ -1,11 +1,10 @@
 import React, { Component } from "react";
-import { getUser, updateUser } from "../../../api/AuthAPI";
+import { getUser} from "../../../api/AuthAPI";
 import Paper from "@material-ui/core/Paper";
 import TextField from "@material-ui/core/TextField";
 import SaveIcon from "@material-ui/icons/Save";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
-
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
 import TableCell from "@material-ui/core/TableCell";
@@ -106,11 +105,7 @@ export default class MyProfile extends Component {
       this.viewData("학번", this.state.student_id),
       this.viewData("SNS", this.state.sns_id)
     ];
-    console.log("프롭스씨발년", this.props)
     const username= this.props.username;
-    const usernow = window.sessionStorage.getItem("username")
-    console.log("username",username)
-    console.log("usernow", usernow)
 
     if (this.state.is_update === false ){
       return (
@@ -120,10 +115,6 @@ export default class MyProfile extends Component {
           style={{
             width: "100%",
             padding: 20
-            // display: "flex",
-            // flexDirection: "column",
-            // justifyContent: "center",
-            // textAlign: "center"
           }}
         >
           <TableContainer className="">
@@ -249,7 +240,7 @@ export default class MyProfile extends Component {
                 </div>
                 <div class="modal-footer">
                   <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                  <button type="button" class="btn btn-primary" type="submit" onClick={this.refreshPage}>Save changes</button>
+                  <button type="button" class="btn btn-primary" onClick={this.refreshPage}>Save changes</button>
                 </div>
               </div>
             </div>

@@ -1,13 +1,6 @@
 import React, { Component } from 'react'
 import Paper from "@material-ui/core/Paper";
-import TextField from '@material-ui/core/TextField';
-import SaveIcon from '@material-ui/icons/Save';
-import Button from "@material-ui/core/Button";
 import api from "../../../api/GroupAPI";
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemText from '@material-ui/core/ListItemText';
-import ListSubheader from '@material-ui/core/ListSubheader';
 import { withStyles } from '@material-ui/core/styles';
 import ExpansionPanel from '@material-ui/core/ExpansionPanel';
 import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
@@ -45,7 +38,6 @@ class MyStudyGroup extends Component {
             this.setState({
                 MyStudyGroup: res.data
             });
-            
           })
           .catch(err => {
             console.log(err);
@@ -106,9 +98,7 @@ class MyStudyGroup extends Component {
                 </>
             ))}
             </div>
-              
             </Paper>
-                
         );
     }
 }

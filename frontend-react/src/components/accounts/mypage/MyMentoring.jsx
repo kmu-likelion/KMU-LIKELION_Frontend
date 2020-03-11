@@ -1,17 +1,12 @@
 import React, { Component } from 'react'
 import Paper from "@material-ui/core/Paper";
-import TextField from '@material-ui/core/TextField';
-import SaveIcon from '@material-ui/icons/Save';
-import Button from "@material-ui/core/Button";
 import api from "../../../api/MentoringAPI";
-
 import { withStyles } from '@material-ui/core/styles';
 import GridList from '@material-ui/core/GridList';
 import GridListTile from '@material-ui/core/GridListTile';
 import GridListTileBar from '@material-ui/core/GridListTileBar';
 import IconButton from '@material-ui/core/IconButton';
 import StarBorderIcon from '@material-ui/icons/StarBorder';
-import { Link } from "react-router-dom";
 
 const useStyles = theme => ({
   root: {
@@ -40,7 +35,6 @@ class MyMentoring extends Component {
 
     }
     componentDidMount(){
-        //this.setState({id:this.props.id});
         this.getLinkedMentee(this.props.id);
         this.getLinkedMentor(this.props.id);
     }
@@ -52,7 +46,6 @@ class MyMentoring extends Component {
             this.setState({
                 linkedMentor : []
             });
-            console.log("연결된 멘토데이터 받아옴", res.data);
             this.setState({
                 linkedMentor: res.data
             });
@@ -68,7 +61,6 @@ class MyMentoring extends Component {
             this.setState({
                 linkedMentee : []
             });
-            console.log("연결된 멘티데이터 받아옴", res.data);
             this.setState({
                 linkedMentee: res.data
             });
