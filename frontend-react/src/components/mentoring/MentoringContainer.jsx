@@ -4,8 +4,6 @@ import Grid from "@material-ui/core/Grid";
 import Mentoring from "./MentoringManage";
 
 class MentoringContainer extends React.Component {
-  componentDidMount() {}
-
   render() {
     return (
       <>

@@ -1,7 +1,6 @@
 import React from "react";
 import api from "../../api/MentoringAPI";
 import { getAllUser } from "../../api/AuthAPI";
-
 import MentorManage from "./MentorManage";
 import MenteeManage from "./MenteeManage";
 import MentoringAdd from "./MentoringAdd";
@@ -40,7 +39,6 @@ class MentoringManage extends React.Component {
     await api
       .getAllMentor()
       .then(res => {
-        console.log("멘토데이터 받아옴", res.data);
         this.setState({
           allMentor: res.data,
           linkedMentor: [],
@@ -56,7 +54,6 @@ class MentoringManage extends React.Component {
     await api
       .getAllMentee()
       .then(res => {
-        console.log("멘티데이터 받아옴", res.data);
         this.setState({
           allMentee: res.data,
           linkedMentor: [],
@@ -67,7 +64,6 @@ class MentoringManage extends React.Component {
         console.log(err);
       });
   };
-  
 
   getLinkedMentor = async (id) => {
     await api
@@ -110,15 +106,12 @@ class MentoringManage extends React.Component {
         mentee: this.state.selected_mentee
       })
       .then(res => {
-        console.log("Add metoring:", res.data);
         this.getAllMentor();
         this.getAllMentee();
         this.setState({
           linkedMentor: [],
           linkedMentee:[],
         })
-        console.log("링크드멘토값",this.state.linkedMentor);
-        console.log("링크드맨티값",this.state.linkedMentee);
       })
       .catch(err => {
         console.log(err);

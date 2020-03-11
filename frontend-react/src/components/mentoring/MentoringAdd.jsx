@@ -1,20 +1,8 @@
 import React from "react";
-import api from "../../api/MentoringAPI";
-import { getAllUser } from "../../api/AuthAPI";
-
-import ListItem from "@material-ui/core/ListItem";
-import ListItemText from "@material-ui/core/ListItemText";
-// import { FixedSizeList } from "react-window";
-import List from "@material-ui/core/List";
-
-import { makeStyles } from "@material-ui/core/styles";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
 import TableCell from "@material-ui/core/TableCell";
-import TableContainer from "@material-ui/core/TableContainer";
-import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
-
 import MenuItem from "@material-ui/core/MenuItem";
 import Select from "@material-ui/core/Select";
 import Button from "@material-ui/core/Button";
@@ -27,7 +15,7 @@ class MentoringAdd extends React.Component {
   };
 
   render() {
-    const {allUser,selected_mentee,selected_mentor,mentorOpen,menteeOpen,mentorId,menteeId}=this.props;
+    const {allUser,selected_mentee,selected_mentor,mentorOpen,menteeOpen}=this.props;
 
     return (
       <>

@@ -12,13 +12,10 @@ import Button from "@material-ui/core/Button";
 import CancelIcon from '@material-ui/icons/Cancel';
 import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
-// import { FixedSizeList } from "react-window";
 import List from "@material-ui/core/List";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
 import TableCell from "@material-ui/core/TableCell";
-import TableContainer from "@material-ui/core/TableContainer";
-import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import ListItemAvatar from "@material-ui/core/ListItemAvatar";
 import IconButton from "@material-ui/core/IconButton";
@@ -65,7 +62,6 @@ class GroupDetail extends React.Component {
     await api1
       .getNPage("study", currentPage)
       .then(res => {
-        console.log("Npage 가져오기 성공! ", res.data);
         this.setState({
           noticePosts: res.data.results,
         });
@@ -79,7 +75,6 @@ class GroupDetail extends React.Component {
     await api1
       .getSPage("study", currentPage)
       .then(res => {
-        console.log("Spage 가져오기 성공! ", res.data);
         this.setState({
           studyPosts: res.data.results,
         });
@@ -105,9 +100,7 @@ class GroupDetail extends React.Component {
     await api
       .getGroupWithName(group_name)
       .then(res => {
-        // console.log("결과 : ", res.data);
         const group_info = res.data;
-        console.log("결과 : ", group_info);
         this.setState({
           group_name: group_info[0].name,
           group_id: group_info[0].id,
@@ -118,7 +111,6 @@ class GroupDetail extends React.Component {
         this.getGroupPostStudy();
         this.getGroupMember();
         this.getGroupCaptain();
-        // this.getGroupCaptain();
       })
       .catch(err => {
         console.log(err);
@@ -126,7 +118,6 @@ class GroupDetail extends React.Component {
   };
   addGroupUser = async event => {
     event.preventDefault();
-    console.log("유저아이디", this.state.selected_user);
     await api
       .addGroupUser({
         "is_captain": false,
@@ -157,11 +148,9 @@ class GroupDetail extends React.Component {
 
   //해당 그룹의 게시물들을 가져옴
   getGroupPostNotice = async () => {
-    // console.log("그룹 ID : ", this.state.group_id);
     await api
       .getPostWithGroupIdNotice(this.state.group_id)
       .then(res => {
-        console.log("그룹의 NOTICEposts 가져오기 성공.", res.data.results);
         this.setState({
           noticePosts: res.data.results,
           NpostCount: res.data.count,
@@ -178,11 +167,9 @@ class GroupDetail extends React.Component {
     this.SgetPage(page);
   };
   getGroupPostStudy = async () => {
-    // console.log("그룹 ID : ", this.state.group_id);
     await api
       .getPostWithGroupIdStudy(this.state.group_id)
       .then(res => {
-        console.log("그룹의 STUDYposts 가져오기 성공.", res.data.results);
         this.setState({
           studyPosts: res.data.results,
           SpostCount: res.data.count,
@@ -195,8 +182,6 @@ class GroupDetail extends React.Component {
     await api
       .getMemberWithGroupId(this.state.group_id)
       .then(res => {
-        console.log("그룹멤버", res.data);
-
         this.setState({
           group_members: res.data
         });
@@ -208,7 +193,6 @@ class GroupDetail extends React.Component {
     await api
       .getCaptainWithGroupId(this.state.group_id)
       .then(res => {
-        console.log("후 이즈 캡틴?", res.data);
         this.setState({
           group_captain: res.data
         });
@@ -225,17 +209,11 @@ class GroupDetail extends React.Component {
 
 
   render() {
-    console.log("시발", this.state.postCount, "시발", this.state.Plength)
     const NpageCount = Math.ceil(this.state.NpostCount / this.state.Plength);
-    console.log("페이지 몇페이지?!!", NpageCount);
     const Npages = _.range(1, NpageCount + 1);
-
-    console.log("시발", this.state.postCount, "시발", this.state.Plength)
     const SpageCount = Math.ceil(this.state.SpostCount / this.state.Plength);
-    console.log("페이지 몇페이지?!!", SpageCount);
     const Spages = _.range(1, SpageCount + 1);
 
-    console.log("그룹캡틴 유저아이디",this.state.group_captain)
     return (
       <Container maxWidth="lg" className="main-container">
         <Paper className="Paper">
@@ -283,7 +261,7 @@ class GroupDetail extends React.Component {
                             </>
                           )
                           : (
-                            <li key={`li-${member.id}`}>
+                            <li>
                               <ul className={"mentoring-ul"}>
                                 <ListItem button key={member.id}>
                                   <ListItemAvatar>
@@ -414,10 +392,10 @@ class GroupDetail extends React.Component {
             </Grid>
             <>
               <Grid item xs={12} sm={12}>
-                <ul class="nav nav-tabs" id="myTab" role="tablist">
-                  <li class="nav-item">
+                <ul className="nav nav-tabs" id="myTab" role="tablist">
+                  <li className="nav-item">
                     <a
-                      class="nav-link active"
+                      className="nav-link active"
                       id="home-tab"
                       data-toggle="tab"
                       href="#home"
@@ -428,9 +406,9 @@ class GroupDetail extends React.Component {
                       공지사항
                   </a>
                   </li>
-                  <li class="nav-item">
+                  <li className="nav-item">
                     <a
-                      class="nav-link"
+                      className="nav-link"
                       id="profile-tab"
                       data-toggle="tab"
                       href="#profile"
@@ -444,9 +422,9 @@ class GroupDetail extends React.Component {
                 </ul>
               </Grid>
               <Grid item xs={12} sm={12}>
-                <div class="tab-content" id="myTabContent">
+                <div className="tab-content" id="myTabContent">
                   <div
-                    class="tab-pane fade show active"
+                    className="tab-pane fade show active"
                     id="home"
                     role="tabpanel"
                     aria-labelledby="home-tab"
@@ -469,7 +447,7 @@ class GroupDetail extends React.Component {
                       </ul>
                     </nav>
                   </div>
-                  <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                  <div className="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
                     {this.state.studyPosts.map(post => (
                       <PostView key={post.id} postInfo={post} board_name="study" />
                     ))}
