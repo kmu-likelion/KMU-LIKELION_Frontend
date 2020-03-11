@@ -10,8 +10,6 @@ import TextareaAutosize from "@material-ui/core/TextareaAutosize";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
-import ListItemAvatar from "@material-ui/core/ListItemAvatar";
-import Avatar from "@material-ui/core/Avatar";
 
 export default class CommentView extends Component {
   state = {
@@ -38,9 +36,7 @@ export default class CommentView extends Component {
   //score type을 위한 state 값 세팅.
   setScoreDict = scoreTypes => {
     let score_list = [];
-    scoreTypes.map(score => {
-      score_list.push("");
-    });
+    scoreTypes.map(() => score_list.push(""));
     this.setState({ score_list: score_list });
   };
 
@@ -59,9 +55,10 @@ export default class CommentView extends Component {
     const { scoreTypes } = this.props;
 
     var score_info = {};
-    scoreTypes.map((score, index) => {
-      score_info[score.score_type] = Number(this.state.score_list[index]);
-    });
+    scoreTypes.map(
+      (score, index) =>
+        (score_info[score.score_type] = Number(this.state.score_list[index]))
+    );
 
     await api
       .createScore(this.props.submissionId, {
@@ -71,7 +68,7 @@ export default class CommentView extends Component {
           evaluation: this.state.body
         }
       })
-      .then(res => {
+      .then(() => {
         this.setState({
           body: "",
           score_list: []

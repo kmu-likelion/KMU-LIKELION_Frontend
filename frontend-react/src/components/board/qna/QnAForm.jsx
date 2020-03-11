@@ -144,7 +144,6 @@ class QnAForm extends Component {
           required
         />
         <TextField
-          className={classes.textarea}
           label="Title"
           name="title"
           value={this.state.title}
