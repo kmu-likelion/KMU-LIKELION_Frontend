@@ -14,10 +14,6 @@ class ConfirmContainer extends Component {
     });
   };
 
-  componentDidMount() {
-    console.log("New ComponentDidMount");
-  }
-
   render() {
     return (
       <Container maxWidth="lg" className="PostingSection">

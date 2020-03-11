@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import api from "../../../api/AdmissionAPI";
 import AdmissionStore from "../../../store/AdmissionStore";
 import moment from "moment";
+
 //@material-ui
 import TextField from "@material-ui/core/TextField";
 import { withStyles } from "@material-ui/core/styles";
@@ -51,7 +52,7 @@ class CheckAnswerForm extends Component {
     await api
       .getJoinDatawithId(id)
       .then(res => {
-        console.log("업데이트 모달을 위한 데이터 가져옴 ", res.data);
+        // console.log("업데이트 모달을 위한 데이터 가져옴 ", res.data);
         this.setState({
           name: res.data.name,
           phoneNum: res.data.phone_number,
@@ -82,7 +83,7 @@ class CheckAnswerForm extends Component {
         pw: this.state.password
       })
       .then(res => {
-        console.log("정상적으로 업데이트 됨", res.data);
+        // console.log("정상적으로 업데이트 됨", res.data);
         this.props.handlingClose();
         this.props.getJoinData(this.context.state.applicationId);
       })
@@ -97,7 +98,7 @@ class CheckAnswerForm extends Component {
   };
 
   render() {
-    const { classes } = this.props;
+    // const { classes } = this.props;
     const { open, handlingClose } = this.props;
 
     return (

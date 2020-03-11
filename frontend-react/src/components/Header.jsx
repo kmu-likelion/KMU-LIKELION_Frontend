@@ -14,17 +14,12 @@ import { Nav, Navbar, NavDropdown } from "react-bootstrap";
 export default function Header(props) {
   const store = useContext(Store);
   const username = window.sessionStorage.getItem("username");
-  let [userType, setUserType] = useState(0);
 
   const DropItem = ({ children, to }) => (
     <Link to={to} className="link drop-link">
       {children}
     </Link>
   );
-
-  useEffect(() => {
-    setUserType(window.sessionStorage.getItem("user_type"));
-  });
 
   return (
     <div>
@@ -58,7 +53,7 @@ export default function Header(props) {
           </Nav>
           {store.logged ? (
             <>
-              {userType !== "3" ? (
+              {window.sessionStorage.getItem("user_type") !== "3" ? (
                 <Nav>
                   <NavDropdown title="동아리관리" id="collasible-nav-dropdown">
                     <NavDropdown.Item as={Link} to="/mentoring">

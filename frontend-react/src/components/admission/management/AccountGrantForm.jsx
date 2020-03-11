@@ -17,8 +17,6 @@ class AccountGrantForm extends React.Component {
     startNumber: "8기"
   };
   componentDidMount() {
-    console.log("아이디!!! ", this.props.joinId);
-
     this.getJoinData();
   }
 
@@ -26,14 +24,10 @@ class AccountGrantForm extends React.Component {
     await api
       .getJoinDatawithId(this.props.joinId)
       .then(res => {
-        console.log("[Modal] get joinData", res.data);
+        // console.log("[Modal] get joinData", res.data);
         this.setState({
           joinData: res.data
         });
-
-        // let username = res.data.email;
-        // username = username.split("@")[0];
-        // console.log(username);
       })
       .catch(err => console.log(err));
   };
@@ -69,7 +63,7 @@ class AccountGrantForm extends React.Component {
   };
 
   render() {
-    const { joinId, open, handlingClose } = this.props;
+    const { open, handlingClose } = this.props;
 
     return (
       <div>
@@ -96,11 +90,7 @@ class AccountGrantForm extends React.Component {
               </Select>
               <br />
               <br />
-              <TextField
-                label="입부기수"
-                defaultValue="8기" //나중에 수정때리던가.. 아 귀찮아 죽겠오
-                disabled
-              />
+              <TextField label="입부기수" defaultValue="8기" disabled />
             </Modal.Body>
             <Modal.Footer>
               <Button type="submit">계정생성 </Button>

@@ -40,8 +40,7 @@ const useStyles = theme => ({
 class ListView extends Component {
   render() {
     const { classes, index, assignmentList, title } = this.props;
-    // const { postInfo } = this.props;
-    // const pubDate = moment(postInfo.pub_date).format("YYYY-MM-DD HH:MM");
+
     return (
       <ExpansionPanel key={index}>
         <ExpansionPanelSummary

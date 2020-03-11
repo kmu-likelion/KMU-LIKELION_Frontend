@@ -1,8 +1,6 @@
 import React, { Component } from "react";
 import Button from "@material-ui/core/Button";
-// import CardActions from '@material-ui/core/CardActions';
 import api from "../../../api/AdmissionAPI";
-import TextField from "@material-ui/core/TextField";
 import { Link } from "react-router-dom";
 import Avatar from "@material-ui/core/Avatar";
 import Paper from "@material-ui/core/Paper";
@@ -27,10 +25,8 @@ export default class CommentView extends Component {
   };
 
   componentDidMount() {
-    const user_id = window.sessionStorage.getItem("id");
-    console.log("현재 유저 아이디 : ", user_id);
     this.setState({
-      request_user: user_id
+      request_user: window.sessionStorage.getItem("id")
     });
   }
 
@@ -48,7 +44,6 @@ export default class CommentView extends Component {
         score: this.state.update_score
       })
       .then(res => {
-        console.log("정상적으로 수정되었습니다. ", res.data);
         this.setState({
           is_update: false
         });

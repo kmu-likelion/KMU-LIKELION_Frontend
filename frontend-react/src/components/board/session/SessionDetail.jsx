@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-// import api from "../../../api/BoardAPI";
 import { Link } from "react-router-dom";
 import moment from "moment";
 import api from "../../../api/BoardAPI";
@@ -30,14 +29,12 @@ class SessionDetail extends Component {
 
   componentDidMount() {
     this.getAssignments(this.props.post_id);
-    //this.setState({userId:window.sessionStorage.getItem("username")});
     this.getUser(window.sessionStorage.getItem("username"));
   }
 
   getUser = async username => {
     await getUser(username)
       .then(res => {
-        console.log("SeSSion User Data", res.data);
         this.setState({
           user_type: res.data[0].user_type
         });
@@ -46,10 +43,7 @@ class SessionDetail extends Component {
   };
 
   getAssignments = async id => {
-    console.log("post id:", id);
     await api.getPost("session", id).then(res => {
-      console.log("detail에서 받은 데이터 ?", res.data);
-      console.log(res.data.assignments.length);
       this.setState({
         title: res.data.title,
         body: res.data.body,

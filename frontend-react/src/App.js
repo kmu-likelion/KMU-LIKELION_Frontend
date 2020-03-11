@@ -1,6 +1,6 @@
 import React from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
-import { Switch, Redirect } from "react-router-dom";
+// import { Switch, Redirect } from "react-router-dom";
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 
@@ -21,9 +21,8 @@ import AdmissionRouter from "./routes/AdmissionRouter";
 import AssignmentRouter from "./routes/AssignmentRouter";
 
 import MentoringContainer from "./components/mentoring/MentoringContainer";
-// import Register from "./components/accounts/Register";
 
-import NotFoundPage from "./components/NotFoundPage";
+// import NotFoundPage from "./components/NotFoundPage";
 
 class App extends React.Component {
   constructor(props) {
@@ -44,7 +43,6 @@ class App extends React.Component {
 
   onLogout = async () => {
     if (this.state.logged) {
-      // console.log(tokenConfig());
       await authlogout(tokenConfig())
         .then(() => {
           this.setState({
@@ -69,7 +67,6 @@ class App extends React.Component {
   }
 
   render() {
-    // console.log("url path : ", this.props);
     return (
       <Store.Provider value={this.state}>
         <Router>

@@ -1,7 +1,4 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
-// import moment from "moment";
-
 import { withStyles } from "@material-ui/core/styles";
 
 import List from "@material-ui/core/List";
@@ -34,7 +31,7 @@ const useStyles = theme => ({
 
 class ScoreView extends Component {
   render() {
-    const { classes, submissionId, scores, totalScore } = this.props;
+    const { classes, scores, totalScore } = this.props;
     return (
       <List component="nav" aria-label="contacts">
         <ListItem className={classes.list}>

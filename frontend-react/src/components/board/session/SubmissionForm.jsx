@@ -1,10 +1,12 @@
 import React, { Component } from "react";
 import api from "../../../api/SessionAPI";
+
 //@material-ui
 import TextField from "@material-ui/core/TextField";
 import { withStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
+
 //bootstrap
 import Modal from "react-bootstrap/Modal";
 
@@ -26,7 +28,6 @@ class SubmissionForm extends Component {
     body: "",
     url: "",
     submittedDate: ""
-    // editFlag: false
   };
 
   componentDidMount() {
@@ -42,7 +43,6 @@ class SubmissionForm extends Component {
     await api
       .getSubmission(this.state.userId, this.props.assignmentId)
       .then(res => {
-        console.log("request user의 과제제출정보 가져옴.", res.data);
         this.setState({
           id: res.data[0].id,
           body: res.data[0].body,
@@ -67,7 +67,6 @@ class SubmissionForm extends Component {
         lecture: this.props.assignmentId
       })
       .then(res => {
-        console.log("성공적으로 과제 수정됨.", res.data);
         this.props.handlingClose();
         this.props.getUserSubmission();
         this.getSubmissionInfo();
@@ -94,7 +93,6 @@ class SubmissionForm extends Component {
         lecture: this.props.assignmentId
       })
       .then(res => {
-        console.log("성공적으로 과제 제출됨.", res.data);
         this.props.handlingClose();
         this.props.getUserSubmission();
         this.getSubmissionInfo();
