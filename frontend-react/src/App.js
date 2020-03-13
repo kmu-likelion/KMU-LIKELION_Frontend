@@ -7,20 +7,24 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import Main from "./components/main/Main";
-
 import Login from "./components/accounts/Login";
 import Mypage from "./components/accounts/mypage/MyPage";
 
 import Store from "./store/Store";
-
 import { authlogout, tokenConfig } from "./api/AuthAPI";
 
-import BoardRouter from "./routes/BoardRouter";
-import StudyRouter from "./routes/StudyRouter";
-import AdmissionRouter from "./routes/AdmissionRouter";
-import AssignmentRouter from "./routes/AssignmentRouter";
-
 import MentoringContainer from "./components/mentoring/MentoringContainer";
+
+import Splitting from "./splitting";
+
+export const BoardRouter = Splitting(() => import("./routes/BoardRouter"));
+export const StudyRouter = Splitting(() => import("./routes/StudyRouter"));
+export const AdmissionRouter = Splitting(() =>
+  import("./routes/AdmissionRouter")
+);
+export const AssignmentRouter = Splitting(() =>
+  import("./routes/AssignmentRouter")
+);
 
 // import NotFoundPage from "./components/NotFoundPage";
 
