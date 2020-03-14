@@ -22,7 +22,7 @@ const Pagination = (props) => {
           className= {page === currentPage ? "page-item active" : "page-item"} // Bootstrap을 이용하여 현재 페이지를 시각적으로 표시
           style={{ cursor: "pointer" }}
         >
-          <a className="page-link" onClick={() => handlePageChange(page)}>{page}</a> {/* 페이지 번호 클릭 이벤트 처리기 지정 */}
+          <a className="page-link" href="#!" onClick={e => handlePageChange(e, page)}>{page}</a> {/* 페이지 번호 클릭 이벤트 처리기 지정 */}
         </li>
 
         ))}

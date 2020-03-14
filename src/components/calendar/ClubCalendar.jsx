@@ -65,7 +65,6 @@ class ClubCalendar extends React.Component {
   };
 
   eventStyleGetter = (event, start, end, isSelected) => {
-    console.log(event);
     // var backgroundColor = '#' + event.hexColor;
     var backgroundColor = '#FFBB00'; // 기본 이벤트 색상
     var style = {

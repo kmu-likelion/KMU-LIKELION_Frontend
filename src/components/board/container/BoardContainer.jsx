@@ -54,7 +54,8 @@ class BoardContainer extends React.Component {
       });
   };
 
-  handlePageChange = page => {
+  handlePageChange = (e, page) => {
+    e.preventDefault();
     this.setState({ currentPage: page });
     this.getPage(this.state.boardType, page);
   };
@@ -200,8 +201,9 @@ class BoardContainer extends React.Component {
                         style={{ cursor: "pointer" }}
                       >
                         <a
+                          href="#!"
                           className="page-link"
-                          onClick={e => this.handlePageChange(page)}
+                          onClick={e => this.handlePageChange(e, page)}
                         >
                           {page}
                         </a>

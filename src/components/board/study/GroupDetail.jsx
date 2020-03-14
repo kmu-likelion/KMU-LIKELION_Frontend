@@ -159,11 +159,13 @@ class GroupDetail extends React.Component {
       .catch(err => console.log(err));
   };
 
-  NhandlePageChange = (page) => {
+  NhandlePageChange = (e, page) => {
+    e.preventDefault();
     this.setState({ NcurrentPage: page });
     this.NgetPage(page);
   };
-  ShandlePageChange = (page) => {
+  ShandlePageChange = (e, page) => {
+    e.preventDefault();
     this.setState({ ScurrentPage: page });
     this.SgetPage(page);
   };
@@ -449,7 +451,7 @@ class GroupDetail extends React.Component {
                             className={page === this.state.NcurrentPage ? "page-item active" : "page-item"} // Bootstrap을 이용하여 현재 페이지를 시각적으로 표시
                             style={{ cursor: "pointer" }}
                           >
-                            <a className="page-link" onClick={e => this.NhandlePageChange(page)}>{page}</a> {/* 페이지 번호 클릭 이벤트 처리기 지정 */}
+                            <a className="page-link" href="#!" onClick={e => this.NhandlePageChange(e, page)}>{page}</a> {/* 페이지 번호 클릭 이벤트 처리기 지정 */}
                           </li>
 
                         ))}
@@ -475,7 +477,7 @@ class GroupDetail extends React.Component {
                             className={page === this.state.ScurrentPage ? "page-item active" : "page-item"} // Bootstrap을 이용하여 현재 페이지를 시각적으로 표시
                             style={{ cursor: "pointer" }}
                           >
-                            <a className="page-link" onClick={e => this.ShandlePageChange(page)}>{page}</a> {/* 페이지 번호 클릭 이벤트 처리기 지정 */}
+                            <a className="page-link" href="#!" onClick={e => this.ShandlePageChange(e, page)}>{page}</a> {/* 페이지 번호 클릭 이벤트 처리기 지정 */}
                           </li>
 
                         ))}
