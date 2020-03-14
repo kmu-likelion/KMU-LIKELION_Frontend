@@ -23,7 +23,7 @@ jobs:
       # - uses: actions/checkout@v2
 
       - name: Checkout source code. # 레포지터리 체크아웃
-        run: actions/checkout@master
+        run: actions/checkout@v2
 
       - name: Cache node modules # node modules 캐싱
         uses: actions/cache@v1
