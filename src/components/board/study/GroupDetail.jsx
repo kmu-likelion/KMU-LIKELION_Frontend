@@ -186,6 +186,7 @@ class GroupDetail extends React.Component {
     await api
       .getMemberWithGroupId(this.state.group_id)
       .then(res => {
+        console.log("group member : ", res.data);
         this.setState({
           group_members: res.data
         });
