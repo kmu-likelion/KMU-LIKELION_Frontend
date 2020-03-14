@@ -1,6 +1,6 @@
 import axios from "axios";
 import { tokenConfig } from "./AuthAPI";
-axios.defaults.baseURL = "http://127.0.0.1:8000/";
+axios.defaults.baseURL = "http://13.125.36.95/";
 axios.defaults.xsrfCookieName = "csrftoken";
 axios.defaults.xsrfHeaderName = "X-CSRFToken";
 
