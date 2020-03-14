@@ -64,6 +64,24 @@ class ClubCalendar extends React.Component {
     });
   };
 
+  eventStyleGetter = (event, start, end, isSelected) => {
+    console.log(event);
+    // var backgroundColor = '#' + event.hexColor;
+    var backgroundColor = '#FFBB00'; // 기본 이벤트 색상
+    var style = {
+        backgroundColor: backgroundColor,
+        borderRadius: '5px',
+        opacity: 0.8,
+        color: 'black',
+        border: '0px',
+        display: 'block'
+    };
+    return { style: style };
+}
+
+
+  /* modal function */
+  
   modalOpen = () => {
     this.setState({
       modalFlag: true
@@ -77,13 +95,13 @@ class ClubCalendar extends React.Component {
   };
 
   modalEvent = async event => {
-    // event.preventDefault();
     await this.setState({
       modalEvent: event
     });
     this.modalOpen();
     // console.log("모달 이벤트 상태저장! ", this.state.modalEvent);
   };
+
 
   render() {
     return (
@@ -95,6 +113,7 @@ class ClubCalendar extends React.Component {
           endAccessor="end"
           style={{ height: 500 }}
           views={["month"]}
+          eventPropGetter={this.eventStyleGetter}
           onSelectEvent={(event, e) => {
             this.modalEvent(event);
           }}
