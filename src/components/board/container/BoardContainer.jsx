@@ -20,7 +20,7 @@ class BoardContainer extends React.Component {
       userId: "",
       selectOpen: false,
       startNumber: "8th",
-      postCount: 0,
+      postCount: -1,
       currentPage: 1,
       Plength: "2"
     };
@@ -80,11 +80,7 @@ class BoardContainer extends React.Component {
       .then(res => {
         console.log("session posts 가져오기 성공! ", res.data);
         
-        if(res.data.results.length === 0) {
-          this.setState({ postList: res.data.results, postCount: 0 });
-        } else {
-          this.setState({ postList: res.data.results, postCount: res.data.results.length });
-        }
+        this.setState({ postList: res.data.results, postCount: res.data.results.length });
         
       })
       .catch(err => {
