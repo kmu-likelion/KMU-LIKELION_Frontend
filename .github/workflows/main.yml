@@ -39,6 +39,16 @@ jobs:
 
       - name: Build # React Build
         run: npm run build
+
+      - name: Deploy
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        run: |
+          aws s3 cp \
+            --recursive \
+            --region ap-northeast-1 \
+            build s3://kmu-likeliuon-deploy
     # Runs a set of commands using the runners shell
     # - name: Run a multi-line script
     #   run: |
