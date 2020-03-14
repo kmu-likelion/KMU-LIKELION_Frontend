@@ -175,16 +175,16 @@ class BoardContainer extends React.Component {
                     board_name={this.state.boardType}
                   />
                 ))}
+                {this.state.postCount === 0 ? (
+                <>
+                  <Typography variant="h2">작성된 게시물이 없습니다.</Typography>
+                </>
+                ):(<></>)}
               </Grid>
               <Grid item sm={1}></Grid>
 
               <Grid className="paginator" item xs={12} sm={12}>
-                {/* <Pagination
-                  itemsCount={this.state.post.count}
-                  pageSize={this.state.postList.length}
-                  handlePageChange={this.handlePageChange}
-                  currentPage={this.state.currentPage}
-                /> */}
+
                 <nav>
                   <ul className="pagination">
                     {pages.map(page => (

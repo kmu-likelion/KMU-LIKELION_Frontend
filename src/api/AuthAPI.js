@@ -1,29 +1,5 @@
 import axios from "axios";
 
-axios.defaults.baseURL = "http://ec2-52-194-187-114.ap-northeast-1.compute.amazonaws.com/";
-axios.defaults.xsrfCookieName = "csrftoken";
-axios.defaults.xsrfHeaderName = "X-CSRFToken";
-
-// export default {
-//   /* Auth API */
-
-//   authLogin(data) {
-//     console.log("login api 실행.");
-//     return axios.post("accounts/auth/login/", data);
-//   },
-
-//   authlogout(auth) {
-//     console.log("logout api 실행.");
-//     // console.log("토큰 잘감?:", token.headers.Authorization);
-
-//     return axios.post("accounts/auth/logout/", null, auth);
-//   },
-//   getUser(userId) {
-//     console.log("getUser api 실행.");
-//     return axios.get("accounts/user/" + String(userId));
-//   }
-// };
-
 export const authlogin = data => {
   console.log("login API 실행.");
   return axios.post("accounts/auth/login/", data); //date : {username, password}
