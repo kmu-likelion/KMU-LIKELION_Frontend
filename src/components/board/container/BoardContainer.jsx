@@ -177,7 +177,9 @@ class BoardContainer extends React.Component {
                 ))}
                 {this.state.postCount === 0 ? (
                 <>
-                  <Typography variant="h2">작성된 게시물이 없습니다.</Typography>
+                  <br/>
+                  <Typography variant="h4" style={{ textAlign:"center", color:"#D5D5D5" }}>작성된 게시물이 없습니다.</Typography>
+                  <br/>
                 </>
                 ):(<></>)}
               </Grid>
