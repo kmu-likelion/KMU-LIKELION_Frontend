@@ -20,7 +20,7 @@ class BoardContainer extends React.Component {
       userId: "",
       selectOpen: false,
       startNumber: "8th",
-      postCount: {},
+      postCount: 0,
       currentPage: 1,
       Plength: "2"
     };
@@ -187,7 +187,6 @@ class BoardContainer extends React.Component {
               <Grid item sm={1}></Grid>
 
               <Grid className="paginator" item xs={12} sm={12}>
-
                 <nav>
                   <ul className="pagination">
                     {pages.map(page => (
@@ -197,7 +196,7 @@ class BoardContainer extends React.Component {
                           page === this.state.currentPage
                             ? "page-item active"
                             : "page-item"
-                        } // Bootstrap을 이용하여 현재 페이지를 시각적으로 표시
+                        }
                         style={{ cursor: "pointer" }}
                       >
                         <a
@@ -207,12 +206,12 @@ class BoardContainer extends React.Component {
                         >
                           {page}
                         </a>
-                        {/* 페이지 번호 클릭 이벤트 처리기 지정 */}
                       </li>
                     ))}
                   </ul>
                 </nav>
               </Grid>
+              
             </Grid>
           </Paper>
         </Container>
