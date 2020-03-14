@@ -44,8 +44,8 @@ class GroupDetail extends React.Component {
       NcurrentPage: 1,
       ScurrentPage: 1,
       Plength: "2",
-      NpostCount: "",
-      SpostCount: "",
+      NpostCount: 0,
+      SpostCount: 0,
 
     };
   }
@@ -158,6 +158,7 @@ class GroupDetail extends React.Component {
       })
       .catch(err => console.log(err));
   };
+
   NhandlePageChange = (page) => {
     this.setState({ NcurrentPage: page });
     this.NgetPage(page);
@@ -166,6 +167,7 @@ class GroupDetail extends React.Component {
     this.setState({ ScurrentPage: page });
     this.SgetPage(page);
   };
+
   getGroupPostStudy = async () => {
     await api
       .getPostWithGroupIdStudy(this.state.group_id)
@@ -432,6 +434,13 @@ class GroupDetail extends React.Component {
                     {this.state.noticePosts.map(post => (
                       <PostView key={post.id} postInfo={post} board_name="study" />
                     ))}
+                    {this.state.NpostCount === 0 ? (
+                    <>
+                      <br/>
+                      <Typography variant="h5" style={{ textAlign:"center", color:"#D5D5D5" }}>작성된 게시물이 없습니다.</Typography>
+                      <br/>
+                    </>
+                    ):(<></>)}
                     <nav>
                       <ul className="pagination">
                         {Npages.map(page => (
@@ -451,6 +460,13 @@ class GroupDetail extends React.Component {
                     {this.state.studyPosts.map(post => (
                       <PostView key={post.id} postInfo={post} board_name="study" />
                     ))}
+                    {this.state.SpostCount === 0 ? (
+                    <>
+                      <br/>
+                      <Typography variant="h5" style={{ textAlign:"center", color:"#D5D5D5" }}>작성된 게시물이 없습니다.</Typography>
+                      <br/>
+                    </>
+                    ):(<></>)}
                     <nav>
                       <ul className="pagination">
                         {Spages.map(page => (

@@ -15,6 +15,7 @@ class StudyMain extends React.Component {
     super(props);
     this.state = {
       groupList: [],
+      isEmpty: false,
       userId:"",
     };
   }
@@ -29,8 +30,13 @@ class StudyMain extends React.Component {
       .getAllGroups()
       .then(res => {
         console.log("getAllGroups 메서드 실행.");
-        console.log(res);
-        this.setState({ groupList: res.data });
+        console.log(res.data);
+        
+        if(res.data.length === 0) {
+          this.setState({ groupList: [], isEmpty: true });
+        } else {
+          this.setState({ groupList: res.data, isEmpty: false });
+        }
       })
       .catch(err => console.log(err));
   }
@@ -71,6 +77,13 @@ class StudyMain extends React.Component {
                   />
                 </Grid>
               ))}
+              {this.state.isEmpty ? (
+              <>
+              <br/>
+              <Typography variant="h4" style={{ textAlign:"center", color:"#D5D5D5" }}>진행 중인 스터디가 없습니다.</Typography>
+              <br/>
+              </>):(<></>)}
+
             </Grid>
           </Paper>
         </Container>
