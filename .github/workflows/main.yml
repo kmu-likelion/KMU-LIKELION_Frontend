@@ -48,7 +48,7 @@ jobs:
           aws s3 cp \
             --recursive \
             --region ap-northeast-1 \
-            build s3://kmu-likeliuon-deploy
+            build s3://kmu-likelion-deploy
     # Runs a set of commands using the runners shell
     # - name: Run a multi-line script
     #   run: |
