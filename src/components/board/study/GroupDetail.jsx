@@ -217,7 +217,6 @@ class GroupDetail extends React.Component {
       <Container maxWidth="lg" className="main-container">
         <Paper className="Paper">
           <Grid container spacing={2}>
-
             <Grid
               item
               xs={12}
@@ -229,8 +228,8 @@ class GroupDetail extends React.Component {
               <Typography component="h4" variant="h4">
                 [{this.state.group_name}]
               </Typography>
-
-              <Typography component="pre" className="preTag">
+              <br/>
+              <Typography component="pre" className="preTag" style={{overflow:'auto'}}>
                 {this.state.group_body}
               </Typography>
             </Grid>
@@ -247,7 +246,7 @@ class GroupDetail extends React.Component {
               <IconButton component={Link} to={`/Mypage/${this.state.group_captain.captain_username}`}>
                 <Avatar alt="Recomment-writer" src={this.state.group_captain.user_img} />
               </IconButton>
-              {this.state.group_captain.full_name}
+              {this.state.group_captain.first_name}
               <hr/>
               <Typography variant="h6">
                 그룹멤버
@@ -336,7 +335,7 @@ class GroupDetail extends React.Component {
 
                                 </Select>
 
-                                <Button type="submit">ADD</Button>
+                                <Button type="submit">멤버추가</Button>
                               </form>
                             </TableCell>
                           </TableRow>

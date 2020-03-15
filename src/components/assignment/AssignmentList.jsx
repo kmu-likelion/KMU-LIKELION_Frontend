@@ -32,7 +32,7 @@ class AssignmentContainer extends React.Component {
     return (
       <>
         <Container className="main-container">
-          <Paper elevation={1} style={{ width: "100%", padding: 10 }}>
+          <Paper elevation={1} style={{ width: "100%", padding: '1.5rem', paddingBottom: 40 }}>
             <Grid container spacing={3}>
               <Grid item style={{ display: "flex" }}>
                 <Typography variant="h4">과제관리</Typography>
@@ -52,7 +52,7 @@ class AssignmentContainer extends React.Component {
               </Grid>
 
               <Grid item sm={1}></Grid>
-              <Grid item sm={10}>
+              <Grid item sm={10} xs={12}>
                 {this.state.sessionList.map((session, index) => (
                   <AssignmentView
                     key={index}
