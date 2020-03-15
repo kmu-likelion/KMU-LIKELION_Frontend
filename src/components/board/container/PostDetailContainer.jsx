@@ -166,7 +166,7 @@ class PostDetailContainer extends Component {
                             key={comment.id}
                             user_id={comment.user_id}
                             author_name={comment.author_name}
-                            full_name={comment.full_name}
+                            first_name={comment.first_name}
                             body={comment.body}
                             comment_id={comment.id}
                             recomments={comment.recomments}
@@ -200,7 +200,7 @@ class PostDetailContainer extends Component {
                             key={comment.id}
                             user_id={comment.user_id}
                             author_name={comment.author_name}
-                            full_name={comment.full_name}
+                            first_name={comment.first_name}
                             update_date={comment.update_date}
                             body={comment.body}
                             comment_id={comment.id}

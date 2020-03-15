@@ -67,7 +67,7 @@ export default class AnswerView extends Component {
     const {
       user_id,
       author_name,
-      full_name,
+      first_name,
       body,
       comment_id,
       board_id,
@@ -100,7 +100,7 @@ export default class AnswerView extends Component {
                     />
                   </Link>
                 }
-                title={`${full_name}(${author_name})`}
+                title={`${first_name}(${author_name})`}
                 // subheader="September 14, 2016"
               />
               <CardContent>
@@ -135,7 +135,7 @@ export default class AnswerView extends Component {
                   <Avatar src={user_img} alt="User-Image" aria-label="recipe" />
                 </Link>
               }
-              title={`${full_name}(${author_name})`}
+              title={`${first_name}(${author_name})`}
               subheader={pubDate}
             />
             <CardContent style={{ paddingLeft: "1.5rem" }}>
@@ -175,7 +175,7 @@ export default class AnswerView extends Component {
                 key={recmt.id}
                 user_id={recmt.user_id}
                 author_name={recmt.author_name}
-                full_name={recmt.full_name}
+                first_name={recmt.first_name}
                 body={recmt.body}
                 comment_id={recmt.id}
                 getComments={getComments}

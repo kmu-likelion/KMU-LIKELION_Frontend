@@ -68,7 +68,7 @@ class PostView extends Component {
           <>
             <ListItemText
               primary={postInfo.title}
-              secondary={`${postInfo.full_name}(${postInfo.author_name})`}
+              secondary={`${postInfo.first_name}(${postInfo.author_name})`}
             />
             <ListItemSecondaryAction>
               <small>{pubDate}</small>

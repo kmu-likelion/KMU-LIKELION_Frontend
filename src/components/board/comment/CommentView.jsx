@@ -59,7 +59,7 @@ export default class CommentView extends Component {
     const {
       user_id,
       author_name,
-      full_name,
+      first_name,
       update_date,
       body,
       comment_id,
@@ -128,7 +128,7 @@ export default class CommentView extends Component {
               primary={body}
               secondary={
                 <>
-                  {`${full_name}(${author_name})`}
+                  {`${first_name}(${author_name})`}
                   <Typography variant="caption"> {updateDate}</Typography>
                 </>
               }
