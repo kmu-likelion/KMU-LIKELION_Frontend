@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import api from "../../../api/BoardAPI";
-import comment_api from "../../../api/CommentAPI";
+import CommentAPI from "../../../api/CommentAPI";
 
 import CommentNew from "../comment/CommentNew";
 import CommentView from "../comment/CommentView";
@@ -16,7 +16,7 @@ import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
 import Divider from "@material-ui/core/Divider";
-// import { isValid } from "date-fns/esm";
+
 
 class PostDetailContainer extends Component {
   constructor(props) {
@@ -40,7 +40,7 @@ class PostDetailContainer extends Component {
   }
 
   async getComments(board_name) {
-    await comment_api
+    await CommentAPI
       .getComments(`${board_name}_comment`, this.props.match.params.id)
       .then(res => {
         const _data = res.data;

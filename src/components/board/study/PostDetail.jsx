@@ -1,7 +1,8 @@
 import React, { Component } from "react";
-import api from "../../../api/BoardAPI";
 import { Link } from "react-router-dom";
 import moment from "moment";
+
+import api from "../../../api/BoardAPI";
 
 import LikeView from "../LikeView";
 import Viewer from "../../Viewer";
@@ -10,13 +11,7 @@ import CommentNew from "../comment/CommentNew";
 import CommentView from "../comment/CommentView";
 
 // @material-ui
-import Button from "@material-ui/core/Button";
-import Container from "@material-ui/core/Container";
-import Paper from "@material-ui/core/Paper";
-import Typography from "@material-ui/core/Typography";
-import Table from "@material-ui/core/Table";
-import TableRow from "@material-ui/core/TableRow";
-import TableCell from "@material-ui/core/TableCell";
+import {Container, Paper, Typography, Button, Table, TableRow, TableCell, TableHead, TableBody} from "@material-ui/core"
 
 class PostDetail extends Component {
   state = {
@@ -33,8 +28,7 @@ class PostDetail extends Component {
     this.setState({
       userId: window.sessionStorage.getItem("id")
     });
-    const post_id = this.props.match.params.id;
-    this.getPost(post_id);
+    this.getPost(this.props.match.params.id);
   }
 
   async getPost(postId) {
@@ -59,7 +53,6 @@ class PostDetail extends Component {
     await api
       .getComments(`${board_name}_comment`, this.props.match.params.id)
       .then(res => {
-        console.log("게시물 댓글 : ", res.data);
         this.setState({
           comments: res.data
         });
@@ -74,7 +67,7 @@ class PostDetail extends Component {
     await api.deletePost("study", id);
     console.log("delete post 성공.");
     document.location.href = `/study/${this.props.match.params.group}`;
-    // this.props.history.push(`/study/${this.props.match.params.group}`);
+
   };
 
   render() {
@@ -84,10 +77,12 @@ class PostDetail extends Component {
       2: "기타"
     };
     const post_id = this.props.match.params.id;
+
     return (
       <Container maxWidth="lg" className="main-container">
-        <Paper>
+        <Paper style={{ padding: "1.5rem" }}>
           <Table className={"post-table"}>
+          <TableHead>
             <TableRow>
               <TableCell>
                 <Typography component="h1" variant="h5">
@@ -96,11 +91,15 @@ class PostDetail extends Component {
               </TableCell>
             </TableRow>
             <TableRow>
-              <Typography variant="caption" color="textSecondary">
-                작성일 {this.state.pub_date} /&nbsp; 작성자
-              </Typography>
+              <TableCell>
+                <Typography variant="caption" color="textSecondary">
+                  작성일 {this.state.pub_date} /&nbsp; 작성자
+                </Typography>
+              </TableCell>
             </TableRow>
+          </TableHead>
 
+          <TableBody>
             <TableRow>
               <TableCell className="post-body">
                 <Typography color="textSecondary" component="pre">
@@ -136,7 +135,6 @@ class PostDetail extends Component {
                     </>
                   }
                 />
-
                 <Button
                   color="primary"
                   size="small"
@@ -147,34 +145,35 @@ class PostDetail extends Component {
                 </Button>
               </TableCell>
             </TableRow>
-          </Table>
-          {this.state.userId > 0 ? (
-            <>
-              <Typography component="h1" variant="h6">
-                Comments
-              </Typography>
-              {this.state.comments.map(comment => (
-                <CommentView
-                  key={comment.id}
-                  user_id={comment.user_id}
-                  author_name={comment.author_name}
-                  full_name={comment.full_name}
-                  update_date={comment.update_date}
-                  body={comment.body}
-                  comment_id={comment.id}
-                  recomments={comment.recomments}
-                  getComments={this.callGetComments}
-                  board_id={comment.board}
-                  user_img={comment.user_img}
-                  url={`study_comment`}
-                />
-              ))}
-              <CommentNew
-                url="study_comment"
-                board_id={post_id}
+          </TableBody>
+        </Table>
+        {this.state.userId > 0 ? (
+          <>
+            <Typography component="h1" variant="h6">
+              Comments
+            </Typography>
+            {this.state.comments.map(comment => (
+              <CommentView
+                key={comment.id}
+                user_id={comment.user_id}
+                author_name={comment.author_name}
+                full_name={comment.full_name}
+                update_date={comment.update_date}
+                body={comment.body}
+                comment_id={comment.id}
+                recomments={comment.recomments}
                 getComments={this.callGetComments}
+                board_id={comment.board}
+                user_img={comment.user_img}
+                url={`study_comment`}
               />
-            </>
+            ))}
+            <CommentNew
+              url="study_comment"
+              board_id={post_id}
+              getComments={this.callGetComments}
+            />
+          </>
           ) : (
             <></>
           )}

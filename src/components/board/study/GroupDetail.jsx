@@ -1,28 +1,21 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import api from "../../../api/GroupAPI";
-import api1 from "../../../api/BoardAPI";
-import PostView from "../container/PostView";
+
+import GroupAPI from "../../../api/GroupAPI";
+import BoardAPI from "../../../api/BoardAPI";
 import { getAllUser } from "../../../api/AuthAPI";
-import Container from "@material-ui/core/Container";
-import Paper from "@material-ui/core/Paper";
-import Grid from "@material-ui/core/Grid";
-import Typography from "@material-ui/core/Typography";
-import Button from "@material-ui/core/Button";
-import CancelIcon from '@material-ui/icons/Cancel';
-import ListItem from "@material-ui/core/ListItem";
-import ListItemText from "@material-ui/core/ListItemText";
-import List from "@material-ui/core/List";
-import Table from "@material-ui/core/Table";
-import TableBody from "@material-ui/core/TableBody";
-import TableCell from "@material-ui/core/TableCell";
-import TableRow from "@material-ui/core/TableRow";
-import ListItemAvatar from "@material-ui/core/ListItemAvatar";
-import IconButton from "@material-ui/core/IconButton";
-import MenuItem from "@material-ui/core/MenuItem";
-import Select from "@material-ui/core/Select";
-import Avatar from "@material-ui/core/Avatar";
+
+import PostView from "../container/PostView";
 import _ from 'lodash';
+
+/* @material-ui */
+import {Container, Paper, Grid, Typography, Button, IconButton } from "@material-ui/core"
+import {List, ListItem, ListItemText, ListItemAvatar, MenuItem, Select, Avatar} from "@material-ui/core"
+import {Table, TableBody, TableCell, TableRow } from "@material-ui/core";
+import CancelIcon from '@material-ui/icons/Cancel';
+
+
+
 class GroupDetail extends React.Component {
   constructor(props) {
     super(props);
@@ -59,7 +52,7 @@ class GroupDetail extends React.Component {
     this.getAllUser();
   }
   NgetPage = async (currentPage) => {
-    await api1
+    await BoardAPI
       .getNPage("study", currentPage)
       .then(res => {
         this.setState({
@@ -72,7 +65,7 @@ class GroupDetail extends React.Component {
   }
 
   SgetPage = async (currentPage) => {
-    await api1
+    await BoardAPI
       .getSPage("study", currentPage)
       .then(res => {
         this.setState({
@@ -87,7 +80,7 @@ class GroupDetail extends React.Component {
 
   getAllUser = async () => {
     await getAllUser().then(res => {
-      console.log("모든 유저 받아옴", res.data);
+      // console.log("모든 유저 받아옴", res.data);
       this.setState({
         allUser: res.data
       });
@@ -97,7 +90,7 @@ class GroupDetail extends React.Component {
   //그룹데이터 가져옴
   getGroup = async () => {
     let group_name = this.props.match.params.group;
-    await api
+    await GroupAPI
       .getGroupWithName(group_name)
       .then(res => {
         const group_info = res.data;
@@ -116,9 +109,10 @@ class GroupDetail extends React.Component {
         console.log(err);
       });
   };
+
   addGroupUser = async event => {
     event.preventDefault();
-    await api
+    await GroupAPI
       .addGroupUser({
         "is_captain": false,
         "user_id": this.state.selected_user,
@@ -133,7 +127,7 @@ class GroupDetail extends React.Component {
   };
   deleteGroupUser = async (event, id) => {
     event.preventDefault();
-    await api
+    await GroupAPI
       .deleteGroupUser(id)
       .then(res => {
         this.getGroupMember();
@@ -148,7 +142,7 @@ class GroupDetail extends React.Component {
 
   //해당 그룹의 게시물들을 가져옴
   getGroupPostNotice = async () => {
-    await api
+    await GroupAPI
       .getPostWithGroupIdNotice(this.state.group_id)
       .then(res => {
         this.setState({
@@ -171,7 +165,7 @@ class GroupDetail extends React.Component {
   };
 
   getGroupPostStudy = async () => {
-    await api
+    await GroupAPI
       .getPostWithGroupIdStudy(this.state.group_id)
       .then(res => {
         this.setState({
@@ -183,10 +177,10 @@ class GroupDetail extends React.Component {
   };
 
   getGroupMember = async () => {
-    await api
+    await GroupAPI
       .getMemberWithGroupId(this.state.group_id)
       .then(res => {
-        console.log("group member : ", res.data);
+        // console.log("group member : ", res.data);
         this.setState({
           group_members: res.data
         });
@@ -195,7 +189,7 @@ class GroupDetail extends React.Component {
   };
 
   getGroupCaptain = async () => {
-    await api
+    await GroupAPI
       .getCaptainWithGroupId(this.state.group_id)
       .then(res => {
         this.setState({
@@ -207,7 +201,7 @@ class GroupDetail extends React.Component {
 
   //그룹 삭제
   groupDelete = async () => {
-    await api.deleteGroup(this.state.group_id);
+    await GroupAPI.deleteGroup(this.state.group_id);
     console.log("delete post 성공.");
     document.location.href = "/study";
   };
@@ -223,6 +217,7 @@ class GroupDetail extends React.Component {
       <Container maxWidth="lg" className="main-container">
         <Paper className="Paper">
           <Grid container spacing={2}>
+
             <Grid
               item
               xs={12}
@@ -239,26 +234,34 @@ class GroupDetail extends React.Component {
                 {this.state.group_body}
               </Typography>
             </Grid>
+
             <Grid
               item
               xs={12}
               sm={5}
               style={{ alignItems: "center", textAlign: "center" }}
             >
-              <Typography component="h5" variant="h5">
-                스터디장<br />
+              <Typography variant="h6">
+                스터디장
               </Typography>
               <IconButton component={Link} to={`/Mypage/${this.state.group_captain.captain_username}`}>
                 <Avatar alt="Recomment-writer" src={this.state.group_captain.user_img} />
               </IconButton>
               {this.state.group_captain.full_name}
-              <Typography component="h6" variant="h6">
+              <hr/>
+              <Typography variant="h6">
                 그룹멤버
               </Typography>
+              {this.state.group_members.length === 1 ? (
+                <>
+                  <br/>
+                  <Typography variant="body2" style={{ textAlign:"center", color:"#D5D5D5" }}>현재 소속된 멤버가 없습니다.</Typography>
+                </>
+              ):(<></>)}
               <Typography component="pre" className="preTag">
                 <List subheader={<li />} className={"mentoring-list"}>
                   {this.state.group_members.map(member => (
-                    <div>
+                    <div key={member.id}>
                       {
                         (this.state.group_captain.captain_username) === member.user.username
                           ? (
@@ -328,7 +331,7 @@ class GroupDetail extends React.Component {
                                     <small>All User</small>
                                   </MenuItem>
                                   {this.state.allUser.map(user => (
-                                    <MenuItem value={user.id}>{user.first_name}</MenuItem>
+                                    <MenuItem key={user.id} value={user.id}>{user.first_name}</MenuItem>
                                   ))}
 
                                 </Select>

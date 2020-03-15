@@ -1,16 +1,11 @@
 import React, { Component } from "react";
+import { Link, Redirect } from "react-router-dom";
+
 import { authlogin } from "../../api/AuthAPI";
 import Store from "../../store/Store";
-import { Link, Redirect } from "react-router-dom";
-import Container from "@material-ui/core/Container";
-import Paper from "@material-ui/core/Paper";
-import Avatar from "@material-ui/core/Avatar";
-import Button from "@material-ui/core/Button";
-import TextField from "@material-ui/core/TextField";
-import Grid from "@material-ui/core/Grid";
-import Typography from "@material-ui/core/Typography";
+
+import {Container, Paper, Avatar, Button, Grid, TextField, Typography, withStyles} from "@material-ui/core";
 import PersonOutlineOutlinedIcon from "@material-ui/icons/PersonOutlineOutlined";
-import { withStyles } from "@material-ui/core/styles";
 
 const useStyles = theme => ({
   paper: {
@@ -47,10 +42,6 @@ class Login extends Component {
     username: "",
     password: ""
   };
-
-  componentDidMount() {
-    console.log("New ComponentDidMount");
-  }
 
   handlingChange = event => {
     this.setState({ [event.target.name]: event.target.value });
