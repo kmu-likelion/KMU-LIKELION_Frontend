@@ -44,7 +44,7 @@ class PostDetailContainer extends Component {
       .getComments(`${board_name}_comment`, this.props.match.params.id)
       .then(res => {
         const _data = res.data;
-        console.log("가져온 댓글 : ", _data.results);
+        // console.log("가져온 댓글 : ", _data.results);
         this.setState({
           comments: _data,
           board_name: board_name

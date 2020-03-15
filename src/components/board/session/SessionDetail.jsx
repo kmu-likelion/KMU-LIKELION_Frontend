@@ -12,9 +12,7 @@ import AuthButton from "../../common/AuthButton";
 // @material-ui
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
-import Table from "@material-ui/core/Table";
-import TableRow from "@material-ui/core/TableRow";
-import TableCell from "@material-ui/core/TableCell";
+import {Table, TableRow, TableCell, TableBody, TableHead } from "@material-ui/core";
 
 class SessionDetail extends Component {
   state = {
@@ -80,18 +78,24 @@ class SessionDetail extends Component {
 
     return (
       <Table className={"post-table"}>
-        <TableRow>
-          <TableCell>
-            <Typography component="h1" variant="h5">
-              {this.state.title}
-            </Typography>
-          </TableCell>
-        </TableRow>
-        <TableRow>
-          <Typography variant="caption" color="textSecondary">
-            작성일 {this.state.pub_date} /&nbsp; 작성자 {this.state.author_name}
-          </Typography>
-        </TableRow>
+        <TableHead>
+          <TableRow>
+            <TableCell>
+              <Typography component="h1" variant="h5">
+                {this.state.title}
+              </Typography>
+            </TableCell>
+          </TableRow>
+          <TableRow>
+            <TableCell>
+              <Typography variant="caption" color="textSecondary">
+                작성일 {this.state.pub_date} /&nbsp; 작성자 {this.state.author_name}
+              </Typography>
+            </TableCell>
+          </TableRow>
+        </TableHead>
+
+        <TableBody>
         <TableRow>
           <TableCell className="post-body">
             <Typography color="textSecondary" component="pre">
@@ -118,7 +122,6 @@ class SessionDetail extends Component {
             />
 
             <br />
-
             <AssignmentForm
               open={this.state.modalFlag}
               handlingOpen={this.modalOpen}
@@ -177,6 +180,7 @@ class SessionDetail extends Component {
             </Button>
           </TableCell>
         </TableRow>
+        </TableBody>
       </Table>
     );
   }

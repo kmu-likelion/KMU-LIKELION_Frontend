@@ -19,7 +19,7 @@ export default class EvaluationView extends Component {
     request_user: ""
   };
 
-  componentWillMount() {
+  UNSAFE_componentWillMount() {
     this.setState({
       request_user: window.sessionStorage.getItem("id")
     });

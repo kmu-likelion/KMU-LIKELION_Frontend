@@ -25,7 +25,7 @@ class BoardContainer extends React.Component {
       Plength: "2"
     };
   }
-  componentWillMount() {
+  UNSAFE_componentWillMount() {
     // console.log("해당 보드는? ", this.props.match.path);
     let board_name = this.props.match.path.split("/")[1];
     this.setState({

@@ -20,7 +20,7 @@ export default class CommentView extends Component {
     board_id: ""
   };
 
-  componentWillMount() {
+  UNSAFE_componentWillMount() {
     this.setState({
       userid: window.sessionStorage.getItem("id"),
       username: window.sessionStorage.getItem("username"),

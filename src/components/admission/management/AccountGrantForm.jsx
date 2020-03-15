@@ -42,7 +42,7 @@ class AccountGrantForm extends React.Component {
       registerUser({
         username: username,
         password: `kmu${this.state.joinData.student_id}`,
-        first_name: this.state.joinData.name,
+        first_name: this.state.joinData.name, //fistname 만을 사용하도록 함.
         last_name: "",
         email: this.state.joinData.email,
         major: this.state.joinData.major,

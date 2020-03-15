@@ -8,8 +8,12 @@ class AuthButton extends React.Component {
     writerId: "",
     logged: ""
   };
-  componentWillMount() {
-    this.getWriter();
+  UNSAFE_componentWillMount() {
+
+    if(this.props.authType === "isWriter") {
+      this.getWriter();
+    }
+
     if (window.sessionStorage.getItem("username") !== null) {
       this.setState({
         userType: Number(window.sessionStorage.getItem("user_type")),
@@ -20,9 +24,11 @@ class AuthButton extends React.Component {
   }
 
   getWriter = async () => {
+    console.log("this.props.info ", this.props.info);
     await api
       .getPost(this.props.boardName, this.props.info)
       .then(res => {
+        // console.log("getWriter! : ", res);
         this.setState({
           writerId: res.data.user_id
         });
@@ -32,6 +38,8 @@ class AuthButton extends React.Component {
 
   render() {
     const { authType, info, button } = this.props;
+    /* info = iswriter:postId, permission:유저권한타입 */
+
     let renderButton = <></>;
 
     if (this.state.logged) {

@@ -60,8 +60,10 @@ class ClubCalendar extends React.Component {
             event.user_id
           );
         }
+        return 0;
       });
     });
+    
   };
 
   eventStyleGetter = (event, start, end, isSelected) => {
@@ -122,7 +124,7 @@ class ClubCalendar extends React.Component {
           open={this.state.modalFlag}
           handlingOpen={this.modalOpen}
           handlingClose={this.modalClose}
-          getAllEvent={this.getAllEvent}
+          // getAllEvent={this.getAllEvent}
         />
       </div>
     );

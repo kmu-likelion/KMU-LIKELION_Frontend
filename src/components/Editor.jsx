@@ -27,7 +27,7 @@ const Editor = memo(({ handlingChange, value }) => {
   };
 
   return (
-    <div class="image-fixer">
+    <div className="image-fixer">
       <MdEditor
         name="body"
         value={value || ""}

@@ -12,8 +12,8 @@ export default class LikeView extends Component {
     is_liked: ""
   };
 
-  componentWillMount() {
-    console.log("LikeView ComponentWillMount");
+  UNSAFE_componentWillMount() {
+  
     const { post_id, board_name } = this.props;
     this.setState({
       post_id: post_id,
@@ -30,12 +30,10 @@ export default class LikeView extends Component {
     await api
       .getLike(url, id)
       .then(status => {
-        console.log("return : ", status);
-        console.log("현재 스크랩 상태 : ", status.data.status);
+        console.log("Like state : ", status);
         this.changeLikeStatus(status.data.state);
       })
       .catch(err => console.log(err));
-    console.log("get Like 성공.");
   };
 
   handlingLike = async (url, id) => {

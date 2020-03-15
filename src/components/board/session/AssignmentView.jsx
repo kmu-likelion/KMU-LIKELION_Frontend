@@ -21,6 +21,7 @@ export default class AssignmentView extends Component {
     submissionInfo: "",
     editFlag: false,
     submitInfo: {},
+    isSubmistted: false,
     modalFlag: false
   };
 
@@ -42,7 +43,8 @@ export default class AssignmentView extends Component {
           submitted = true;
         }
         this.setState({
-          submissionInfo: res.data
+          submissionInfo: res.data,
+          isSubmistted: submitted
         });
       })
       .catch(err => {
