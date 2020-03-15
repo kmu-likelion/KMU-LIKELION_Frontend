@@ -29,8 +29,7 @@ class StudyMain extends React.Component {
     await api
       .getAllGroups()
       .then(res => {
-        console.log("getAllGroups 메서드 실행.");
-        console.log(res.data);
+        console.log("getAllGroups 메서드 실행.", res.data);
         
         if(res.data.length === 0) {
           this.setState({ groupList: [], isEmpty: true });
@@ -53,12 +52,12 @@ class StudyMain extends React.Component {
           }}
         >
           <Paper className="Paper">
-            <Typography component="h1" variant="h4">
+            <Typography component="h1" variant="h4" style={{paddingBottom: 15}}>
               스터디그룹
             </Typography>
             {this.state.userId >0
             ?(
-              <Link to={"/study/group/new"}>새로운 그룹 생성하기</Link>
+              <Link to={"/study/group/new"}>새 스터디그룹 생성</Link>
             )
             :(
               <></>

@@ -13,7 +13,7 @@ import { withStyles } from "@material-ui/core/styles";
 const useStyles = theme => ({
   root: {
     // maxWidth: 345
-    // maxHeight: 350
+    // maxHeight: 350,
     width: "100%"
   },
   media: {
@@ -37,11 +37,11 @@ class GroupView extends Component {
             image={img}
             title="Group image"
           />
-          <CardContent>
+          <CardContent style={{height:'150px'}}>
             <Typography gutterBottom variant="h5" component="h2">
               {name}
             </Typography>
-            <Typography variant="body2" color="textSecondary" component="p">
+            <Typography variant="body2" color="textSecondary" component="p" style={{display:'block', height:'100px',  overflow:'hidden', textOverflow:'ellipsis'}}>
               {introduction}
             </Typography>
           </CardContent>
