@@ -5,7 +5,7 @@ import ScoreNew from "./ScoreNew";
 import ScoreView from "./ScoreView";
 
 import {Typography, Card, CardActions, CardContent} from "@material-ui/core";
-
+import moment from "moment";
 
 
 class GradingView extends React.Component {
@@ -23,6 +23,8 @@ class GradingView extends React.Component {
       assignmentId,
       getSubmission
     } = this.props;
+
+
     if (memberId === "") {
       return <>...</>;
     } else {
@@ -57,7 +59,7 @@ class GradingView extends React.Component {
                     {member.first_name}({member.username})
                   </Typography>
                   <Typography color="textSecondary">
-                    제출기록 :: {submissionInfo[0].update_date}
+                    제출기록 :: {moment(submissionInfo[0].update_date).format("YY/MM/DD hh:mm")}
                   </Typography>
                   <Typography variant="body2">
                     {submissionInfo[0].body}

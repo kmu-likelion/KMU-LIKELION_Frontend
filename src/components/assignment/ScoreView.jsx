@@ -28,13 +28,14 @@ const useStyles = theme => ({
 class ScoreView extends Component {
   render() {
     const { classes, scores, totalScore } = this.props;
+
     return (
       <List component="nav" aria-label="contacts">
         <ListItem className={classes.list}>
           <ListItemAvatar>
             <AssignmentIcon />
           </ListItemAvatar>
-          <ListItemText primary="총 점수" secondary={`${totalScore} / 100`} />
+          <ListItemText primary="총 점수" secondary={`${totalScore}`} />
           {scores.map(score => (
             <ListItemText
               primary={score.score_type}

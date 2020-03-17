@@ -58,8 +58,6 @@ class AssignmentForm extends Component {
 
   handlingChange = event => {
     this.setState({ [event.target.name]: event.target.value });
-    console.log("입력값 :", event.target.value);
-    console.log("상태값 :", this.state.title);
   };
 
   handlingEditorChange = ({ html, text }) => {

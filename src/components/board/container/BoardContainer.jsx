@@ -78,10 +78,7 @@ class BoardContainer extends React.Component {
     await api
       .getMyAlumPosts(boardType, start_number)
       .then(res => {
-        console.log("session posts 가져오기 성공! ", res.data);
-        
         this.setState({ postList: res.data.results, postCount: res.data.results.length });
-        
       })
       .catch(err => {
         console.log(err);

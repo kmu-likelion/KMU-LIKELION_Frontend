@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import moment from "moment";
 
 import {List, ListItem, ListItemText, ListItemAvatar, ListItemSecondaryAction} from "@material-ui/core";
 import {Divider, Typography, IconButton, Avatar} from "@material-ui/core";
@@ -21,6 +22,8 @@ export default class EvaluationView extends Component {
   render() {
     const { evaluator_name, evaluation, evaluation_pub_date } = this.props;
 
+    const eval_pubDate = moment(evaluation_pub_date).format("YY/MM/DD hh:mm");
+
     return (
       <List component="nav" aria-label="contacts">
         <ListItem>
@@ -34,7 +37,7 @@ export default class EvaluationView extends Component {
             secondary={`[채점자] ${evaluator_name}`}
           />
           <ListItemSecondaryAction>
-            <small>{evaluation_pub_date}</small>
+            <Typography variant="caption" color="textsecondary">{eval_pubDate}</Typography>
           </ListItemSecondaryAction>
         </ListItem>
         <Divider variant="inset" />
