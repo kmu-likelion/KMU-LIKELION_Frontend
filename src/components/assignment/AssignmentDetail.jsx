@@ -1,6 +1,8 @@
 import React from "react";
+import moment from "moment";
 import api from "../../api/SessionAPI";
 import GradingContainer from "./GradingContainer";
+import Viewer from "../Viewer";
 
 import {Container, Paper, Typography, Grid, Tabs, Tab, Button} from "@material-ui/core";
 
@@ -37,6 +39,8 @@ class AssignmentDetail extends React.Component {
   };
 
   render() {
+    const deadline = moment(this.state.assignmentInfo.update_date).format("YY/MM/DD hh:mm");
+
     return (
       <>
         <Container className="main-container">
@@ -63,17 +67,17 @@ class AssignmentDetail extends React.Component {
                 <div>
                   {this.state.tabValue === 0 ? (
                     <Card variant="outlined">
-                      <CardContent>
-                        <Typography color="textSecondary" gutterBottom>
+                      <CardContent style={{margin : 25}}>
+                        <Typography variant="h5" gutterBottom>
                           {this.state.assignmentInfo.title}
                         </Typography>
-                        <Typography variant="h5" component="h2"></Typography>
-                        <Typography color="textSecondary">
-                          {this.state.assignmentInfo.update_date}
+                        <Typography variant="body2" color="primary">
+                          제출기한 : {deadline}
                         </Typography>
-                        <Typography variant="body2" component="p">
-                          {this.state.assignmentInfo.body}
-                        </Typography>
+                        <hr/>
+                        
+                        <Viewer value={String(this.state.assignmentInfo.body)}/>
+                        
                       </CardContent>
                       <CardActions>
                         <Button size="small">Learn More</Button>

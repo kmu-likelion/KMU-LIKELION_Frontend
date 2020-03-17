@@ -1,33 +1,22 @@
 import React, { Component } from "react";
 
-import sessionApi from "../../../api/SessionAPI";
+import sessionAPI from "../../../api/SessionAPI";
 import Editor from "../../Editor";
 import moment from "moment";
 
 //@material-ui
-import TextField from "@material-ui/core/TextField";
-// import FormControlLabel from "@material-ui/core/FormControlLabel";
-// import Typography from "@material-ui/core/Typography";
-import Chip from "@material-ui/core/Chip";
-import Paper from "@material-ui/core/Paper";
-import AddCircleIcon from "@material-ui/icons/AddCircle";
-import InputBase from "@material-ui/core/InputBase";
-import IconButton from "@material-ui/core/IconButton";
 import { withStyles } from "@material-ui/core/styles";
+import {Paper, TextField, Chip, InputBase, IconButton, Button} from "@material-ui/core";
+import AddCircleIcon from "@material-ui/icons/AddCircle";
 
-// import Paper from "@material-ui/core/Paper";
-import Button from "@material-ui/core/Button";
 import Modal from "react-bootstrap/Modal";
 
 const useStyles = theme => ({
   form: {
     width: "100%",
-    marginTop: theme.spacing(3)
-    // display: "flex",
-    // flexDirection: "column"
+    marginTop: theme.spacing(3)    
   },
   textField: {
-    // width: "50%",
     display: "flex",
     paddingBottom: "1rem"
   },
@@ -67,14 +56,6 @@ class AssignmentForm extends Component {
     scoreType: ""
   };
 
-  componentDidMount() {
-    if (window.sessionStorage.getItem("id")) {
-      console.log("접근상태 : 인증됨");
-    } else {
-      console.log("접근상태 : 인증되지 않음.");
-    }
-  }
-
   handlingChange = event => {
     this.setState({ [event.target.name]: event.target.value });
     console.log("입력값 :", event.target.value);
@@ -89,7 +70,7 @@ class AssignmentForm extends Component {
     event.preventDefault();
     if (this.state.body !== "" && this.state.scoreTypeList.length > 0) {
       let score_type = this.state.scoreTypeList.join(",");
-      await sessionApi
+      await sessionAPI
         .addAssignment(sessionId, {
           title: this.state.title,
           user_id: window.sessionStorage.getItem("id"),

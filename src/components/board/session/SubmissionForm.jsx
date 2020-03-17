@@ -27,27 +27,27 @@ class SubmissionForm extends Component {
     id: "",
     body: "",
     url: "",
-    submittedDate: ""
+    submittedDate: "",
+    InfodidGet: false,
   };
 
   componentDidMount() {
     this.setState({
       userId: window.sessionStorage.getItem("id")
     });
-    if (this.props.editFlag) {
-      this.getSubmissionInfo();
-    }
   }
 
   getSubmissionInfo = async () => {
     await api
       .getSubmission(this.state.userId, this.props.assignmentId)
       .then(res => {
+        console.log(res.data);
         this.setState({
           id: res.data[0].id,
           body: res.data[0].body,
           url: res.data[0].url,
-          submittedDate: res.data[0].update_date
+          submittedDate: res.data[0].update_date,
+          InfodidGet: true
         });
       })
       .catch(err => {
@@ -69,12 +69,6 @@ class SubmissionForm extends Component {
       .then(res => {
         this.props.handlingClose();
         this.props.getUserSubmission();
-        this.getSubmissionInfo();
-
-        this.setState({
-          body: "",
-          url: ""
-        });
       })
       .catch(err => {
         console.log(err);
@@ -112,10 +106,13 @@ class SubmissionForm extends Component {
     this.setState({ [event.target.name]: event.target.value });
   };
 
-  render() {
-    const { classes } = this.props;
-    const { open, handlingClose, editFlag } = this.props;
+  render() {    
+    const { classes, open, handlingClose, editFlag } = this.props;
+
     if (editFlag) {
+      if(!this.state.InfodidGet) {
+        this.getSubmissionInfo();
+      }
       return (
         <>
           <Modal size="lg" show={open} onHide={handlingClose}>

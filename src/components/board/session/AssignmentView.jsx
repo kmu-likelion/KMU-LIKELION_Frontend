@@ -1,16 +1,12 @@
 import React, { Component } from "react";
 import api from "../../../api/SessionAPI";
 import SubmissionForm from "./SubmissionForm";
+import moment from "moment";
 
+import Viewer from "../../Viewer";
 //@material-ui;
-import Button from "@material-ui/core/Button";
-import Chip from "@material-ui/core/Chip";
-
-import ExpansionPanel from "@material-ui/core/ExpansionPanel";
-import ExpansionPanelSummary from "@material-ui/core/ExpansionPanelSummary";
-import ExpansionPanelDetails from "@material-ui/core/ExpansionPanelDetails";
-import ExpansionPanelActions from "@material-ui/core/ExpansionPanelActions";
-import Typography from "@material-ui/core/Typography";
+import {Button, Chip, Typography, Divider} from "@material-ui/core";
+import {ExpansionPanel, ExpansionPanelSummary, ExpansionPanelDetails, ExpansionPanelActions} from "@material-ui/core";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 
 export default class AssignmentView extends Component {
@@ -25,7 +21,7 @@ export default class AssignmentView extends Component {
     modalFlag: false
   };
 
-  componentDidMount() {
+  UNSAFE_componentWillMount() {
     this.setState({
       userId: window.sessionStorage.getItem("id")
     });
@@ -83,10 +79,40 @@ export default class AssignmentView extends Component {
     return scoreTypes.split(",");
   };
 
-  render() {
-    const { assignment, sessionId, index, user_type } = this.props;
+  renderSubmissionBtn = assignment_id => {
+    let renderBtn = <></>;
 
-    console.log(assignment);
+    switch(this.state.isSubmistted) {
+      case true: 
+        
+        renderBtn = (
+        <>
+          이미 제출되었습니다. <br/>
+          <Button
+          color="secondary"
+          onClick={event => this.modalOpen(assignment_id)}
+        >
+          제출수정
+        </Button>
+        </>);
+        break;
+      default:
+        renderBtn = (
+        <Button
+          color="primary"
+          onClick={event => this.modalOpen(assignment_id)}
+        >
+          과제제출
+        </Button>);
+        break;    
+    }
+    return renderBtn;
+  }
+
+  render() {
+    const { assignment, sessionId, index } = this.props;
+    const deadline = moment(assignment.deadline).format("YY-MM-DD HH:DD");
+    
     return (
       <>
         <ExpansionPanel>
@@ -99,35 +125,38 @@ export default class AssignmentView extends Component {
               과제{index + 1} {assignment.title}
             </Typography>
           </ExpansionPanelSummary>
-          <ExpansionPanelDetails style={{ flexDirection: "column" }}>
-            <div>
-              <Typography variant="body1" style={{ margin: 15 }}>
-                {assignment.body}
-              </Typography>
-            </div>
-            <div>
+
+          <ExpansionPanelDetails style={{ flexDirection: "column"}}>
+
+            <Typography variant="body2" color="primary">
+                제출 기한 : {deadline}  
+            </Typography>
+            <Divider style={{marginTop: 10, marginBottom: 20}} />
+            
+            <Viewer value={String(assignment.body)}/>
+            
+            <div style={{ marginTop: 30 }}>
               {this.slice(assignment.score_types).map(type => (
                 <Chip
                   key={`chip-${type}`}
                   label={type}
                   name={type}
-                  color="secondary"
+                  color="primary"
                   style={{ marginRight: 5 }}
                 />
               ))}
             </div>
           </ExpansionPanelDetails>
+
           <ExpansionPanelActions>
-            <Button
-              color="primary"
-              onClick={event => this.modalOpen(assignment.id)}
-            >
-              과제제출
-            </Button>
-            {user_type < 3 ? (
+            {/* 제출여부에 따른 과제제출버튼 */}
+            {this.renderSubmissionBtn(assignment.id)}
+
+            {window.sessionStorage.getItem("user_type") < 3 ? (
               <>
                 <Button
                   color="secondary"
+                  variant="contained"
                   onClick={e =>
                     this.handlingDelete(e, assignment.id, sessionId)
                   }
@@ -145,7 +174,7 @@ export default class AssignmentView extends Component {
           open={this.state.modalFlag}
           handlingClose={this.modalClose}
           assignmentId={assignment.id}
-          editFlag={this.state.editFlag}
+          editFlag={this.state.isSubmistted}
           getUserSubmission={this.getUserSubmission}
         />
       </>

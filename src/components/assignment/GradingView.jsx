@@ -11,8 +11,6 @@ import {Typography, Card, CardActions, CardContent} from "@material-ui/core";
 class GradingView extends React.Component {
   state = { isLoading: true };
 
-  componentDidMount() {}
-
   handlingChange = event => {
     this.setState({ [event.target.name]: event.target.value });
   };
@@ -37,11 +35,11 @@ class GradingView extends React.Component {
                   <Typography color="textSecondary" gutterBottom>
                     ID :: {memberId}
                   </Typography>
-                  <Typography variant="h5" component="h2">
+                  <Typography variant="h5">
                     {member.first_name}({member.username})
                   </Typography>
                   <Typography color="textSecondary">제출기록 :: --</Typography>
-                  <Typography variant="body2" component="p">
+                  <Typography variant="body2">
                     제출물이 없습니다.
                   </Typography>
                 </CardContent>
@@ -55,16 +53,16 @@ class GradingView extends React.Component {
                   <Typography color="textSecondary" gutterBottom>
                     ID :: {memberId}
                   </Typography>
-                  <Typography variant="h5" component="h2">
+                  <Typography variant="h5">
                     {member.first_name}({member.username})
                   </Typography>
                   <Typography color="textSecondary">
                     제출기록 :: {submissionInfo[0].update_date}
                   </Typography>
-                  <Typography variant="body2" component="p">
+                  <Typography variant="body2">
                     {submissionInfo[0].body}
                   </Typography>
-                  <Typography variant="body2" component="p">
+                  <Typography variant="body2">
                     URL ::
                     <a href={submissionInfo[0].url}>{submissionInfo[0].url}</a>
                   </Typography>

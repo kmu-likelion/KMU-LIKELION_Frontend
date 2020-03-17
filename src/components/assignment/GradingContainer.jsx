@@ -75,10 +75,9 @@ class GradingContainer extends React.Component {
             </List>
           </Grid>
           <Grid item sm={7} style={{ textAlign: "center" }}>
-            <Typography color="body1" style={{ textAlign: "left" }}>
+            <Typography variant="body1">
               제출물 정보
             </Typography>
-            {/* 디테일 평가 */}
 
             <GradingView
               memberId={this.state.selectedMemberId}

@@ -38,10 +38,10 @@ class GroupView extends Component {
             title="Group image"
           />
           <CardContent style={{height:'150px'}}>
-            <Typography gutterBottom variant="h5" component="h2">
+            <Typography gutterBottom variant="h5">
               {name}
             </Typography>
-            <Typography variant="body2" color="textSecondary" component="p" style={{display:'block', height:'100px',  overflow:'hidden', textOverflow:'ellipsis'}}>
+            <Typography variant="body2" color="textSecondary" style={{display:'block', height:'100px',  overflow:'hidden', textOverflow:'ellipsis'}}>
               {introduction}
             </Typography>
           </CardContent>

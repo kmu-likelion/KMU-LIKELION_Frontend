@@ -1,8 +1,9 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import moment from "moment";
+
 import api from "../../../api/BoardAPI";
-import { getUser } from "../../../api/AuthAPI";
+
 import LikeView from "../LikeView";
 import Viewer from "../../Viewer";
 import AssignmentView from "./AssignmentView";
@@ -21,24 +22,12 @@ class SessionDetail extends Component {
     pub_date: "",
     author_name: "",
     assignments: [],
-    modalFlag: false,
-    user_type: ""
+    modalFlag: false
   };
 
   componentDidMount() {
     this.getAssignments(this.props.post_id);
-    this.getUser(window.sessionStorage.getItem("username"));
   }
-
-  getUser = async username => {
-    await getUser(username)
-      .then(res => {
-        this.setState({
-          user_type: res.data[0].user_type
-        });
-      })
-      .catch(err => console.log(err));
-  };
 
   getAssignments = async id => {
     await api.getPost("session", id).then(res => {
@@ -96,90 +85,90 @@ class SessionDetail extends Component {
         </TableHead>
 
         <TableBody>
-        <TableRow>
-          <TableCell className="post-body">
-            <Typography color="textSecondary" component="pre">
+          <TableRow>
+            <TableCell className="post-body">
+              
               <Viewer value={String(this.state.body)} />
-            </Typography>
-            <hr />
+              <br/>
 
-            <AuthButton
-              authType="permission"
-              info={2}
-              boardName={board_name}
-              button={
-                <>
-                  <Button
-                    color="secondary"
-                    size="small"
-                    variant="contained"
-                    onClick={event => this.addAssignment(event)}
-                  >
-                    과제추가
-                  </Button>
-                </>
-              }
-            />
-
-            <br />
-            <AssignmentForm
-              open={this.state.modalFlag}
-              handlingOpen={this.modalOpen}
-              handlingClose={this.modalClose}
-              getAssignments={this.getAssignments}
-              sessionId={this.props.post_id}
-            />
-            {this.state.assignments.map((task, index) => (
-              <AssignmentView
-                key={index}
-                index={index}
-                assignment={task}
-                getAssignments={this.callGetAssignments}
-                sessionId={this.props.post_id}
-                user_type={this.props.user_type}
+              <AuthButton
+                authType="permission"
+                info={2}
+                boardName={board_name}
+                button={
+                  <>
+                    <Button
+                      color="primary"
+                      size="small"
+                      variant="contained"
+                      onClick={event => this.addAssignment(event)}
+                      style={{marginBottom: 20}}
+                    >
+                      과제추가
+                    </Button>
+                  </>
+                }
               />
-            ))}
-          </TableCell>
-        </TableRow>
+              {/* 과제추가 modal */}
+              <AssignmentForm
+                open={this.state.modalFlag}
+                handlingOpen={this.modalOpen}
+                handlingClose={this.modalClose}
+                getAssignments={this.getAssignments}
+                sessionId={this.props.post_id}
+              />
 
-        <TableRow>
-          <TableCell>
-            <LikeView post_id={post_id} board_name={board_name} />
-            <AuthButton
-              authType="isWriter"
-              info={post_id}
-              boardName={board_name}
-              button={
-                <>
-                  <Button
-                    color="primary"
-                    size="small"
-                    onClick={event => handlingDelete(board_name, post_id)}
-                  >
-                    Delete
-                  </Button>
-                  <Button
-                    color="primary"
-                    size="small"
-                    component={Link}
-                    to={`/${board_name}/update/${post_id}`}
-                  >
-                    Update
-                  </Button>
-                </>
-              }
-            />
+              {/* 과제 view list */}
+              {this.state.assignments.map((task, index) => (
+                <AssignmentView
+                  key={index}
+                  index={index}
+                  assignment={task}
+                  getAssignments={this.callGetAssignments}
+                  sessionId={this.props.post_id}
+                />
+              ))}
+            </TableCell>
+          </TableRow>
 
-            <Button
-              color="primary"
-              size="small"
-              component={Link}
-              to={`/${board_name}`}
-            >
-              Back
-            </Button>
-          </TableCell>
-        </TableRow>
+          <TableRow>
+            <TableCell>
+              <LikeView post_id={post_id} board_name={board_name} />
+              <AuthButton
+                authType="isWriter"
+                info={post_id}
+                boardName={board_name}
+                button={
+                  <>
+                    <Button
+                      color="primary"
+                      size="small"
+                      onClick={event => handlingDelete(board_name, post_id)}
+                    >
+                      Delete
+                    </Button>
+                    <Button
+                      color="primary"
+                      size="small"
+                      component={Link}
+                      to={`/${board_name}/update/${post_id}`}
+                    >
+                      Update
+                    </Button>
+                  </>
+                }
+              />
+
+              <Button
+                color="primary"
+                size="small"
+                component={Link}
+                to={`/${board_name}`}
+              >
+                Back
+              </Button>
+            </TableCell>
+          </TableRow>
         </TableBody>
       </Table>
     );
