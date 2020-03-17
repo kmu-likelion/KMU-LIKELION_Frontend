@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { getUser, updateUser } from "../../../api/AuthAPI";
-import Grid from "@material-ui/core/Grid";
-import Container from "@material-ui/core/Container";
+import {Grid, Container} from "@material-ui/core";
+
 import MyLike from "./MyLike";
 import LeftProfileView from "./LeftProfileView";
 import MyProfile from "./MyProfile";

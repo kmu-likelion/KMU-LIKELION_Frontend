@@ -1,13 +1,12 @@
 import React from "react";
 
-import Typography from "@material-ui/core/Typography";
-import Card from "@material-ui/core/Card";
-import CardActions from "@material-ui/core/CardActions";
-import CardContent from "@material-ui/core/CardContent";
-
 import EvaluationView from "./EvaluationView";
 import ScoreNew from "./ScoreNew";
 import ScoreView from "./ScoreView";
+
+import {Typography, Card, CardActions, CardContent} from "@material-ui/core";
+
+
 
 class GradingView extends React.Component {
   state = { isLoading: true };

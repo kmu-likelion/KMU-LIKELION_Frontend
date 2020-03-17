@@ -1,11 +1,12 @@
 import React from "react";
-import MemberList from "./MemberList";
-import GradingView from "./GradingView";
 import { getAllUser } from "../../api/AuthAPI";
 import api from "../../api/SessionAPI";
-import Typography from "@material-ui/core/Typography";
-import Grid from "@material-ui/core/Grid";
-import List from "@material-ui/core/List";
+
+import MemberList from "./MemberList";
+import GradingView from "./GradingView";
+
+import {Grid, List, Typography} from "@material-ui/core";
+
 class GradingContainer extends React.Component {
   state = {
     assignmentId: "",

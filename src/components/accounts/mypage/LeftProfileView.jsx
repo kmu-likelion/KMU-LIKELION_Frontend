@@ -1,13 +1,12 @@
 import React, { Component } from "react";
-import Paper from "@material-ui/core/Paper";
-import Typography from "@material-ui/core/Typography";
-import MenuList from "@material-ui/core/MenuList";
-import MenuItem from "@material-ui/core/MenuItem";
-import ListItemIcon from "@material-ui/core/ListItemIcon";
+import {Paper, Typography, MenuItem, MenuList, ListItemIcon } from "@material-ui/core"
+
+// import {EditIcon, DraftsIcon, SendIcon, PriorityHighIcon} from "@material-ui/icons"
 import EditIcon from '@material-ui/icons/Edit';
 import DraftsIcon from "@material-ui/icons/Drafts";
 import SendIcon from "@material-ui/icons/Send";
 import PriorityHighIcon from "@material-ui/icons/PriorityHigh";
+
 import {updateUser} from "../../../api/AuthAPI";
 import {getUserWithId} from "../../../api/AuthAPI";
 export default class LeftProfileView extends Component {

@@ -1,20 +1,12 @@
 import React, { Component } from "react";
-import Button from "@material-ui/core/Button";
+import { Link } from "react-router-dom";
 
 import moment from "moment";
 import api from "../../../api/CommentAPI";
-import TextField from "@material-ui/core/TextField";
-import { Link } from "react-router-dom";
-import Avatar from "@material-ui/core/Avatar";
 
-import Typography from "@material-ui/core/Typography";
-import List from "@material-ui/core/List";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemText from "@material-ui/core/ListItemText";
-import ListItemAvatar from "@material-ui/core/ListItemAvatar";
-import IconButton from "@material-ui/core/IconButton";
-import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
-import Divider from "@material-ui/core/Divider";
+//@material-ui
+import {TextField, Avatar, Typography, IconButton, Divider, Button} from "@material-ui/core";
+import {List, ListItem, ListItemText, ListItemAvatar, ListItemSecondaryAction} from "@material-ui/core"
 
 export default class CommentView extends Component {
   state = {

@@ -2,17 +2,9 @@ import React from "react";
 import api from "../../api/SessionAPI";
 import GradingContainer from "./GradingContainer";
 
-import Container from "@material-ui/core/Container";
-import Paper from "@material-ui/core/Paper";
-import Typography from "@material-ui/core/Typography";
-import Grid from "@material-ui/core/Grid";
-import Tabs from "@material-ui/core/Tabs";
-import Tab from "@material-ui/core/Tab";
+import {Container, Paper, Typography, Grid, Tabs, Tab, Button} from "@material-ui/core";
 
-import Card from "@material-ui/core/Card";
-import CardActions from "@material-ui/core/CardActions";
-import CardContent from "@material-ui/core/CardContent";
-import Button from "@material-ui/core/Button";
+import {Card, CardActions, CardContent } from "@material-ui/core";
 
 class AssignmentDetail extends React.Component {
   state = { assignmentId: "", tabValue: 0, assignmentInfo: {} };

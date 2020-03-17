@@ -1,16 +1,9 @@
 import React, { Component } from "react";
-
 import { Link } from "react-router-dom";
-import Avatar from "@material-ui/core/Avatar";
 
-import List from "@material-ui/core/List";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemText from "@material-ui/core/ListItemText";
-import ListItemAvatar from "@material-ui/core/ListItemAvatar";
-import IconButton from "@material-ui/core/IconButton";
-import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
-import Divider from "@material-ui/core/Divider";
-import Typography from "@material-ui/core/Typography";
+import {List, ListItem, ListItemText, ListItemAvatar, ListItemSecondaryAction} from "@material-ui/core";
+import {Divider, Typography, IconButton, Avatar} from "@material-ui/core";
+
 
 export default class EvaluationView extends Component {
   state = {

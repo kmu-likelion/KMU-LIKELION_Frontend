@@ -1,18 +1,10 @@
 import React from "react";
-
-// import api from "../../api/SessionAPI";
 import { Link } from "react-router-dom";
-// import { getAllUser } from "../../api/AuthAPI";
-// import Typography from "@material-ui/core/Typography";
+
 import api from "../../api/SessionAPI";
 
-import ListItem from "@material-ui/core/ListItem";
-import ListItemText from "@material-ui/core/ListItemText";
-import ListItemAvatar from "@material-ui/core/ListItemAvatar";
-import Divider from "@material-ui/core/Divider";
-import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
-import IconButton from "@material-ui/core/IconButton";
-import Avatar from "@material-ui/core/Avatar";
+import {ListItem, ListItemText, ListItemAvatar, ListItemSecondaryAction} from "@material-ui/core";
+import {Divider, IconButton, Avatar} from "@material-ui/core";
 
 class MemberList extends React.Component {
   state = {

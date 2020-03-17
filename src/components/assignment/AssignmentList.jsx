@@ -1,15 +1,10 @@
 import React from "react";
 import api from "../../api/BoardAPI";
-import Container from "@material-ui/core/Container";
-import Paper from "@material-ui/core/Paper";
-import Typography from "@material-ui/core/Typography";
-import Grid from "@material-ui/core/Grid";
-import MenuItem from "@material-ui/core/MenuItem";
-import FormControl from "@material-ui/core/FormControl";
-import Select from "@material-ui/core/Select";
-import InputLabel from "@material-ui/core/InputLabel";
-
 import AssignmentView from "./AssignmentView";
+
+import {Container, Paper, Typography, Grid, MenuItem, Select, InputLabel, FormControl} from "@material-ui/core";
+
+
 
 class AssignmentContainer extends React.Component {
   state = { selectNumber: "", sessionList: [] };

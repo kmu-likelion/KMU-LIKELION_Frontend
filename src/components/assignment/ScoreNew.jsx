@@ -2,14 +2,8 @@ import React, { Component } from "react";
 
 import api from "../../api/SessionAPI";
 
-import Typography from "@material-ui/core/Typography";
-import Grid from "@material-ui/core/Grid";
-import Button from "@material-ui/core/Button";
-import TextField from "@material-ui/core/TextField";
-import TextareaAutosize from "@material-ui/core/TextareaAutosize";
-import List from "@material-ui/core/List";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemText from "@material-ui/core/ListItemText";
+import {Grid, Typography, Button, TextField, TextareaAutosize, List, ListItem, ListItemText} from "@material-ui/core";
+
 
 export default class CommentView extends Component {
   state = {
@@ -22,7 +16,7 @@ export default class CommentView extends Component {
   };
 
   componentDidMount() {
-    console.log("현재 유저아이디", window.sessionStorage.getItem("id"));
+    // console.log("현재 유저아이디", window.sessionStorage.getItem("id"));
     this.setState({
       userId: window.sessionStorage.getItem("id"),
       username: window.sessionStorage.getItem("username")

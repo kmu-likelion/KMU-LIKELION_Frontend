@@ -1,14 +1,10 @@
 import React, { Component } from "react";
 import { withStyles } from "@material-ui/core/styles";
 
-import List from "@material-ui/core/List";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemText from "@material-ui/core/ListItemText";
-import ListItemAvatar from "@material-ui/core/ListItemAvatar";
-import Divider from "@material-ui/core/Divider";
-import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
+import {List, ListItem, ListItemAvatar, ListItemText, ListItemSecondaryAction} from "@material-ui/core";
+import {Divider, IconButton} from "@material-ui/core";
 import AssignmentIcon from "@material-ui/icons/Assignment";
-import IconButton from "@material-ui/core/IconButton";
+
 
 const useStyles = theme => ({
   root: {
