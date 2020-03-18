@@ -1,9 +1,8 @@
 import React, { Component } from "react";
-import TableCell from "@material-ui/core/TableCell";
-import TableRow from "@material-ui/core/TableRow";
-import Button from "@material-ui/core/Button";
 import api from "../../../api/AdmissionAPI";
-import Input from "@material-ui/core/Input";
+
+import {TableRow, TableCell, Button, Input } from "@material-ui/core";
+
 
 export default class ManageQuestionForm extends Component {
   state = {

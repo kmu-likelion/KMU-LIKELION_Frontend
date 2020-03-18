@@ -1,21 +1,12 @@
 import React, { Component } from "react";
-
-import Container from "@material-ui/core/Container";
-import Paper from "@material-ui/core/Paper";
 import api from "../../../api/AdmissionAPI";
 import ConfirmAnswerForm from "./ConfirmAnswerForm";
 import ConfirmBasicView from "./ConfirmBasicView";
 import AdmissionStore from "../../../store/AdmissionStore";
 
-import Grid from "@material-ui/core/Grid";
-import Typography from "@material-ui/core/Typography";
-import List from "@material-ui/core/List";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemText from "@material-ui/core/ListItemText";
-import ListItemAvatar from "@material-ui/core/ListItemAvatar";
-import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
-import Divider from "@material-ui/core/Divider";
-import Button from "@material-ui/core/Button";
+import {Container, Paper, Grid, Typography, Divider, Button } from "@material-ui/core";
+import {List, ListItem, ListItemAvatar, ListItemSecondaryAction, ListItemText } from "@material-ui/core";
+
 import QuestionAnswerIcon from "@material-ui/icons/QuestionAnswer";
 
 class ConfirmApplication extends Component {
@@ -44,7 +35,7 @@ class ConfirmApplication extends Component {
     await api
       .getAllQuestions()
       .then(res => {
-        // console.log("모든 질문사항 가져옴", res);
+
         this.setState({
           questions: res.data
         });
@@ -54,7 +45,6 @@ class ConfirmApplication extends Component {
 
   getJoinDataWithId = async join_id => {
     await api.getJoinDatawithId(join_id).then(res => {
-      // console.log("id로 지원내역 가져오기 !", res.data);
       this.setState({
         joinInfo: res.data,
         answers: res.data.answer
@@ -87,10 +77,11 @@ class ConfirmApplication extends Component {
     return (
       <Container maxWidth="lg" className="PostingSection">
         <Paper className="PostingForm" elevation={0}>
-          <Typography component="h1" variant="h5">
+          <Typography variant="h5">
             지원내역 확인
           </Typography>
           <br />
+          
           {/* User Info Section */}
           <Grid container spacing={1}>
             <Grid item xs={1} sm={2}></Grid>

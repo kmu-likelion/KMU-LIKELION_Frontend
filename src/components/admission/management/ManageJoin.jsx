@@ -1,22 +1,13 @@
 import React, { Component } from "react";
-
-import Container from "@material-ui/core/Container";
-import Paper from "@material-ui/core/Paper";
-import api from "../../../api/AdmissionAPI";
 import { Link } from "react-router-dom";
+import api from "../../../api/AdmissionAPI";
 
-import Input from "@material-ui/core/Input";
-
-import Typography from "@material-ui/core/Typography";
-import Button from "@material-ui/core/Button";
-import { makeStyles } from "@material-ui/core/styles";
-import Table from "@material-ui/core/Table";
-import TableBody from "@material-ui/core/TableBody";
-import TableCell from "@material-ui/core/TableCell";
-import TableContainer from "@material-ui/core/TableContainer";
-import TableHead from "@material-ui/core/TableHead";
-import TableRow from "@material-ui/core/TableRow";
 import ManageQuestionForm from "./ManageQuestionForm";
+
+import {Container, Paper, Input, Typography, Button, makeStyles } from "@material-ui/core"
+import {Table, TableBody, TableCell, TableContainer, TableRow, TableHead } from "@material-ui/core";
+
+
 
 class ManageJoin extends Component {
   state = {
@@ -112,6 +103,7 @@ class ManageJoin extends Component {
                   <TableCell>Num</TableCell>
                   <TableCell colSpan={3}>Question</TableCell>
                 </TableRow>
+
                 {this.state.questions.map((qus, index) => {
                   return (
                     <ManageQuestionForm
@@ -124,6 +116,7 @@ class ManageJoin extends Component {
                     />
                   );
                 })}
+
                 <TableRow>
                   <TableCell colSpan={4}>
                     <form onSubmit={event => this.addQuestion(event)}>
@@ -147,6 +140,7 @@ class ManageJoin extends Component {
 
           <TableContainer>
             <Table className={useStyles.table}>
+
               <TableHead>
                 <TableRow>
                   <TableCell>지원번호</TableCell>
@@ -156,6 +150,7 @@ class ManageJoin extends Component {
                   <TableCell colSpan={2}>현황</TableCell>
                 </TableRow>
               </TableHead>
+
               <TableBody>
                 {this.state.joindata.map((row, index) => (
                   <TableRow key={index}>
@@ -174,6 +169,7 @@ class ManageJoin extends Component {
                   </TableRow>
                 ))}
               </TableBody>
+              
             </Table>
           </TableContainer>
         </Paper>

@@ -1,17 +1,13 @@
 import React, { Component } from "react";
 import api from "../../../api/AdmissionAPI";
 import AdmissionStore from "../../../store/AdmissionStore";
+
+//날짜,시간 관련 모듈
 import moment from "moment";
+import DateFnsUtils from "@date-io/date-fns";
 
 //@material-ui
-import TextField from "@material-ui/core/TextField";
-import { withStyles } from "@material-ui/core/styles";
-import Radio from "@material-ui/core/Radio";
-import RadioGroup from "@material-ui/core/RadioGroup";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import FormLabel from "@material-ui/core/FormLabel";
-import Button from "@material-ui/core/Button";
-import DateFnsUtils from "@date-io/date-fns";
+import {TextField, withStyles, Radio, RadioGroup, FormControlLabel, FormLabel, Button } from "@material-ui/core";
 import {
   MuiPickersUtilsProvider,
   KeyboardDatePicker

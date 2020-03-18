@@ -9,22 +9,9 @@ import AuthButton from "../../common/AuthButton";
 import moment from "moment";
 
 //@material-ui
-import Container from "@material-ui/core/Container";
-import Table from "@material-ui/core/Table";
-import TableBody from "@material-ui/core/TableBody";
-import TableCell from "@material-ui/core/TableCell";
-import TableRow from "@material-ui/core/TableRow";
-import Grid from "@material-ui/core/Grid";
-import Typography from "@material-ui/core/Typography";
-
-import List from "@material-ui/core/List";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemText from "@material-ui/core/ListItemText";
-import ListItemAvatar from "@material-ui/core/ListItemAvatar";
-import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
-import Divider from "@material-ui/core/Divider";
+import { Table, TableBody, TableCell, TableRow, List, ListItem, ListItemAvatar, ListItemSecondaryAction, ListItemText} from "@material-ui/core";
+import { Container, Grid, Typography, Divider, Button } from "@material-ui/core";
 import QuestionAnswerIcon from "@material-ui/icons/QuestionAnswer";
-import Button from "@material-ui/core/Button";
 
 import Modal from "react-bootstrap/Modal";
 
@@ -107,7 +94,7 @@ export default class ManageJoinDetail extends Component {
     event.preventDefault();
     let answers = this.state.answers;
     let ans_index = answers.findIndex(ans => ans.question_id === question_id);
-    console.log(answers[ans_index]);
+    // console.log(answers[ans_index]);
     this.setState({ showAnswerInfo: answers[ans_index] });
     this.modalOpen("answerModal");
   };

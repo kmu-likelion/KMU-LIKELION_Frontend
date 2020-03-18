@@ -1,11 +1,9 @@
 import React, { Component } from "react";
 import AdmissionStore from "../../../store/AdmissionStore";
-
-import Container from "@material-ui/core/Container";
-import Paper from "@material-ui/core/Paper";
 import api from "../../../api/AdmissionAPI";
-import TextField from "@material-ui/core/TextField";
-import Button from "@material-ui/core/Button";
+
+import {Container, Paper, TextField, Button } from "@material-ui/core";
+
 
 class CheckJoin extends Component {
   static contextType = AdmissionStore;

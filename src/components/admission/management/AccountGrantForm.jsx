@@ -1,13 +1,9 @@
 import React from "react";
-import Modal from "react-bootstrap/Modal";
-import Button from "@material-ui/core/Button";
-import api from "../../../api/AdmissionAPI";
 import { registerUser } from "../../../api/AuthAPI";
+import api from "../../../api/AdmissionAPI";
 
-import TextField from "@material-ui/core/TextField";
-import Select from "@material-ui/core/Select";
-import InputLabel from "@material-ui/core/InputLabel";
-import MenuItem from "@material-ui/core/MenuItem";
+import Modal from "react-bootstrap/Modal";
+import {Button, TextField, Select, InputLabel, MenuItem } from "@material-ui/core";
 
 class AccountGrantForm extends React.Component {
   state = {
@@ -37,11 +33,11 @@ class AccountGrantForm extends React.Component {
     if (window.confirm("해당 권한으로 계정을 생성하시겠습니까?") === true) {
       let username = this.state.joinData.email;
       username = username.split("@")[0];
-      console.log("회원가입될 유저네임!", username);
+      console.log("부여된 username : ", username);
 
       registerUser({
         username: username,
-        password: `kmu${this.state.joinData.student_id}`,
+        password: `kmu${this.state.joinData.student_id}`, //password는 (kmu + 지원자학번)
         first_name: this.state.joinData.name, //fistname 만을 사용하도록 함.
         last_name: "",
         email: this.state.joinData.email,

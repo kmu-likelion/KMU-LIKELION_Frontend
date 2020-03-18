@@ -52,6 +52,7 @@ class StudyMain extends React.Component {
             </Typography>
             {this.state.userId > 0
             ?(
+              
               <Link to={"/study/group/new"}>새 스터디그룹 생성</Link>
             )
             :(

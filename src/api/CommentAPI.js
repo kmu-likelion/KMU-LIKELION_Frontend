@@ -2,10 +2,7 @@ import axios from "axios";
 import { tokenConfig } from "./AuthAPI";
 
 export default {
-  /* Board CRUD api */
-  //모든글 불러오기
-
-  //댓글 불러오기
+  
   getComments(url, id) {
     console.log("getComments api 실행.");
     return axios.get(`board/${url}/?board_id=${id}`, tokenConfig());

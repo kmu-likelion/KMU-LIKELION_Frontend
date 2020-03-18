@@ -2,7 +2,7 @@ import axios from "axios";
 import { tokenConfig } from "./AuthAPI";
 
 export default {
-  /* ------Group CRUD api------ */
+
   //모든 그룹 가져오기
   getAllGroups() {
     console.log("getAllGroups API.");
@@ -52,7 +52,6 @@ export default {
 
   getMemberWithGroupId(id) {
     console.log("get GroupMember with groupId API.");
-    // return axios.get(`accounts/groupuser?group_id=${id}`, tokenConfig());
     return axios.get(`accounts/studygroup/${id}/group_users/`, tokenConfig());
   },
 

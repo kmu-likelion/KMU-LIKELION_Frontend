@@ -1,19 +1,10 @@
 import React, { Component } from "react";
-import Button from "@material-ui/core/Button";
-import api from "../../../api/AdmissionAPI";
 import { Link } from "react-router-dom";
-import Avatar from "@material-ui/core/Avatar";
-import Paper from "@material-ui/core/Paper";
+import api from "../../../api/AdmissionAPI";
 
-import Typography from "@material-ui/core/Typography";
-import List from "@material-ui/core/List";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemText from "@material-ui/core/ListItemText";
-import ListItemAvatar from "@material-ui/core/ListItemAvatar";
-import IconButton from "@material-ui/core/IconButton";
-import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
-import TextareaAutosize from "@material-ui/core/TextareaAutosize";
-import Divider from "@material-ui/core/Divider";
+
+import { Typography, Paper, Avatar, Button, TextareaAutosize, Divider, IconButton } from "@material-ui/core";
+import {List, ListItem, ListItemAvatar, ListItemSecondaryAction, ListItemText } from "@material-ui/core";
 import Rating from "@material-ui/lab/Rating";
 
 export default class CommentView extends Component {
@@ -97,7 +88,8 @@ export default class CommentView extends Component {
                   />
                 </ListItemSecondaryAction>
               </ListItem>
-              <ListItem alignItems="middle" style={{ verticalAlign: "middle" }}>
+
+              <ListItem alignItems="center" style={{ verticalAlign: "middle" }}>
                 <ListItemText
                   primary={
                     <TextareaAutosize
@@ -177,7 +169,7 @@ export default class CommentView extends Component {
           </ListItem>
 
           <ListItem
-            alignItems="middle"
+            alignItems="center"
             style={{ verticalAlign: "middle", alignItems: "center" }}
           >
             <Paper

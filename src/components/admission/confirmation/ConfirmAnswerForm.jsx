@@ -1,9 +1,8 @@
 import React, { Component } from "react";
 import api from "../../../api/AdmissionAPI";
+
 //@material-ui
-import TextField from "@material-ui/core/TextField";
-import { withStyles } from "@material-ui/core/styles";
-import Button from "@material-ui/core/Button";
+import { withStyles, TextField, Button } from "@material-ui/core";
 
 //bootstrap
 import Modal from "react-bootstrap/Modal";
@@ -26,8 +25,6 @@ class ConfirmAnswerForm extends Component {
     editFlag: false
   };
 
-  componentDidMount() {}
-
   handlingSubmit = async event => {
     event.preventDefault();
     await api
@@ -37,7 +34,6 @@ class ConfirmAnswerForm extends Component {
         question_id: this.props.answerInfo.question_id
       })
       .then(res => {
-        // console.log("성공적으로 수정됨.", res.data);
         this.closeModal();
       })
       .catch(err => {
@@ -90,7 +86,6 @@ class ConfirmAnswerForm extends Component {
             <form onSubmit={this.handlingSubmit} className={classes.form}>
               <Modal.Body>
                 <TextField
-                  // fullWidth
                   label="답변"
                   name="body"
                   className={classes.textField}
@@ -107,7 +102,7 @@ class ConfirmAnswerForm extends Component {
                 <Button color="secondary" onClick={this.changeMode}>
                   취소
                 </Button>
-                <Button onClick={this.closeModal}>Close</Button>
+                <Button onClick={this.closeModal}>닫기</Button>
               </Modal.Footer>
             </form>
           </Modal>
