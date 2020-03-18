@@ -7,28 +7,27 @@ import Viewer from "../../Viewer";
 import AuthButton from "../../common/AuthButton";
 
 // @material-ui
-import Button from "@material-ui/core/Button";
-import Typography from "@material-ui/core/Typography";
-import Table from "@material-ui/core/Table";
-import TableRow from "@material-ui/core/TableRow";
-import TableCell from "@material-ui/core/TableCell";
+import {Button, Typography, Table, TableRow, TableCell} from "@material-ui/core";
 
 class CareerDetail extends Component {
   render() {
-    const { postInfo, handlingDelete, post_id, board_name } = this.props;
+    const { postInfo, author, handlingDelete, post_id, board_name } = this.props;
     const pubDate = moment(postInfo.pub_date).format("YYYY-MM-DD HH:MM");
     return (
       <Table className={"post-table"}>
         <TableRow>
           <TableCell>
-            <Typography component="h1" variant="h5">
+            <Typography variant="h5">
               {postInfo.title}
             </Typography>
           </TableCell>
         </TableRow>
         <TableRow>
-          <small>작성일 {pubDate}</small> /&nbsp;
-          <small>작성자 {postInfo.author_name}</small>
+          <TableCell>
+            <Typography variant="caption" color="textSecondary">
+              작성일 {pubDate} /&nbsp; 작성자 {author.name}(<Link to={`/mypage/${author.username}`}>{author.username}</Link>)
+            </Typography>
+          </TableCell>
         </TableRow>
         <TableRow>
           <TableCell className="post-body">

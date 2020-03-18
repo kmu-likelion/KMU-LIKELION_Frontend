@@ -1,15 +1,10 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 import api from "../../../api/BoardAPI";
 import Editor from "../../Editor";
 
-import { Link } from "react-router-dom";
+import { Container, Paper, MenuItem, Select, TextField, Button, Typography } from "@material-ui/core";
 
-import Container from "@material-ui/core/Container";
-import Paper from "@material-ui/core/Paper";
-import MenuItem from "@material-ui/core/MenuItem";
-import Select from "@material-ui/core/Select";
-import TextField from "@material-ui/core/TextField";
-import Button from "@material-ui/core/Button";
 
 class PostUpdate extends Component {
   state = {
@@ -21,7 +16,6 @@ class PostUpdate extends Component {
   };
 
   componentDidMount() {
-    console.log("Detail ComponentDidMount");
     this.getStudy();
   }
 
@@ -57,22 +51,22 @@ class PostUpdate extends Component {
         body: this.state.body,
         study_type: this.state.study_type
       })
-      .then(result => console.log("정상적으로 update됨.", result))
-      .catch(err => console.log(err));
+      .then(res => {
 
-    this.setState({ title: "", content: "" });
-    // this.getPosts()
-    // document.location.href = "/study";
-    this.props.history.push(
-      `/study/${this.props.match.params.group}/detail/${this.state.id}`
-    );
+        this.setState({ title: "", content: "" });
+        this.props.history.push(
+          `/study/${this.props.match.params.group}/detail/${this.state.id}`
+        );        
+
+      })
+      .catch(err => console.log(err));
   };
 
   render() {
     return (
-      <Container maxWidth="lg" className="PostingSection">
-        <Paper className="PostingPaper">
-          <h2>Update Post</h2>
+      <Container maxWidth="lg" className="PostingSection" style={{padding: 30}}>
+
+          <Typography variant="h4"> Update Post </Typography>
           <form onSubmit={this.handlingSubmit} className="PostingForm">
             <Select
               labelId="demo-controlled-open-select-label"
@@ -99,16 +93,6 @@ class PostUpdate extends Component {
             />
             <br />
             <br />
-            {/* <TextField
-              id="standard-basic"
-              label="body"
-              name="body"
-              value={this.state.body}
-              onChange={this.handlingChange}
-              multiline
-              rows="4"
-              required
-            /> */}
             <Editor
               value={this.state.body}
               name="body"
@@ -116,13 +100,16 @@ class PostUpdate extends Component {
             />
             <br />
             <br />
-            <Button variant="contained" color="primary" type="submit">
-              작성
-            </Button>
-          </form>
 
-          <Link to="/study">Cancel</Link>
-        </Paper>
+            <Button color="primary" component={Link} to="/study">
+              뒤로가기
+            </Button>
+
+            <Button variant="contained" color="primary" type="submit">
+              저장
+            </Button>
+
+          </form>
       </Container>
     );
   }

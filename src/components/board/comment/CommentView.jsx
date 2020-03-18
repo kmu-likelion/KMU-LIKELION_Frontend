@@ -50,14 +50,12 @@ export default class CommentView extends Component {
   render() {
     const {
       user_id,
-      author_name,
-      first_name,
+      author,
       update_date,
       body,
       comment_id,
       board_id,
       url,
-      user_img
     } = this.props;
     var updateDate = moment(update_date).format("MM/DD hh:mm");
     if (this.state.is_update) {
@@ -76,7 +74,7 @@ export default class CommentView extends Component {
                 style={{ verticalAlign: "middle" }}
               >
                 <ListItemAvatar>
-                  <Avatar alt="comment-writer" src={user_img} />
+                  <Avatar alt="comment-writer" src={author.img} />
                 </ListItemAvatar>
                 <ListItemText
                   primary={
@@ -112,15 +110,15 @@ export default class CommentView extends Component {
         <List component="nav" aria-label="contacts">
           <ListItem>
             <ListItemAvatar>
-              <IconButton component={Link} to={`/Mypage/${author_name}`}>
-                <Avatar alt="Recomment-writer" src={user_img} />
+              <IconButton component={Link} to={`/Mypage/${author.username}`}>
+                <Avatar alt="Recomment-writer" src={author.img} />
               </IconButton>
             </ListItemAvatar>
             <ListItemText
               primary={body}
               secondary={
                 <>
-                  {`${first_name}(${author_name})`}
+                  {`${author.name}(${author.username})`}
                   <Typography variant="caption"> {updateDate}</Typography>
                 </>
               }

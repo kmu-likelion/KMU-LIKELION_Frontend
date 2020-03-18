@@ -20,7 +20,7 @@ class SessionDetail extends Component {
     title: "",
     body: "",
     pub_date: "",
-    author_name: "",
+    author: {},
     assignments: [],
     modalFlag: false
   };
@@ -35,7 +35,7 @@ class SessionDetail extends Component {
         title: res.data.title,
         body: res.data.body,
         pub_date: moment(res.data.pub_date).format("YYYY-MM-DD HH:MM"),
-        author_name: res.data.author_name,
+        author: res.data.author,
         assignments: res.data.assignments
       });
     });
@@ -78,7 +78,11 @@ class SessionDetail extends Component {
           <TableRow>
             <TableCell>
               <Typography variant="caption" color="textSecondary">
-                작성일 {this.state.pub_date} /&nbsp; 작성자 {this.state.author_name}
+                작성일 {this.state.pub_date} /&nbsp; 작성자 {this.state.author.name}(
+                  <Link to={`/mypage/${this.state.author.username}`}>
+                    {this.state.author.username}
+                  </Link>
+                  )
               </Typography>
             </TableCell>
           </TableRow>

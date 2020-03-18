@@ -2,10 +2,7 @@ import React, { Component } from "react";
 import api from "../../../api/SessionAPI";
 
 //@material-ui
-import TextField from "@material-ui/core/TextField";
-import { withStyles } from "@material-ui/core/styles";
-import Button from "@material-ui/core/Button";
-import Typography from "@material-ui/core/Typography";
+import { withStyles, TextField, Button, Typography } from "@material-ui/core";
 
 //bootstrap
 import Modal from "react-bootstrap/Modal";

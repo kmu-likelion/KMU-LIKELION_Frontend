@@ -2,14 +2,8 @@ import React, { Component } from "react";
 import api from "../../../api/GroupAPI";
 import { Link } from "react-router-dom";
 
-import Container from "@material-ui/core/Container";
-import Paper from "@material-ui/core/Paper";
-import TextField from "@material-ui/core/TextField";
-import TextareaAutosize from "@material-ui/core/TextareaAutosize";
-import Button from "@material-ui/core/Button";
-import { withStyles } from "@material-ui/core/styles";
-import Grid from "@material-ui/core/Grid";
-import Typography from "@material-ui/core/Typography";
+import {Container, Paper, TextField, TextareaAutosize, Button, withStyles, Grid, Typography} from "@material-ui/core";
+// import { fromUnixTime } from "date-fns/esm";
 
 const useStyles = theme => ({
   form: {
@@ -105,7 +99,6 @@ class GroupNew extends Component {
               <Grid item xs={12} sm={12}>
                 <TextareaAutosize
                   className={classes.textarea}
-                  fullWidth
                   // label="Introduction"
                   name="introduction"
                   rowsMin={3}

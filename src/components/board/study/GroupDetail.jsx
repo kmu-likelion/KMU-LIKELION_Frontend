@@ -225,7 +225,7 @@ class GroupDetail extends React.Component {
             >
               <img src={this.state.group_img} alt="group_image" />
 
-              <Typography component="h4" variant="h4">
+              <Typography variant="h4">
                 [{this.state.group_name}]
               </Typography>
               <br/>
@@ -246,7 +246,7 @@ class GroupDetail extends React.Component {
               <IconButton component={Link} to={`/Mypage/${this.state.group_captain.captain_username}`}>
                 <Avatar alt="Recomment-writer" src={this.state.group_captain.user_img} />
               </IconButton>
-              {this.state.group_captain.first_name}
+              {this.state.group_captain.first_name}({this.state.group_captain.captain_username})
               <hr/>
               <Typography variant="h6">
                 그룹멤버
@@ -259,8 +259,8 @@ class GroupDetail extends React.Component {
               ):(<></>)}
               <Typography component="pre" className="preTag">
                 <List subheader={<li />} className={"mentoring-list"}>
-                  {this.state.group_members.map(member => (
-                    <div key={member.id}>
+                  {this.state.group_members.map((member,index) => (
+                    <div key={index}>
                       {
                         (this.state.group_captain.captain_username) === member.user.username
                           ? (
@@ -276,10 +276,10 @@ class GroupDetail extends React.Component {
                                       <Avatar alt="Recomment-writer" src={member.user.img} />
                                     </IconButton>
                                   </ListItemAvatar>
-                                  <ListItemText primary={member.user.first_name} />
+                                  <ListItemText primary={`${member.user.first_name}(${member.user.username})`} />
                                   {this.state.userNow === this.state.group_captain.captain_username
                                     ? (
-                                      <CancelIcon className="Cancle" onClick={event => this.deleteGroupUser(event, member.id)} />
+                                      <CancelIcon cla ssName="Cancle" onClick={event => this.deleteGroupUser(event, member.id)} />
                                     )
                                     : (
                                       <></>
@@ -334,7 +334,6 @@ class GroupDetail extends React.Component {
                                   ))}
 
                                 </Select>
-
                                 <Button type="submit">멤버추가</Button>
                               </form>
                             </TableCell>
@@ -349,14 +348,13 @@ class GroupDetail extends React.Component {
               </div>
               {this.state.userNow === this.state.group_captain.captain_username
                 ? (
-                  <Link to={`/study/${this.state.group_name}/update`}>
                     <Button
                       color="secondary"
-                      size="small"
+                      component={Link}
+                      to={`/study/${this.state.group_name}/update`}
                     >
                       그룹수정
                   </Button>
-                  </Link>
                 )
                 : (
                   <></>
@@ -365,7 +363,6 @@ class GroupDetail extends React.Component {
               }
               <Button
                 color="primary"
-                size="small"
                 component={Link}
                 to={"/study"}
               >

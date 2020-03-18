@@ -11,11 +11,7 @@ import CareerDetail from "../career/CareerDetail";
 import SessionDetail from "../session/SessionDetail";
 
 // @material-ui
-import Container from "@material-ui/core/Container";
-import Paper from "@material-ui/core/Paper";
-import Typography from "@material-ui/core/Typography";
-import Grid from "@material-ui/core/Grid";
-import Divider from "@material-ui/core/Divider";
+import {Container, Paper, Typography, Grid, Divider} from "@material-ui/core";
 
 
 class PostDetailContainer extends Component {
@@ -23,6 +19,7 @@ class PostDetailContainer extends Component {
     super(props);
     this.state = {
       postInfo: {},
+      author: {},
       board_name: "",
       comments: [],
       userId: ""
@@ -43,10 +40,8 @@ class PostDetailContainer extends Component {
     await CommentAPI
       .getComments(`${board_name}_comment`, this.props.match.params.id)
       .then(res => {
-        const _data = res.data;
-        // console.log("가져온 댓글 : ", _data.results);
         this.setState({
-          comments: _data,
+          comments: res.data,
           board_name: board_name
         });
       })
@@ -66,6 +61,7 @@ class PostDetailContainer extends Component {
         console.log("data: ", data);
         this.setState({
           postInfo: data,
+          author: data.author,
           board_name: board_name
         });
       })
@@ -86,13 +82,14 @@ class PostDetailContainer extends Component {
     }
   };
 
-  renderDetailComponent = (boardName, postInfo) => {
+  renderDetailComponent = (boardName, postInfo, author) => {
     let detailComponent = "";
     switch (boardName) {
       case "notice":
         detailComponent = (
           <NoticeDetail
             postInfo={postInfo}
+            author={author}
             handlingDelete={this.handlingDelete}
             post_id={this.props.match.params.id}
             board_name={this.props.match.path.split("/")[1]}
@@ -103,6 +100,7 @@ class PostDetailContainer extends Component {
         detailComponent = (
           <QnADetail
             postInfo={postInfo}
+            author={author}
             handlingDelete={this.handlingDelete}
             post_id={this.props.match.params.id}
             board_name={this.props.match.path.split("/")[1]}
@@ -113,6 +111,7 @@ class PostDetailContainer extends Component {
         detailComponent = (
           <CareerDetail
             postInfo={postInfo}
+            author={author}
             handlingDelete={this.handlingDelete}
             post_id={this.props.match.params.id}
             board_name={this.props.match.path.split("/")[1]}
@@ -146,7 +145,7 @@ class PostDetailContainer extends Component {
           <Grid container spacing={2} style={{ paddingTop: "1.5rem" }}>
             <Grid item xs={1} sm={1}></Grid>
             <Grid item xs={10} sm={10}>
-              {this.renderDetailComponent(board_name, this.state.postInfo)}
+              {this.renderDetailComponent(board_name, this.state.postInfo, this.state.author)}
               <Divider />
               <div style={{ padding: "1rem" }}>
                 {board_name === "qna" ? (
@@ -165,14 +164,12 @@ class PostDetailContainer extends Component {
                           <AnswerView
                             key={comment.id}
                             user_id={comment.user_id}
-                            author_name={comment.author_name}
-                            first_name={comment.first_name}
+                            author={comment.author}
                             body={comment.body}
                             comment_id={comment.id}
                             recomments={comment.recomments}
                             getComments={this.callGetComments}
                             board_id={post_id}
-                            user_img={comment.user_img}
                             pub_date={comment.pub_date}
                             url={`${this.state.board_name}_comment`}
                           />
@@ -199,15 +196,13 @@ class PostDetailContainer extends Component {
                           <CommentView
                             key={comment.id}
                             user_id={comment.user_id}
-                            author_name={comment.author_name}
-                            first_name={comment.first_name}
+                            author={comment.author}
                             update_date={comment.update_date}
                             body={comment.body}
                             comment_id={comment.id}
                             recomments={comment.recomments}
                             getComments={this.callGetComments}
                             board_id={comment.board}
-                            user_img={comment.user_img}
                             url={`${this.state.board_name}_comment`}
                           />
                         ))}

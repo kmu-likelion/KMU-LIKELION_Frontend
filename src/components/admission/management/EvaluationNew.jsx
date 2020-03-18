@@ -2,18 +2,10 @@ import React, { Component } from "react";
 
 import api from "../../../api/AdmissionAPI";
 
-import Typography from "@material-ui/core/Typography";
-import Grid from "@material-ui/core/Grid";
-import Button from "@material-ui/core/Button";
-
-import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
-import TextareaAutosize from "@material-ui/core/TextareaAutosize";
-import List from "@material-ui/core/List";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemText from "@material-ui/core/ListItemText";
-import ListItemAvatar from "@material-ui/core/ListItemAvatar";
-import Avatar from "@material-ui/core/Avatar";
+import {Typography, Grid, Button, TextareaAutosize, Avatar} from "@material-ui/core";
+import {List, ListItem, ListItemText, ListItemAvatar, ListItemSecondaryAction} from "@material-ui/core";
 import Rating from "@material-ui/lab/Rating";
+
 export default class CommentView extends Component {
   state = {
     userId: "",
@@ -31,7 +23,6 @@ export default class CommentView extends Component {
       username: window.sessionStorage.getItem("username"),
       userImg: window.sessionStorage.getItem("user_img")
     });
-    console.log(window.sessionStorage.getItem("user_img"));
   }
 
   handlingChange = event => {
@@ -43,10 +34,10 @@ export default class CommentView extends Component {
 
     await api
       .createEvaluation({
-        user_id: this.state.userId,
+        user_id: Number(this.state.userId),
         application_id: this.props.applicationId,
         body: this.state.body,
-        score: this.state.score
+        score: Number(this.state.score)
       })
       .then(res => {
         // console.log("성공적으로 평가생성됨.", res.data);

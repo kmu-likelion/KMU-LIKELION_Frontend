@@ -1,19 +1,9 @@
 import React, { Component } from "react";
-import api from "../../../api/BoardAPI";
 import { Link } from "react-router-dom";
+import api from "../../../api/BoardAPI";
 import Editor from "../../Editor";
 
-import Grid from "@material-ui/core/Grid";
-import Container from "@material-ui/core/Container";
-import Paper from "@material-ui/core/Paper";
-import MenuItem from "@material-ui/core/MenuItem";
-import Select from "@material-ui/core/Select";
-import TextField from "@material-ui/core/TextField";
-import Button from "@material-ui/core/Button";
-
-import { withStyles } from "@material-ui/core/styles";
-import Avatar from "@material-ui/core/Avatar";
-import Typography from "@material-ui/core/Typography";
+import {Grid, Container, Paper, MenuItem, Select, Button, TextField, withStyles, Avatar, Typography } from "@material-ui/core";
 import EditIcon from "@material-ui/icons/Edit";
 
 const useStyles = theme => ({
@@ -32,8 +22,6 @@ const useStyles = theme => ({
   form: {
     width: "100%",
     marginTop: theme.spacing(3)
-    // display: "flex",
-    // flexDirection: "column"
   },
   textField: {
     width: "25%",
@@ -69,19 +57,14 @@ class StudyNew extends Component {
   };
 
   componentDidMount() {
-    console.log("New ComponentDidMount");
-    const _id = window.sessionStorage.getItem("id");
-    const _user = window.sessionStorage.getItem("username");
-    if (_id) {
-      this.setState({ user_id: _id, username: _user });
-      console.log("접근모드 : 로그인 상태");
-    } else {
-      console.log("접근모드 : 로그아웃 상태");
-    }
-    this.setState({
+
+    this.setState({ 
+      user_id: window.sessionStorage.getItem("id"),
+      username: window.sessionStorage.getItem("username"),
       group_name: this.props.location.state.group_name,
       group_id: this.props.location.state.group_id
     });
+
   }
 
   handlingChange = event => {
@@ -95,16 +78,19 @@ class StudyNew extends Component {
   handlingSubmit = async event => {
     event.preventDefault();
     console.log("user-id: ", this.state.user_id);
-    let result = await api.createPost("study", {
+    await api.createPost("study", {
       title: this.state.title,
       body: this.state.body,
       study_type: this.state.study_type,
       group_id: this.state.group_id,
       user_id: this.state.user_id
-    });
-    console.log("정상적으로 생성됨.", result);
-    this.setState({ title: "", body: "" });
-    this.props.history.push(`/study/${this.props.match.params.group}`);
+    }).then( res => {
+
+      // console.log(res.data);
+      this.setState({ title: "", body: "" });
+      this.props.history.push(`/study/${this.props.match.params.group}`);
+
+    }).catch(err => {console.log(err)});
   };
 
   render() {

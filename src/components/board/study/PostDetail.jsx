@@ -18,6 +18,7 @@ class PostDetail extends Component {
     id: "",
     title: "",
     body: "",
+    author: "",
     study_type: "",
     pub_date: "",
     comments: [],
@@ -40,6 +41,7 @@ class PostDetail extends Component {
         this.setState({
           title: data.title,
           body: data.body,
+          author: data.author,
           id: data.id,
           study_type: data.study_type,
           pub_date: moment(data.pub_date).format("YYYY-MM-DD hh:mm")
@@ -93,7 +95,11 @@ class PostDetail extends Component {
             <TableRow>
               <TableCell>
                 <Typography variant="caption" color="textSecondary">
-                  작성일 {this.state.pub_date} /&nbsp; 작성자
+                  작성일 {this.state.pub_date} /&nbsp; 작성자 {this.state.author.name}(
+                  <Link to={`/mypage/${this.state.author.username}`}>
+                    {this.state.author.username}
+                  </Link>
+                  )
                 </Typography>
               </TableCell>
             </TableRow>
@@ -156,15 +162,13 @@ class PostDetail extends Component {
               <CommentView
                 key={comment.id}
                 user_id={comment.user_id}
-                author_name={comment.author_name}
-                first_name={comment.first_name}
+                author={comment.author}
                 update_date={comment.update_date}
                 body={comment.body}
                 comment_id={comment.id}
                 recomments={comment.recomments}
                 getComments={this.callGetComments}
                 board_id={comment.board}
-                user_img={comment.user_img}
                 url={`study_comment`}
               />
             ))}

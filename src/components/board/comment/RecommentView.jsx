@@ -56,13 +56,11 @@ export default class CommentView extends Component {
   render() {
     const {
       user_id,
-      author_name,
-      first_name,
+      author,
       body,
       comment_id,
       board_id,
       url,
-      user_img
     } = this.props;
 
     if (this.state.is_update) {
@@ -92,13 +90,13 @@ export default class CommentView extends Component {
     } else {
       return (
         <List component="nav" aria-label="contacts">
-          <ListItem button component={Link} to={`/Mypage/${author_name}`}>
+          <ListItem button component={Link} to={`/Mypage/${author.username}`}>
             <ListItemAvatar>
-              <Avatar alt="Recomment-writer" src={user_img} />
+              <Avatar alt="Recomment-writer" src={author.img} />
             </ListItemAvatar>
             <ListItemText
               primary={body}
-              secondary={`${first_name}(${author_name})`}
+              secondary={`${author.name}(${author.username})`}
             />
             <ListItemSecondaryAction>
               {user_id === Number(window.sessionStorage.getItem("id")) ? (

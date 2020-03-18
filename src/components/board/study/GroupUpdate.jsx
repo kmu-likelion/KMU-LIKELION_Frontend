@@ -2,34 +2,23 @@ import React, { Component } from "react";
 import api from "../../../api/GroupAPI";
 import { Link } from "react-router-dom";
 
-import Container from "@material-ui/core/Container";
-import Paper from "@material-ui/core/Paper";
-import TextField from "@material-ui/core/TextField";
-import TextareaAutosize from "@material-ui/core/TextareaAutosize";
-import Button from "@material-ui/core/Button";
-import { withStyles } from "@material-ui/core/styles";
-import Grid from "@material-ui/core/Grid";
-import Typography from "@material-ui/core/Typography";
+import {Container, Paper, TextField, TextareaAutosize, Button, withStyles, Grid, Typography } from "@material-ui/core";
 
 const useStyles = theme => ({
-  form: {
-    width: "100%",
-    alignItems: "center",
-    marginTop: theme.spacing(5)
-  },
-  selectBox: {
-    minWidth: 100,
-    textAlign: "center"
-  },
+
   formContent: {
-    alignItems: "center"
+    alignItems: "center",
+    textAlign: "center",
+    paddingTop : 25,
   },
   textarea: {
-    width: "100%"
+    width: "100%",
+    marginTop: 20
   },
   submit: {
-    margin: theme.spacing(3, 0, 2)
-  }
+    margin: theme.spacing(3, 0, 2),
+    width: "50%"
+  },
 });
 
 class GroupUpdate extends Component {
@@ -48,7 +37,6 @@ class GroupUpdate extends Component {
         userName: window.sessionStorage.getItem("username")
       });
     }
-    console.log("group Id" ,this.props.match.params.group)
     this.getGroup();
   }
 
@@ -58,8 +46,6 @@ class GroupUpdate extends Component {
       .then(res => {
         const data = res.data;
         console.log(data)
-        console.log(data[0].name)
-        console.log(data[0].introduction)
         this.setState({groupId:data[0].id})
         this.setState({title:data[0].name})
         this.setState({introduction:data[0].introduction})
@@ -73,7 +59,7 @@ class GroupUpdate extends Component {
 
   handlingSubmit = async event => {
     event.preventDefault();
-    // console.log("user-id: ", this.state.id);
+
     await api
       .updateGroup(this.state.groupId,{
         name: this.state.title,
@@ -92,12 +78,14 @@ class GroupUpdate extends Component {
     return (
       <Container maxWidth="lg" className="main-container">
         <Paper className="Paper">
-          <Typography component="h1" variant="h4">
-            그룹 수정
-          </Typography>
-          <form onSubmit={this.handlingSubmit} className="PostingForm">
-            <Grid container spacing={2} className={classes.formContent}>
-              <Grid item xs={12} sm={12}>
+          <form onSubmit={this.handlingSubmit} className={classes.formContent}>
+            <Grid container spacing={2}>
+              <Grid item xs={12} sm={1}></Grid>
+              <Grid item xs={12} sm={10}>
+                <Typography variant="h4" style={{float:'left', paddingBottom: 15}}>
+                  그룹 수정
+                </Typography>
+
                 <TextField
                   fullWidth
                   label="Group Name"
@@ -107,12 +95,8 @@ class GroupUpdate extends Component {
                   margin="normal"
                   required
                 />
-              </Grid>
-              <Grid item xs={12} sm={12}>
                 <TextareaAutosize
                   className={classes.textarea}
-                  fullWidth
-                  // label="Introduction"
                   name="introduction"
                   rowsMin={3}
                   rowsMax={7}
@@ -123,6 +107,7 @@ class GroupUpdate extends Component {
                   required
                 />
               </Grid>
+              <Grid item xs={12} sm={1}></Grid>
             </Grid>
             <Button
               type="submit"

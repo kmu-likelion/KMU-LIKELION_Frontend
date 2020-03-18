@@ -15,8 +15,9 @@ import {Table, TableRow, TableCell, TableBody, TableHead } from "@material-ui/co
 
 class NoticeDetail extends Component {
   render() {
-    const { postInfo, handlingDelete, post_id, board_name } = this.props;
+    const { postInfo, author, handlingDelete, post_id, board_name } = this.props;
     const pubDate = moment(postInfo.pub_date).format("YYYY-MM-DD HH:MM");
+
 
     return (
       <Table className={"post-table"}>
@@ -30,9 +31,9 @@ class NoticeDetail extends Component {
             </TableRow>
             <TableRow >
               <TableCell>
-              <Typography variant="caption" color="textSecondary">
-                작성일 {pubDate} /&nbsp; 작성자 {postInfo.author_name}
-              </Typography>
+                <Typography variant="caption" color="textSecondary">
+                  작성일 {pubDate} /&nbsp; 작성자 {author.name}(<Link to={`/mypage/${author.username}`}>{author.username}</Link>)
+                </Typography>
               </TableCell>
             </TableRow>
         </TableHead>

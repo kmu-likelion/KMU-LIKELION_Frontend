@@ -66,14 +66,12 @@ export default class AnswerView extends Component {
   render() {
     const {
       user_id,
-      author_name,
-      first_name,
+      author,
       body,
       comment_id,
       board_id,
       url,
       recomments,
-      user_img,
       pub_date,
       getComments
     } = this.props;
@@ -92,15 +90,15 @@ export default class AnswerView extends Component {
             <Card className="answer-card">
               <CardHeader
                 avatar={
-                  <Link to={`/Mypage/${author_name}`}>
+                  <Link to={`/Mypage/${author.username}`}>
                     <Avatar
-                      src={user_img}
+                      src={author.img}
                       alt="User-Image"
                       aria-label="recipe"
                     />
                   </Link>
                 }
-                title={`${first_name}(${author_name})`}
+                title={`${author.name}(${author.username})`}
                 // subheader="September 14, 2016"
               />
               <CardContent>
@@ -131,11 +129,11 @@ export default class AnswerView extends Component {
           <Card className="answer-card">
             <CardHeader
               avatar={
-                <Link to={`/Mypage/${author_name}`}>
-                  <Avatar src={user_img} alt="User-Image" aria-label="recipe" />
+                <Link to={`/Mypage/${author.username}`}>
+                  <Avatar src={author.img} alt="User-Image" aria-label="recipe" />
                 </Link>
               }
-              title={`${first_name}(${author_name})`}
+              title={`${author.name}(${author.username})`}
               subheader={pubDate}
             />
             <CardContent style={{ paddingLeft: "1.5rem" }}>
@@ -174,13 +172,11 @@ export default class AnswerView extends Component {
               <RecommentView
                 key={recmt.id}
                 user_id={recmt.user_id}
-                author_name={recmt.author_name}
-                first_name={recmt.first_name}
+                author={recmt.author}
                 body={recmt.body}
                 comment_id={recmt.id}
                 getComments={getComments}
                 board_id={recmt.board}
-                user_img={recmt.user_img}
                 url={`qna_comment`}
               />
             ))}

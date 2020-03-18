@@ -1,14 +1,11 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import api from "../../../api/GroupAPI";
-//component
+
 import GroupView from "./GroupView";
 
 //@material-ui
-import Typography from "@material-ui/core/Typography";
-import Paper from "@material-ui/core/Paper";
-import Container from "@material-ui/core/Container";
-import Grid from "@material-ui/core/Grid";
+import {Typography, Paper, Container, Grid } from "@material-ui/core";
 
 class StudyMain extends React.Component {
   constructor(props) {
@@ -29,8 +26,6 @@ class StudyMain extends React.Component {
     await api
       .getAllGroups()
       .then(res => {
-        console.log("getAllGroups 메서드 실행.", res.data);
-        
         if(res.data.length === 0) {
           this.setState({ groupList: [], isEmpty: true });
         } else {
@@ -55,7 +50,7 @@ class StudyMain extends React.Component {
             <Typography component="h1" variant="h4" style={{paddingBottom: 15}}>
               스터디그룹
             </Typography>
-            {this.state.userId >0
+            {this.state.userId > 0
             ?(
               <Link to={"/study/group/new"}>새 스터디그룹 생성</Link>
             )
