@@ -1,14 +1,11 @@
 import React, { Component } from 'react'
-import Paper from "@material-ui/core/Paper";
+import { Link } from "react-router-dom";
 import api from "../../../api/GroupAPI";
-import { withStyles } from '@material-ui/core/styles';
-import ExpansionPanel from '@material-ui/core/ExpansionPanel';
-import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
-import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
-import Typography from '@material-ui/core/Typography';
+
+import { withStyles, ExpansionPanel, ExpansionPanelSummary, ExpansionPanelDetails, Typography } from "@material-ui/core";
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import GradeIcon from '@material-ui/icons/Grade';
-import { Link } from "react-router-dom";
+
 
 const useStyles = theme => ({
   root: {
@@ -47,43 +44,25 @@ class MyStudyGroup extends Component {
     render() {
       const {classes} = this.props;
         return (
-            <Paper elevation={10} className="MyStudyGroup">
-              <h1>My StudyGroup</h1>
+            <>
+              <Typography variant="h4">My StudyGroup</Typography>
               <hr/>
               <br/>
+
               <div className={classes.root}>
-              {this.state.MyStudyGroup.map(item => (
-                <>
-                <div>
-                {
-                  item.is_captain === true 
-                    ? (
-                      <ExpansionPanel>
-                        <ExpansionPanelSummary
-                          expandIcon={<ExpandMoreIcon />}
-                          aria-controls="panel1a-content"
-                          id="panel1a-header"
-                        >
-                          <Link to={`/study/${item.studygroup.name}`}>
-                          <Typography className={classes.heading}><GradeIcon/> {item.studygroup.name}</Typography>
-                          </Link>
-                        </ExpansionPanelSummary>
-                        <ExpansionPanelDetails>
-                          <Typography>
-                            {item.studygroup.introduction}
-                          </Typography>
-                        </ExpansionPanelDetails>
-                      </ExpansionPanel>
-                    )
-                    : (
-                      <ExpansionPanel>
+                {this.state.MyStudyGroup.map(item => (
+                  <>
+                  {
+                    item.is_captain === true 
+                      ? (
+                        <ExpansionPanel>
                           <ExpansionPanelSummary
                             expandIcon={<ExpandMoreIcon />}
                             aria-controls="panel1a-content"
                             id="panel1a-header"
                           >
                             <Link to={`/study/${item.studygroup.name}`}>
-                            <Typography className={classes.heading}>{item.studygroup.name}</Typography>
+                            <Typography className={classes.heading}><GradeIcon/> {item.studygroup.name}</Typography>
                             </Link>
                           </ExpansionPanelSummary>
                           <ExpansionPanelDetails>
@@ -92,13 +71,30 @@ class MyStudyGroup extends Component {
                             </Typography>
                           </ExpansionPanelDetails>
                         </ExpansionPanel>
-                    )
-                }
-                </div>
+                      )
+                      : (
+                        <ExpansionPanel>
+                            <ExpansionPanelSummary
+                              expandIcon={<ExpandMoreIcon />}
+                              aria-controls="panel1a-content"
+                              id="panel1a-header"
+                            >
+                              <Link to={`/study/${item.studygroup.name}`}>
+                              <Typography className={classes.heading}>{item.studygroup.name}</Typography>
+                              </Link>
+                            </ExpansionPanelSummary>
+                            <ExpansionPanelDetails>
+                              <Typography>
+                                {item.studygroup.introduction}
+                              </Typography>
+                            </ExpansionPanelDetails>
+                          </ExpansionPanel>
+                      )
+                  }
                 </>
-            ))}
+              ))}
             </div>
-            </Paper>
+          </>
         );
     }
 }

@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { getUser } from "../../../api/AuthAPI";
 
 // @material-ui
-import {Paper, TextField, Button, Typography} from "@material-ui/core";
+import { TextField, Button, Typography} from "@material-ui/core";
 import {Table, TableBody, TableCell, TableContainer, TableHead, TableRow} from "@material-ui/core";
 import SaveIcon from "@material-ui/icons/Save";
 
@@ -101,18 +101,12 @@ export default class MyProfile extends Component {
 
     if (this.state.is_update === false ){
       return (
-        <Paper
-          elevation={10}
-          className="MyProfile"
-          style={{
-            width: "100%",
-            padding: 20
-          }}
-        >
-          <TableContainer className="">
+        
+          <TableContainer>
             <Table
               style={{
                 width: "100%",
+                padding: 20,
                 borderCollapse: "seperate"
               }}
             >
@@ -143,21 +137,20 @@ export default class MyProfile extends Component {
                   onClick={e => this.setState({ is_update: true })}
                   style={{marginTop : 20}}
                 >
-                  Update
+                  정보수정
                 </Button>
               ) : (
                 <></>
               )
             }
           </TableContainer>
-        </Paper>
       );
     } else{
       return (
-        <Paper elevation={10} className="MyProfile">
+        <div >
           <Typography variant="h4">Update Profile</Typography>
           <hr />
-          <form onSubmit={e => this.handlingSubmit(e, this.state.userId)}>
+          <form onSubmit={e => this.handlingSubmit(e, this.state.userId)} style={{ textAlign: 'center', lineHeight: 4}}>
             <TextField
               className="standard-required"
               label="User Name"
@@ -233,16 +226,16 @@ export default class MyProfile extends Component {
           <Button
               className="faked"
               variant="contained"
-              color="primary"
+              color="secondary"
               size="large"
               startIcon={<SaveIcon />}
               type="submit"
               onClick={this.refreshPage}
             >
-              수정
+              저장
             </Button>
           </form>
-        </Paper>
+        </div>
       );
     }
   }

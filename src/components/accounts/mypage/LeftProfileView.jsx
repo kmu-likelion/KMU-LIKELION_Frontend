@@ -7,7 +7,7 @@ import EditIcon from '@material-ui/icons/Edit';
 import DraftsIcon from "@material-ui/icons/Drafts";
 import SendIcon from "@material-ui/icons/Send";
 import PriorityHighIcon from "@material-ui/icons/PriorityHigh";
-
+import AssignmentIcon from "@material-ui/icons/Assignment";
 
 
 export default class LeftProfileView extends Component {
@@ -97,7 +97,7 @@ export default class LeftProfileView extends Component {
           <img
             src={user_img}
             alt="Myprofile"
-            style={{ width: "70%", padding: "5px" }}
+            style={{ width: "70%", padding: "10px", borderRadius: '20px' }}
           />
           <br />
           {username === window.sessionStorage.getItem("username")
@@ -105,13 +105,12 @@ export default class LeftProfileView extends Component {
           </EditIcon>)
           :(
             <></>
-          )
-          }
+          )}
           <div className="modal fade" id="exampleModal" tabIndex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div className="modal-dialog" role="document">
               <div className="modal-content">
                 <div className="modal-header">
-                  <h5 className="modal-title" id="exampleModalLabel">이미지 업데이트</h5>
+                  <h5 className="modal-title" id="exampleModalLabel">프로필사진 수정</h5>
                   <button type="button" className="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                   </button>
@@ -120,8 +119,8 @@ export default class LeftProfileView extends Component {
                   <input type="file" name="file" onChange={e=> this.handleFileInput(e)}/>
                 </div>
                 <div className="modal-footer">
-                  <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>
-                  <button type="button" className="btn btn-primary" onClick={e=>{this.updateUserImage(); this.refreshPage()}}>Save changes</button>
+                  <button type="button" className="btn btn-secondary" data-dismiss="modal">닫기</button>
+                  <button type="button" className="btn btn-primary" onClick={e=>{this.updateUserImage(); this.refreshPage()}}>변경하기</button>
                 </div>
               </div>
             </div>
@@ -146,14 +145,25 @@ export default class LeftProfileView extends Component {
 
           {username === window.sessionStorage.getItem("username")
           ?(
+            <div>
             <MenuItem
-              onClick={event => this.props.handlingSubmit(event, "MyLike")}
+              onClick={event => this.props.handlingSubmit(event, "MySubmission")}
             >
               <ListItemIcon>
-                <PriorityHighIcon fontSize="small" />
+                <AssignmentIcon fontSize="small" />
               </ListItemIcon>
-              <Typography variant="inherit">내가 좋아요 한 글</Typography>
+              <Typography variant="inherit">나의 과제 제출물</Typography>
             </MenuItem>
+
+            <MenuItem
+            onClick={event => this.props.handlingSubmit(event, "MyLike")}
+          >
+            <ListItemIcon>
+              <PriorityHighIcon fontSize="small" />
+            </ListItemIcon>
+            <Typography variant="inherit">내가 좋아요 한 글</Typography>
+          </MenuItem>
+          </div>
           ):( <span></span> )}
 
           <MenuItem

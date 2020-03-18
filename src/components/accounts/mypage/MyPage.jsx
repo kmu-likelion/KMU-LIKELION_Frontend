@@ -1,14 +1,26 @@
 import React, { Component } from "react";
 import { getUser, updateUser } from "../../../api/AuthAPI";
-import {Grid, Container} from "@material-ui/core";
+import {Grid, Container, Paper, withStyles } from "@material-ui/core";
 
-import MyLike from "./MyLike";
 import LeftProfileView from "./LeftProfileView";
 import MyProfile from "./MyProfile";
+import MyLike from "./MyLike";
 import MyPost from "./MyPost";
 import MyComment from "./MyComment";
 import MyMentoring from "./MyMentoring";
 import MyStudyGroup from "./MyStudyGroup";
+import MySubmission from "./MySubmission";
+
+
+const useStyles = theme => ({
+  root: {
+    padding: '2rem'
+  },
+  paper: {
+    padding : '2rem',
+    height: '100%'
+  }
+});
 
 class MyPage extends Component {
   constructor(props) {
@@ -49,8 +61,11 @@ class MyPage extends Component {
   };
 
   render() {
+    const { classes } = this.props;
     let renderComponent = "";
+
     switch (this.state.type) {
+
       case "Myprofile":
         renderComponent = (
           <MyProfile
@@ -60,29 +75,38 @@ class MyPage extends Component {
           />
         );
         break;
+      case "MySubmission":
+        renderComponent = <MySubmission/>;
+        break;
+
       case "MyLike":
         renderComponent = <MyLike />;
         break;
+
       case "MyPost":
         renderComponent = <MyPost id={this.state.userId} />;
         break;
+
       case "MyComment":
         renderComponent = <MyComment id={this.state.userId} />;
         break;
+
       case "MyMentoring":
         renderComponent = <MyMentoring id={this.state.userId} />;
         break;
-      case "MyStudyGroup":
+
+        case "MyStudyGroup":
         renderComponent = <MyStudyGroup id={this.state.userId} />;
         break;
+
       default:
         renderComponent = "";
         break;
     }
 
     return (
-      <Container maxWidth="lg" className="PostingSection">
-        <Grid container spacing={2} className="firstbox">
+      <Container maxWidth="lg" className={classes.root}>
+        <Grid container spacing={2}>
           <Grid item xs={12} sm={4}>
             <LeftProfileView
               username={this.state.userInfo.username}
@@ -93,7 +117,9 @@ class MyPage extends Component {
             />
           </Grid>
           <Grid item xs={12} sm={8}>
-            {renderComponent}
+            <Paper elevation={10} className={classes.paper}>
+              {renderComponent}
+            </Paper>
           </Grid>
         </Grid>
       </Container>
@@ -101,4 +127,4 @@ class MyPage extends Component {
   }
 }
 
-export default MyPage;
+export default withStyles(useStyles)(MyPage);

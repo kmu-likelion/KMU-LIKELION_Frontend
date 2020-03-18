@@ -1,9 +1,8 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-
 import api from "../../../api/BoardAPI";
 
-import {Paper, List, ListItem, ListItemText, ListSubheader, withStyles} from "@material-ui/core";
+import { List, ListItem, ListItemText, ListSubheader, withStyles, Typography} from "@material-ui/core";
 
 
 const useStyles = theme => ({
@@ -114,23 +113,25 @@ class MyPost extends Component {
     const { classes } = this.props;
 
     return (
-      <Paper elevation={10} className="MyPost">
         <>
-          <h1>My Post</h1>
+          <Typography variant="h4">
+            My Post
+          </Typography>
           <hr/>
           <br />
           <List className={classes.root} subheader={<li />}>
-            {["Notice Board", "QnA Board", "Study Board"].map(sectionId => (
-              <li key={`section-${sectionId}`} className={classes.listSection}>
+            {["Notice Board", "QnA Board", "Study Board"].map((sectionId, index) => (
+
+              <li key={`section-${index}`} className={classes.listSection}>
                 <ul className={classes.ul}>
                   <ListSubheader><h3>{`${sectionId}`}</h3></ListSubheader>
                   {this.show(sectionId)}
                 </ul>
               </li>
+
             ))}
           </List>
         </>
-      </Paper>
     );
   }
 }

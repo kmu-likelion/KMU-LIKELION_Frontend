@@ -1,12 +1,9 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import Paper from "@material-ui/core/Paper";
+
 import api from "../../../api/BoardAPI";
-import { withStyles } from '@material-ui/core/styles';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemText from '@material-ui/core/ListItemText';
-import ListSubheader from '@material-ui/core/ListSubheader';
+import { Typography, withStyles, List, ListItem, ListItemText, ListSubheader } from "@material-ui/core";
+
 
 const useStyles = theme => ({
   root: {
@@ -16,7 +13,6 @@ const useStyles = theme => ({
     position: 'relative',
     overflow: 'auto',
     maxHeight: 500,
-
   },
   listSection: {
     backgroundColor: 'inherit',
@@ -119,9 +115,10 @@ class MyComment extends Component {
     const { classes } = this.props;
 
     return (
-      <Paper elevation={10} className="MyComment">
         <>
-          <h1>My Comments</h1>
+          <Typography variant="h4">
+            My Comments
+          </Typography>
           <hr/>
           <br />
           <List className={classes.root} subheader={<li />}>
@@ -135,7 +132,6 @@ class MyComment extends Component {
             ))}
           </List>
         </>
-      </Paper>
     );
   }
 }

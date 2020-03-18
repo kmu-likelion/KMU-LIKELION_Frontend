@@ -1,12 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import Paper from "@material-ui/core/Paper";
 import api from "../../../api/BoardAPI";
-import { withStyles } from '@material-ui/core/styles';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemText from '@material-ui/core/ListItemText';
-import ListSubheader from '@material-ui/core/ListSubheader';
+
+import { List, ListItem, ListItemText, ListSubheader, withStyles } from "@material-ui/core";
 
 
 const useStyles = theme => ({
@@ -31,6 +27,7 @@ const useStyles = theme => ({
 
 
 class MyLike extends React.Component {
+
   state = {
     likeNotice: [],
     likeQnA: [],
@@ -38,6 +35,7 @@ class MyLike extends React.Component {
     likeSession:[],
     likeCareer:[],
   };
+
   componentDidMount() {
     this.getLikePosts("notice");
     this.getLikePosts("qna");
@@ -135,7 +133,6 @@ class MyLike extends React.Component {
   render() {
     const { classes } = this.props;
     return (
-      <Paper elevation={10} className="MyLike">
         <>
           <h1>Liked Post</h1>
           <hr/>
@@ -151,7 +148,6 @@ class MyLike extends React.Component {
             ))}
           </List>
           </>
-      </Paper>
     );
   }
 }

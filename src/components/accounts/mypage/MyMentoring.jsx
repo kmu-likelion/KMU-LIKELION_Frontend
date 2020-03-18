@@ -1,11 +1,7 @@
 import React, { Component } from 'react'
-import Paper from "@material-ui/core/Paper";
 import api from "../../../api/MentoringAPI";
-import { withStyles } from '@material-ui/core/styles';
-import GridList from '@material-ui/core/GridList';
-import GridListTile from '@material-ui/core/GridListTile';
-import GridListTileBar from '@material-ui/core/GridListTileBar';
-import IconButton from '@material-ui/core/IconButton';
+
+import { withStyles, GridList, GridListTile, GridListTileBar, IconButton, Typography } from "@material-ui/core";
 import StarBorderIcon from '@material-ui/icons/StarBorder';
 
 const useStyles = theme => ({
@@ -15,6 +11,10 @@ const useStyles = theme => ({
     justifyContent: 'space-around',
     overflow: 'hidden',
     backgroundColor: theme.palette.background.paper,
+  },
+  container: {
+    width: '80%',
+    paddingLeft: 20
   },
   gridList: {
     flexWrap: 'nowrap',
@@ -73,64 +73,75 @@ class MyMentoring extends Component {
     render() {
         const {classes} =this.props;
         return (
-            <Paper elevation={10} className="MyMentoring">
               <>
-              <h1>My Mentoring</h1>
-              <hr/>
-              <br/>
-              <h3>My Mentor</h3>
-              <div className={classes.root}>
-
-                <GridList className={classes.gridList} cols={2.5}>
-                    {this.state.linkedMentor.map(tile => (
-                    <GridListTile key={tile.user.img}>
-                        <img src={tile.user.img} alt={tile.user.id} />
-                        <a href={'/Mypage/'+ tile.user.username}>
-                        <GridListTileBar
-                        title={tile.user.first_name}
-                        classes={{
-                            root: classes.titleBar,
-                            title: classes.title,
-                        }}
-                        actionIcon={
-                            <IconButton aria-label={`star ${tile.user.username}`}>
-                            <StarBorderIcon className={classes.title} />
-                            </IconButton>
-                        }
-                        />
-                        </a>
-                    </GridListTile>
-                    ))}
-                </GridList>
-                </div>
+                <Typography variant="h4">
+                    Mentor / Mentee
+                </Typography>
+                <hr/>
                 <br/>
-              <h3>My Mentee</h3>
-              <div className={classes.root}>
-                <GridList className={classes.gridList} cols={2.5}>
-                    {this.state.linkedMentee.map(tile => (
-                    <GridListTile key={tile.user.img}>
-                        <img src={tile.user.img} alt={tile.user.id} />
-                        <a href={'/Mypage/'+ tile.user.username}>
-                        <GridListTileBar
-                        title={tile.user.first_name}
-                        classes={{
-                            root: classes.titleBar,
-                            title: classes.title,
-                        }}
-                        actionIcon={
-                            <IconButton aria-label={`star ${tile.user.username}`}>
-                            <StarBorderIcon className={classes.title} />
-                            </IconButton>
-                        }
-                        />
-                        </a>
-                    </GridListTile>
-                    ))}
-                </GridList>
-                </div>
+                <div className={classes.container}>
+                  <Typography variant="h5">
+                      나의 멘토
+                  </Typography>              
 
+                  <div className={classes.root}>
+                    <GridList className={classes.gridList} cols={2.5}>
+                      
+                      {this.state.linkedMentor.map(tile => (
+                      <GridListTile key={tile.user.img}>
+
+                          <img src={tile.user.img} alt={tile.user.id} />
+                          <a href={'/Mypage/'+ tile.user.username}>
+                            <GridListTileBar
+                            title={tile.user.first_name}
+                            classes={{
+                                root: classes.titleBar,
+                                title: classes.title,
+                            }}
+                            actionIcon={
+                                <IconButton aria-label={`star ${tile.user.username}`}>
+                                <StarBorderIcon className={classes.title} />
+                                </IconButton>
+                            }
+                            />
+                          </a>
+                      </GridListTile>
+                      ))}
+                    </GridList>
+                  </div>
+
+                  <hr/>
+                  <Typography variant="h5">
+                    나의 멘티
+                  </Typography>
+                  <div className={classes.root}>
+                    <GridList className={classes.gridList} cols={2.5}>
+
+                      {this.state.linkedMentee.map(tile => (
+                        <GridListTile key={tile.user.img}>
+
+                          <img src={tile.user.img} alt={tile.user.id} />
+                          <a href={'/Mypage/'+ tile.user.username}>
+
+                            <GridListTileBar
+                            title={tile.user.first_name}
+                            classes={{
+                                root: classes.titleBar,
+                                title: classes.title,
+                            }}
+                            actionIcon={
+                                <IconButton aria-label={`star ${tile.user.username}`}>
+                                <StarBorderIcon className={classes.title} />
+                                </IconButton>
+                            }
+                            />
+                          </a>
+                        </GridListTile>
+                      ))}
+                    </GridList>
+                  </div>
+                </div>
               </>
-            </Paper>
         );
     }
 }
