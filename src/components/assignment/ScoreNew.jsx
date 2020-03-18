@@ -80,7 +80,7 @@ export default class CommentView extends Component {
         <Grid container spacing={2}>
           <Grid item sm={1}></Grid>
           <Grid item xs={12} sm={10}>
-            <Typography color="body1" style={{ textAlign: "left" }}>
+            <Typography variant="body1" style={{ textAlign: "left" }}>
               과제 채점
             </Typography>
             <List>
@@ -89,12 +89,13 @@ export default class CommentView extends Component {
                 style={{ width: "auto" }}
               >
                 <ListItem
-                  alignItems="flex-start"
+                  alignItems="center"
                   style={{ verticalAlign: "middle" }}
                 ></ListItem>
                 {scoreTypes.map((score, index) => (
                   <ListItem
-                    alignItems="middle"
+                    key={index}
+                    alignItems="center"
                     style={{ verticalAlign: "middle" }}
                   >
                     <ListItemText
@@ -118,7 +119,7 @@ export default class CommentView extends Component {
                   </ListItem>
                 ))}
                 <ListItem
-                  alignItems="middle"
+                  alignItems="center"
                   style={{ verticalAlign: "middle" }}
                 >
                   <ListItemText
@@ -137,7 +138,7 @@ export default class CommentView extends Component {
                   />
                 </ListItem>
                 <ListItem
-                  alignItems="middle"
+                  alignItems="center"
                   style={{ verticalAlign: "middle" }}
                 >
                   <Button

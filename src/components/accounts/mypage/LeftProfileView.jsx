@@ -1,14 +1,15 @@
 import React, { Component } from "react";
-import {Paper, Typography, MenuItem, MenuList, ListItemIcon } from "@material-ui/core"
 
-// import {EditIcon, DraftsIcon, SendIcon, PriorityHighIcon} from "@material-ui/icons"
+import { updateUser, getUserWithId } from "../../../api/AuthAPI";
+
+import { Paper, Typography, MenuItem, MenuList, ListItemIcon } from "@material-ui/core"
 import EditIcon from '@material-ui/icons/Edit';
 import DraftsIcon from "@material-ui/icons/Drafts";
 import SendIcon from "@material-ui/icons/Send";
 import PriorityHighIcon from "@material-ui/icons/PriorityHigh";
 
-import {updateUser} from "../../../api/AuthAPI";
-import {getUserWithId} from "../../../api/AuthAPI";
+
+
 export default class LeftProfileView extends Component {
   state={
     img:null,
@@ -69,14 +70,15 @@ export default class LeftProfileView extends Component {
       }
     }
 
-    await updateUser(window.sessionStorage.getItem("id"),formData,config)
+    await updateUser(window.sessionStorage.getItem("id"), formData, config)
       .then(res => {
 
-        const userImg = res.data;
+        const userData = res.data;
+        console.log("userData! ", res.data);
         this.setState({
-          img: userImg.img,
-
+          img: userData.img,
         });
+        window.sessionStorage.setItem("user_img", userData.img);
         this.getUserWithId();
         ('#myModal').modal('hide')
       })
@@ -105,21 +107,21 @@ export default class LeftProfileView extends Component {
             <></>
           )
           }
-          <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h5 class="modal-title" id="exampleModalLabel">이미지 업데이트</h5>
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <div className="modal fade" id="exampleModal" tabIndex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div className="modal-dialog" role="document">
+              <div className="modal-content">
+                <div className="modal-header">
+                  <h5 className="modal-title" id="exampleModalLabel">이미지 업데이트</h5>
+                  <button type="button" className="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                   </button>
                 </div>
-                <div class="modal-body">
+                <div className="modal-body">
                   <input type="file" name="file" onChange={e=> this.handleFileInput(e)}/>
                 </div>
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                  <button type="button" class="btn btn-primary" onClick={e=>{this.updateUserImage(); this.refreshPage()}}>Save changes</button>
+                <div className="modal-footer">
+                  <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>
+                  <button type="button" className="btn btn-primary" onClick={e=>{this.updateUserImage(); this.refreshPage()}}>Save changes</button>
                 </div>
               </div>
             </div>
@@ -141,23 +143,19 @@ export default class LeftProfileView extends Component {
             </ListItemIcon>
             <Typography variant="inherit">내 프로필</Typography>
           </MenuItem>
+
           {username === window.sessionStorage.getItem("username")
           ?(
             <MenuItem
-            onClick={event => this.props.handlingSubmit(event, "MyLike")}
-          >
-            <ListItemIcon>
-              <PriorityHighIcon fontSize="small" />
-            </ListItemIcon>
-            <Typography variant="inherit">내가 좋아요 한 글</Typography>
-          </MenuItem>
+              onClick={event => this.props.handlingSubmit(event, "MyLike")}
+            >
+              <ListItemIcon>
+                <PriorityHighIcon fontSize="small" />
+              </ListItemIcon>
+              <Typography variant="inherit">내가 좋아요 한 글</Typography>
+            </MenuItem>
+          ):( <span></span> )}
 
-
-          )
-          :(
-            <></>
-          )
-          }
           <MenuItem
             onClick={event => this.props.handlingSubmit(event, "MyPost")}
           >

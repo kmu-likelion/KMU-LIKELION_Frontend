@@ -36,8 +36,9 @@ class ScoreView extends Component {
             <AssignmentIcon />
           </ListItemAvatar>
           <ListItemText primary="총 점수" secondary={`${totalScore}`} />
-          {scores.map(score => (
+          {scores.map((score, index) => (
             <ListItemText
+              key={index}
               primary={score.score_type}
               secondary={`${score.score} / 100`}
             />

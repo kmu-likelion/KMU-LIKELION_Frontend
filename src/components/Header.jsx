@@ -3,17 +3,16 @@ import { Link } from "react-router-dom";
 import Store from "../store/Store";
 
 // @material-ui
-import Button from "@material-ui/core/Button";
-import Menu from "@material-ui/core/Menu";
-import MenuItem from "@material-ui/core/MenuItem";
+import {Menu, MenuItem, Avatar, IconButton} from "@material-ui/core";
 import PopupState, { bindTrigger, bindMenu } from "material-ui-popup-state";
-import Avatar from "@material-ui/core/Avatar";
+
 // bootstrap
 import { Nav, Navbar, NavDropdown } from "react-bootstrap";
 
 export default function Header(props) {
   const store = useContext(Store);
   const username = window.sessionStorage.getItem("username");
+  // const user_img = window.sessionStorage.getItem("user_img");
 
   const DropItem = ({ children, to }) => (
     <Link to={to} className="link drop-link">
@@ -74,12 +73,12 @@ export default function Header(props) {
                 <PopupState variant="popover" popupId="popup-menu">
                   {popupState => (
                     <>
-                      <Button
+                      <IconButton
                         style={{ color: "white" }}
                         {...bindTrigger(popupState)}
                       >
                         <Avatar alt="User" src="" />
-                      </Button>
+                      </IconButton>
                       <Menu {...bindMenu(popupState)}>
                         <MenuItem
                           onClick={e => {

@@ -37,7 +37,7 @@ export default class EvaluationView extends Component {
             secondary={`[채점자] ${evaluator_name}`}
           />
           <ListItemSecondaryAction>
-            <Typography variant="caption" color="textsecondary">{eval_pubDate}</Typography>
+            <Typography variant="caption" color="textSecondary">{eval_pubDate}</Typography>
           </ListItemSecondaryAction>
         </ListItem>
         <Divider variant="inset" />

@@ -1,16 +1,10 @@
 import React, { Component } from "react";
-import { getUser} from "../../../api/AuthAPI";
-import Paper from "@material-ui/core/Paper";
-import TextField from "@material-ui/core/TextField";
+import { getUser } from "../../../api/AuthAPI";
+
+// @material-ui
+import {Paper, TextField, Button, Typography} from "@material-ui/core";
+import {Table, TableBody, TableCell, TableContainer, TableHead, TableRow} from "@material-ui/core";
 import SaveIcon from "@material-ui/icons/Save";
-import Button from "@material-ui/core/Button";
-import Typography from "@material-ui/core/Typography";
-import Table from "@material-ui/core/Table";
-import TableBody from "@material-ui/core/TableBody";
-import TableCell from "@material-ui/core/TableCell";
-import TableContainer from "@material-ui/core/TableContainer";
-import TableHead from "@material-ui/core/TableHead";
-import TableRow from "@material-ui/core/TableRow";
 
 export default class MyProfile extends Component {
   state = {
@@ -64,7 +58,6 @@ export default class MyProfile extends Component {
     this.props.updateUser(id, {
       username: this.state.username,
       first_name: this.state.first_name,
-      // img: this.state.img,
       id: this.state.userId,
       email: this.state.email,
       major: this.state.major,
@@ -80,7 +73,6 @@ export default class MyProfile extends Component {
     this.props.updateUser(id, {
       username: this.state.username,
       first_name: this.state.first_name,
-      // img: this.state.img,
       id: this.state.userId,
       email: this.state.email,
       major: this.state.major,
@@ -126,12 +118,14 @@ export default class MyProfile extends Component {
             >
               <TableHead>
                 <TableRow>
-                  <Typography variant="h4">My Profile</Typography>
+                  <TableCell colSpan={2}>
+                    <Typography variant="h4">My Profile</Typography>
+                  </TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
-                {userData.map(col => (
-                  <TableRow style={{ padding: 10 }}>
+                {userData.map((col, index) => (
+                  <TableRow key={index} style={{ padding: 10 }}>
                     <TableCell>{col.key}</TableCell>
                     <TableCell>{col.value}</TableCell>
                   </TableRow>
@@ -147,6 +141,7 @@ export default class MyProfile extends Component {
                   size="large"
                   startIcon={<SaveIcon />}
                   onClick={e => this.setState({ is_update: true })}
+                  style={{marginTop : 20}}
                 >
                   Update
                 </Button>
@@ -206,28 +201,17 @@ export default class MyProfile extends Component {
               onChange={this.handlingChange}
             />
             <br />
-            {/* <Button
-              className="faked"
-              variant="contained"
-              color="primary"
-              size="large"
-              startIcon={<SaveIcon />}
-              onClick={null}
-              type="button" data-toggle="modal" data-target="#exampleModal2"
-            >
-              password수정
-            </Button> */}
 
-            <div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h5 class="modal-title" id="exampleModalLabel">패스워드 수정</h5>
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            {/* <div className="modal fade" id="exampleModal2" tabIndex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div className="modal-dialog" role="document">
+              <div className="modal-content">
+                <div className="modal-header">
+                  <h5 className="modal-title" id="exampleModalLabel">패스워드 수정</h5>
+                  <button type="button" className="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                   </button>
                 </div>
-                <div class="modal-body">
+                <div className="modal-body">
                 <form onSubmit={e => this.handlingpasswordSubmit(e, this.state.userId)}>
                 <TextField
                   className="standard-required"
@@ -238,13 +222,13 @@ export default class MyProfile extends Component {
                 />
                 </form>
                 </div>
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                  <button type="button" class="btn btn-primary" onClick={this.refreshPage}>Save changes</button>
+                <div className="modal-footer">
+                  <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>
+                  <button type="button" className="btn btn-primary" onClick={this.refreshPage}>Save changes</button>
                 </div>
               </div>
             </div>
-          </div>
+          </div> */}
 
           <Button
               className="faked"

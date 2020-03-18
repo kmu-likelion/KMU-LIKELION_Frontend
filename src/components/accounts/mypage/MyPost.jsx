@@ -1,13 +1,9 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import Paper from "@material-ui/core/Paper";
-import api from "../../../api/BoardAPI";
-import { withStyles } from '@material-ui/core/styles';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemText from '@material-ui/core/ListItemText';
-import ListSubheader from '@material-ui/core/ListSubheader';
 
+import api from "../../../api/BoardAPI";
+
+import {Paper, List, ListItem, ListItemText, ListSubheader, withStyles} from "@material-ui/core";
 
 
 const useStyles = theme => ({
@@ -32,14 +28,15 @@ const useStyles = theme => ({
 
 
 class MyPost extends Component {
+
   state = {
     studyboard: [],
     noticeboard: [],
     qnaboard: [],
   };
+
   componentDidMount() {
-    const id = this.props.id;
-    this.getMyPost(id);
+    this.getMyPost(this.props.id);
   }
 
   async getMyPost(id) {
@@ -58,29 +55,35 @@ class MyPost extends Component {
       .catch(err => console.log(err));
   }
 
-  show(type){
+  show (type) {
     let postlist = [];
     let board_type = "";
-    switch(type){
+     
+    switch(type) {
+
       case "Notice Board":
         postlist = this.state.noticeboard;
         board_type = "notice";
         break;
+
       case "QnA Board":
         postlist = this.state.qnaboard;
         board_type = "qna";
         break;
+
       case "Study Board":
         postlist = this.state.studyboard;
         board_type = "study";
         break;
+
       default:
         postlist=[];
         board_type ="";
         break;
     }
-    if(board_type === "study"){
-      return(
+
+    if(board_type === "study") {
+      return (
         postlist.map(item => (
           <ListItem>
             <Link
@@ -93,18 +96,18 @@ class MyPost extends Component {
         ))
       )
     }
-    return(
-      postlist.map(item => (
-        <ListItem>
+
+    return (
+      postlist.map((item, index) => (
+        <ListItem key={index}>
           <Link
                 to={`/${board_type}/detail/${item.id}`}
-                className={"main-postTitle"}
               >
                 <ListItemText primary={`${item.title}`} />
               </Link>
         </ListItem>
       ))
-    )
+    );
   }
 
   render() {

@@ -3,16 +3,10 @@ import { Link } from "react-router-dom";
 import moment from "moment";
 
 import { withStyles } from "@material-ui/core/styles";
-import List from "@material-ui/core/List";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemText from "@material-ui/core/ListItemText";
-import ListItemAvatar from "@material-ui/core/ListItemAvatar";
-import Avatar from "@material-ui/core/Avatar";
-import Divider from "@material-ui/core/Divider";
-import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
-import Badge from "@material-ui/core/Badge";
+import {List, ListItem, ListItemText, ListItemAvatar, ListItemSecondaryAction} from "@material-ui/core";
+import {Avatar, Divider, IconButton, Badge} from "@material-ui/core";
 import AssignmentIcon from "@material-ui/icons/Assignment";
-import IconButton from "@material-ui/core/IconButton";
+
 
 const useStyles = theme => ({
   root: {
@@ -25,6 +19,7 @@ class PostView extends Component {
   render() {
     const { classes } = this.props;
     const { postInfo, board_name } = this.props;
+    const author = postInfo.author;
     const pubDate = moment(postInfo.update_date).format("YY/MM/DD hh:mm");
 
     let linkUrl = "";
@@ -68,7 +63,7 @@ class PostView extends Component {
           <>
             <ListItemText
               primary={postInfo.title}
-              secondary={`${postInfo.first_name}(${postInfo.author_name})`}
+              secondary={`${author.name}(${author.username})`}
             />
             <ListItemSecondaryAction>
               <small>{pubDate}</small>
@@ -82,7 +77,7 @@ class PostView extends Component {
       <List component="nav" className={classes.root} aria-label="contacts">
         <ListItem button component={Link} to={linkUrl}>
           <ListItemAvatar>
-            <Avatar alt="Author Name" src="" />
+            <Avatar alt="Author Name" src={author.img} />
           </ListItemAvatar>
           {renderItem}
         </ListItem>

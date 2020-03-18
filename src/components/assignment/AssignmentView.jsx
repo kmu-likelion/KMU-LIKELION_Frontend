@@ -42,8 +42,8 @@ class ListView extends Component {
           <Typography className={classes.secondaryHeading}>{title}</Typography>
         </ExpansionPanelSummary>
         <ExpansionPanelDetails style={{ flexDirection: "column" }}>
-          {assignmentList.map(assign => (
-            <List component="nav" aria-label="contacts">
+          {assignmentList.map((assign, index) => (
+            <List component="nav" aria-label="contacts" key={index}>
               <ListItem
                 button
                 component={Link}
