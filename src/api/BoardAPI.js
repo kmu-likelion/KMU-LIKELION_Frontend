@@ -1,8 +1,9 @@
 import axios from "axios";
 import { tokenConfig } from "./AuthAPI";
-import config from "../axiosConfig";
 
-axios.defaults.baseURL = config.baseURL;
+axios.defaults.baseURL =
+  "http://ec2-52-194-187-114.ap-northeast-1.compute.amazonaws.com/";
+// axios.defaults.baseURL = "http://127.0.0.1:8000/";
 axios.defaults.xsrfCookieName = "csrftoken";
 axios.defaults.xsrfHeaderName = "X-CSRFToken";
 
