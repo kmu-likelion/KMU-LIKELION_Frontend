@@ -327,3 +327,7 @@ yarn-error.log*
 #DB conf
 /conf
 mysql.cnf
+
+#Axios config
+src/axiosConfig.js
+axiosConfig.js
