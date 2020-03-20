@@ -1,14 +1,7 @@
 import React, { Component } from "react";
 import api from "../../../api/CommentAPI";
 
-import Grid from "@material-ui/core/Grid";
-import Button from "@material-ui/core/Button";
-import TextField from "@material-ui/core/TextField";
-import List from "@material-ui/core/List";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemText from "@material-ui/core/ListItemText";
-import ListItemAvatar from "@material-ui/core/ListItemAvatar";
-import Avatar from "@material-ui/core/Avatar";
+import { Grid, Button, TextField, Avatar, List, ListItem, ListItemAvatar, ListItemText } from "@material-ui/core";
 
 export default class RecommentView extends Component {
   state = {
@@ -42,7 +35,6 @@ export default class RecommentView extends Component {
         parent_id: String(comment_id)
       })
       .then(res => {
-        console.log("대댓글생성 성공 !", res.data);
         this.setState({
           body: ""
         });

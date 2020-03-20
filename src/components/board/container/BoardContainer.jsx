@@ -1,15 +1,11 @@
 import React from "react";
-import Container from "@material-ui/core/Container";
-import Paper from "@material-ui/core/Paper";
-import Typography from "@material-ui/core/Typography";
-import Grid from "@material-ui/core/Grid";
 import { Link } from "react-router-dom";
 import api from "../../../api/BoardAPI";
 import PostView from "./PostView";
 import _ from "lodash";
 
-import Select from "@material-ui/core/Select";
-import MenuItem from "@material-ui/core/MenuItem";
+import { Container, Paper, Typography, Grid, Select, MenuItem } from "@material-ui/core";
+
 
 class BoardContainer extends React.Component {
   constructor(props) {
@@ -26,7 +22,6 @@ class BoardContainer extends React.Component {
     };
   }
   UNSAFE_componentWillMount() {
-    // console.log("해당 보드는? ", this.props.match.path);
     let board_name = this.props.match.path.split("/")[1];
     this.setState({
       boardType: board_name,
@@ -43,7 +38,7 @@ class BoardContainer extends React.Component {
     await api
       .getAllPosts(boardType)
       .then(res => {
-        // console.log("posts 가져오기 성공! ", res.data);
+
         this.setState({
           postCount: res.data.count,
           postList: res.data.results
@@ -64,7 +59,6 @@ class BoardContainer extends React.Component {
     await api
       .getPage(boardType, currentPage)
       .then(res => {
-        // console.log("page 가져오기 성공! ", res.data);
         this.setState({
           postList: res.data.results
         });

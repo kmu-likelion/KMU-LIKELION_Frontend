@@ -97,14 +97,18 @@ export default class AnswerNew extends Component {
                 </ListItem>
               </Grid>
               <ListItem style={{width: "auto"}}>
-                <Button
-                  type="submit"
-                  variant="contained"
-                  color="primary"
-                  fullWidth
-                >
-                  답변작성
-                </Button>
+                <Grid item sm={4}></Grid>
+                <Grid item xs={12} sm={4}>
+                  <Button
+                    type="submit"
+                    variant="contained"
+                    color="primary"
+                    fullWidth
+                  >
+                    답변작성
+                  </Button>
+                  </Grid>
+                <Grid item sm={4}></Grid>
               </ListItem>
             </List>
           </Grid>        

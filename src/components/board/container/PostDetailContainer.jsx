@@ -144,8 +144,8 @@ class PostDetailContainer extends Component {
       <Container maxWidth="lg" className="main-container">
         <Paper>
           <Grid container spacing={2} style={{ paddingTop: "1.5rem" }}>
-            <Grid item xs={1} sm={1}></Grid>
-            <Grid item xs={10} sm={10}>
+            <Grid item sm={1}></Grid>
+            <Grid item xs={12} sm={10}>
               {this.renderDetailComponent(board_name, this.state.postInfo, this.state.author)}
               <Divider />
               <div style={{ padding: "1rem" }}>
@@ -220,7 +220,7 @@ class PostDetailContainer extends Component {
                 )}
               </div>
             </Grid>
-            <Grid item xs={1} sm={1}></Grid>
+            <Grid item sm={1}></Grid>
           </Grid>
         </Paper>
       </Container>

@@ -36,7 +36,6 @@ export default class CommentView extends Component {
         parent_id: null
       })
       .then(res => {
-        // console.log("댓글생성 성공 !", res.data);
         this.setState({
           body: ""
         });
@@ -49,7 +48,7 @@ export default class CommentView extends Component {
     return (
       <>
         <Grid container spacing={2}>
-          <Grid item xs={10} sm={10}>
+          <Grid item xs={12} sm={10}>
             <List>
               <form
                 onSubmit={event => this.handlingSubmit(event, url, board_id)}

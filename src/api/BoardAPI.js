@@ -1,13 +1,12 @@
 import axios from "axios";
 import { tokenConfig } from "./AuthAPI";
+import config from "../axiosConfig";
 
-// axios.defaults.baseURL = "http://ec2-52-194-187-114.ap-northeast-1.compute.amazonaws.com/";
-axios.defaults.baseURL = "http://127.0.0.1:8000/";
+axios.defaults.baseURL = config.baseURL;
 axios.defaults.xsrfCookieName = "csrftoken";
 axios.defaults.xsrfHeaderName = "X-CSRFToken";
 
 export default {
-
   /* Board CRUD api */
   getAllPosts(url) {
     return axios.get(`board/${url}/`, tokenConfig());
@@ -17,7 +16,6 @@ export default {
   getMyAlumPosts(url, alum) {
     return axios.get(`board/${url}/?start_number=${alum}`, tokenConfig());
   },
-
 
   getPost(url, id) {
     return axios.get(`board/${url}/` + String(id), tokenConfig());
@@ -55,7 +53,7 @@ export default {
   },
 
   //댓글 불러오기
-  getComments(url, id) {    
+  getComments(url, id) {
     return axios.get(`board/${url}/?board_id=` + String(id), tokenConfig());
   },
 
@@ -72,8 +70,8 @@ export default {
   changeLike(url, id) {
     return axios.post(`board/${url}/${id}/like/`, null, tokenConfig());
   },
-  
-  getMyPost(id) {    
+
+  getMyPost(id) {
     return axios.get(`accounts/user/${id}/activity/`, tokenConfig());
   }
 };
