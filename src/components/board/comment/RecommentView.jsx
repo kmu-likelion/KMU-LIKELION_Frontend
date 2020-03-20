@@ -1,18 +1,11 @@
 import React, { Component } from "react";
-import Button from "@material-ui/core/Button";
-import api from "../../../api/BoardAPI";
-import TextField from "@material-ui/core/TextField";
 import { Link } from "react-router-dom";
+import api from "../../../api/BoardAPI";
+import moment from "moment";
 
-import List from "@material-ui/core/List";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemText from "@material-ui/core/ListItemText";
-import ListItemAvatar from "@material-ui/core/ListItemAvatar";
-import Avatar from "@material-ui/core/Avatar";
-import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
-import Divider from "@material-ui/core/Divider";
+import {TextField, Typography, Button, Avatar, Divider, IconButton, List, ListItem, ListItemAvatar, ListItemSecondaryAction, ListItemText } from "@material-ui/core";
 
-export default class CommentView extends Component {
+export default class RecommentView extends Component {
   state = {
     is_update: false,
     update_body: "",
@@ -20,10 +13,8 @@ export default class CommentView extends Component {
   };
 
   componentDidMount() {
-    const user_id = window.sessionStorage.getItem("id");
-    console.log("현재 유저 아이디 : ", user_id);
     this.setState({
-      request_user: user_id
+      request_user: window.sessionStorage.getItem("id")
     });
   }
 
@@ -47,7 +38,7 @@ export default class CommentView extends Component {
   };
 
   handlingDelete = async (target, id) => {
-    if (window.confirm("대댓글을 삭제하시겠습니까?") === true) {
+    if (window.confirm("댓글을 삭제하시겠습니까?") === true) {
       await api.deletePost(target, id);
       this.props.getComments();
     }
@@ -57,11 +48,13 @@ export default class CommentView extends Component {
     const {
       user_id,
       author,
+      update_date,
       body,
       comment_id,
       board_id,
       url,
     } = this.props;
+    const updateDate = moment(update_date).format("MM/DD hh:mm");
 
     if (this.state.is_update) {
       return (
@@ -81,7 +74,7 @@ export default class CommentView extends Component {
               margin="normal"
             />
             <Button type="submit" variant="contained" color="primary">
-              제출
+              수정
             </Button>
           </form>
           <hr />
@@ -90,13 +83,20 @@ export default class CommentView extends Component {
     } else {
       return (
         <List component="nav" aria-label="contacts">
-          <ListItem button component={Link} to={`/Mypage/${author.username}`}>
+          <ListItem>
             <ListItemAvatar>
-              <Avatar alt="Recomment-writer" src={author.img} />
+              <IconButton component={Link} to={`/Mypage/${author.username}`}>
+                <Avatar alt="recomment-author" src={author.img} />
+              </IconButton>
             </ListItemAvatar>
             <ListItemText
               primary={body}
-              secondary={`${author.name}(${author.username})`}
+              secondary={
+                <>
+                  {`${author.name}(${author.username})`}
+                  <Typography variant="caption"> {updateDate}</Typography>
+                </>
+              }
             />
             <ListItemSecondaryAction>
               {user_id === Number(window.sessionStorage.getItem("id")) ? (
@@ -108,14 +108,14 @@ export default class CommentView extends Component {
                       this.setState({ is_update: true, update_body: body })
                     }
                   >
-                    Update
+                    수정
                   </Button>
                   <Button
                     color="secondary"
                     size="small"
                     onClick={event => this.handlingDelete(url, comment_id)}
                   >
-                    Delete
+                    삭제
                   </Button>
                 </>
               ) : (

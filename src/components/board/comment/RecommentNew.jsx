@@ -10,7 +10,7 @@ import ListItemText from "@material-ui/core/ListItemText";
 import ListItemAvatar from "@material-ui/core/ListItemAvatar";
 import Avatar from "@material-ui/core/Avatar";
 
-export default class CommentView extends Component {
+export default class RecommentView extends Component {
   state = {
     userid: "",
     username: "",

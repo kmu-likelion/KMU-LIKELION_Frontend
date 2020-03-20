@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import CheckIn from "./CheckIn";
 import ConfirmApplication from "./ConfirmApplication";
 import AdmissionStore from "../../../store/AdmissionStore";
+
 import Container from "@material-ui/core/Container";
 import Paper from "@material-ui/core/Paper";
 

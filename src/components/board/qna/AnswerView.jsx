@@ -6,14 +6,7 @@ import moment from "moment";
 import RecommentNew from "../comment/RecommentNew";
 import RecommentView from "../comment/RecommentView";
 
-import Button from "@material-ui/core/Button";
-import TextareaAutosize from "@material-ui/core/TextareaAutosize";
-import Avatar from "@material-ui/core/Avatar";
-import Typography from "@material-ui/core/Typography";
-import Card from "@material-ui/core/Card";
-import CardHeader from "@material-ui/core/CardHeader";
-import CardContent from "@material-ui/core/CardContent";
-import CardActions from "@material-ui/core/CardActions";
+import {Button, TextareaAutosize, Avatar, Typography, Card, CardHeader, CardActions, CardContent} from "@material-ui/core";
 
 export default class AnswerView extends Component {
   state = {
@@ -24,10 +17,8 @@ export default class AnswerView extends Component {
   };
 
   componentDidMount() {
-    const user_id = window.sessionStorage.getItem("id");
-    console.log("현재 유저 아이디 : ", user_id);
     this.setState({
-      request_user: user_id
+      request_user: window.sessionStorage.getItem("id")
     });
   }
 
@@ -146,41 +137,23 @@ export default class AnswerView extends Component {
                 <>
                   <Button
                     color="primary"
-                    size="small"
                     onClick={event =>
                       this.setState({ is_update: true, update_body: body })
                     }
                   >
-                    Update
+                    수정
                   </Button>
                   <Button
                     color="secondary"
-                    size="small"
                     onClick={event => this.handlingDelete(url, comment_id)}
                   >
-                    Delete
+                    삭제
                   </Button>
                 </>
               ) : (
                 <></>
               )}
-            </CardActions>
-          </Card>
-          <details>
-            <summary> {recomments.length}개의 댓글이 있습니다.</summary>
-            {recomments.map(recmt => (
-              <RecommentView
-                key={recmt.id}
-                user_id={recmt.user_id}
-                author={recmt.author}
-                body={recmt.body}
-                comment_id={recmt.id}
-                getComments={getComments}
-                board_id={recmt.board}
-                url={`qna_comment`}
-              />
-            ))}
-            <Button
+              <Button
               color="primary"
               onClick={event =>
                 this.setState(prevState => ({
@@ -190,7 +163,9 @@ export default class AnswerView extends Component {
             >
               {this.state.openRecomment === true ? "작성취소" : "댓글작성"}
             </Button>
-            {this.state.openRecomment === true ? (
+            </CardActions>
+          </Card>
+          {this.state.openRecomment === true ? (
               <RecommentNew
                 url={`qna_comment`}
                 board_id={board_id}
@@ -201,6 +176,21 @@ export default class AnswerView extends Component {
             ) : (
               <></>
             )}
+          <details>
+            <summary> {recomments.length}개의 댓글이 있습니다.</summary>
+            {recomments.map(recmt => (
+              <RecommentView
+                key={recmt.id}
+                user_id={recmt.user_id}
+                author={recmt.author}
+                body={recmt.body}
+                update_date={recmt.update_date}
+                comment_id={recmt.id}
+                getComments={getComments}
+                board_id={recmt.board}
+                url={`qna_comment`}
+              />
+            ))}
           </details>
 
           <br />

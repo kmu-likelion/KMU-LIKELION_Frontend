@@ -4,6 +4,7 @@ import CommentAPI from "../../../api/CommentAPI";
 
 import CommentNew from "../comment/CommentNew";
 import CommentView from "../comment/CommentView";
+import AnswerNew from "../qna/AnswerNew";
 import AnswerView from "../qna/AnswerView";
 import NoticeDetail from "../notice/NoticeDetail";
 import QnADetail from "../qna/QnADetail";
@@ -152,6 +153,11 @@ class PostDetailContainer extends Component {
                   <>
                     {this.state.userId > 0 ? (
                       <>
+                      <AnswerNew
+                          url={`${this.state.board_name}_comment`}
+                          board_id={post_id}
+                          getComments={this.callGetComments}
+                        />
                         <Typography
                           component="h1"
                           variant="h5"
@@ -174,11 +180,6 @@ class PostDetailContainer extends Component {
                             url={`${this.state.board_name}_comment`}
                           />
                         ))}
-                        <CommentNew
-                          url={`${this.state.board_name}_comment`}
-                          board_id={post_id}
-                          getComments={this.callGetComments}
-                        />
                       </>
                     ) : (
                       <></>

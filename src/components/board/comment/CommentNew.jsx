@@ -2,14 +2,7 @@ import React, { Component } from "react";
 
 import api from "../../../api/CommentAPI";
 
-import Grid from "@material-ui/core/Grid";
-import Button from "@material-ui/core/Button";
-import TextField from "@material-ui/core/TextField";
-import List from "@material-ui/core/List";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemText from "@material-ui/core/ListItemText";
-import ListItemAvatar from "@material-ui/core/ListItemAvatar";
-import Avatar from "@material-ui/core/Avatar";
+import {Grid, Button, TextField, List, ListItem, ListItemAvatar, ListItemText, Avatar} from "@material-ui/core";
 
 export default class CommentView extends Component {
   state = {
@@ -43,7 +36,7 @@ export default class CommentView extends Component {
         parent_id: null
       })
       .then(res => {
-        console.log("댓글생성 성공 !", res.data);
+        // console.log("댓글생성 성공 !", res.data);
         this.setState({
           body: ""
         });
@@ -83,7 +76,6 @@ export default class CommentView extends Component {
                       />
                     }
                   />
-
                   <Button type="submit" variant="contained" color="primary">
                     작성
                   </Button>

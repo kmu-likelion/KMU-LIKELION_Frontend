@@ -83,7 +83,7 @@ export default class CommentView extends Component {
                 </ListItem>
 
                 <ListItem
-                  alignItems="middle"
+                  alignItems="center"
                   style={{ verticalAlign: "middle" }}
                 >
                   <ListItemText
@@ -102,7 +102,7 @@ export default class CommentView extends Component {
                   />
                 </ListItem>
                 <ListItem
-                  alignItems="middle"
+                  alignItems="center"
                   style={{ verticalAlign: "middle" }}
                 >
                   <Button

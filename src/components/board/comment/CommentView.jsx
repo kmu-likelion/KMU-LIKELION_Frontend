@@ -57,7 +57,7 @@ export default class CommentView extends Component {
       board_id,
       url,
     } = this.props;
-    var updateDate = moment(update_date).format("MM/DD hh:mm");
+    const updateDate = moment(update_date).format("MM/DD hh:mm");
     if (this.state.is_update) {
       return (
         <>
@@ -111,7 +111,7 @@ export default class CommentView extends Component {
           <ListItem>
             <ListItemAvatar>
               <IconButton component={Link} to={`/Mypage/${author.username}`}>
-                <Avatar alt="Recomment-writer" src={author.img} />
+                <Avatar alt="comment-author" src={author.img} />
               </IconButton>
             </ListItemAvatar>
             <ListItemText
@@ -133,14 +133,14 @@ export default class CommentView extends Component {
                       this.setState({ is_update: true, update_body: body })
                     }
                   >
-                    Update
+                    수정
                   </Button>
                   <Button
                     color="secondary"
                     size="small"
                     onClick={event => this.handlingDelete(url, comment_id)}
                   >
-                    Delete
+                    삭제
                   </Button>
                 </>
               ) : (
