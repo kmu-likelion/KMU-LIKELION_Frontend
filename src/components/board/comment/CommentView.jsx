@@ -3,15 +3,29 @@ import { Link } from "react-router-dom";
 
 import moment from "moment";
 import api from "../../../api/CommentAPI";
+import CommentNew from "./CommentNew";
 
 //@material-ui
-import {TextField, Avatar, Typography, IconButton, Divider, Button} from "@material-ui/core";
-import {List, ListItem, ListItemText, ListItemAvatar, ListItemSecondaryAction} from "@material-ui/core"
+import {
+  Avatar,
+  Typography,
+  IconButton,
+  Divider,
+  Menu,
+  MenuItem,
+  List,
+  ListItem,
+  ListItemText,
+  ListItemAvatar,
+  ListItemSecondaryAction
+} from "@material-ui/core";
+
+import PopupState, { bindTrigger, bindMenu } from "material-ui-popup-state";
+import SettingsIcon from "@material-ui/icons/Settings";
 
 export default class CommentView extends Component {
   state = {
     is_update: false,
-    update_body: "",
     request_user: ""
   };
 
@@ -25,26 +39,17 @@ export default class CommentView extends Component {
     this.setState({ [event.target.name]: event.target.value });
   };
 
-  handlingUpdate = async (event, url, board_id, user_id, comment_id) => {
-    event.preventDefault();
-    await api
-      .updateComment(url, comment_id, {
-        body: this.state.update_body,
-        user_id: user_id,
-        board: board_id
-      })
-      .then(res => {
-        console.log(res);
-        this.setState({ is_update: false });
-        this.props.getComments();
-      });
-  };
-
   handlingDelete = async (target, id) => {
     if (window.confirm("댓글을 삭제하시겠습니까?") === true) {
       await api.deleteComment(target, id);
       this.props.getComments();
     }
+  };
+
+  flagChange = () => {
+    this.setState({
+      is_update: false
+    });
   };
 
   render() {
@@ -56,54 +61,23 @@ export default class CommentView extends Component {
       comment_id,
       board_id,
       url,
+      getComments
     } = this.props;
+
     const updateDate = moment(update_date).format("MM/DD hh:mm");
+
     if (this.state.is_update) {
       return (
-        <>
-          <List>
-            <form
-              onSubmit={event => {
-                this.handlingUpdate(event, url, board_id, user_id, comment_id);
-              }}
-              className="commentForm"
-              style={{ width: "auto" }}
-            >
-              <ListItem
-                alignItems="flex-start"
-                style={{ verticalAlign: "middle" }}
-              >
-                <ListItemAvatar>
-                  <Avatar alt="comment-writer" src={author.img} />
-                </ListItemAvatar>
-                <ListItemText
-                  primary={
-                    <TextField
-                      id="outlined-name"
-                      label="comment"
-                      name="update_body"
-                      value={this.state.update_body}
-                      onChange={this.handlingChange}
-                      margin="normal"
-                      style={{ width: "70%" }}
-                      required
-                    />
-                  }
-                />
-
-                <Button
-                  color="secondary"
-                  size="small"
-                  type="submit"
-                  variant="contained"
-                >
-                  수정
-                </Button>
-              </ListItem>
-            </form>
-            <Divider variant="inset" />
-          </List>
-        </>
+        <CommentNew
+          board_id={board_id}
+          url={url}
+          editFlag={this.state.is_update}
+          body={body}
+          user_id={user_id}
+          comment_id={comment_id}
+          getComments={getComments}
+          flagChange={this.flagChange}
+        />
       );
     } else {
       return (
@@ -126,22 +100,41 @@ export default class CommentView extends Component {
             <ListItemSecondaryAction>
               {user_id === Number(window.sessionStorage.getItem("id")) ? (
                 <>
-                  <Button
-                    color="primary"
-                    size="small"
-                    onClick={event =>
-                      this.setState({ is_update: true, update_body: body })
-                    }
-                  >
-                    수정
-                  </Button>
-                  <Button
-                    color="secondary"
-                    size="small"
-                    onClick={event => this.handlingDelete(url, comment_id)}
-                  >
-                    삭제
-                  </Button>
+                  <PopupState variant="popover" popupId="popup-menu">
+                    {popupState => (
+                      <>
+                        <IconButton
+                          style={{ color: "white" }}
+                          {...bindTrigger(popupState)}
+                        >
+                          <SettingsIcon color="primary" />
+                        </IconButton>
+                        <Menu {...bindMenu(popupState)} style={{ padding: 10 }}>
+                          <MenuItem
+                            onClick={e => {
+                              popupState.close();
+                              this.setState({
+                                is_update: true,
+                                update_body: body
+                              });
+                            }}
+                            style={{ color: "blue" }}
+                          >
+                            수정
+                          </MenuItem>
+                          <MenuItem
+                            onClick={e => {
+                              popupState.close();
+                              this.handlingDelete(url, comment_id);
+                            }}
+                            style={{ color: "red" }}
+                          >
+                            삭제
+                          </MenuItem>
+                        </Menu>
+                      </>
+                    )}
+                  </PopupState>
                 </>
               ) : (
                 <></>

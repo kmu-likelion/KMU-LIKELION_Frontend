@@ -145,16 +145,18 @@ class PostDetailContainer extends Component {
     return (
       <Container maxWidth="lg" className="main-container">
         <Paper>
-          <Grid container spacing={2} style={{ paddingTop: "1.5rem" }}>
+          <Grid container spacing={2}>
             <Grid item sm={1}></Grid>
             <Grid item xs={12} sm={10}>
-              {this.renderDetailComponent(
-                board_name,
-                this.state.postInfo,
-                this.state.author
-              )}
-              <Divider />
               <div style={{ padding: "1rem" }}>
+                {this.renderDetailComponent(
+                  board_name,
+                  this.state.postInfo,
+                  this.state.author
+                )}
+                <Divider />
+              </div>
+              <div style={{ paddingTop: "1rem" }}>
                 {board_name === "qna" ? (
                   <>
                     {this.state.userId > 0 ? (
@@ -195,7 +197,15 @@ class PostDetailContainer extends Component {
                   <>
                     {this.state.userId > 0 && board_name !== "career" ? (
                       <>
-                        <Typography variant="h6">Comments</Typography>
+                        <Typography variant="h6" style={{ marginLeft: 20 }}>
+                          Comments
+                        </Typography>
+
+                        <CommentNew
+                          url={`${this.state.board_name}_comment`}
+                          board_id={post_id}
+                          getComments={this.callGetComments}
+                        />
 
                         {this.state.comments.map(comment => (
                           <CommentView
@@ -211,11 +221,6 @@ class PostDetailContainer extends Component {
                             url={`${this.state.board_name}_comment`}
                           />
                         ))}
-                        <CommentNew
-                          url={`${this.state.board_name}_comment`}
-                          board_id={post_id}
-                          getComments={this.callGetComments}
-                        />
                       </>
                     ) : (
                       <></>
