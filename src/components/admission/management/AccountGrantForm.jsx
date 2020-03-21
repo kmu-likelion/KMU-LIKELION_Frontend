@@ -3,14 +3,20 @@ import { registerUser } from "../../../api/AuthAPI";
 import api from "../../../api/AdmissionAPI";
 
 import Modal from "react-bootstrap/Modal";
-import {Button, TextField, Select, InputLabel, MenuItem } from "@material-ui/core";
+import {
+  Button,
+  TextField,
+  Select,
+  InputLabel,
+  MenuItem
+} from "@material-ui/core";
 
 class AccountGrantForm extends React.Component {
   state = {
     joinData: {},
     selectOpen: false,
     userType: "3",
-    startNumber: "8기"
+    startNumber: "8th"
   };
   componentDidMount() {
     this.getJoinData();
