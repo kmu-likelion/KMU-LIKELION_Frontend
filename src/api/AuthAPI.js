@@ -1,5 +1,10 @@
 import axios from "axios";
 
+export const validateToken = () => {
+  console.log("validate token API."); //토큰 유효성 확인 API
+  return axios.get("accounts/auth/user/", tokenConfig());
+};
+
 export const authlogin = data => {
   console.log("login API 실행.");
   return axios.post("accounts/auth/login/", data); //date : {username, password}

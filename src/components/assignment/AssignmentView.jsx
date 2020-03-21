@@ -2,9 +2,20 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 
 import { withStyles } from "@material-ui/core/styles";
-import {ExpansionPanel, ExpansionPanelDetails, ExpansionPanelSummary, ExpansionPanelActions} from "@material-ui/core";
-import {List, ListItem, ListItemText, ListItemAvatar, ListItemSecondaryAction} from "@material-ui/core";
-import {Typography, Divider, IconButton} from "@material-ui/core";
+import {
+  ExpansionPanel,
+  ExpansionPanelDetails,
+  ExpansionPanelSummary,
+  ExpansionPanelActions
+} from "@material-ui/core";
+import {
+  List,
+  ListItem,
+  ListItemText,
+  ListItemAvatar,
+  ListItemSecondaryAction
+} from "@material-ui/core";
+import { Typography, Divider, IconButton } from "@material-ui/core";
 
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import AssignmentIcon from "@material-ui/icons/Assignment";

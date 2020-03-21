@@ -10,7 +10,7 @@ import Login from "./components/accounts/Login";
 import Mypage from "./components/accounts/mypage/MyPage";
 
 import Store from "./store/Store";
-import { authlogout, tokenConfig } from "./api/AuthAPI";
+import { authlogout, validateToken } from "./api/AuthAPI";
 
 import MentoringContainer from "./components/mentoring/MentoringContainer";
 
@@ -33,9 +33,25 @@ class App extends React.Component {
     this.state = {
       logged: false,
       onLogin: this.onLogin,
-      onLogout: this.onLogout,
+      onLogout: this.onLogout
     };
   }
+
+  checkValidity = async token => {
+    if (token) {
+      await validateToken(token)
+        .then(() => {
+          this.onLogin();
+        })
+        .catch(err => {
+          console.log(err);
+          this.onLogout(); //session에 저장된 토큰이 유효하지 않다면 로그아웃.
+          alert("유효하지 않은 Token이므로, 자동 로그아웃 되었습니다.");
+        });
+    } else {
+      this.onLogout();
+    }
+  };
 
   onLogin = () => {
     this.setState({
@@ -45,13 +61,13 @@ class App extends React.Component {
 
   onLogout = async () => {
     if (this.state.logged) {
-      await authlogout(tokenConfig())
+      await authlogout()
         .then(() => {
           this.setState({
             logged: false
           });
           window.sessionStorage.clear();
-          console.log("logout 되었습니다.");
+          console.log("logout.");
         })
         .catch(err => {
           console.log(err);
@@ -60,12 +76,7 @@ class App extends React.Component {
   };
 
   componentDidMount() {
-    const token = window.sessionStorage.getItem("token");
-    if (token) {
-      this.onLogin();
-    } else {
-      this.onLogout();
-    }
+    this.checkValidity(window.sessionStorage.getItem("token"));
   }
 
   render() {
