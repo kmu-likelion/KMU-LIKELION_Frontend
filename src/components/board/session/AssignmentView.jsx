@@ -1,56 +1,31 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 import api from "../../../api/SessionAPI";
-import SubmissionForm from "./SubmissionForm";
 import moment from "moment";
 
-import Viewer from "../../Viewer";
 //@material-ui;
-import {Button, Chip, Typography, Divider} from "@material-ui/core";
-import {ExpansionPanel, ExpansionPanelSummary, ExpansionPanelDetails, ExpansionPanelActions} from "@material-ui/core";
-import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
+// import { Button, Chip, Typography,  } from "@material-ui/core";
+import {
+  Divider,
+  List,
+  ListItem,
+  ListItemText,
+  ListItemAvatar
+} from "@material-ui/core";
+import AssignmentIcon from "@material-ui/icons/Assignment";
 
 export default class AssignmentView extends Component {
   state = {
-    tab: "",
     userId: "",
-    seletedAssignmentId: "",
     submissionInfo: "",
-    editFlag: false,
-    submitInfo: {},
-    isSubmistted: false,
-    modalFlag: false
+    submitInfo: {}
   };
 
-  UNSAFE_componentWillMount() {
-    this.setState({
-      userId: window.sessionStorage.getItem("id")
-    });
-    this.getUserSubmission();
-  }
-
-  getUserSubmission = () => {
-    api
-      .getSubmission(this.state.userId, this.props.assignment.id)
-      .then(res => {
-        let submitted;
-        if (res.data.length === 0) {
-          submitted = false;
-        } else {
-          submitted = true;
-        }
-        this.setState({
-          submissionInfo: res.data,
-          isSubmistted: submitted
-        });
-      })
-      .catch(err => {
-        console.log(err);
-      });
-  };
-
-  handlingChange = event => {
-    this.setState({ [event.target.name]: event.target.value });
-  };
+  // UNSAFE_componentWillMount() {
+  //   this.setState({
+  //     userId: window.sessionStorage.getItem("id")
+  //   });
+  // }
 
   handlingDelete = async (event, taskId) => {
     if (window.confirm("과제를 삭제하시겠습니까?") === true) {
@@ -63,120 +38,33 @@ export default class AssignmentView extends Component {
     }
   };
 
-  modalOpen = () => {
-    this.setState({
-      modalFlag: true
-    });
-  };
-
-  modalClose = () => {
-    this.setState({
-      modalFlag: false
-    });
-  };
-
-  slice = scoreTypes => {
-    return scoreTypes.split(",");
-  };
-
-  renderSubmissionBtn = assignment_id => {
-    let renderBtn = <></>;
-
-    switch(this.state.isSubmistted) {
-      case true: 
-        
-        renderBtn = (
-        <>
-          이미 제출되었습니다. <br/>
-          <Button
-          color="secondary"
-          onClick={event => this.modalOpen(assignment_id)}
-        >
-          제출수정
-        </Button>
-        </>);
-        break;
-      default:
-        renderBtn = (
-        <Button
-          color="primary"
-          onClick={event => this.modalOpen(assignment_id)}
-        >
-          과제제출
-        </Button>);
-        break;    
-    }
-    return renderBtn;
-  }
-
   render() {
     const { assignment, sessionId, index } = this.props;
-    const deadline = moment(assignment.deadline).format("YY-MM-DD HH:DD");
-    
+    const deadline = moment(assignment.deadline).format("YYYY-MM-DD HH:DD");
+
     return (
       <>
-        <ExpansionPanel>
-          <ExpansionPanelSummary
-            expandIcon={<ExpandMoreIcon />}
-            aria-controls="panel1a-content"
-            id="panel1a-header"
+        <List
+          component="nav"
+          aria-label="contacts"
+          style={{ borderRadius: "10px" }}
+        >
+          <ListItem
+            button
+            component={Link}
+            to={`/assignment/submission/${assignment.id}`}
           >
-            <Typography variant="h6">
-              과제{index + 1} {assignment.title}
-            </Typography>
-          </ExpansionPanelSummary>
+            <ListItemAvatar>
+              <AssignmentIcon />
+            </ListItemAvatar>
+            <ListItemText
+              primary={assignment.title}
+              secondary={`제출기한 : ${deadline}`}
+            />
+          </ListItem>
 
-          <ExpansionPanelDetails style={{ flexDirection: "column"}}>
-
-            <Typography variant="body2" color="primary">
-                제출 기한 : {deadline}  
-            </Typography>
-            <Divider style={{marginTop: 10, marginBottom: 20}} />
-            
-            <Viewer value={String(assignment.body)}/>
-            
-            <div style={{ marginTop: 30 }}>
-              {this.slice(assignment.score_types).map(type => (
-                <Chip
-                  key={`chip-${type}`}
-                  label={type}
-                  name={type}
-                  color="primary"
-                  style={{ marginRight: 5 }}
-                />
-              ))}
-            </div>
-          </ExpansionPanelDetails>
-
-          <ExpansionPanelActions>
-            {/* 제출여부에 따른 과제제출버튼 */}
-            {this.renderSubmissionBtn(assignment.id)}
-
-            {window.sessionStorage.getItem("user_type") < 3 ? (
-              <>
-                <Button
-                  color="secondary"
-                  variant="contained"
-                  onClick={e =>
-                    this.handlingDelete(e, assignment.id, sessionId)
-                  }
-                >
-                  과제삭제
-                </Button>
-              </>
-            ) : (
-              <></>
-            )}
-          </ExpansionPanelActions>
-        </ExpansionPanel>
-
-        <SubmissionForm
-          open={this.state.modalFlag}
-          handlingClose={this.modalClose}
-          assignmentId={assignment.id}
-          editFlag={this.state.isSubmistted}
-          getUserSubmission={this.getUserSubmission}
-        />
+          <Divider variant="inset" />
+        </List>
       </>
     );
   }

@@ -1,15 +1,9 @@
 import React from "react";
 // import { Link } from "react-router-dom";
-// import api from "../../../api/BoardAPI";
+import api from "../../../api/SessionAPI";
+import AssignmentView from "./AssignmentView";
 
-import {
-  Typography,
-  List,
-  ListItem,
-  ListItemText,
-  ListSubheader,
-  withStyles
-} from "@material-ui/core";
+import { Typography, withStyles } from "@material-ui/core";
 
 const useStyles = theme => ({
   root: {
@@ -23,7 +17,20 @@ const useStyles = theme => ({
 });
 
 class MySubmission extends React.Component {
-  state = {};
+  state = {
+    sessionList: []
+  };
+
+  componentDidMount() {
+    this.getAssignments(window.sessionStorage.getItem("cardinal_number"));
+  }
+
+  getAssignments = async cardinal_num => {
+    await api.getSessionsWithAlum(cardinal_num).then(res => {
+      console.log(res.data);
+      this.setState({ sessionList: res.data.results });
+    });
+  };
 
   render() {
     // const { classes } = this.props;
@@ -32,6 +39,15 @@ class MySubmission extends React.Component {
         <Typography variant="h4">My Submission</Typography>
         <hr />
         <br />
+        {this.state.sessionList.map((session, index) => (
+          <AssignmentView
+            key={index}
+            index={index}
+            title={session.title}
+            date={session.update_date}
+            assignmentList={session.assignments}
+          />
+        ))}
       </>
     );
   }

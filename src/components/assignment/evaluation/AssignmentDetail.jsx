@@ -1,12 +1,20 @@
 import React from "react";
 import moment from "moment";
-import api from "../../api/SessionAPI";
+import api from "../../../api/SessionAPI";
 import GradingContainer from "./GradingContainer";
-import Viewer from "../Viewer";
+import Viewer from "../../Viewer";
 
-import {Container, Paper, Typography, Grid, Tabs, Tab, Button} from "@material-ui/core";
+import {
+  Container,
+  Paper,
+  Typography,
+  Grid,
+  Tabs,
+  Tab,
+  Button
+} from "@material-ui/core";
 
-import {Card, CardActions, CardContent } from "@material-ui/core";
+import { Card, CardActions, CardContent } from "@material-ui/core";
 
 class AssignmentDetail extends React.Component {
   state = { assignmentId: "", tabValue: 0, assignmentInfo: {} };
@@ -39,7 +47,9 @@ class AssignmentDetail extends React.Component {
   };
 
   render() {
-    const deadline = moment(this.state.assignmentInfo.update_date).format("YY/MM/DD hh:mm");
+    const deadline = moment(this.state.assignmentInfo.update_date).format(
+      "YY/MM/DD hh:mm"
+    );
 
     return (
       <>
@@ -67,17 +77,18 @@ class AssignmentDetail extends React.Component {
                 <div>
                   {this.state.tabValue === 0 ? (
                     <Card variant="outlined">
-                      <CardContent style={{margin : 25}}>
+                      <CardContent style={{ margin: 25 }}>
                         <Typography variant="h5" gutterBottom>
                           {this.state.assignmentInfo.title}
                         </Typography>
                         <Typography variant="body2" color="primary">
                           제출기한 : {deadline}
                         </Typography>
-                        <hr/>
-                        
-                        <Viewer value={String(this.state.assignmentInfo.body)}/>
-                        
+                        <hr />
+
+                        <Viewer
+                          value={String(this.state.assignmentInfo.body)}
+                        />
                       </CardContent>
                       <CardActions>
                         <Button size="small">Learn More</Button>

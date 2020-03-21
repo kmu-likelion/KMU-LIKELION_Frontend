@@ -1,8 +1,10 @@
 import React from "react";
 import { Route } from "react-router-dom";
 import AssignmentStore from "../store/AssignmentStore";
-import AssignmentDetail from "../components/assignment/AssignmentDetail";
-import AssignmentList from "../components/assignment/AssignmentList";
+import EvaluationDetail from "../components/assignment/evaluation/AssignmentDetail";
+import EvaluationList from "../components/assignment/evaluation/AssignmentList";
+import SubmissionDetail from "../components/assignment/submission/SubmissionDetail";
+// import SubmissionForm from "../components/board/session/SubmissionForm";
 
 class AssignmentRouter extends React.Component {
   state = {
@@ -21,13 +23,18 @@ class AssignmentRouter extends React.Component {
       >
         <Route
           exact
-          path={`${this.props.match.path}`}
-          component={AssignmentList}
+          path={`${this.props.match.path}/evaluation`}
+          component={EvaluationList}
         />
         <Route
-          path={`${this.props.match.path}/detail/:id`}
-          component={AssignmentDetail}
+          path={`${this.props.match.path}/evaluation/:id`}
+          component={EvaluationDetail}
           id="number"
+        />
+        <Route
+          path={`${this.props.match.path}/submission/:assignmentId`}
+          component={SubmissionDetail}
+          assignmentId="number"
         />
       </AssignmentStore.Provider>
     );

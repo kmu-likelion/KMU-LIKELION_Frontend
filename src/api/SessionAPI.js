@@ -2,8 +2,11 @@ import axios from "axios";
 import { tokenConfig } from "./AuthAPI";
 
 export default {
+  //기수(cardinal)에 해당하는 session list을 가져옴
+  getSessionsWithAlum(cardinal_number) {
+    return axios.get(`board/session/?start_number=${cardinal_number}`);
+  },
 
-  //과제 추가
   addAssignment(id, data) {
     return axios.post(
       `board/session/${id}/add_assignment/`,
@@ -23,7 +26,7 @@ export default {
   },
 
   createSubmission(data) {
-    // console.log("create submission api 실행", data);
+    console.log("create submission api 실행", data);
     return axios.post(`board/submission/`, data, tokenConfig());
   },
 

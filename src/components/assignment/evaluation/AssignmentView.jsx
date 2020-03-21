@@ -5,8 +5,7 @@ import { withStyles } from "@material-ui/core/styles";
 import {
   ExpansionPanel,
   ExpansionPanelDetails,
-  ExpansionPanelSummary,
-  ExpansionPanelActions
+  ExpansionPanelSummary
 } from "@material-ui/core";
 import {
   List,
@@ -58,7 +57,7 @@ class ListView extends Component {
               <ListItem
                 button
                 component={Link}
-                to={`/assignment/detail/${assign.id}`}
+                to={`/assignment/evaluation/${assign.id}`}
                 className={classes.list}
               >
                 <ListItemAvatar>
@@ -74,7 +73,6 @@ class ListView extends Component {
             </List>
           ))}
         </ExpansionPanelDetails>
-        <ExpansionPanelActions></ExpansionPanelActions>
       </ExpansionPanel>
     );
   }

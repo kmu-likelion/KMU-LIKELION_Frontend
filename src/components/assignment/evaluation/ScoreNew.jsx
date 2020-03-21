@@ -1,9 +1,17 @@
 import React, { Component } from "react";
 
-import api from "../../api/SessionAPI";
+import api from "../../../api/SessionAPI";
 
-import {Grid, Typography, Button, TextField, TextareaAutosize, List, ListItem, ListItemText} from "@material-ui/core";
-
+import {
+  Grid,
+  Typography,
+  Button,
+  TextField,
+  TextareaAutosize,
+  List,
+  ListItem,
+  ListItemText
+} from "@material-ui/core";
 
 export default class CommentView extends Component {
   state = {
