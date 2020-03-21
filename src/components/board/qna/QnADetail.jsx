@@ -7,13 +7,24 @@ import Viewer from "../../Viewer";
 import AuthButton from "../../common/AuthButton";
 
 // @material-ui
-import Button from "@material-ui/core/Button";
-import Typography from "@material-ui/core/Typography";
-import {Table, TableRow, TableCell, TableBody, TableHead } from "@material-ui/core";
+import { Button, Typography } from "@material-ui/core";
+import {
+  Table,
+  TableRow,
+  TableCell,
+  TableBody,
+  TableHead
+} from "@material-ui/core";
 
 class QnADetail extends Component {
   render() {
-    const { postInfo, author, handlingDelete, post_id, board_name } = this.props;
+    const {
+      postInfo,
+      author,
+      handlingDelete,
+      post_id,
+      board_name
+    } = this.props;
     const pubDate = moment(postInfo.pub_date).format("YYYY-MM-DD HH:MM");
     return (
       <Table className={"post-table"}>
@@ -25,21 +36,21 @@ class QnADetail extends Component {
               </Typography>
             </TableCell>
           </TableRow>
-          <TableRow >
+          <TableRow>
             <TableCell>
               <Typography variant="caption" color="textSecondary">
-                작성일 {pubDate} /&nbsp; 작성자 {author.name}(<Link to={`/mypage/${author.username}`}>{author.username}</Link>)
+                작성일 {pubDate} /&nbsp; 작성자 {author.name}(
+                <Link to={`/mypage/${author.username}`}>{author.username}</Link>
+                )
               </Typography>
             </TableCell>
           </TableRow>
         </TableHead>
-        
+
         <TableBody>
           <TableRow>
             <TableCell className="post-body">
-              <Typography color="textSecondary">
-                <Viewer value={String(postInfo.body)} />
-              </Typography>
+              <Viewer value={String(postInfo.body)} />
             </TableCell>
           </TableRow>
 
@@ -82,7 +93,6 @@ class QnADetail extends Component {
             </TableCell>
           </TableRow>
         </TableBody>
-        
       </Table>
     );
   }

@@ -40,13 +40,17 @@ class App extends React.Component {
   checkValidity = async token => {
     if (token) {
       await validateToken(token)
-        .then(() => {
-          this.onLogin();
+        .then(res => {
+          if (!res.detail) {
+            this.onLogin();
+          } else {
+            this.onLogout(); //session에 저장된 토큰이 유효하지 않다면 로그아웃.
+            console.log(res.detail);
+            alert(`Token이 유효하지 않습니다 [${res.detail}]`);
+          }
         })
         .catch(err => {
           console.log(err);
-          this.onLogout(); //session에 저장된 토큰이 유효하지 않다면 로그아웃.
-          alert("유효하지 않은 Token이므로, 자동 로그아웃 되었습니다.");
         });
     } else {
       this.onLogout();
