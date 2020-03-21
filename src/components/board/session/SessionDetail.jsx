@@ -11,15 +11,14 @@ import AssignmentForm from "./AssignmentForm";
 import AuthButton from "../../common/AuthButton";
 
 // @material-ui
-import Button from "@material-ui/core/Button";
-import Typography from "@material-ui/core/Typography";
 import {
+  Button,
+  Typography,
   Table,
   TableRow,
   TableCell,
   TableBody,
-  TableHead,
-  Divider
+  TableHead
 } from "@material-ui/core";
 
 class SessionDetail extends Component {

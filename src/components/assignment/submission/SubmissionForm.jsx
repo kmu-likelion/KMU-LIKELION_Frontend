@@ -22,6 +22,7 @@ const useStyles = theme => ({
 class SubmissionForm extends Component {
   state = {
     userId: "",
+    username: "",
     id: "",
     body: "",
     url: "",
@@ -31,7 +32,8 @@ class SubmissionForm extends Component {
 
   componentDidMount() {
     this.setState({
-      userId: window.sessionStorage.getItem("id")
+      userId: window.sessionStorage.getItem("id"),
+      username: window.sessionStorage.getItem("username")
     });
   }
 
@@ -54,7 +56,7 @@ class SubmissionForm extends Component {
 
   updateSubmission = async event => {
     event.preventDefault();
-    let default_title = `Submission-${this.props.assignmentId}`;
+    let default_title = `Submission-${this.state.username}`;
     await API.updateSubmission(this.state.id, {
       title: default_title,
       user_id: this.state.userId,
@@ -64,7 +66,7 @@ class SubmissionForm extends Component {
     })
       .then(res => {
         this.props.handlingClose();
-        this.props.getSubmissionInfo();
+        this.props.getSubmissionInfo(this.props.assignmentId);
       })
       .catch(err => {
         console.log(err);
@@ -73,7 +75,7 @@ class SubmissionForm extends Component {
 
   createSubmission = async event => {
     event.preventDefault();
-    let default_title = `Submission-${this.props.assignmentId}`;
+    let default_title = `Submission-${this.state.username}`;
     await API.createSubmission({
       title: default_title,
       user_id: Number(this.state.userId),
@@ -83,7 +85,7 @@ class SubmissionForm extends Component {
     })
       .then(res => {
         this.props.handlingClose();
-        this.props.getSubmissionInfo();
+        this.props.getSubmissionInfo(this.props.assignmentId);
 
         this.setState({
           body: "",

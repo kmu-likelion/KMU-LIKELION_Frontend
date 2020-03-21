@@ -39,7 +39,7 @@ export default class AssignmentView extends Component {
   };
 
   render() {
-    const { assignment, sessionId, index } = this.props;
+    const { assignment } = this.props;
     const deadline = moment(assignment.deadline).format("YYYY-MM-DD HH:DD");
 
     return (

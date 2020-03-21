@@ -15,13 +15,7 @@ import {
   ListItemAvatar,
   ListItemSecondaryAction
 } from "@material-ui/core";
-import {
-  withStyles,
-  Typography,
-  Divider,
-  Button,
-  IconButton
-} from "@material-ui/core";
+import { withStyles, Typography, Divider, Button } from "@material-ui/core";
 
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import AssignmentIcon from "@material-ui/icons/Assignment";
@@ -45,42 +39,78 @@ const useStyles = theme => ({
   }
 });
 
-class SubmissionView extends Component {
+class AssignmentView extends Component {
   state = {
     user_id: window.sessionStorage.getItem("id"),
+    submitStatus: [],
     modalFlag: false
   };
 
   componentDidMount() {
-    // this.props.assignmentList.map(assignment => {
-    //   this.getSubmissionStatus(this.state.user_id, assignment.id);
-    // });
+    this.props.assignmentList.map((assignment, index) => {
+      this.getSubmissionStatus(this.state.user_id, assignment.id, index);
+      return null;
+    });
   }
 
-  getSubmissionStatus = async (user_id, assignment_id) => {
-    await API.getSubmitStatusWithUser(user_id, assignment_id).then(res => {
-      console.log(res.data);
-    });
+  getSubmissionStatus = async (user_id, assignment_id, index) => {
+    await API.getSubmitStatusWithUser(user_id, assignment_id)
+      .then(res => {
+        // console.log(res.data);
+        var status = this.state.submitStatus;
+        status.push(res.data.status);
+        this.setState({ submitStatus: status });
+      })
+      .catch(err => console.log(err));
   };
 
-  /*
-  getSubmission(user_id, assignment_id) {
-    // console.log("get submission api 실행.");
-    return axios.get(
-      `board/submission/?user_id=${user_id}&lecture=${assignment_id}`
-    );
-  },
-  
-  */
+  renderStatus = index => {
+    const keyword = {
+      COMPLETE: "제출됨",
+      UNQUALIFIED: "권한이 없습니다.",
+      NOT_SUBMIT: "미제출",
+      LATE: "마감 후 제출"
+    };
+    let render = <></>;
 
-  getSubmissionInfo = async assignment_id => {
-    await API.getSubmission(this.state.user_id, assignment_id).then(res => {
-      console.log(res.data);
-    });
+    switch (this.state.submitStatus[index]) {
+      case "COMPLETE":
+        render = (
+          <Typography variant="body2" color="primary">
+            {keyword["COMPLETE"]}
+          </Typography>
+        );
+        break;
+      case "NOT_SUBMIT":
+        render = (
+          <Typography variant="body2" color="secondary">
+            {keyword["NOT_SUBMIT"]}
+          </Typography>
+        );
+        break;
+      case "LATE":
+        render = (
+          <Typography variant="body2" color="secondary">
+            {keyword["LATE"]}
+          </Typography>
+        );
+        break;
+
+      default:
+        break;
+    }
+    return render;
   };
 
-  get render() {
-    const { classes, date, index, assignmentList, title } = this.props;
+  render() {
+    const {
+      classes,
+      date,
+      index,
+      assignmentList,
+      title,
+      sessionId
+    } = this.props;
     const pub_date = moment(date).format("YYYY-MM-DD");
 
     return (
@@ -101,7 +131,7 @@ class SubmissionView extends Component {
                 <ListItem
                   button
                   component={Link}
-                  to={`/assignment/detail/${assign.id}`}
+                  to={`/assignment/submission/${assign.id}`}
                   className={classes.list}
                 >
                   <ListItemAvatar>
@@ -112,7 +142,7 @@ class SubmissionView extends Component {
                     secondary={assign.body}
                   />
                   <ListItemSecondaryAction>
-                    <IconButton aria-label="cart"></IconButton>
+                    {this.renderStatus(index)}
                   </ListItemSecondaryAction>
                 </ListItem>
 
@@ -121,7 +151,11 @@ class SubmissionView extends Component {
             ))}
           </ExpansionPanelDetails>
           <ExpansionPanelActions>
-            <Button component={Link} to="" color="primary">
+            <Button
+              component={Link}
+              to={`/session/detail/${sessionId}`}
+              color="primary"
+            >
               세션 보러가기
             </Button>
           </ExpansionPanelActions>
@@ -131,4 +165,4 @@ class SubmissionView extends Component {
   }
 }
 
-export default withStyles(useStyles)(SubmissionView);
+export default withStyles(useStyles)(AssignmentView);

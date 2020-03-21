@@ -46,6 +46,7 @@ class MySubmission extends React.Component {
             title={session.title}
             date={session.update_date}
             assignmentList={session.assignments}
+            sessionId={session.id}
           />
         ))}
       </>
