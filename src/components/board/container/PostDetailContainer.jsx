@@ -12,8 +12,7 @@ import CareerDetail from "../career/CareerDetail";
 import SessionDetail from "../session/SessionDetail";
 
 // @material-ui
-import {Container, Paper, Typography, Grid, Divider} from "@material-ui/core";
-
+import { Container, Paper, Typography, Grid, Divider } from "@material-ui/core";
 
 class PostDetailContainer extends Component {
   constructor(props) {
@@ -38,9 +37,12 @@ class PostDetailContainer extends Component {
   }
 
   async getComments(board_name) {
-    await CommentAPI
-      .getComments(`${board_name}_comment`, this.props.match.params.id)
+    await CommentAPI.getComments(
+      `${board_name}_comment`,
+      this.props.match.params.id
+    )
       .then(res => {
+        console.log(res.data);
         this.setState({
           comments: res.data,
           board_name: board_name
@@ -146,14 +148,18 @@ class PostDetailContainer extends Component {
           <Grid container spacing={2} style={{ paddingTop: "1.5rem" }}>
             <Grid item sm={1}></Grid>
             <Grid item xs={12} sm={10}>
-              {this.renderDetailComponent(board_name, this.state.postInfo, this.state.author)}
+              {this.renderDetailComponent(
+                board_name,
+                this.state.postInfo,
+                this.state.author
+              )}
               <Divider />
               <div style={{ padding: "1rem" }}>
                 {board_name === "qna" ? (
                   <>
                     {this.state.userId > 0 ? (
                       <>
-                      <AnswerNew
+                        <AnswerNew
                           url={`${this.state.board_name}_comment`}
                           board_id={post_id}
                           getComments={this.callGetComments}
@@ -189,9 +195,7 @@ class PostDetailContainer extends Component {
                   <>
                     {this.state.userId > 0 && board_name !== "career" ? (
                       <>
-                        <Typography component="h1" variant="h6">
-                          Comments
-                        </Typography>
+                        <Typography variant="h6">Comments</Typography>
 
                         {this.state.comments.map(comment => (
                           <CommentView

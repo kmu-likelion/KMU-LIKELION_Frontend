@@ -2,9 +2,8 @@ import axios from "axios";
 import { tokenConfig } from "./AuthAPI";
 
 export default {
-  
   getComments(url, id) {
-    console.log("getComments api 실행.");
+    console.log("getComments api 실행.", url, id);
     return axios.get(`board/${url}/?board_id=${id}`, tokenConfig());
   },
 

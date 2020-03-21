@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import Store from "../store/Store";
 
 // @material-ui
-import {Menu, MenuItem, Avatar, IconButton} from "@material-ui/core";
+import { Menu, MenuItem, Avatar, IconButton } from "@material-ui/core";
 import PopupState, { bindTrigger, bindMenu } from "material-ui-popup-state";
 
 // bootstrap
@@ -61,7 +61,7 @@ export default function Header(props) {
                     <NavDropdown.Item as={Link} to="/admission/management">
                       입부관리
                     </NavDropdown.Item>
-                    <NavDropdown.Item as={Link} to="/assignment">
+                    <NavDropdown.Item as={Link} to="/assignment/evaluation">
                       과제관리
                     </NavDropdown.Item>
                   </NavDropdown>

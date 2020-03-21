@@ -1,23 +1,30 @@
 import React from "react";
-import api from "../../api/BoardAPI";
+import api from "../../../api/BoardAPI";
 import AssignmentView from "./AssignmentView";
 
-import {Container, Paper, Typography, Grid, MenuItem, Select, InputLabel, FormControl} from "@material-ui/core";
-
-
+import {
+  Container,
+  Paper,
+  Typography,
+  Grid,
+  MenuItem,
+  Select,
+  InputLabel,
+  FormControl
+} from "@material-ui/core";
 
 class AssignmentContainer extends React.Component {
   state = { selectNumber: "", sessionList: [] };
 
   componentDidMount() {
-    this.getAssignmentList();
+    this.getSessionList();
   }
 
   handlingChange = event => {
     this.setState({ [event.target.name]: event.target.value });
   };
 
-  getAssignmentList = async () => {
+  getSessionList = async () => {
     await api.getAllPosts("session").then(res => {
       this.setState({ sessionList: res.data.results });
     });
@@ -27,7 +34,10 @@ class AssignmentContainer extends React.Component {
     return (
       <>
         <Container className="main-container">
-          <Paper elevation={1} style={{ width: "100%", padding: '1.5rem', paddingBottom: 40 }}>
+          <Paper
+            elevation={1}
+            style={{ width: "100%", padding: "1.5rem", paddingBottom: 40 }}
+          >
             <Grid container spacing={3}>
               <Grid item style={{ display: "flex" }}>
                 <Typography variant="h4">과제관리</Typography>
@@ -39,9 +49,9 @@ class AssignmentContainer extends React.Component {
                     value={this.state.selectNumber}
                     onChange={this.handlingChange}
                   >
-                    <MenuItem value={"7"}>7기</MenuItem>
-                    <MenuItem value={"7.5"}>7.5기</MenuItem>
-                    <MenuItem value={"8"}>8기</MenuItem>
+                    <MenuItem value={"7th"}>7기</MenuItem>
+                    <MenuItem value={"7.5th"}>7.5기</MenuItem>
+                    <MenuItem value={"8th"}>8기</MenuItem>
                   </Select>
                 </FormControl>
               </Grid>

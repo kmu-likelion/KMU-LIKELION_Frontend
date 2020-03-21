@@ -4,7 +4,16 @@ import { Link, Redirect } from "react-router-dom";
 import { authlogin } from "../../api/AuthAPI";
 import Store from "../../store/Store";
 
-import {Container, Paper, Avatar, Button, Grid, TextField, Typography, withStyles} from "@material-ui/core";
+import {
+  Container,
+  Paper,
+  Avatar,
+  Button,
+  Grid,
+  TextField,
+  Typography,
+  withStyles
+} from "@material-ui/core";
 import PersonOutlineOutlinedIcon from "@material-ui/icons/PersonOutlineOutlined";
 
 const useStyles = theme => ({
@@ -61,6 +70,7 @@ class Login extends Component {
           result.data.user.username,
           result.data.user.img,
           result.data.user.user_type,
+          result.data.user.start_number,
           result.data.token
         );
         this.context.onLogin();
@@ -73,13 +83,13 @@ class Login extends Component {
     this.setState({ username: "", password: "" });
   };
 
-  doSignup = (id, name, img, user_type, token) => {
+  doSignup = (id, name, img, user_type, cardinal_num, token) => {
     window.sessionStorage.setItem("id", id);
     window.sessionStorage.setItem("username", name);
     window.sessionStorage.setItem("user_img", img);
     window.sessionStorage.setItem("user_type", user_type);
+    window.sessionStorage.setItem("cardinal_number", cardinal_num);
     window.sessionStorage.setItem("token", token);
-    // console.log("token in session : ", window.sessionStorage.getItem("token"));
   };
 
   render() {

@@ -11,9 +11,15 @@ import AssignmentForm from "./AssignmentForm";
 import AuthButton from "../../common/AuthButton";
 
 // @material-ui
-import Button from "@material-ui/core/Button";
-import Typography from "@material-ui/core/Typography";
-import {Table, TableRow, TableCell, TableBody, TableHead } from "@material-ui/core";
+import {
+  Button,
+  Typography,
+  Table,
+  TableRow,
+  TableCell,
+  TableBody,
+  TableHead
+} from "@material-ui/core";
 
 class SessionDetail extends Component {
   state = {
@@ -78,11 +84,12 @@ class SessionDetail extends Component {
           <TableRow>
             <TableCell>
               <Typography variant="caption" color="textSecondary">
-                작성일 {this.state.pub_date} /&nbsp; 작성자 {this.state.author.name}(
-                  <Link to={`/mypage/${this.state.author.username}`}>
-                    {this.state.author.username}
-                  </Link>
-                  )
+                작성일 {this.state.pub_date} /&nbsp; 작성자{" "}
+                {this.state.author.name}(
+                <Link to={`/mypage/${this.state.author.username}`}>
+                  {this.state.author.username}
+                </Link>
+                )
               </Typography>
             </TableCell>
           </TableRow>
@@ -91,10 +98,8 @@ class SessionDetail extends Component {
         <TableBody>
           <TableRow>
             <TableCell className="post-body">
-              
               <Viewer value={String(this.state.body)} />
-              <br/>
-
+              <br />
               <AuthButton
                 authType="permission"
                 info={2}
@@ -106,7 +111,7 @@ class SessionDetail extends Component {
                       size="small"
                       variant="contained"
                       onClick={event => this.addAssignment(event)}
-                      style={{marginBottom: 20}}
+                      style={{ marginBottom: 20 }}
                     >
                       과제추가
                     </Button>
@@ -121,7 +126,6 @@ class SessionDetail extends Component {
                 getAssignments={this.getAssignments}
                 sessionId={this.props.post_id}
               />
-
               {/* 과제 view list */}
               {this.state.assignments.map((task, index) => (
                 <AssignmentView

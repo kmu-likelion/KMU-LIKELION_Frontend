@@ -1,11 +1,11 @@
 import React from "react";
-import { getAllUser } from "../../api/AuthAPI";
-import api from "../../api/SessionAPI";
+import { getAllUser } from "../../../api/AuthAPI";
+import api from "../../../api/SessionAPI";
 
 import MemberList from "./MemberList";
 import GradingView from "./GradingView";
 
-import {Grid, List, Typography} from "@material-ui/core";
+import { Grid, List, Typography } from "@material-ui/core";
 
 class GradingContainer extends React.Component {
   state = {
@@ -75,9 +75,7 @@ class GradingContainer extends React.Component {
             </List>
           </Grid>
           <Grid item sm={7} style={{ textAlign: "center" }}>
-            <Typography variant="body1">
-              제출물 정보
-            </Typography>
+            <Typography variant="body1">제출물 정보</Typography>
 
             <GradingView
               memberId={this.state.selectedMemberId}
