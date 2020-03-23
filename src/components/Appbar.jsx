@@ -35,15 +35,16 @@ const useStyle = theme => ({
     width: 200
   },
   padding: {
-    paddingRight: 30,
-    paddingLeft: 30,
+    // paddingRight: 30,
+    // paddingLeft: 30,
     cursor: "pointer"
   },
   menuButton: {
     marginRight: theme.spacing(2)
   },
   title: {
-    flexGrow: 1
+    // flexGrow: 1
+    marginRight: 10
   }
 });
 
@@ -114,7 +115,8 @@ class Appbar extends Component {
         to={to}
         style={{
           textDecoration: "inherit",
-          color: "inherit"
+          color: "inherit",
+          flexGrow: 1
         }}
       >
         {item}
@@ -279,91 +281,98 @@ class Appbar extends Component {
     return (
       <AppBar className={classes.appbar} position="static">
         <Toolbar>
-          <Typography
-            variant="h6"
-            color="inherit"
-            className={classes.title}
-            component={Link}
-            to="/"
-            style={{
-              textDecoration: "inherit",
-              color: "inherit"
-            }}
+          <Grid
+            container
+            direction="row"
+            justify="space-between"
+            alignItems="center"
           >
-            KMU-LIKELION
-          </Typography>
-          {this.desktopItem("/notice", "공지사항")}
-          {this.desktopItem("/session", "세션")}
-          {this.desktopItem("/study", "스터디")}
-          {this.desktopItem("/qna", "QnA")}
-          {this.desktopItem("/career", "커리어")}
-          {this.context.logged ? (
-            <>
-              {window.sessionStorage.getItem("user_type") !== "3" ? (
+            <Typography
+              variant="h6"
+              color="inherit"
+              className={classes.title}
+              component={Link}
+              to="/"
+              style={{
+                textDecoration: "inherit",
+                color: "inherit"
+              }}
+            >
+              KMU-LIKELION
+            </Typography>
+            {this.desktopItem("/notice", "공지사항")}
+            {this.desktopItem("/session", "세션")}
+            {this.desktopItem("/study", "스터디")}
+            {this.desktopItem("/qna", "QnA")}
+            {this.desktopItem("/career", "커리어")}
+            {this.context.logged ? (
+              <>
+                {window.sessionStorage.getItem("user_type") !== "3" ? (
+                  <DropMenu
+                    header="관리자메뉴"
+                    items={[
+                      {
+                        children: "과제관리",
+                        to: "/assignment/evaluation"
+                      },
+                      {
+                        children: "멘토링관리",
+                        to: "/mentoring"
+                      },
+                      {
+                        children: "입부관리",
+                        to: "/admission/management"
+                      }
+                    ]}
+                  />
+                ) : (
+                  <></>
+                )}
                 <DropMenu
-                  header="관리자메뉴"
+                  type="icon"
+                  header={<AccountCircle />}
                   items={[
                     {
-                      children: "과제관리",
-                      to: "/assignment/evaluation"
+                      children: "마이페이지",
+                      to: `/mypage/${window.sessionStorage.getItem("username")}`
                     },
                     {
-                      children: "멘토링관리",
-                      to: "/mentoring"
-                    },
-                    {
-                      children: "입부관리",
-                      to: "/admission/management"
+                      children: "logout"
                     }
                   ]}
                 />
-              ) : (
-                <></>
-              )}
-              <DropMenu
-                type="icon"
-                header={<AccountCircle />}
-                items={[
-                  {
-                    children: "마이페이지",
-                    to: `/mypage/${window.sessionStorage.getItem("username")}`
-                  },
-                  {
-                    children: "logout"
-                  }
-                ]}
-              />
-            </>
-          ) : (
-            <>
-              <DropMenu
-                header="지원하기"
-                items={[
-                  {
-                    children: "입부신청",
-                    to: "/admission/apply"
-                  },
-                  {
-                    children: "지원내역",
-                    to: "/admission/confirmApply"
-                  }
-                ]}
-              />
+              </>
+            ) : (
+              <>
+                <DropMenu
+                  header="지원하기"
+                  items={[
+                    {
+                      children: "입부신청",
+                      to: "/admission/apply"
+                    },
+                    {
+                      children: "지원내역",
+                      to: "/admission/confirmApply"
+                    }
+                  ]}
+                />
 
-              <Button
-                color="inherit"
-                size="large"
-                component={Link}
-                to="/login"
-                style={{
-                  textDecoration: "inherit",
-                  color: "inherit"
-                }}
-              >
-                로그인
-              </Button>
-            </>
-          )}
+                <Button
+                  color="inherit"
+                  size="large"
+                  component={Link}
+                  to="/login"
+                  style={{
+                    textDecoration: "inherit",
+                    color: "inherit"
+                  }}
+                >
+                  로그인
+                </Button>
+              </>
+            )}
+          </Grid>
         </Toolbar>
       </AppBar>
     );

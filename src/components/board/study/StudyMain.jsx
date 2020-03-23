@@ -5,7 +5,7 @@ import api from "../../../api/GroupAPI";
 import GroupView from "./GroupView";
 
 //@material-ui
-import {Typography, Paper, Container, Grid } from "@material-ui/core";
+import { Typography, Paper, Container, Grid } from "@material-ui/core";
 
 class StudyMain extends React.Component {
   constructor(props) {
@@ -13,20 +13,20 @@ class StudyMain extends React.Component {
     this.state = {
       groupList: [],
       isEmpty: false,
-      userId:"",
+      userId: ""
     };
   }
 
   componentDidMount() {
     this.getAllGroup();
-    this.setState({userId:window.sessionStorage.getItem("id")});
+    this.setState({ userId: window.sessionStorage.getItem("id") });
   }
 
   async getAllGroup() {
     await api
       .getAllGroups()
       .then(res => {
-        if(res.data.length === 0) {
+        if (res.data.length === 0) {
           this.setState({ groupList: [], isEmpty: true });
         } else {
           this.setState({ groupList: res.data, isEmpty: false });
@@ -47,18 +47,15 @@ class StudyMain extends React.Component {
           }}
         >
           <Paper className="Paper">
-            <Typography component="h1" variant="h4" style={{paddingBottom: 15}}>
+            <Typography variant="h4" style={{ fontWeight: "500" }}>
               스터디그룹
             </Typography>
-            {this.state.userId > 0
-            ?(
-              
+            <br />
+            {this.state.userId > 0 ? (
               <Link to={"/study/group/new"}>새 스터디그룹 생성</Link>
-            )
-            :(
+            ) : (
               <></>
-            )
-            }
+            )}
             <hr />
             <Grid container spacing={2}>
               {this.state.groupList.map(group => (
@@ -73,12 +70,19 @@ class StudyMain extends React.Component {
                 </Grid>
               ))}
               {this.state.isEmpty ? (
-              <>
-              <br/>
-              <Typography variant="h4" style={{ textAlign:"center", color:"#D5D5D5" }}>진행 중인 스터디가 없습니다.</Typography>
-              <br/>
-              </>):(<></>)}
-
+                <>
+                  <br />
+                  <Typography
+                    variant="h5"
+                    style={{ textAlign: "center", color: "#D5D5D5" }}
+                  >
+                    진행 중인 스터디가 없습니다.
+                  </Typography>
+                  <br />
+                </>
+              ) : (
+                <></>
+              )}
             </Grid>
           </Paper>
         </Container>

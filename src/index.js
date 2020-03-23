@@ -7,7 +7,7 @@ import { MuiThemeProvider, createMuiTheme } from "@material-ui/core/styles";
 
 const theme = createMuiTheme({
   typography: {
-    fontFamily: "NIXGONM-Vb"
+    fontFamily: "Noto Sans KR"
   }
 });
 

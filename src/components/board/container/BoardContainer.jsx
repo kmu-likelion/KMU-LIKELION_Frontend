@@ -4,8 +4,14 @@ import api from "../../../api/BoardAPI";
 import PostView from "./PostView";
 import _ from "lodash";
 
-import { Container, Paper, Typography, Grid, Select, MenuItem } from "@material-ui/core";
-
+import {
+  Container,
+  Paper,
+  Typography,
+  Grid,
+  Select,
+  MenuItem
+} from "@material-ui/core";
 
 class BoardContainer extends React.Component {
   constructor(props) {
@@ -38,7 +44,6 @@ class BoardContainer extends React.Component {
     await api
       .getAllPosts(boardType)
       .then(res => {
-
         this.setState({
           postCount: res.data.count,
           postList: res.data.results
@@ -72,7 +77,10 @@ class BoardContainer extends React.Component {
     await api
       .getMyAlumPosts(boardType, start_number)
       .then(res => {
-        this.setState({ postList: res.data.results, postCount: res.data.results.length });
+        this.setState({
+          postList: res.data.results,
+          postCount: res.data.results.length
+        });
       })
       .catch(err => {
         console.log(err);
@@ -107,14 +115,23 @@ class BoardContainer extends React.Component {
 
     const pages = _.range(1, pageCount + 1);
     const board_name = this.props.match.path.split("/")[1];
+    // const header = {}
+    const header = {
+      notice: "공지사항",
+      session: "세션",
+      study: "스터디그룹",
+      qna: "Q&A",
+      career: "커리어"
+    };
 
     return (
       <div>
         <Container maxWidth="lg" className="main-container">
-          <Paper className="Paper">
-            <Typography component="h1" variant="h4">
-              {this.state.boardType.toUpperCase()}
+          <Paper className="Paper" elevation={0}>
+            <Typography variant="h4" style={{ fontWeight: "500" }}>
+              {header[this.state.boardType]}
             </Typography>
+            <br />
             {this.state.userId > 0 ? (
               this.checkCreateAuth(
                 board_name,
@@ -170,12 +187,19 @@ class BoardContainer extends React.Component {
                   />
                 ))}
                 {this.state.postCount === 0 ? (
-                <>
-                  <br/>
-                  <Typography variant="h4" style={{ textAlign:"center", color:"#D5D5D5" }}>작성된 게시물이 없습니다.</Typography>
-                  <br/>
-                </>
-                ):(<></>)}
+                  <>
+                    <br />
+                    <Typography
+                      variant="h4"
+                      style={{ textAlign: "center", color: "#D5D5D5" }}
+                    >
+                      작성된 게시물이 없습니다.
+                    </Typography>
+                    <br />
+                  </>
+                ) : (
+                  <></>
+                )}
               </Grid>
               <Grid item sm={1}></Grid>
 
@@ -204,7 +228,6 @@ class BoardContainer extends React.Component {
                   </ul>
                 </nav>
               </Grid>
-
             </Grid>
           </Paper>
         </Container>
