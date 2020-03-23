@@ -2,9 +2,6 @@ import React from "react";
 import { Link } from "react-router-dom";
 import Store from "../store/Store";
 import { Menu, MenuItem, IconButton, Button } from "@material-ui/core";
-// import Menu, { MenuItem } from "@material-ui/Menu";
-// import IconButton from "@material-ui/IconButton";
-// import {} from "@material-ui/styles";
 
 class DropMenu extends React.Component {
   static contextType = Store;

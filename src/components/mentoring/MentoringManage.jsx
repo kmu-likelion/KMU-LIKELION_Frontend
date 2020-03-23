@@ -6,22 +6,20 @@ import MenteeManage from "./MenteeManage";
 import MentoringAdd from "./MentoringAdd";
 
 class MentoringManage extends React.Component {
-
-  state={
-    allUser:[],
-    allMentor:[],
-    allMentee:[],
-    linkedMentor:[],
-    linkedMentee:[],
+  state = {
+    allUser: [],
+    allMentor: [],
+    allMentee: [],
+    linkedMentor: [],
+    linkedMentee: [],
     selected_mentor: "",
     selected_mentee: "",
     mentorOpen: false,
     menteeOpen: false,
-    mentorId:"",
-    menteeId:"",
-  }
-  componentDidMount(){
-
+    mentorId: "",
+    menteeId: ""
+  };
+  componentDidMount() {
     this.getAllUser();
     this.getAllMentor();
     this.getAllMentee();
@@ -42,7 +40,7 @@ class MentoringManage extends React.Component {
         this.setState({
           allMentor: res.data,
           linkedMentor: [],
-          linkedMentee: [],
+          linkedMentee: []
         });
       })
       .catch(err => {
@@ -57,7 +55,7 @@ class MentoringManage extends React.Component {
         this.setState({
           allMentee: res.data,
           linkedMentor: [],
-          linkedMentee: [],
+          linkedMentee: []
         });
       })
       .catch(err => {
@@ -65,7 +63,7 @@ class MentoringManage extends React.Component {
       });
   };
 
-  getLinkedMentor = async (id) => {
+  getLinkedMentor = async id => {
     await api
       .getLinkedMentor(id)
       .then(res => {
@@ -82,7 +80,7 @@ class MentoringManage extends React.Component {
       });
   };
 
-  getLinkedMentee = async (id) => {
+  getLinkedMentee = async id => {
     await api
       .getLinkedMentee(id)
       .then(res => {
@@ -110,8 +108,8 @@ class MentoringManage extends React.Component {
         this.getAllMentee();
         this.setState({
           linkedMentor: [],
-          linkedMentee:[],
-        })
+          linkedMentee: []
+        });
       })
       .catch(err => {
         console.log(err);
@@ -136,41 +134,37 @@ class MentoringManage extends React.Component {
       });
   };
 
-  onCloseMentor = () =>{
-    this.setState({mentorOpen: false})
-  }
+  onCloseMentor = () => {
+    this.setState({ mentorOpen: false });
+  };
 
-  onOpenMentor = () =>{
-    this.setState({mentorOpen: true })
-  }
+  onOpenMentor = () => {
+    this.setState({ mentorOpen: true });
+  };
 
-  onCloseMentee = () =>{
-    this.setState({menteeOpen: false})
-  }
+  onCloseMentee = () => {
+    this.setState({ menteeOpen: false });
+  };
 
-  onOpenMentee = () =>{
-    this.setState({menteeOpen: true })
-  }
+  onOpenMentee = () => {
+    this.setState({ menteeOpen: true });
+  };
 
-  onChangeMentor = e =>{
-    this.setState({ selected_mentor: e.target.value })
-  }
+  onChangeMentor = e => {
+    this.setState({ selected_mentor: e.target.value });
+  };
 
-  onChangeMentee = e =>{
-    this.setState({ selected_mentee: e.target.value })
-  }
-
-
-
+  onChangeMentee = e => {
+    this.setState({ selected_mentee: e.target.value });
+  };
 
   render() {
-
     return (
       <>
-        <ul class="nav nav-tabs" id="myTab" role="tablist">
-          <li class="nav-item">
+        <ul className="nav nav-tabs" id="myTab" role="tablist">
+          <li className="nav-item">
             <a
-              class="nav-link active"
+              className="nav-link active"
               id="home-tab"
               data-toggle="tab"
               href="#home"
@@ -181,9 +175,9 @@ class MentoringManage extends React.Component {
               Mentor
             </a>
           </li>
-          <li class="nav-item">
+          <li className="nav-item">
             <a
-              class="nav-link"
+              className="nav-link"
               id="profile-tab"
               data-toggle="tab"
               href="#profile"
@@ -196,9 +190,9 @@ class MentoringManage extends React.Component {
           </li>
         </ul>
 
-        <div class="tab-content" id="myTabContent">
+        <div className="tab-content" id="myTabContent">
           <div
-            class="tab-pane fade show active"
+            className="tab-pane fade show active"
             id="home"
             role="tabpanel"
             aria-labelledby="home-tab"
@@ -211,7 +205,12 @@ class MentoringManage extends React.Component {
             />
           </div>
 
-          <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+          <div
+            className="tab-pane fade"
+            id="profile"
+            role="tabpanel"
+            aria-labelledby="profile-tab"
+          >
             <MenteeManage
               allMentee={this.state.allMentee}
               linkedMentor={this.state.linkedMentor}
@@ -242,7 +241,6 @@ class MentoringManage extends React.Component {
             onOpenMentee={this.onOpenMentee}
             onChangeMentor={this.onChangeMentor}
             onChangeMentee={this.onChangeMentee}
-
           />
         </div>
       </>

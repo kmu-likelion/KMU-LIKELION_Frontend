@@ -7,73 +7,75 @@ import MenuItem from "@material-ui/core/MenuItem";
 import Select from "@material-ui/core/Select";
 import Button from "@material-ui/core/Button";
 class MentoringAdd extends React.Component {
-  state = {
-  };
+  state = {};
 
   handlingChange = event => {
     this.setState({ [event.target.name]: event.target.value });
   };
 
   render() {
-    const {allUser,selected_mentee,selected_mentor,mentorOpen,menteeOpen}=this.props;
+    const {
+      allUser,
+      selected_mentee,
+      selected_mentor,
+      mentorOpen,
+      menteeOpen
+    } = this.props;
 
     return (
       <>
         <Table>
           <TableBody>
-          <TableRow>
-                <TableCell colSpan={2}>
-                  <form
-                    onSubmit= {event=>this.props.createMentoring(event)}
-                    className={"mentoring-form"}
+            <TableRow>
+              <TableCell colSpan={2}>
+                <form
+                  onSubmit={event => this.props.createMentoring(event)}
+                  className={"mentoring-form"}
+                >
+                  <Select
+                    className={"mentoring-select"}
+                    open={mentorOpen}
+                    onClose={e => this.props.onCloseMentor()}
+                    name="selected_mentor"
+                    onOpen={e => this.props.onOpenMentor()}
+                    value={selected_mentor}
+                    onChange={e => this.props.onChangeMentor(e)}
+                    displayEmpty
                   >
-                    <Select
-                      className={"mentoring-select"}
-                      open={mentorOpen}
-                      onClose={e => this.props.onCloseMentor()}
-                      name="selected_mentor"
-                      onOpen={e => this.props.onOpenMentor()}
-                      value={selected_mentor}
-                      onChange={e =>
-                        this.props.onChangeMentor(e)
-                      }
-                      displayEmpty
-                    >
-                      <MenuItem value="">
-                        <small>Mentor</small>
+                    <MenuItem value="">
+                      <small>Mentor</small>
+                    </MenuItem>
+                    {allUser.map((user, index) => (
+                      <MenuItem key={index} value={user.id}>
+                        {user.first_name}
                       </MenuItem>
-                      {allUser.map(user => (
-                        <MenuItem value={user.id}>{user.first_name}</MenuItem>
-                      ))}
+                    ))}
+                  </Select>
 
-                    </Select>
-
-
-                    <Select
-                      className={"mentoring-select"}
-                      open={menteeOpen}
-                      onClose={e => this.props.onCloseMentee()}
-                      name="selected_mentee"
-                      onOpen={e => this.props.onOpenMentee()}
-                      value={selected_mentee}
-                      onChange={e =>
-                        this.props.onChangeMentee(e)
-                      }
-                      displayEmpty
-                    >
-                      <MenuItem value="">
-                        <small>Mentee</small>
+                  <Select
+                    className={"mentoring-select"}
+                    open={menteeOpen}
+                    onClose={e => this.props.onCloseMentee()}
+                    name="selected_mentee"
+                    onOpen={e => this.props.onOpenMentee()}
+                    value={selected_mentee}
+                    onChange={e => this.props.onChangeMentee(e)}
+                    displayEmpty
+                  >
+                    <MenuItem value="">
+                      <small>Mentee</small>
+                    </MenuItem>
+                    {allUser.map((user, index) => (
+                      <MenuItem key={index} value={user.id}>
+                        {user.first_name}
                       </MenuItem>
-                      {allUser.map(user => (
-                        <MenuItem value={user.id}>{user.first_name}</MenuItem>
-                      ))}
+                    ))}
+                  </Select>
 
-                    </Select>
-
-                    <Button type="submit">ADD</Button>
-                  </form>
-                </TableCell>
-              </TableRow>
+                  <Button type="submit">ADD</Button>
+                </form>
+              </TableCell>
+            </TableRow>
           </TableBody>
         </Table>
       </>
