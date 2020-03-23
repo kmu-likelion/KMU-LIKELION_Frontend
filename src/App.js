@@ -3,7 +3,8 @@ import { BrowserRouter as Router, Route } from "react-router-dom";
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 
-import Header from "./components/Header";
+import Appbar from "./components/Appbar";
+// import Header from "./components/Header";
 import Footer from "./components/Footer";
 import Main from "./components/main/Main";
 import Login from "./components/accounts/Login";
@@ -87,7 +88,8 @@ class App extends React.Component {
     return (
       <Store.Provider value={this.state}>
         <Router>
-          <Header />
+          {/* <Header /> */}
+          <Appbar />
           <Route exact path="/" component={Main} />
 
           <Route path="/career" component={BoardRouter} />

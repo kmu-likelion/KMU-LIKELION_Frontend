@@ -151,6 +151,11 @@ input[type="password"] {
   color: #fff;
 }
 
+.navbar .nav > li > .dropdown-menu::after,
+.navbar .nav > li > .dropdown-menu::before {
+  display: none;
+}
+
 .commentForm {
   display: flex;
   flex-direction: column;
