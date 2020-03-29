@@ -348,3 +348,28 @@ input[type="password"] {
 .paginator {
   justify-items: center;
 }
+
+@media only screen and (min-width: 320px) {
+  .swiper {
+    margin-top: 30px;
+    text-align: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 80%;
+    height: 180px;
+  }
+}
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {
+  .swiper {
+    margin-top: 30px;
+    text-align: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 60%;
+    height: 380px;
+  }
+}

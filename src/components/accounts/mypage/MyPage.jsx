@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { getUser, updateUser } from "../../../api/AuthAPI";
-import {Grid, Container, Paper, withStyles } from "@material-ui/core";
+import { Grid, Container, Paper, withStyles } from "@material-ui/core";
 
 import LeftProfileView from "./LeftProfileView";
 import MyProfile from "./MyProfile";
@@ -11,14 +11,13 @@ import MyMentoring from "./MyMentoring";
 import MyStudyGroup from "./MyStudyGroup";
 import MySubmission from "./MySubmission";
 
-
 const useStyles = theme => ({
   root: {
-    padding: '2rem'
+    padding: "2rem"
   },
   paper: {
-    padding : '2rem',
-    height: '100%'
+    padding: "2rem",
+    height: "100%"
   }
 });
 
@@ -28,7 +27,7 @@ class MyPage extends Component {
     this.state = {
       type: "Myprofile",
       userId: "",
-      userInfo: {},
+      userInfo: {}
     };
   }
   componentDidMount() {
@@ -65,7 +64,6 @@ class MyPage extends Component {
     let renderComponent = "";
 
     switch (this.state.type) {
-
       case "Myprofile":
         renderComponent = (
           <MyProfile
@@ -76,7 +74,7 @@ class MyPage extends Component {
         );
         break;
       case "MySubmission":
-        renderComponent = <MySubmission/>;
+        renderComponent = <MySubmission />;
         break;
 
       case "MyLike":
@@ -95,7 +93,7 @@ class MyPage extends Component {
         renderComponent = <MyMentoring id={this.state.userId} />;
         break;
 
-        case "MyStudyGroup":
+      case "MyStudyGroup":
         renderComponent = <MyStudyGroup id={this.state.userId} />;
         break;
 
