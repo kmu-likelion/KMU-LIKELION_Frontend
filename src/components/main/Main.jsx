@@ -1,11 +1,11 @@
 import React from "react";
 import api from "../../api/BoardAPI";
 import RecentPost from "../board/container/PostView";
-import logo from "./logo.png";
 import Container from "@material-ui/core/Container";
 import Grid from "@material-ui/core/Grid";
 
-import Carousel from "react-bootstrap/Carousel";
+// import Carousel from "react-bootstrap/Carousel";
+import Carousel from "./Carousel";
 import { ClubCalendar } from "../calendar/ClubCalendar";
 
 class Main extends React.Component {
@@ -50,26 +50,12 @@ class Main extends React.Component {
   render() {
     return (
       <div>
-        <Container maxWidth="lg" className="main-container">
-          <Grid container spacing={3}>
-            <Grid item xs={12}>
-              <Carousel>
-                <Carousel.Item>
-                  <img className="d-block w-100" src={logo} alt="logo" />
-                </Carousel.Item>
-                <Carousel.Item>
-                  <img
-                    className="d-block w-100"
-                    src={logo}
-                    alt="Second slide"
-                  />
-                </Carousel.Item>
-                <Carousel.Item>
-                  <img className="d-block w-100" src={logo} alt="Third slide" />
-                </Carousel.Item>
-              </Carousel>
-            </Grid>
+        <Grid container spacing={1}>
+          <Grid item xs={12}>
+            <Carousel />
           </Grid>
+        </Grid>
+        <Container maxWidth="lg" className="main-container">
           <hr />
           <div>
             <Grid container spacing={3}>
